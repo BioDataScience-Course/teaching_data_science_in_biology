@@ -1,0 +1,208 @@
+---
+title: "Teaching Data Science to Undergraduate and Graduate Students in Biology using R, RStudio and Learnr: Analysis of Three Years Data Including COVID-19 Pandemic Lockdowns"
+output: html_document
+bibliography: bibliography.bib
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+SciViews::R
+
+# datesets
+## using temporairly no-pseudo datasets
+users19 <- read(pcloud_crypto("sdd_users/users_2019-2020_Q1.csv")) 
+users <- read(pcloud_crypto("sdd_users/users_2020-2021_Q1.csv")) 
+## pseudo date
+course19 <- read(pcloud("sdd_2019-2020/data/courses.csv")) 
+exam19 <- read(pcloud("sdd_2019-2020/data/exam.csv")) 
+assessments19 <- read(pcloud("sdd_2019-2020/data/assessment.csv"))
+
+courses <- read(pcloud("sdd_2020-2021/data/courses.csv")) 
+assessments <- read(pcloud("sdd_2020-2021/data/assessments.csv"))
+wo <- read(pcloud("sdd_2020-2021/data/wooclap.csv"))
+
+# functions ----
+## RTLX NASA - TLX -------------------------------------------------------------
+learnr_feeling <- function(df, apps, labels) {
+  res <- dplyr::filter(df, app == apps & label == labels)
+  
+  c("(\\d):(Quelle a été l'importance de l'activité mentale et intellectuelle requise)", 
+    "(\\d):(Quelle a été l'importance de l'activité physique requise)",
+    "(\\d):(Quelle a été l'importance de la pression temporelle causée par la rapidité nécessitée pour l'accomplissement de la tâche)",
+    "(\\d):Quelle réussite pensez-vous avoir eu dans l'accomplissement de la tâche",
+    "(\\d):Quel degré d'effort avez-vous dû fournir pour exécuter la tâche demandée",
+    "(\\d):Pendant l'exécution du travail vous êtes-vous senti découragé"
+    ) %>.%
+  purrr::map_dfc(., function(str, pattern) {stringr::str_match(str, pattern = pattern)[,2]}, str = res$value) -> vec
+  
+  names(vec) <- c("mental", "physical", "time_pressure", "performance", "effort", "frustration")
+  
+  vec %>.%
+    map_dfc(.,as.numeric) -> vec1
+  
+  vec1$app <- apps
+  vec1$label <- labels
+  vec1$user <- res$user
+  return(vec1)
+}
+
+
+n_fun <- function(x){
+  return(data.frame(y = max(x) * 1.1, label = paste0("n = ",length(x))))
+}
+```
+
+# Abstract 
+
+The courses in biostatistics in biology at the University of Mons, Belgium, were completely refactored in 2018 into data science courses (see http://bds.sciviews.org). The content is expanded beyond statistics to include computing tools, version management, reproducible analyses, critical thinking and open data. Flipped classroom approach is used. Students learn with the online material and they apply the concepts on individual and group projects using a preconfigured virtual machine with R and RStudio. Activities (H5P, learnr or Shiny applications) are recorded in a MongoDB database (300,000+ events for 180+ students and 2,000+ GitHub repositories at https://github.com/BioDataScience-Course). The analysis of these data reveals several trends. (1) There is a relatively long lag period required for the students to get used to the computing environment, the teaching method and the data science in general. (2) Implication is very high, with more than 85% of the students that complete all the activities and got good to excellent assessment. (3) There is a gap between students' own perception of their skills achievements and their assessment results: they tend to underestimate their progress. (4) During COVID-19 pandemic lockdown, the intensity of the activities largely decreased during two weeks before returning to previous level, but for 3/4 of the students only. The remaining fraction never caught up. We hypothesize that the technical requirements or the lack of motivation during the lockdown were detrimental to roughly one student over ten, despite all the efforts the University deployed to reduce the social fracture.
+
+# Introdution
+
+Les cours de biostatistiques de l'Université de Mons du cursus en biologie sont complètement revue afin de proposer des cours de sciences des données biologiques en classe inversée. Ces nouveaux cours intégrent des notions de biostastique ainsi que des notions sur la gestion de projet, la gestion de version, la recherche reproductible et l'open data.
+
+L'approche en classe inversée permet de rendre les étudiants actif de leur apprentissage, ce qui a pour avantage d'améliorer les résultats des étudiants [@Freeman2014]. 
+
+Nous utilisons une machine virtuelle préconfiguré avec R et RStudio afin de permettre aux étudiants de fixer les concepts théoriques directement au travers d'exercices pratique.  
+
+L'utilisation d'un software professionnel est indispensable pour analyser des données écologique....
+
+Les cours de statistiques bien qu'apportant des compétences indispensables à un futur biologiste génèrent de l'anxiété chez les étudiants [@Onwuegbuzie2003]. 
+
+
+
+# M&M
+
+| Niveau | description                                                                         | type d'exercices |
+|--------|-------------------------------------------------------------------------------------|------------------|
+| N1     | Exercice court intégré directement dans le cours en ligne avec un feedback immédiat | h5p, shiny       |
+| N2     | Exercice guidé dans un tutoriel avec un feedback immédiat                           | learnr           |
+| N3     | Exercice cadré sous la forme d'un projet individuel                                 | ind github       |
+| N4     | Exercice libre sous la forme de projet de groupe                                    | group github     |
+| N5     | Exercice complexe individuel ou par groupe limité dans le temps                     | challenge        |
+
+The NASA-LTX indicator is composed of six questions on a Likert scale to quantify the perceived workload to complete a tutorial [@Hart1988]. The questions concern mental load, physical load, time pressure, expected success, effort required, and frustration experienced during the accomplishment of the task. The average value for the six questions constitutes a Raw Task Load indeX (RTLX) [@Byers1989].
+
+The SUS ....
+
+# Résultats
+
+La transition du cours classique vers une cours en classe inversée a menée à l'intégration de nouveaux outils permettant de diversifier les types d'exercice proposés aux étudiants (tab M&M). Le tableau XX indique la répartition des exercices pour chauqe cours. La collecte des données pour chaque exercice permet de construire une note objective pour chaque étudiant. La note des étudiant est construite sur l'évaluation des 5 niveaux d'exerices complémentaires allant des exercices les plus simples (N1) aux exercices les plus complexes (N5). Une moyenne pondérée pour chaque niveau d'exercice est employée pour obtenir une note finale par cours.
+
+```{r}
+# Tab of number of users and number of exercices by type ----------------------
+# users
+users %>.%
+  filter(., state == "regular") %>.%
+  group_by(., course) %>.%
+  summarise(., user = n()) %>.%
+  ungroup(.) %>.%
+  filter(., course != "D")-> us_tab
+
+# tab number of exercices by type ---
+assessments %>.%
+  mutate(., 
+    app_type = paste0(app,"_",'type'),
+    course = substr(app, start = 1, stop = 1),
+    ) %>.%
+  group_by(., course, type) %>.%
+  summarise(., tot = length(unique(app_type)))  %>.%
+  ungroup(.) %>.%
+  pivot_wider(., names_from = "type", values_from = "tot") %>.%
+  select(., course,  h5p, shiny, learnr, `ind. github`, `group github`, blog) -> exercice_tab
+
+left_join(us_tab, exercice_tab, by = c("course"))
+```
+
+```{r}
+assessments19 %>.%
+  group_by(., course, evaluation, github_project, project, user) %>.%
+  summarise(., result = round(sum(score*weight),4)) -> assess_result
+
+assess_result %>.%
+  filter(., evaluation == "Q1") %>.%
+  left_join(exam19, .) %>.%
+  replace_na(., list(result = 0)) %>.%
+  mutate(., link = case_when(
+    exam >= 5 & result >= 5 ~ "sym",
+    exam >= 5 & result < 5 ~ "exam",
+    exam < 5 & result >= 5 ~ "project",
+    exam < 5 & result < 5 ~ "sym")) -> q1
+
+q1 <- left_join(rename(q1, icourse = course), course19)
+q1_regular <- filter(q1, user %in% users19$user[users19$state =="regular"])
+#table(q1$link) /nrow(q1)
+q1_regular %>.%
+  cor.test(.$exam, .$result)
+```
+
+Jusqu'au premier quadrimestre 2019-2020, la note des étudiants était basé sur la réalisation d'un projet et d'un examen plus conventionnel réalisé lors de la période des examens. Une faible corrélation linéaire significative de 0.41 est obtenue entre la note de l'examen et la note obtenu pour les projets (Pearson correlation test, t = 3.82, df = 74, p-value = 0.0002). On dénombre 73% des étudiants qui réussisent ou ratent les 2 évaluations, 12% valident uniquement l'examen en session et 15% des étudiants valide uniquement le projet. La pandémie de COVID 19 nous a contraints à annuler l'examen du second quadrimestre 2019-2020 et d'évaluer uniquement les étudiants sur les projets. La faible corrélation entre la note du projet pratique et la note de l'examen observé lors du premier quadrimestre met en avant que la critère d'évaluation entre un projet pratique et un examen théorique ne sont pas les mêmes. Suite à cette observation, l'examen théorique est définitivement abandonné pour l'année académique 2020-2021.
+
+```{r}
+chart(q1_regular, exam ~ result %color=% link | name) +
+  geom_vline(xintercept = 5, alpha = 0.2) +
+  geom_hline(yintercept = 5, alpha = 0.2) +
+  geom_point() +
+  ylim(c(0,10)) +
+  xlim(c(0,10)) +
+  labs(y = "Exam grade", x = "Project grade")
+```
+
+Le suivi de l'activité permet de mettre en avant différents profils d'étudiants. ....
+
+```{r}
+# TODO
+```
+
+La perception positives des étudiants face aux outils utilisés est un éléments important ...
+
+```{r}
+#SUS
+```
+
+La charge cognitive requise pour réaliser des tutoriel (N3) est étudié via un questionnaire NASA LTX. En effet, ces exercices ont pour objectif de permettre une transition plus facile de la théorie vers les exercices pratiques (N4 et N5).
+
+```{r}
+c("A99Wa_perception", "B99Wa_perception", "C99Wb_perception:perception") %>%
+  purrr::map_dfr(learnr_feeling, df = wo, label = "Q4") %>.%
+  mutate(., course = substr(app, start = 1, stop = 1)) -> learnr_workload
+
+learnr_workload %>.%
+  pivot_longer(.,cols = c(mental, physical, time_pressure, performance, effort, frustration),
+  names_to = "category", values_to = "grade")  %>.%
+  left_join(., dplyr::distinct(courses, course,name), by = "course")-> workload
+
+workload %>.%
+  group_by(., user, app, course) %>.%
+  summarise(., rtlx = 10*mean(grade)) -> workload_rtlx
+
+chart(workload_rtlx, rtlx ~ course) +
+  geom_boxplot(fill = "#00BFC4") +
+  geom_jitter(alpha = 0.5, width = 0.1) +
+  labs(y = "RTLX", x = "Course") +
+  stat_summary(fun.data = n_fun, geom = "text", hjust = 0.5) +
+  labs( y = "Raw Task Load indeX (2020-2021)")
+```
+
+La difficultés des exercices tutoriels est croissante de cours en cours. Cependant, on observe une valeur du RTLX du cours de sciences des données 3 significativement plus faible que pour le cours de science des données 1 (Tukey HSD, p-value = 0.023). La charge cognitive percue par les étudiants est donc plus faible.
+
+```{r}
+workload_rtlx %>.%
+  mutate(., course = as.factor(course)) -> workload_rtlx
+
+anova. <- lm(data = workload_rtlx, rtlx ~ course)
+anova(anova.)
+
+#bartlett.test(data = workload_rtlx, rtlx ~ course)
+#plot(anova., which = 2)
+
+summary(anovaComp. <- confint(multcomp::glht(anova.,
+  linfct = multcomp::mcp(course = "Tukey"))))
+```
+
+La temporalité ....
+
+# Discussion
+
+
+Les études portant sur le changements d'attitudes au sein de semestre ne montre pas différence significative. La comparaison entre les 3 cours met en avant qu'il faut plusieurs cours en continue afin d'observer une chagement de la charge cognitive des étudiants.
+
