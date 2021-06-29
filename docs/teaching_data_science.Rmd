@@ -1,17 +1,19 @@
 ---
 title: "Teaching Data Science to Undergraduate and Graduate Students in Biology using R, RStudio and Learnr: Analysis of Three Years Data Including COVID-19 Pandemic Lockdowns"
-output: html_document
+output: 
+  html_document:
+    code_folding: hide
 bibliography: bibliography.bib
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
 SciViews::R
 
 # datesets
 ## using temporairly no-pseudo datasets
-users19 <- read(pcloud_crypto("sdd_users/users_2019-2020_Q1.csv")) 
-users <- read(pcloud_crypto("sdd_users/users_2020-2021_Q1.csv")) 
+users19 <- read(pcloud("sdd_2019-2020/data/users.csv")) 
+users <- read(pcloud("sdd_2020-2021/data/users.csv")) 
 ## pseudo date
 course19 <- read(pcloud("sdd_2019-2020/data/courses.csv")) 
 exam19 <- read(pcloud("sdd_2019-2020/data/exam.csv")) 
@@ -62,9 +64,9 @@ Les cours de biostatistiques de l'Université de Mons du cursus en biologie sont
 
 L'approche en classe inversée permet de rendre les étudiants actif de leur apprentissage, ce qui a pour avantage d'améliorer les résultats des étudiants [@Freeman2014]. 
 
-Nous utilisons une machine virtuelle préconfiguré avec R et RStudio afin de permettre aux étudiants de fixer les concepts théoriques directement au travers d'exercices pratique.  
+Nous utilisons une machine virtuelle préconfiguré avec R et RStudio afin de permettre aux étudiants de mieux fixer les concepts théoriques directement au travers d'exercices pratique [@Larwin2011].  
 
-L'utilisation d'un software professionnel est indispensable pour analyser des données écologique....
+L'utilisation d'un software professionnel est important pour analyser des données écologique [@Auker2020] ....
 
 Les cours de statistiques bien qu'apportant des compétences indispensables à un futur biologiste génèrent de l'anxiété chez les étudiants [@Onwuegbuzie2003]. 
 
@@ -92,7 +94,7 @@ La transition du cours classique vers une cours en classe inversée a menée à 
 # Tab of number of users and number of exercices by type ----------------------
 # users
 users %>.%
-  filter(., state == "regular") %>.%
+  filter(., institution == "UMONS" & term == "Q1" & state == "regular") %>.%
   group_by(., course) %>.%
   summarise(., user = n()) %>.%
   ungroup(.) %>.%
@@ -110,7 +112,7 @@ assessments %>.%
   pivot_wider(., names_from = "type", values_from = "tot") %>.%
   select(., course,  h5p, shiny, learnr, `ind. github`, `group github`, blog) -> exercice_tab
 
-left_join(us_tab, exercice_tab, by = c("course"))
+knitr::kable(left_join(us_tab, exercice_tab, by = c("course")))
 ```
 
 ```{r}
@@ -129,7 +131,7 @@ assess_result %>.%
     exam < 5 & result < 5 ~ "sym")) -> q1
 
 q1 <- left_join(rename(q1, icourse = course), course19)
-q1_regular <- filter(q1, user %in% users19$user[users19$state =="regular"])
+q1_regular <- filter(q1, user %in% users19$user[users19$institution == "UMONS" & users19$term == "Q1" & users19$state == "regular"])
 #table(q1$link) /nrow(q1)
 q1_regular %>.%
   cor.test(.$exam, .$result)
@@ -206,3 +208,4 @@ La temporalité ....
 
 Les études portant sur le changements d'attitudes au sein de semestre ne montre pas différence significative. La comparaison entre les 3 cours met en avant qu'il faut plusieurs cours en continue afin d'observer une chagement de la charge cognitive des étudiants.
 
+# References
