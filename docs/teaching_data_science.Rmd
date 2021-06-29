@@ -11,16 +11,31 @@ knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
 SciViews::R
 
 # datesets
-## using temporairly no-pseudo datasets
+
+users18 <- read(pcloud("sdd_2018-2019/data/users.csv")) 
 users19 <- read(pcloud("sdd_2019-2020/data/users.csv")) 
 users <- read(pcloud("sdd_2020-2021/data/users.csv")) 
-## pseudo date
-course19 <- read(pcloud("sdd_2019-2020/data/courses.csv")) 
+
+assessments18 <- read(pcloud("sdd_2018-2019/data/assessment_temp.csv"))
+
 exam19 <- read(pcloud("sdd_2019-2020/data/exam.csv")) 
 assessments19 <- read(pcloud("sdd_2019-2020/data/assessment.csv"))
 
+courses18 <- read(pcloud("sdd_2018-2019/data/courses.csv")) 
+courses19 <- read(pcloud("sdd_2019-2020/data/courses.csv")) 
 courses <- read(pcloud("sdd_2020-2021/data/courses.csv")) 
+
 assessments <- read(pcloud("sdd_2020-2021/data/assessments.csv"))
+learnr <- read(pcloud("sdd_2020-2021/data/learnr.csv"))
+projects <- read(pcloud("sdd_2020-2021/data/projects.csv")) %>.%
+  mutate(., 
+    icourse = course,
+    course = substr(github_project, 1,1),
+    type = case_when(
+      subtype == "individual" ~ "ind. github",
+      subtype == "group" ~ "group github",
+      subtype == "challenge,group" ~ "challenge"))
+
 wo <- read(pcloud("sdd_2020-2021/data/wooclap.csv"))
 
 # functions ----
@@ -60,7 +75,9 @@ The courses in biostatistics in biology at the University of Mons, Belgium, were
 
 # Introdution
 
-Les cours de biostatistiques de l'Université de Mons du cursus en biologie sont complètement revue afin de proposer des cours de sciences des données biologiques en classe inversée. Ces nouveaux cours intégrent des notions de biostastique ainsi que des notions sur la gestion de projet, la gestion de version, la recherche reproductible et l'open data.
+Les cours de biostatistiques de l'Université de Mons du cursus en biologie sont complètement revue afin de proposer des cours de sciences des données biologiques. 
+
+en classe inversée. Ces nouveaux cours intégrent des notions de biostastique ainsi que des notions sur la gestion de projet, la gestion de version, la recherche reproductible et l'open data.
 
 L'approche en classe inversée permet de rendre les étudiants actif de leur apprentissage, ce qui a pour avantage d'améliorer les résultats des étudiants [@Freeman2014]. 
 
@@ -70,7 +87,8 @@ L'utilisation d'un software professionnel est important pour analyser des donné
 
 Les cours de statistiques bien qu'apportant des compétences indispensables à un futur biologiste génèrent de l'anxiété chez les étudiants [@Onwuegbuzie2003]. 
 
-
+étudiant non technique, orienté l'intro sur l'approche en classe inversé, approche par projet, evaluation continue, 
+citer date science in a box, cours d'oxford, bouquin de phG data science in education, how learning happens,...
 
 # M&M
 
@@ -80,13 +98,24 @@ Les cours de statistiques bien qu'apportant des compétences indispensables à u
 | N2     | Exercice guidé dans un tutoriel avec un feedback immédiat                           | learnr           |
 | N3     | Exercice cadré sous la forme d'un projet individuel                                 | ind github       |
 | N4     | Exercice libre sous la forme de projet de groupe                                    | group github     |
-| N5     | Exercice complexe individuel ou par groupe limité dans le temps                     | challenge        |
+
+ajouter une colonne avec la taxonomie de bloom 
 
 The NASA-LTX indicator is composed of six questions on a Likert scale to quantify the perceived workload to complete a tutorial [@Hart1988]. The questions concern mental load, physical load, time pressure, expected success, effort required, and frustration experienced during the accomplishment of the task. The average value for the six questions constitutes a Raw Task Load indeX (RTLX) [@Byers1989].
 
 The SUS ....
 
+rechercher une ref plus récente type meta analyse SUS et NASA LTX
+
 # Résultats
+
+
+Liste des idées :
+
+-  
+-
+-
+-
 
 La transition du cours classique vers une cours en classe inversée a menée à l'intégration de nouveaux outils permettant de diversifier les types d'exercice proposés aux étudiants (tab M&M). Le tableau XX indique la répartition des exercices pour chauqe cours. La collecte des données pour chaque exercice permet de construire une note objective pour chaque étudiant. La note des étudiant est construite sur l'évaluation des 5 niveaux d'exerices complémentaires allant des exercices les plus simples (N1) aux exercices les plus complexes (N5). Une moyenne pondérée pour chaque niveau d'exercice est employée pour obtenir une note finale par cours.
 
@@ -99,6 +128,24 @@ users %>.%
   summarise(., user = n()) %>.%
   ungroup(.) %>.%
   filter(., course != "D")-> us_tab
+
+# learnr
+learnr %>.% 
+  filter(., !label %in% c("","C99La_avis") & !is.na(label)) %>.%
+  mutate(., course = substr(app,1,1),
+    app_label = paste0(app, label)) %>.%
+  filter(., course %in% c("A", "B", "C")) %>.%
+  group_by(., course) %>.%
+  summarise(., app = length(unique(app)), questions = length(unique(app_label)))-> t 
+
+# projects
+projects %>.%
+  filter(., type %in% c("ind. github", "group github") & course != "D") %>.%
+  group_by(., course, type) %>.%
+  count(.) %>.%
+  pivot_wider(., names_from = "type", values_from = "n") -> projects_tab
+    
+  
 
 # tab number of exercices by type ---
 assessments %>.%
@@ -115,39 +162,67 @@ assessments %>.%
 knitr::kable(left_join(us_tab, exercice_tab, by = c("course")))
 ```
 
+blog a virer , shiny on cogite à la virer, ind.github error cours C, learnr ajouter nombre de question en ()
+
 ```{r}
+assessments18 %>.%
+  #select(., -coral_growth, result = biometry) %>.%
+  mutate(., result = (biometry+coral_growth)/2, acad_year = "2018-2019") -> assess_result18
+  
+q1_18_regular <- left_join(rename(assess_result18, icourse = course), courses18) %>.%
+  filter(., user %in% users18$user[users18$institution == "UMONS" & users18$term == "Q1" & users18$state == "regular"])
+
 assessments19 %>.%
   group_by(., course, evaluation, github_project, project, user) %>.%
-  summarise(., result = round(sum(score*weight),4)) -> assess_result
-
-assess_result %>.%
+  summarise(., result = round(sum(score*weight),4)) %>.%
   filter(., evaluation == "Q1") %>.%
   left_join(exam19, .) %>.%
   replace_na(., list(result = 0)) %>.%
-  mutate(., link = case_when(
-    exam >= 5 & result >= 5 ~ "sym",
-    exam >= 5 & result < 5 ~ "exam",
-    exam < 5 & result >= 5 ~ "project",
-    exam < 5 & result < 5 ~ "sym")) -> q1
+  mutate(., acad_year = "2019-2020")-> assess_result19
 
-q1 <- left_join(rename(q1, icourse = course), course19)
-q1_regular <- filter(q1, user %in% users19$user[users19$institution == "UMONS" & users19$term == "Q1" & users19$state == "regular"])
+q1_19_regular <- left_join(rename(assess_result19, icourse = course), courses19) %>.%
+  filter(., user %in% users19$user[users19$institution == "UMONS" & users19$term == "Q1" & users19$state == "regular"])
+
+q1 <- bind_rows(
+  select(q1_18_regular, user, acad_year, course, result, exam),
+  select(q1_19_regular, user, acad_year, course, result, exam)
+  )
 #table(q1$link) /nrow(q1)
-q1_regular %>.%
+q1 %>.%
   cor.test(.$exam, .$result)
 ```
 
-Jusqu'au premier quadrimestre 2019-2020, la note des étudiants était basé sur la réalisation d'un projet et d'un examen plus conventionnel réalisé lors de la période des examens. Une faible corrélation linéaire significative de 0.41 est obtenue entre la note de l'examen et la note obtenu pour les projets (Pearson correlation test, t = 3.82, df = 74, p-value = 0.0002). On dénombre 73% des étudiants qui réussisent ou ratent les 2 évaluations, 12% valident uniquement l'examen en session et 15% des étudiants valide uniquement le projet. La pandémie de COVID 19 nous a contraints à annuler l'examen du second quadrimestre 2019-2020 et d'évaluer uniquement les étudiants sur les projets. La faible corrélation entre la note du projet pratique et la note de l'examen observé lors du premier quadrimestre met en avant que la critère d'évaluation entre un projet pratique et un examen théorique ne sont pas les mêmes. Suite à cette observation, l'examen théorique est définitivement abandonné pour l'année académique 2020-2021.
+Jusqu'au premier quadrimestre 2019-2020, la note des étudiants était basé sur la réalisation d'un projet et d'un examen plus conventionnel réalisé lors de la période des examens. Une faible corrélation linéaire significative de 0.41 est obtenue entre la note de l'examen et la note obtenu pour les projets (Pearson correlation test, t = 3.82, df = 74, p-value = 0.0002). 
+
+La pandémie de COVID 19 nous a contraints à annuler l'examen du second quadrimestre 2019-2020 et d'évaluer uniquement les étudiants sur les projets. La faible corrélation entre la note du projet pratique et la note de l'examen observé lors du premier quadrimestre met en avant que la critère d'évaluation entre un projet pratique et un examen théorique ne sont pas les mêmes. Suite à cette observation, l'examen théorique est définitivement abandonné pour l'année académique 2020-2021.
 
 ```{r}
-chart(q1_regular, exam ~ result %color=% link | name) +
+q1 %>.%
+  mutate(., course_year = paste0(course, " (",acad_year,")")) %>.%
+  chart(., exam ~ result %col=% user | course_year) +
   geom_vline(xintercept = 5, alpha = 0.2) +
   geom_hline(yintercept = 5, alpha = 0.2) +
-  geom_point() +
+  geom_jitter(alpha = 1, width = 0.05, height = 0.05, show.legend = FALSE) +
   ylim(c(0,10)) +
   xlim(c(0,10)) +
   labs(y = "Exam grade", x = "Project grade")
 ```
+
+```{r}
+q1 %>.%
+  filter(., )
+```
+
+on souhaite former des étudiants capable d'appliquer la science des données. L'examen plus classique ne ermet pasd'évaluer correctemetn les acquis pratique des étudiants. 
+
+a exam in the end of the term, melange entre des questions théoriques et la mise en pratique.
+
+```{r}
+q1 %>.%
+  filter(., course == "A") %>.%
+  wilcox.test(data = ., exam ~ acad_year)
+```
+
 
 Le suivi de l'activité permet de mettre en avant différents profils d'étudiants. ....
 
@@ -177,6 +252,7 @@ workload %>.%
   group_by(., user, app, course) %>.%
   summarise(., rtlx = 10*mean(grade)) -> workload_rtlx
 
+set.seed(222)
 chart(workload_rtlx, rtlx ~ course) +
   geom_boxplot(fill = "#00BFC4") +
   geom_jitter(alpha = 0.5, width = 0.1) +
@@ -186,6 +262,8 @@ chart(workload_rtlx, rtlx ~ course) +
 ```
 
 La difficultés des exercices tutoriels est croissante de cours en cours. Cependant, on observe une valeur du RTLX du cours de sciences des données 3 significativement plus faible que pour le cours de science des données 1 (Tukey HSD, p-value = 0.023). La charge cognitive percue par les étudiants est donc plus faible.
+
+faire un test sur les médianes ....
 
 ```{r}
 workload_rtlx %>.%
@@ -207,5 +285,19 @@ La temporalité ....
 
 
 Les études portant sur le changements d'attitudes au sein de semestre ne montre pas différence significative. La comparaison entre les 3 cours met en avant qu'il faut plusieurs cours en continue afin d'observer une chagement de la charge cognitive des étudiants.
+
+apprentissage en continu sur 3 années successives (cohérence entre le programme et l'approche pédagogique), les résultats sont meilleurs vers la 3ieme années.
+
+# Conclusion
+
+- Exam classique évalue mal la capacité d'evaluer des données biologiques par eux même
+
+- Les biologistes non  expert de l'informatique est une challenge vu le nombre important de notions a apprendre utilisation d'un ordi, gestion de projet, statistique. Il faut décomposer ces notions en 5 quadrimestre continue
+
+- Le logiciel reste vu comme pointu et diffficile d'utilisation (SUS).
+
+- l'evaluation continue et l'analyse de projet via des grilles critérié semble une approche intéressante pour juger de la capacité des étudiant à bosser.
+
+- la catégorisation des étudiants démontre une grande diversité de profils. Premier élément vers une pédagogie différencié  vers 
 
 # References
