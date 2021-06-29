@@ -77,11 +77,20 @@ The courses in biostatistics in biology at the University of Mons, Belgium, were
 
 # Introduction
 
-Les cours de biostatistiques de l'Université de Mons du cursus en biologie sont complètement revue afin de proposer des cours de sciences des données biologiques. 
+The growing mass of collected data, the reproducibility crisis [@Baker2016], the concepts linked to Open Science are elements that have pushed the emergence of data science programs in the Data Science initiative since 2015 [@Donoho2017; @Cetinkaya-Rundel2021] as the Harvard Data science Initiative (<https://datascience.harvard.edu/about>). 
+These courses are not just for computer scientists, mathematicians or statisticians as evidenced by the data science training by Duke University which accepts humanities, social sciences, and natural sciences students [@Cetinkaya-Rundel2021]. The classical statistics courses are outdated by these new concepts. Students will have to propose reproducible analyses with open data and interpret them with the knowledge of their field of expertise. This is a challenge for students that are a poor or no background in computing and statisticics. They must be able to manage, analyze, and communicate with professional tools.
 
-en classe inversée. Ces nouveaux cours intégrent des notions de biostastique ainsi que des notions sur la gestion de projet, la gestion de version, la recherche reproductible et l'open data.
+git_github : recherhce reproductible, utilisation de rmarkdown, gestion de projet.
 
-L'approche en classe inversée permet de rendre les étudiants actif de leur apprentissage, ce qui a pour avantage d'améliorer les résultats des étudiants [@Freeman2014]. 
+-> git permet de suivre leur apprentissage grâce au commit et il permet de faire découvrir au étudiants la gestion de version
+
+pedagogie : citer bloom 2010krathwohl, acceptation des outils, utilisabilité, 
+
+To support them in this learning process, the biostatistics courses of the University of Mons in the biology curriculum are being transformed since 2018 in order to offer a continuous training divided into three successive courses on three years from undergradueted and gradueted. The flipped classroom approach allows students to be active in their learning, which has the benefit of improving student outcomes [@Freeman2014]. 
+
+
+
+**idee**
 
 Nous utilisons une machine virtuelle préconfiguré avec R et RStudio afin de permettre aux étudiants de mieux fixer les concepts théoriques directement au travers d'exercices pratique [@Larwin2011].  
 
@@ -210,8 +219,7 @@ q1 %>.%
 ```
 
 ```{r}
-q1 %>.%
-  filter(., )
+
 ```
 
 on souhaite former des étudiants capable d'appliquer la science des données. L'examen plus classique ne ermet pasd'évaluer correctemetn les acquis pratique des étudiants. 
