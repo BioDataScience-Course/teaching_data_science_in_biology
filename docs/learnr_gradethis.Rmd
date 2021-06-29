@@ -1,0 +1,336 @@
+---
+title: "Teaching Biology students to code smoothly with learnR and gradethis"
+author:
+- Engels Guyliann Engels, Numerical Ecology Department, Complexys and InforTec Institutes,
+  University of Mons, Belgium
+- Philippe Grosjean, Numerical Ecology Department, Complexys and InforTec Institutes,
+  University of Mons, Belgium
+date: "`r Sys.Date()`"
+output:
+  html_document:
+    keep_md: yes
+  pdf_document: default
+bibliography: bibliography.bib
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, warning = FALSE, results = "hide", message = FALSE, fig.path = "")
+
+knitr::knit_hooks$set(
+  plot = function(x, options) {
+    hugoopts <- options$hugoopts
+    paste0(
+      "{", "{<figure src=", # the original code is simpler
+      # but here I need to escape the shortcode!
+      '"', x, '" ',
+      if (!is.null(hugoopts)) {
+        glue::glue_collapse(
+          glue::glue('{names(hugoopts)}="{hugoopts}"'),
+          sep = " "
+        )
+      },
+      ">}}\n"
+    )
+  }
+)
+
+```
+
+```{r}
+
+SciViews::R
+source("../R/learnr_functions.R")
+pcloud_path <- "~/pCloud Drive/"
+
+# 2020-2021 ----
+pseudo_path <- paste0(pcloud_path, "sdd_2020-2021/data/")
+#fs::dir_ls(pseudo_path)
+
+learnr2020 <- read(paste0(pseudo_path, "learnr.csv")) %>.%
+  mutate(., 
+    user = paste0("id", user),
+    course1 = stringr::str_extract(app, "^."),
+    user_course = paste0(user, "_", course),
+    user_course1 = paste0(user, "_", course1),
+    app_label = paste0(app, "_", label))
+
+## keep only the regular student only ----
+user2020 <- read(paste0(pcloud_path, "Crypto Folder/sdd_users/users_2020-2021_q1.csv"))
+staff <- paste0("id", 1:6)
+us2020 <- filter(user2020, icflag %in% c("S-BIOG-006", "S-BIOG-015", "S-BIOG-025")) %>.%
+  mutate(., 
+    course1 = case_when(
+      icflag == "S-BIOG-006" ~ "A",
+      icflag == "S-BIOG-015" ~ "B",
+      icflag == "S-BIOG-025" ~ "C"),
+    user_course = paste0(ID, "_", icflag),
+    user_course1 = paste0(ID, "_", course1))
+
+stu_drop <- paste0("id", c(93, 68, 76, 164, 79, 69, 35, 33, 82, 153, 161))
+
+learnr2020 %>.%
+  filter(., !user %in% staff) %>.% # delete staff
+  filter(., course %in% c("S-BIOG-006", "S-BIOG-015", "S-BIOG-025")) %>.%
+  filter(., user_course1 %in% unique(us2020$user_course1)) %>.%
+  filter(., !app %in% c(".A04a_graphs_adv", ".B01b_reg_poly", ".B01b_reg_multi", "A06Lb_recombinaison")) %>.%
+  filter(., !user %in% stu_drop) %>.%
+  mutate(., year = 2020) -> learnr2020
+
+learnr2020 %>.%
+  filter(., !label %in% stringr::str_subset(label, "noscore")) %>.%
+  first_sequence(.) -> learnr_red2020
+
+# 2019-2020 ----
+library(DBI)
+base_dir <- "~/pCloud Drive/Crypto Folder/sdd_data_backup/sdd_data_2019-2020/"
+sdd2019 <- dbConnect(RSQLite::SQLite(), file.path(base_dir, "sdd.db"))
+# Session that contains all event types
+# dbListTables(sdd2019)
+learnr2019 <- dbReadTable(sdd2019, "learnr")
+dbDisconnect(sdd2019)
+
+learnr2019$correct[learnr2019$correct == ""] <- NA
+
+learnr2019 <- mutate(learnr2019,
+  correct = as.logical(correct),
+  date = lubridate::ymd_hms(date),
+  course1 = stringr::str_extract(app, "^."),
+  user_course = paste0(user, "_", course),
+  user_course1 = paste0(user, "_", course1),
+  app_label = paste0(app, "_", label)
+)
+
+learnr2019 <- mutate(learnr2019, key = oid(date))
+
+## keep only the regular student only ----
+user2019 <- read(paste0(pcloud_path, "Crypto Folder/sdd_users/users_2019-2020_q1.csv"))
+us2019 <- filter(user2019, icflag %in% c("S-BIOG-006", "S-BIOG-015")) %>.%
+  mutate(., 
+    course1 = case_when(
+      icflag == "S-BIOG-006" ~ "A",
+      icflag == "S-BIOG-015" ~ "B"),
+    user_course = paste0(ID, "_", icflag),
+    user_course1 = paste0(ID, "_", course1))
+
+stu_drop <- paste0("id", c(96, 144, 172, 173, 174, 175, 176, 159, 145, 179, 176, 100, 180))
+
+learnr2019 %>.%
+  filter(., !user %in% staff) %>.% # delete staff
+  filter(., course %in% c("S-BIOG-006", "S-BIOG-015")) %>.%
+  filter(., !app %in% c(
+    ".00La_jde", "A..Lc_ch_examen", "A13Lc_examen", "A..Lb_m_examen", 
+    "A10L._anova_test", "B..Lb_m_examen", "B..La_m_examen", "A..Lc_m_examen", "
+    A11L._anova2_test", "A..La_examen")) %>.%
+  filter(., user_course1 %in% unique(us2019$user_course1)) %>.%
+  filter(., !user %in% stu_drop) %>.%
+  mutate(., year = 2019) -> learnr2019
+
+learnr2019 %>.%
+  filter(., !label %in% stringr::str_subset(label, "comm")) %>.%
+  first_sequence(.) -> learnr_red2019
+
+learnr_comp <- bind_rows(select(learnr2019, names(learnr2020)), learnr2020)
+
+learnr_red <- bind_rows(select(learnr_red2019, names(learnr_red2020)), learnr_red2020)
+```
+
+## Abstract
+
+Students in a biology curriculum at the University of Mons learn to use R, RStudio, git and GitHub in their data science courses. The flipped classroom approach is used since 2018; students discover by themselves new concepts using online course material (<https://wp.sciviews.org>) at home. Then they apply the new concepts in the classroom on biological datasets in individual or group projects hosted on GitHub (<https://github.com/BioDataScience-Course>).
+
+{Learnr} tutorials are used for a smooth transition between the theory at home and practice in the classroom. Students self-assess their conceptual understanding thanks to these tutorials with or without guided feedback using {gradethis}. {learnitdown} (<https://www.sciviews.org/learnitdown/>) is used to manage students identity and to record their activity in a MongoDB database.
+
+Students in the first course are more perseverant when guided feedback is available, translating in a significant increase in the number of attempts per question. In the second course their perseverance was already high without the guided feedback, which exhibits thus a more limited effect.
+
+Perception of the workload in the tutorials is quantified using a Raw Task load index (NASA-LTX questionnaire). This index could be used as one of the indicators to check the improvement of the tutorials in the future.
+
+### Keywords
+
+data science class, flipped classroom, learnr, gradethis, learnitdown
+
+## Findings
+
+Number of students , tutorials, questions and recorded events during the last two year are presented in the next table.
+
+```{r, results='markup'}
+learnr_comp %>.%
+  group_by(., course1, year) %>.%
+  summarise(., 
+    user = length(unique(user)), app = length(unique(app)), 
+    question = length(unique(app_label)), event = n()) -> tab
+
+tab <- mutate(tab, course1 = case_when(
+      course1 == "A" ~ "BioDataScience I",
+      course1 == "B" ~ "BioDataScience II",
+      course1 == "C" ~ "BioDataScience III")) 
+  
+knitr::kable(tab, col.names = c("Course", "Academic year","User", "App", "Question", "Event"))
+```
+
+The learnr tutorials analysed in the present study are available in GitHub:
+
+-   BioDataScience1 (<https://github.com/BioDataScience-Course/BioDataScience1>)
+-   BioDataScience2 (<https://github.com/BioDataScience-Course/BioDataScience2>)
+-   BioDataScience3 (<https://github.com/BioDataScience-Course/BioDataScience3>)
+
+```{r}
+
+learnr_red %>.%
+  group_by(., user, year, course, app_label, verb) %>.%
+  summarise(., n = n()) -> learnr_verb
+
+learnr_verb %>.%
+  filter(., verb == "executed") %>.%
+  group_by(., user, year, course) %>.%
+  summarise(., tot = sum(n)) -> learnr_executed
+
+learnr_verb %>.%
+  filter(., verb == "submitted") %>.%
+  group_by(., course, year)  %>.%
+  summarise(., q_tot = length(unique(app_label))) -> learnr_submitted
+
+learnr_participation <- left_join(learnr_executed, learnr_submitted, by = c("course", "year"))
+
+learnr_participation <- mutate(learnr_participation, 
+  ratio_question = tot/q_tot)
+
+learnr_participation <- mutate(learnr_participation, 
+  course_name = case_when(
+    course == "S-BIOG-006" ~ "Biodatascience I",
+    course == "S-BIOG-015" ~ "Biodatascience II",
+    course == "S-BIOG-025" ~ "Biodatascience III"
+    ),
+  year_name = factor(case_when(
+    year == 2019 ~ "without guided feedback",
+    year == 2020 ~ "with guided feedback"
+  ), levels = c("without guided feedback", "with guided feedback"))
+  )
+
+n_fun <- function(x){
+  return(data.frame(y = max(x) * 1.1, label = paste0("n = ",length(x))))
+}
+
+chart(learnr_participation, ratio_question~course_name %fill=% year_name) +
+  geom_hline(yintercept = c(5,10), alpha = 0.2) +
+  geom_boxplot() +
+  stat_summary(fun.data = n_fun, geom = "text", hjust = 0.5,
+    position = position_dodge(0.75)) +
+  labs(y = "Number of attempts / question", x = "Course", fill = "") +
+    theme(legend.position = "top", legend.justification = "center")
+```
+
+The comparison with and without guided feedback does not show significant differences in number of attempts per exercise except for the Biodatascience I course (Wilcoxon independent test, W = 33, p-value = 2e-16). Guided feedbacks induce a behaviour change: students gave up sooner without them.
+
+```{r}
+learnr_participation %>.%
+  filter(., course == "S-BIOG-006") %>.%
+  wilcox.test(data = ., ratio_question ~ year_name)
+
+learnr_participation %>.%
+  filter(., course == "S-BIOG-015") %>.%
+  wilcox.test(data = ., ratio_question ~ year)
+```
+
+### Perceived workload
+
+The NASA-LTX indicator is composed of six questions on a Likert scale to quantify the perceived workload to complete a tutorial [@hart1988development]. The questions concern mental load, physical load, time pressure, expected success, effort required, and frustration experienced during the accomplishment of the task. The average value for the six questions constitutes a Raw Task Load indeX (RTLX) [@byers1989traditional].
+
+```{r}
+wo <- read(paste0(pseudo_path, "wooclap.csv"))
+
+learnr_feeling <- function(df, apps, labels) {
+  res <- dplyr::filter(df, app == apps & label == labels)
+  
+  c("(\\d):(Quelle a été l'importance de l'activité mentale et intellectuelle requise)", 
+    "(\\d):(Quelle a été l'importance de l'activité physique requise)",
+    "(\\d):(Quelle a été l'importance de la pression temporelle causée par la rapidité nécessitée pour l'accomplissement de la tâche)",
+    "(\\d):Quelle réussite pensez-vous avoir eu dans l'accomplissement de la tâche",
+    "(\\d):Quel degré d'effort avez-vous dû fournir pour exécuter la tâche demandée",
+    "(\\d):Pendant l'exécution du travail vous êtes-vous senti découragé"
+    ) %>.%
+  purrr::map_dfc(., function(str, pattern) {stringr::str_match(str, pattern = pattern)[,2]}, str = res$value) -> vec
+  
+  names(vec) <- c("mental", "physical", "time_pressure", "performance", "effort", "frustration")
+  
+  vec %>.%
+    map_dfc(.,as.numeric) -> vec1
+  
+  vec1$app <- apps
+  vec1$label <- labels
+  vec1$user <- res$user
+  return(vec1)
+}
+
+c("A99Wa_perception", "B99Wa_perception", "C99Wb_perception:perception") %>%
+  purrr::map_dfr(learnr_feeling, df = wo, label = "Q4") -> learnr_workload
+
+learnr_workload$course <- stringr::str_extract(learnr_workload$app, "^.")
+
+learnr_workload %>.%
+  pivot_longer(.,cols = c(mental, physical, time_pressure, performance, effort, frustration),
+  names_to = "category", values_to = "grade") -> workload
+
+workload %>.%
+  group_by(., user, app, course) %>.%
+  summarise(., rtlx = 10*mean(grade)) -> workload_rtlx
+
+
+chart(workload, grade ~ category %fill=% course) +
+  geom_boxplot()
+workload %>.%
+  group_by(., user, app, course) %>.%
+  summarise(., rtlx = 10*mean(grade)) -> workload_rtlx
+
+workload_rtlx <- mutate(workload_rtlx, course_name = case_when(
+  course == "A" ~ "Biodatascience I",
+  course == "B" ~ "Biodatascience II",
+  course == "C" ~ "Biodatascience III"
+))
+
+
+n_fun <- function(x){
+  return(data.frame(y = max(x) * 1.1, label = paste0("n = ",length(x))))
+}
+
+chart(workload_rtlx, rtlx ~ course_name) +
+  geom_boxplot(fill = "#00BFC4") +
+  geom_jitter(alpha = 0.5, width = 0.1) +
+  labs(y = "RTLX", x = "Course") +
+  stat_summary(fun.data = n_fun, geom = "text", hjust = 0.5) +
+  labs( y = "Raw Task Load indeX (2020-2021)")
+```
+
+Despite the increased difficulty of the exercises from one course to the other, RTLX indicator for Biodatascience III is significantly lower than for Biodatascience I (Tukey HSD, p-value = 0.023). We hypothesise that students are more used to the {learnr} tutorials as well as, R coding required to solve the exercises. Consequently, global workload is perceived as lighter. These RTLX measurements are meant to be a reference point for the following years: any future improvements in the tutorials should lead to similar or lower RTLX.
+
+```{r}
+workload_rtlx %>.%
+  mutate(., course = as.factor(course)) -> workload_rtlx
+
+anova. <- lm(data = workload_rtlx, rtlx ~ course)
+anova(anova.)
+
+#bartlett.test(data = workload_rtlx, rtlx ~ course)
+#plot(anova., which = 2)
+
+summary(anovaComp. <- confint(multcomp::glht(anova.,
+  linfct = multcomp::mcp(course = "Tukey")))) # Add a second factor if you want
+#.oma <- par(oma = c(0, 5.1, 0, 0)); plot(anovaComp.); par(.oma); rm(.oma)
+
+```
+
+The combination of {learnr}, {gradethis} and {learnitdown} provides a powerful tool to self-assess learning in data science. Students first exposed to {learnr} tutorials also benefit from additional guided feedback with {gradethis}. We propose to use the RTLX index as a mean to assess perceived difficulties and work required to complete these tutorials.
+
+
+### **Availability of supporting source code and requirements**
+
+-   Project home pages: <https://www.sciviews.org/learnitdown/>, <https://github.com/BioDataScience-Course/BioDataScience1>, <https://github.com/BioDataScience-Course/BioDataScience2>, <https://github.com/BioDataScience-Course/BioDataScience3>
+-   Operating systems: Platform independent
+-   Programming language: R
+-   Other requirements: R 4.0.5 or higher, learnr 0.10.1.9008 or higher , gradethis, learnitdown 1.3.0 or higher
+
+### Data availability
+
+The data will be opened shortly.
+
+### References
+
