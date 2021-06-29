@@ -75,11 +75,17 @@ The courses in biostatistics in biology at the University of Mons, Belgium, were
 
 # Introdution
 
-The growing mass of collected data, the reproducibility crisis [@Baker2016], the concepts linked to Open Science are elements that have pushed the emergence of data science programs in the Data Science initiative since 2015 [@Donoho2017; @Cetinkaya-Rundel2021] as the Harvard Data science Initiative (<https://datascience.harvard.edu/about>). These courses are not dedicated to statisticians, mathematicians or computer scientists 
+The growing mass of collected data, the reproducibility crisis [@Baker2016], the concepts linked to Open Science are elements that have pushed the emergence of data science programs in the Data Science initiative since 2015 [@Donoho2017; @Cetinkaya-Rundel2021] as the Harvard Data science Initiative (<https://datascience.harvard.edu/about>). 
+These courses are not just for computer scientists, mathematicians or statisticians as evidenced by the data science training by Duke University which accepts humanities, social sciences, and natural sciences students [@Cetinkaya-Rundel2021]. The classical statistics courses are outdated by these new concepts. Students will have to propose reproducible analyses with open data and interpret them with the knowledge of their field of expertise. This is a challenge for students that are a poor or no background in computing and statisticics. They must be able to manage, analyze, and communicate with professional tools.
 
-These courses are not just for computer scientists, mathematicians or statisticians as evidenced by the data science training by Duke University which accepts humanities, social sciences, and natural sciences students [@BCetinkaya-Rundel2021]. The classical statistics courses are outdated by these new concepts. Students will have to propose reproducible analyses with open data and interpret them with the knowledge of their field of expertise. This is a challenge for students hat are a poor or no background in computing and statisticics. They must be able to manage, analyze, and communicate with professional tools.
+git_github : recherhce reproductible, utilisation de rmarkdown, gestion de projet.
 
-To support them in this learning process, the biostatistics courses of the University of Mons in the biology curriculum are being transformed since 2018 in order to offer a continuous training divided into five successive courses on three years. The flipped classroom approach allows students to be active in their learning, which has the benefit of improving student outcomes [@Freeman2014]. 
+-> git permet de suivre leur apprentissage grâce au commit et il permet de faire découvrir au étudiants la gestion de version
+
+pedagogie : citer bloom 2010krathwohl, acceptation des outils, utilisabilité, 
+
+To support them in this learning process, the biostatistics courses of the University of Mons in the biology curriculum are being transformed since 2018 in order to offer a continuous training divided into three successive courses on three years from undergradueted and gradueted. The flipped classroom approach allows students to be active in their learning, which has the benefit of improving student outcomes [@Freeman2014]. 
+
 
 
 **idee**
