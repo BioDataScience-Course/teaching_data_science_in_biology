@@ -10,7 +10,7 @@ bibliography: bibliography.bib
 knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
 SciViews::R
 
-# datesets
+# datasets
 
 users18 <- read(pcloud("sdd_2018-2019/data/users.csv")) 
 users19 <- read(pcloud("sdd_2019-2020/data/users.csv")) 
@@ -71,9 +71,11 @@ n_fun <- function(x){
 
 # Abstract 
 
+**This is the oroginal abstract that should be reworked according to final content of the manuscript.**
+
 The courses in biostatistics in biology at the University of Mons, Belgium, were completely refactored in 2018 into data science courses (see http://bds.sciviews.org). The content is expanded beyond statistics to include computing tools, version management, reproducible analyses, critical thinking and open data. Flipped classroom approach is used. Students learn with the online material and they apply the concepts on individual and group projects using a preconfigured virtual machine with R and RStudio. Activities (H5P, learnr or Shiny applications) are recorded in a MongoDB database (300,000+ events for 180+ students and 2,000+ GitHub repositories at https://github.com/BioDataScience-Course). The analysis of these data reveals several trends. (1) There is a relatively long lag period required for the students to get used to the computing environment, the teaching method and the data science in general. (2) Implication is very high, with more than 85% of the students that complete all the activities and got good to excellent assessment. (3) There is a gap between students' own perception of their skills achievements and their assessment results: they tend to underestimate their progress. (4) During COVID-19 pandemic lockdown, the intensity of the activities largely decreased during two weeks before returning to previous level, but for 3/4 of the students only. The remaining fraction never caught up. We hypothesize that the technical requirements or the lack of motivation during the lockdown were detrimental to roughly one student over ten, despite all the efforts the University deployed to reduce the social fracture.
 
-# Introdution
+# Introduction
 
 Les cours de biostatistiques de l'Université de Mons du cursus en biologie sont complètement revue afin de proposer des cours de sciences des données biologiques. 
 
@@ -107,8 +109,7 @@ The SUS ....
 
 rechercher une ref plus récente type meta analyse SUS et NASA LTX
 
-# Résultats
-
+# Results
 
 Liste des idées :
 
@@ -281,8 +282,8 @@ summary(anovaComp. <- confint(multcomp::glht(anova.,
 
 La temporalité ....
 
-# Discussion
 
+# Discussion
 
 Les études portant sur le changements d'attitudes au sein de semestre ne montre pas différence significative. La comparaison entre les 3 cours met en avant qu'il faut plusieurs cours en continue afin d'observer une chagement de la charge cognitive des étudiants.
 
