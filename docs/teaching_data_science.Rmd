@@ -11,7 +11,6 @@ knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
 SciViews::R
 
 # datasets
-
 users18 <- read(pcloud("sdd_2018-2019/data/users.csv")) 
 users19 <- read(pcloud("sdd_2019-2020/data/users.csv")) 
 users <- read(pcloud("sdd_2020-2021/data/users.csv")) 
@@ -26,18 +25,11 @@ courses19 <- read(pcloud("sdd_2019-2020/data/courses.csv"))
 courses <- read(pcloud("sdd_2020-2021/data/courses.csv")) 
 
 assessments <- read(pcloud("sdd_2020-2021/data/assessments.csv"))
+h5p <- read(pcloud("sdd_2020-2021/data/h5p.csv"))
 learnr <- read(pcloud("sdd_2020-2021/data/learnr.csv"))
-projects <- read(pcloud("sdd_2020-2021/data/projects.csv")) %>.%
-  mutate(., 
-    icourse = course,
-    course = substr(github_project, 1,1),
-    type = case_when(
-      subtype == "individual" ~ "ind. github",
-      subtype == "group" ~ "group github",
-      subtype == "challenge,group" ~ "challenge"))
+projects <- read(pcloud("sdd_2020-2021/data/projects.csv"))
 
 wo <- read(pcloud("sdd_2020-2021/data/wooclap.csv"))
-
 # functions ----
 ## RTLX NASA - TLX -------------------------------------------------------------
 learnr_feeling <- function(df, apps, labels) {
@@ -139,38 +131,40 @@ users %>.%
 
 # learnr
 learnr %>.% 
-  filter(., !label %in% c("","C99La_avis") & !is.na(label)) %>.%
+  filter(., !app %in% c("A06Lb_recombinaison", "A99La_avis", "B00La_rappel", "B99La_avis","C99La_avis") & !is.na(label)) %>.%
   mutate(., course = substr(app,1,1),
     app_label = paste0(app, label)) %>.%
   filter(., course %in% c("A", "B", "C")) %>.%
   group_by(., course) %>.%
-  summarise(., app = length(unique(app)), questions = length(unique(app_label)))-> t 
+  summarise(., app = length(unique(app)), questions = length(unique(app_label))) -> learnr_tab 
 
 # projects
 projects %>.%
   filter(., type %in% c("ind. github", "group github") & course != "D") %>.%
   group_by(., course, type) %>.%
   count(.) %>.%
-  pivot_wider(., names_from = "type", values_from = "n") -> projects_tab
+  pivot_wider(., names_from = "type", values_from = "n") %>.%
+  ungroup(.) %>.%
+  select(., course, `ind. github`, `group github`)-> projects_tab
     
-  
-
 # tab number of exercices by type ---
 assessments %>.%
+  filter(., type == "h5p") %>.%
   mutate(., 
-    app_type = paste0(app,"_",'type'),
+    app_type = paste0(app, "_" ,'type'),
     course = substr(app, start = 1, stop = 1),
     ) %>.%
-  group_by(., course, type) %>.%
-  summarise(., tot = length(unique(app_type)))  %>.%
-  ungroup(.) %>.%
-  pivot_wider(., names_from = "type", values_from = "tot") %>.%
-  select(., course,  h5p, shiny, learnr, `ind. github`, `group github`, blog) -> exercice_tab
+  group_by(., course) %>.%
+  summarise(., h5p = length(unique(app_type))) -> h5P_tab
 
-knitr::kable(left_join(us_tab, exercice_tab, by = c("course")))
+left_join(us_tab, h5P_tab) %>.%
+  left_join(., mutate(learnr_tab, learnr = paste0(app, " (", questions, ")"), .keep = "unused")) %>.%
+  left_join(., projects_tab) %>.%
+  knitr::kable(.)
 ```
 
-blog a virer , shiny on cogite à la virer, ind.github error cours C, learnr ajouter nombre de question en ()
+
+## Exams versus project
 
 ```{r}
 assessments18 %>.%
@@ -216,20 +210,17 @@ q1 %>.%
   labs(y = "Exam grade", x = "Project grade")
 ```
 
-```{r}
-
-```
 
 on souhaite former des étudiants capable d'appliquer la science des données. L'examen plus classique ne ermet pasd'évaluer correctemetn les acquis pratique des étudiants. 
 
-a exam in the end of the term, melange entre des questions théoriques et la mise en pratique.
 
-```{r}
-q1 %>.%
-  filter(., course == "A") %>.%
-  wilcox.test(data = ., exam ~ acad_year)
-```
+## Students' profiles
 
+
+## temporality of work
+
+
+## students' perception
 
 Le suivi de l'activité permet de mettre en avant différents profils d'étudiants. ....
 
@@ -285,8 +276,6 @@ anova(anova.)
 summary(anovaComp. <- confint(multcomp::glht(anova.,
   linfct = multcomp::mcp(course = "Tukey"))))
 ```
-
-La temporalité ....
 
 
 # Discussion
