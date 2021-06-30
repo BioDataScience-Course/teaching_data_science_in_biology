@@ -88,6 +88,8 @@ At the University of Mons, in Belgium, we have started to rework our biostatisti
 
 As our course were completely reworked, we also decided to use flipped classroom and progressive adoption of suitable pedagogical practices with a cyclical approach that consists in stating goals, building pedagogical material with a large emphasis on numerical tools and collection of student's activities, and analysis of these data. Conclusions of these analyses initiate another cycle the following academic year with refined goals and pedagogical material or techniques. Here, we present the main results spanning on three successive academic years from 2018 to 2021, including two particular periods where distance learning was forced due to COVID pandemic lockdown. 
 
+[TODO: ajouter une informaiton sur notre objectif : former des étudiants pouvant analyser des données.]
+
 [TODO: present here the 3-4 research questions that will be elaborated in the manuscript.]
 
 
@@ -118,6 +120,9 @@ Liste des idées :
 - learnrs (+ perception) -> apprentissage sur le très long terme (> 1 ou deux quadris)
 
 La transition du cours classique vers une cours en classe inversée a menée à l'intégration de nouveaux outils permettant de diversifier les types d'exercice proposés aux étudiants (tab M&M). Le tableau XX indique la répartition des exercices pour chaque cours. La collecte des données pour chaque exercice permet de construire une note objective pour chaque étudiant. La note des étudiant est construite sur l'évaluation des 5 niveaux d'exercices complémentaires allant des exercices les plus simples (N1) aux exercices les plus complexes (N5). Une moyenne pondérée pour chaque niveau d'exercice est employée pour obtenir une note finale par cours.
+
+Our in-service training includes 26 complementary modules over 3 years and 3 consecutive courses from bab2 to MA1. The number of exercises per type is shown in Table XXX. The goal and the difficulty levels of the exercises are presented in table xxx. The completion of each exercise is recorded in a database which allows an objective grade to be constructed for each student. 
+
 
 ```{r}
 # Tab of number of users and number of exercices by type ----------------------
@@ -157,12 +162,13 @@ assessments %>.%
   group_by(., course) %>.%
   summarise(., h5p = length(unique(app_type))) -> h5P_tab
 
-left_join(us_tab, h5P_tab) %>.%
+us_tab %>.%
+  mutate(., module = c(12, 8, 6)) %>.%
+  left_join(., h5P_tab) %>.%
   left_join(., mutate(learnr_tab, learnr = paste0(app, " (", questions, ")"), .keep = "unused")) %>.%
   left_join(., projects_tab) %>.%
-  knitr::kable(.)
+  knitr::kable(., caption = "Number of users, modules, exercises with h5p, learnr tutorial,individual project and group project by course. The number of quesion by learnr tutorial are in the parentheses.")
 ```
-
 
 ## Exams versus project
 
@@ -190,18 +196,15 @@ q1 <- bind_rows(
   select(q1_19_regular, user, acad_year, course, result, exam)
   )
 #table(q1$link) /nrow(q1)
-q1 %>.%
-  cor.test(.$exam, .$result)
 ```
 
-Jusqu'au premier quadrimestre 2019-2020, la note des étudiants était basé sur la réalisation d'un projet et d'un examen plus conventionnel réalisé lors de la période des examens. Une faible corrélation linéaire significative de 0.41 est obtenue entre la note de l'examen et la note obtenu pour les projets (Pearson correlation test, t = 3.82, df = 74, p-value = 0.0002). 
 
-La pandémie de COVID 19 nous a contraints à annuler l'examen du second quadrimestre 2019-2020 et d'évaluer uniquement les étudiants sur les projets. La faible corrélation entre la note du projet pratique et la note de l'examen observé lors du premier quadrimestre met en avant que la critère d'évaluation entre un projet pratique et un examen théorique ne sont pas les mêmes. Suite à cette observation, l'examen théorique est définitivement abandonné pour l'année académique 2020-2021.
+Until the first four months of the 2019-2020 academic year, students' grades were based on the completion of a project and a more conventional examination during the examination period. The projects are assessed using a grading grid since the 2019-2020 academic year.
 
 ```{r}
 q1 %>.%
   mutate(., course_year = paste0(course, " (",acad_year,")")) %>.%
-  chart(., exam ~ result %col=% user | course_year) +
+  chart(., exam ~ result | course_year) +
   geom_vline(xintercept = 5, alpha = 0.2) +
   geom_hline(yintercept = 5, alpha = 0.2) +
   geom_jitter(alpha = 1, width = 0.05, height = 0.05, show.legend = FALSE) +
@@ -210,31 +213,27 @@ q1 %>.%
   labs(y = "Exam grade", x = "Project grade")
 ```
 
+The comparison of the marks obtained between the project and the exam mark shows a strong disparity between these two types of evaluation. 
 
-on souhaite former des étudiants capable d'appliquer la science des données. L'examen plus classique ne ermet pasd'évaluer correctemetn les acquis pratique des étudiants. 
+The 2018-2019 year is the first year of transition to data science courses. Only one student failed the project, while almost one third of the students failed their exams. The level of requirements is being raised for the 2019-2020 academic year. The new expectations and the introduction of evaluation grids to assess projects show a greater disparity in students' grades.
 
+Despite an examination that includes theoretical and practical questions, this type of assessment does not assess a student's ability to correctly process and analyse biological data.
+
+Following these results and the monitoring of more precise exercises, the examination is definitively abandoned for the 2020-2021 academic year to be replaced by a continuous assessment.
 
 ## Students' profiles
+
+[TODO : Add SOM analyses, This analysis is stand by as we validate the metrics]
+
 
 
 ## temporality of work
 
+[TODO : add analyse on the commit or h5P/learnr exercices to follow the student]
 
-## students' perception
+## Learnr tutorials
 
-Le suivi de l'activité permet de mettre en avant différents profils d'étudiants. ....
-
-```{r}
-# TODO
-```
-
-La perception positives des étudiants face aux outils utilisés est un éléments important ...
-
-```{r}
-#SUS
-```
-
-La charge cognitive requise pour réaliser des tutoriel (N3) est étudié via un questionnaire NASA LTX. En effet, ces exercices ont pour objectif de permettre une transition plus facile de la théorie vers les exercices pratiques (N4 et N5).
+The learnr tutorials are an essential part of the learning method to link theory and practice. The cognitive load required to perform tutorials is studied via a NASA LTX questionnaire.
 
 ```{r}
 c("A99Wa_perception", "B99Wa_perception", "C99Wb_perception:perception") %>%
@@ -248,6 +247,7 @@ learnr_workload %>.%
 
 workload %>.%
   group_by(., user, app, course) %>.%
+  #filter(., user != "ECAYEO033") %>.%
   summarise(., rtlx = 10*mean(grade)) -> workload_rtlx
 
 set.seed(222)
@@ -255,17 +255,20 @@ chart(workload_rtlx, rtlx ~ course) +
   geom_boxplot(fill = "#00BFC4") +
   geom_jitter(alpha = 0.5, width = 0.1) +
   labs(y = "RTLX", x = "Course") +
+  stat_summary(fun.y="mean", color = "red")+
   stat_summary(fun.data = n_fun, geom = "text", hjust = 0.5) +
   labs( y = "Raw Task Load indeX (2020-2021)")
 ```
 
-La difficultés des exercices tutoriels est croissante de cours en cours. Cependant, on observe une valeur du RTLX du cours de sciences des données 3 significativement plus faible que pour le cours de science des données 1 (Tukey HSD, p-value = 0.023). La charge cognitive percue par les étudiants est donc plus faible.
+The difficulty of the tutorial exercises increases from course to course. However, we observe a significantly lower RTLX value for the course C than for the course A (Tukey HSD, p-value = 0.023). The cognitive load perceived by the students is therefore lower.
 
-faire un test sur les médianes ....
 
 ```{r}
 workload_rtlx %>.%
   mutate(., course = as.factor(course)) -> workload_rtlx
+
+#kruskal.test(data = workload_rtlx, rtlx ~ course)
+#summary(kw_comp. <- nparcomp::nparcomp(data = workload_rtlx, rtlx ~ course))
 
 anova. <- lm(data = workload_rtlx, rtlx ~ course)
 anova(anova.)
