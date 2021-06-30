@@ -35,6 +35,9 @@ learnr <- read(pcloud("sdd_2020-2021/data/learnr.csv"))
 projects <- read(pcloud("sdd_2020-2021/data/projects.csv"))
 
 wo <- read(pcloud("sdd_2020-2021/data/wooclap.csv"))
+
+log19 <- read(pcloud("sdd_2019-2020/data/git_log.csv"))
+log <- read(pcloud("sdd_2020-2021/data/git_log.csv"))
 # functions ----
 ## RTLX NASA - TLX -------------------------------------------------------------
 learnr_feeling <- function(df, apps, labels) {
@@ -245,6 +248,46 @@ Following these results and the monitoring of more precise exercises, the examin
 ## temporality of work
 
 [TODO : add analyse on the commit or h5P/learnr exercices to follow the student]
+
+```{r}
+log19 %>.% 
+  distinct(., commit, .keep_all = TRUE) %>.%
+  filter(., is.na(from)) %>.%
+  mutate(., date_round = lubridate::round_date(date, "day")) %>.%
+  group_by(., date_round) %>.%
+  count(.) %>.%
+  ungroup(.) %>.%
+  mutate(., cumul_commit = cumsum(n)) -> log19_red
+
+
+log19_red %>.%
+  filter(., date_round > lubridate::ymd("2020-02-01") & date_round < lubridate::ymd("2020-05-22")) %>.%
+  chart(., cumul_commit ~ date_round) +
+  geom_line() +
+  geom_vline(xintercept = as.POSIXct("2020-03-15"), color = "red") +
+  labs(x = "Date", y = "cumulative sum of commits") -> p1
+
+log %>.% 
+  distinct(., commit, .keep_all = TRUE) %>.%
+  filter(., is.na(from)) %>.%
+  mutate(., date_round = lubridate::round_date(date, "day")) %>.%
+  group_by(., date_round) %>.%
+  count(.) %>.%
+  ungroup(.) %>.%
+  mutate(., cumul_commit = cumsum(n)) -> log_red
+
+
+log_red %>.%
+  filter(., date_round < lubridate::ymd("2020-11-15")) %>.%
+  chart(., cumul_commit ~ date_round) +
+  geom_line() +
+  geom_vline(xintercept = as.POSIXct("2020-10-21"), color = "red") +
+  labs(x = "Date", y = "cumulative sum of commits") -> p2
+
+combine_charts(list(p1, p2))
+
+```
+During the first containment there is an almost complete cessation of activity (graph A) ....
 
 ## Learnr tutorials
 
