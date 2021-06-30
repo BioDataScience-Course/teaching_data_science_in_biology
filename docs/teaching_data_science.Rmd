@@ -1,13 +1,15 @@
 ---
-title: 'Teaching Data Science to Students in Biology using R, RStudio and Learnr: Analysis of Three years Data'
+title: 'Teaching Data Science to Students in Biology using R, RStudio and Learnr:
+  Analysis of Three years Data'
 output:
-  pdf_document: 
+  word_document: default
+  html_document:
+    code_folding: hide
+  pdf_document:
     fig_caption: yes
     number_sections: yes
     latex_engine: xelatex
     keep_tex: yes
-  html_document:
-    code_folding: hide
 bibliography: bibliography.bib
 ---
 
@@ -99,41 +101,46 @@ As our course were completely reworked, we also decided to use flipped classroom
 
 # Methods
 
-The course material is available online (https://wp.sciviews.org) from a Wordpress site. Students have to login with their GitHub account and their academic data are collected from the UMONS Moodle server. All student activities in H5P exercises, and learnr tutorials are recorded in a MongoDB database. The learnitdown R package (https://www.sciviews.org/learnitdown/) provides the functions required to manage login and activity tracking in the interactive material.
+The course materials are available online (https://wp.sciviews.org) and are centralized in a Wordpress site. Students have to login with their GitHub account and their academic data are collected from the UMONS Moodle server. The courses are break down into modules that amount roughly to 15h of work each in total. There are two sessions of 2h and 4h in the classroom (outside of lockdown periods, of course). Main activities in the class are actual data analysis (projects), answering student questions, and very sort lectures of 1/4h on selected topics. Students propose and vote for the topics to be covered during these short lectures. Finally, we encourage students to help each other and to explain what they understand to their colleagues. Indeed, students' questions may be redirected to other students that have already mastered the topic by the educators. On the other hand, teachers rarely answer questions directly. When it is possible, they rather propose new tracks or ideas to investigate in order to find the solution by oneself. Students that have finished the work before the others are encouraged to help their colleagues too.
 
-Projects are managed in GitHub repositories and locally, files are edited in RStudio projects. The assignations and creation of the GitHub repositories is orchestrated by GitHub Classroom. All repositories are cloned in a folder and data about commits (git logs) are collected using git version XXX and R version YYY.
+Regarding the timing, one module it taught every second week so that students have enough time to prepare the material at home and then, to finalize their projects before the next module. Since a term is 14 weeks, we do not teach more than six modules in a course unit to avoid compacting them in time at a faster pace than one module every second week.
 
-Support to student in distance learning was done via email and Discord. All messages are collected into text files that are scraped using R code to create a table with required information (who, when, what). Students are surveyed during lessons by means of Wooclap questionnaires. The results are exported from Wooclap into Excel files, and the pertinent information is collected together in a table in the MongoDB database.
+All student activities in H5P exercises for their auto-evaluation, and in learnr tutorials to transition smoothly from the theory to the practice are recorded in the MongoDB database. The learnitdown R package (https://www.sciviews.org/learnitdown/) provides the functions required to manage user login, user identification and activity tracking in the interactive material.
 
-Informations about users, courses, lessons et projects, as well as grading items (on average, more that 130 grading items per student in 2020-2021) are anonymized: name, email and all the personal information are replaced by random identifiers. The different tables are then exported into CSV files and made public. These data are available at [... Zenodo?]. Data collection, treatment, and use respect European GDPR (General Data Protection Regulation) since each student had to agree explicitly with the way data are collected and used (including for research purpose) and can access its own data through personalized reports.
+Projects with the data, the analyses and te reports are hosted in GitHub repositories. These repositories are cloned and edited locally with RStudio, either on a PC in the computer lab, or directly on the student's laptop. We encourage our students to install the virtual machine on their own computer so that they can use it for other courses too. Assignment and creation of the GitHub repositories for each student, or group of students is orchestrated with GitHub Classroom. All repositories are ultimately cloned in a centralized area on our servers and data about commits (git logs) are collected using git version [XXX] and R version 4.0.5. To give an idea of the amount of data recorded, in 2020-2021 we have a little bit more than 2,500 events per student.
 
-The course material is organized in a way that favour autonomy and auto-evaluation (direct feedback in the exercises, hints and retry button in case of wrong answer).
+In distance learning, support to the students was done via email and Discord. At the end, all messages that were exchanged are collected together into text files. These files are scraped using R code to create a table with key information (basically, who, when, and what) for each message. Surveys are periodically conducted during lessons by means of Wooclap questionnaires (see, for instance, the Nasa-LTX questionnaire analysis in the results section). Wooclap allows to export data into Excel files. These data are then converted into a table in our database.
 
-| Niveau | description                                                                         | type d'exercices |
-|--------|-------------------------------------------------------------------------------------|------------------|
-| N1     | Exercice court intégré directement dans le cours en ligne avec un feedback immédiat | h5p, shiny       |
-| N2     | Exercice guidé dans un tutoriel avec un feedback immédiat                           | learnr           |
-| N3     | Exercice cadré sous la forme d'un projet individuel                                 | ind github       |
-| N4     | Exercice libre sous la forme de projet de groupe                                    | group github     |
+Information about users, courses, lessons and projects, as well as grading items (on average, more that 130 grading items were established for each student in 2020-2021) are anonymized: name, email and all the personal information are replaced by random identifiers. The different tables are ultimately exported into CSV files and made public. These data are available at [... Zenodo?]. Data collection, treatment, and use respect European GDPR (General Data Protection Regulation) since each student had to agree explicitly with the way data are collected and used (including for research purpose) before the course begins. They can visualize their own data through personalized reports at anytime.
 
-ajouter une colonne avec la taxonomie de bloom 
+The course material is organized in a way that favour autonomy and auto-evaluation (direct feedback in the exercises, hints and retry button in case of wrong answer). Activities span into a sequence of exercises of increasing difficulty, ranging from Level 1 to level 4. Table 1 summarizes main characteristics of the exercises according to the level.
 
-The NASA-LTX indicator is composed of six questions on a Likert scale to quantify the perceived workload to complete a tutorial [@Hart1988]. The questions concern mental load, physical load, time pressure, expected success, effort required, and frustration experienced during the accomplishment of the task. The average value for the six questions constitutes a Raw Task Load indeX (RTLX) [@Byers1989].
+| Level | Description                                                                                   | Type               |
+|-------|-----------------------------------------------------------------------------------------------|--------------------|
+| L1    | Short exercise directly integrated in the course and with direct feedback for auto-evaluation | h5p                |
+| L2    | Guided exercise with contextual feedback within a short tutorial                              | learnr             |
+| L3    | Individual and guided data analysis                                                           | individual project |
+| L4    | More complex and free data analysis and reporting (group of 2 or 4 students)                  | group project      |
 
-The SUS ....
+Table: for levels of increasing difficulties in the exercises.
 
-rechercher une ref plus récente type meta analyse SUS et NASA LTX
+[one or two paragraphs to describe statistical methods used here...]
+
+The NASA-LTX questionnaire is composed of six questions on a Likert scale to quantify the perceived workload to complete a task [@Hart1988]. The questions concern mental load, physical load, time pressure, expected success, effort required, and frustration experienced during the accomplishment of the task. The average value for the six questions constitutes a Raw Task Load indeX (RTLX) [@Byers1989] that we use to quantify how students perceive the workload of a given task.
+
 
 # Results
 
-Liste des idées :
+Liste des idées développées dans cette section :
 
 - exam versus project 2018 et 2019 => elimination de l'examen
 - profiles analyse SOM => sous-groupes + analyse des groupes y compris comparaison avec les grades
 - temporel présentiel -> distanciel
 - learnrs (+ perception) -> apprentissage sur le très long terme (> 1 ou deux quadris)
 
-La transition du cours classique vers une cours en classe inversée a menée à l'intégration de nouveaux outils permettant de diversifier les types d'exercice proposés aux étudiants (tab M&M). Le tableau XX indique la répartition des exercices pour chaque cours. La collecte des données pour chaque exercice permet de construire une note objective pour chaque étudiant. La note des étudiant est construite sur l'évaluation des 5 niveaux d'exercices complémentaires allant des exercices les plus simples (N1) aux exercices les plus complexes (N5). Une moyenne pondérée pour chaque niveau d'exercice est employée pour obtenir une note finale par cours.
+[Next paragraph to be translated and reworked]
+
+La transition du cours classique vers une cours en classe inversée a menée à l'intégration de nouveaux outils permettant de diversifier les types d'exercice proposés aux étudiants (tab M&M). Le tableau XX (il semble avoir disparu dans l'édition du document???) indique la répartition des exercices pour chaque cours. La collecte des données pour chaque exercice permet de construire une note objective pour chaque étudiant. La note des étudiant est construite sur l'évaluation des 5 niveaux d'exercices complémentaires allant des exercices les plus simples (N1) aux exercices les plus complexes (N5). Une moyenne pondérée pour chaque niveau d'exercice est employée pour obtenir une note finale par cours.
 
 Our in-service training includes 26 complementary modules over 3 years and 3 consecutive courses from bab2 to MA1. The number of exercises per type is shown in Table XXX. The goal and the difficulty levels of the exercises are presented in table xxx. The completion of each exercise is recorded in a database which allows an objective grade to be constructed for each student. 
 
@@ -239,11 +246,13 @@ Following these results and the monitoring of more precise exercises, the examin
 
 [TODO : Add SOM analyses, This analysis is stand by as we validate the metrics]
 
+Les groupes réalisés créent des profils d'apprenants ayant des stratégies très différentes. Puisque certains profils sont plutôt associées aux notes plus faible, ces groupes devront faire l'objet d'une attention particulière et peut-être aussi d'une adaptation du matéirel ou de l'approche pédagogique vers un apprentissage plus inclusif.
 
+## Transition between face-to-face and distance learning
 
-## temporality of work
+Due to Covid-19 lockdown periods, distance learning had to be adopted abruptly. We analyze the activity and support data collected during academic years 2019-2020 and 2020-2021 to assess the impact of this transition on the progression of the students and
 
-[TODO : add analyse on the commit or h5P/learnr exercices to follow the student]
+[TODO : add analyse on the commit or h5P/learnr exercises to follow the student]
 
 ```{r}
 log19 %>.% 
@@ -283,11 +292,12 @@ log_red %>.%
 combine_charts(list(p1, p2))
 
 ```
-During the first containment there is an almost complete cessation of activity (graph A) ....
 
-## Learnr tutorials
+During the first lockdown, support rapidly switched to the proposed channels, by email and via Discord. However, despite a sustained exchange of message, progression of the students in the course material almost stopped for two weeks before taking over (graph A) .... During the second lockdown ... [make plots and analyse this...]
 
-The learnr tutorials are an essential part of the learning method to link theory and practice. The cognitive load required to perform tutorials is studied via a NASA LTX questionnaire.
+## Learnr tutorials perceived cognitive workload
+
+The learnr tutorials play an essential role in the progressive acquisition of competences because they are at the transition between the theory (online book chapters) and the practice (projects where student analyze real biological data by themselves). Our goal is to prepare our students optimally for the practice of data science. In the other hand, we don't want to exhaust their mental energy in these tutorials before they start their projects. The efficiency of these tutorials is qualitatively determined by observing the behaviour of the students when they start their practical work. A few tutorials were elaborated during the academic year 2018-2019, and positive feedback on their utility (both by direct observation of the pupils, and by their remarks) led us to systematize them into what we now call level 2 activities (see Table XX) in the form of learnr documents in 2019-2020. The tutorials were further refined in 2020-2021: we added contextual hints thanks to the gradethis R package. When students submit their answer to the exercises, the R code is analyzed and the results are compared with the solution. In case of differences, heuristics are used to provide contextual hints. Students can then refine their solution and resubmit it. This appears very efficient in self-teaching and self-evaluation of their competences before switching to the practice. However, the cognitive load required to perform these exercises has, as far as we know, not been studied yet. We used a NASA LTX questionnaire to assess it across all three courses [indicate here the level of participation of the students for each course].
 
 ```{r}
 c("A99Wa_perception", "B99Wa_perception", "C99Wb_perception:perception") %>%
@@ -314,7 +324,7 @@ chart(workload_rtlx, rtlx ~ course) +
   labs( y = "Raw Task Load indeX (2020-2021)")
 ```
 
-The difficulty of the tutorial exercises increases from course to course. However, we observe a significantly lower RTLX value for the course C than for the course A (Tukey HSD, p-value = 0.023). The cognitive load perceived by the students is therefore lower.
+The difficulty of the course, and thus, of the exercises in the tutorials increase from one course to the other. However, we do not observe an increase in the RTLX index. On the contrary, it is significantly lower for course C than for course A (Tukey HSD, p-value = 0.023). The cognitive load perceived by the students diminishes. This may be a consequence of a more fluent R coding and the better mastering of all the software tools the students have to use.
 
 
 ```{r}
@@ -337,20 +347,30 @@ summary(anovaComp. <- confint(multcomp::glht(anova.,
 
 # Discussion
 
-Les études portant sur le changements d'attitudes au sein de semestre ne montre pas différence significative. La comparaison entre les 3 cours met en avant qu'il faut plusieurs cours en continue afin d'observer une chagement de la charge cognitive des étudiants.
+[juste quelques idées... à développer et à traduire en anglais bien sûr.]
 
-apprentissage en continu sur 3 années successives (cohérence entre le programme et l'approche pédagogique), les résultats sont meilleurs vers la 3ieme années.
+- L'examen en fin de période, même s'il reprend des questions liées à de la pratique et de l'utilisation d'outils, ne mène pas à une évaluation formtement corrélée avec l'activité qui nous intéresse le plus, à savoir, la capacité de l'étudiant à analyser des données billogiques réelles. Cette capacité est parfaitement évaluée dans les projets de niveau 1, et surtout de niveau 2 qui correspondent très précisément à une telle activité. Par conséquent, l'évaluation ne se fait plus via un examen final, mais uniquement via les prestations des étudiants dans les projets, ainsi que (pour une part relativement faible de 15% de la note finale), leur progression dans l'apprentissage de la matière via la réalisation des exercises de niveau 1 et des tutoriels de niveau 2, ceci afin de les encourager à réaliser complètement tous les exercises et à les faire dans l'ordre croissant de difficulté.
+
+- Même au sein d'une cohortez d'étudiants ayant un parcours académique similaire, nous notons de très grosses différences de stratégie dans les activités d'apprentissage. Si plusieurs stratégies différentes sont associées à une acquisirtion bonne à erxcellente des compétences telle qu'attestée par les notes obtenues, plusieurs profils sont systématiquement associés à des performances faibles. Les profils ainsi établis via cartes auto-adaptatives permettront à l'avenir de détecter plus tôt les étudiants à suivre plus particulièrement et à réfléchir à des approiches alternatives pour eux afin de les aider (pédagogie inclusive).
+
+- Les études portant sur le changements d'attitudes au sein de semestre ne montre pas différence significative. La comparaison entre les 3 cours met en avant qu'il faut plusieurs cours en continu afin d'observer une changement de la charge cognitive des étudiants.
+
+- Apprentissage en continu sur 3 années successives (cohérence entre le programme et l'approche pédagogique), les résultats sont meilleurs vers la 3ieme années.
+
+- Pendant les périodes de confinements, le passage brutal à des cours en présentiel vers des cours en distaznciel nécesite une période d'adaptation que nous avons quantifié dans notre cas à environ 2 semaine. Il s'agit ici du temps d'adaptation des étudiants, sachant que du côté des enseignants, nous avons réagit immédiatement (et même anticipé) en mettant en place très rapidement les canaux de communication alternatifs via le mail et Discord.
+
+- Les tutoriels learnrs jouent un rôle charnière entre la théorie et la pratique. Ils offrent la possibilité de préparer les étudiants de manière optimale à l'analyse de données en pratique. Nous avans quantifié la charge cognitive perçue. Si la valeur absolue de l'index RTX n'est pas informative, la comparaison d'index obtenus dans des situations différentes permet de déterminer laquelle de ces situations est la mieux perçue. La compraison des trois cours successifs montre une diminution de cette charge cognitive perçue dans le dernier cours qui est pourtant le plus avancé et le plus difficile. A l'avenir, nous pourrons utiliser ces points de référence pour encore améliorer ces tutoriels de ce pôint de vue.
 
 # Conclusions
 
 - Exam classique évalue mal la capacité d'evaluer des données biologiques par eux même
 
-- Les biologistes non  expert de l'informatique est une challenge vu le nombre important de notions a apprendre utilisation d'un ordi, gestion de projet, statistique. Il faut décomposer ces notions en 5 quadrimestre continue
+- Les biologistes non expert de l'informatique est une challenge vu le nombre important de notions a apprendre utilisation d'un ordi, gestion de projet, statistique. Il faut décomposer ces notions en petites étapes successives si nous ne voulons pas les perdre rapidement. Notre approche en 3 cours étalés sur 5 quadrimestres successifs et étalés sur 3 années semblent correspondre à un bon timing pour ce type d'étudiant qui, au départ, n'a aucune notion de statistique, et très peu de connaissance des outils des logiciels couramment utilisées par le scientifique des données.
 
-- Le logiciel reste vu comme pointu et diffficile d'utilisation (SUS).
+- Néanmoins, malgré leur habituation progressive, ces logiciels restent vus comme pointu et diffficile d'utilisation (SUS) [à voir si on met cela dans l'article: on a déjà beaucoup ! => réserver cela pour un autre article l'annéde prochaine peut-être ?].
 
-- l'evaluation continue et l'analyse de projet via des grilles critérié semble une approche intéressante pour juger de la capacité des étudiant à bosser.
+- l'evaluation continue et l'analyse de projet via des grilles critérié semble une approche intéressante pour juger de la capacité des étudiant à bosser [on a pas développé cela au final, il me semble].
 
-- la catégorisation des étudiants démontre une grande diversité de profils. Premier élément vers une pédagogie différencié  vers 
+- la catégorisation des étudiants en différents profils d'apprenants ayant adopté des stratégies très contrastées démontre une grande diversité des apprenants, même à l'intérieur d'un groupe a priori homogène (n,ous ne nous trouvons pas ici dans une grande classe qui regrouperait des étudiants d'horizons très différents comme les cours d'introduction à la science des données tels que pratiques dans certaines grandes universités américaines). Ceci est un premier pas vers une pédagogie différencié et plus inclusive qui s'avèrent être des éléments importants ici.
 
 # References
