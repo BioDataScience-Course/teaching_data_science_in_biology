@@ -1,6 +1,11 @@
 ---
-title: "Teaching Data Science to Undergraduate and Graduate Students in Biology using R, RStudio and Learnr: Analysis of Three Years Data Including COVID-19 Pandemic Lockdowns"
-output: 
+title: 'Teaching Data Science to Students in Biology using R, RStudio and Learnr: Analysis of Three years Data'
+output:
+  pdf_document: 
+    fig_caption: yes
+    number_sections: yes
+    latex_engine: xelatex
+    keep_tex: yes
   html_document:
     code_folding: hide
 bibliography: bibliography.bib
@@ -93,7 +98,17 @@ As our course were completely reworked, we also decided to use flipped classroom
 [TODO: present here the 3-4 research questions that will be elaborated in the manuscript.]
 
 
-# Material and methods
+# Methods
+
+The course material is available online (https://wp.sciviews.org) from a Wordpress site. Students have to login with their GitHub account and their academic data are collected from the UMONS Moodle server. All student activities in H5P exercises, and learnr tutorials are recorded in a MongoDB database. The learnitdown R package (https://www.sciviews.org/learnitdown/) provides the functions required to manage login and activity tracking in the interactive material.
+
+Projects are managed in GitHub repositories and locally, files are edited in RStudio projects. The assignations and creation of the GitHub repositories is orchestrated by GitHub Classroom. All repositories are cloned in a folder and data about commits (git logs) are collected using git version XXX and R version YYY.
+
+Support to student in distance learning was done via email and Discord. All messages are collected into text files that are scraped using R code to create a table with required information (who, when, what). Students are surveyed during lessons by means of Wooclap questionnaires. The results are exported from Wooclap into Excel files, and the pertinent information is collected together in a table in the MongoDB database.
+
+Informations about users, courses, lessons et projects, as well as grading items (on average, more that 130 grading items per student in 2020-2021) are anonymized: name, email and all the personal information are replaced by random identifiers. The different tables are then exported into CSV files and made public. These data are available at [... Zenodo?]. Data collection, treatment, and use respect European GDPR (General Data Protection Regulation) since each student had to agree explicitly with the way data are collected and used (including for research purpose) and can access its own data through personalized reports.
+
+The course material is organized in a way that favour autonomy and auto-evaluation (direct feedback in the exercises, hints and retry button in case of wrong answer).
 
 | Niveau | description                                                                         | type d'exercices |
 |--------|-------------------------------------------------------------------------------------|------------------|
