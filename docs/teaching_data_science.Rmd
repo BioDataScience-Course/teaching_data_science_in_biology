@@ -2,9 +2,10 @@
 title: 'Teaching Data Science to Students in Biology using R, RStudio and Learnr:
   Analysis of Three years Data'
 output:
-  word_document: default
-  html_document:
+  html_document: 
     code_folding: hide
+    fig_caption: yes
+  word_document: default
   pdf_document:
     fig_caption: yes
     number_sections: yes
@@ -23,15 +24,14 @@ users19 <- read(pcloud("sdd_2019-2020/data/users.csv"))
 users <- read(pcloud("sdd_2020-2021/data/users.csv")) 
 
 assessments18 <- read(pcloud("sdd_2018-2019/data/assessment_temp.csv"))
-
 exam19 <- read(pcloud("sdd_2019-2020/data/exam.csv")) 
 assessments19 <- read(pcloud("sdd_2019-2020/data/assessment.csv"))
+assessments <- read(pcloud("sdd_2020-2021/data/assessments.csv"))
 
 courses18 <- read(pcloud("sdd_2018-2019/data/courses.csv")) 
 courses19 <- read(pcloud("sdd_2019-2020/data/courses.csv")) 
 courses <- read(pcloud("sdd_2020-2021/data/courses.csv")) 
 
-assessments <- read(pcloud("sdd_2020-2021/data/assessments.csv"))
 h5p <- read(pcloud("sdd_2020-2021/data/h5p.csv"))
 learnr <- read(pcloud("sdd_2020-2021/data/learnr.csv"))
 projects <- read(pcloud("sdd_2020-2021/data/projects.csv"))
@@ -40,6 +40,12 @@ wo <- read(pcloud("sdd_2020-2021/data/wooclap.csv"))
 
 log19 <- read(pcloud("sdd_2019-2020/data/git_log.csv"))
 log <- read(pcloud("sdd_2020-2021/data/git_log.csv"))
+
+support19 <- read(pcloud("sdd_2019-2020/data/support.csv"))
+support <- read(pcloud("sdd_2020-2021/data/support.csv"))
+
+lessons19 <- read(pcloud("sdd_2019-2020/data/lessons.csv"))
+lessons <- read(pcloud("sdd_2020-2021/data/lessons.csv"))
 # functions ----
 ## RTLX NASA - TLX -------------------------------------------------------------
 learnr_feeling <- function(df, apps, labels) {
@@ -80,11 +86,11 @@ The courses in biostatistics in biology at the University of Mons, Belgium, were
 
 # Introduction
 
-In a context where there is an exponentially growing mass of data [ref...], a reproducibility crisis in Science [@Baker2016], and a progressive adoption of Open Science practices [@Banks2019], statistics were broaden to a larger discipline called Data Science. For the Data Science association, "the Data Science means the scientific study of the creation, validation and transformation of data to create meaning" (<http://www.datascienceassn.org/code-of-conduct.html>). These changes also led to the emergence of data science programs in universities and higher schools [@Donoho2017; @Cetinkaya-Rundel2021]. One example is the Harvard Data Science initiative (<https://datascience.harvard.edu/about>) initiated in 2017. With a broader approach, comes also a broaden public. The data science courses are not just limited to computer scientists, mathematicians or statisticians, but also welcome students in humanities, social sciences, and natural sciences (for instance, the data science training at Duke University [@Cetinkaya-Rundel2021]). Main focus of such courses is for students to develop the ability to deal with "real" datasets in all their complexities and to realize reproducible analyses to interpret these data in the light of knowledge in their field of expertise.
+In a context where there is an exponentially growing mass of data [@Marx2013], a reproducibility crisis in Science [@Baker2016], and a progressive adoption of Open Science practices [@Banks2019], statistics were broaden to a larger discipline called Data Science. For the Data Science association, "the Data Science means the scientific study of the creation, validation and transformation of data to create meaning" (<http://www.datascienceassn.org/code-of-conduct.html>). These changes also led to the emergence of data science programs in universities and higher schools [@Donoho2017; @Cetinkaya-Rundel2021]. One example is the Harvard Data Science initiative (<https://datascience.harvard.edu/about>) initiated in 2017. With a broader approach, comes also a broaden public. The data science courses are not just limited to computer scientists, mathematicians or statisticians, but also welcome students in humanities, social sciences, and natural sciences (for instance, the data science training at Duke University [@Cetinkaya-Rundel2021]). Main focus of such courses is for students to develop the ability to deal with "real" datasets in all their complexities and to realize reproducible analyses to interpret these data in the light of knowledge in their field of expertise.
 
 The data transformation part of the job is a challenge for students with a poor or no background at all in computing. Students that are not used to deal with computer languages enter in a foreign world and have to deal with many exotic concepts, techniques and tools. This is the same for the analysis of these data when students have no background in mathematics or statistics. It generates anxiety (see for instance [@Onwuegbuzie2003], for students in biology). The course must be organized in a way that such students progress by little steps in order to avoid exposition to much intimidating concepts and tools at once. Hence, a student in computing science already masters one or more computing languages, is acquainted with version control systems, with databases and with the way data are represented in a computer. A student in mathematics or statistics is familiar with various concept that underpin the techniques to analyse the data. On the other hand, students in biology, medicine, psychology, social sciences, economics, ... have very different *a priori* knowledges. Version control systems like git, and their internet hosting counterparts like GitHub, Gitlab or Bitbucket also make part of the tools that data science course teach and use [ @Fiksel2019; @Hsing2019]. Presentation of the results  and the use of documents formats that dissociate content from presentation, namely LaTeX, Jupyter Notebook, or R Markdown also contribute to the large number of potentially new tools students have to learn [@Baumer2014].
 
-Suitable computer hardware and software environments are required in the practical sessions of the courses. Different approaches range from inline software (RStudio Cloud [ref], Chromebook data science [ref]) to local installation on the Student's computers. The former requires an infrastructure to run the software on a server, nad that software is only accessible to the students during the course. The later raises problems of license for proprietary software, but also installation and configuration issues. An intermediary solution uses preconfigured virtual machines, or containers (e.g., Docker) [@Cetinkaya-Rundel2018]. Such a solution is the most flexible because it can be deployed almost anywhere (in the computer lab, at home, using a laptop, ...). To fix theoretical concepts through applied exercises is a key aspect of learning data science [@Larwin2011]. Correct choice of software is critical and exposing students early with the tools they are most susceptible to use later in their work is desirable. This was highlighted by [@Auker2020] for instance, for the analysis of ecological data.
+Suitable computer hardware and software environments are required in the practical sessions of the courses. Different approaches range from inline software (RStudio Cloud (<https://rstudio.cloud/>), Chromebook data science (<http://jhudatascience.org/chromebookdatascience/>)) to local installation on the Student's computers. The former requires an infrastructure to run the software on a server, nad that software is only accessible to the students during the course. The later raises problems of license for proprietary software, but also installation and configuration issues. An intermediary solution uses preconfigured virtual machines, or containers (e.g., Docker) [@Cetinkaya-Rundel2018 ; @Boettiger2015]. Such a solution is the most flexible because it can be deployed almost anywhere (in the computer lab, at home, using a laptop, ...). To fix theoretical concepts through applied exercises is a key aspect of learning data science [@Larwin2011]. Correct choice of software is critical and exposing students early with the tools they are most susceptible to use later in their work is desirable. This was highlighted by [@Auker2020] for instance, for the analysis of ecological data.
 
 These data science courses pose several challenges to pedagogy because various, numerous and unfamiliar concepts must be acquired by a population of potentially very diverse students. Learning objectives span a large range of cognitive abilities [@Krathwohl2002]. [We need to develop here things like flipped classroom, continuous evaluation, pedagogy by projects, and inclusive pedagogy]. The flipped classroom approach allows students to be active in their learning, which has the benefit of improving student outcomes [@Freeman2014].
 
@@ -139,8 +145,6 @@ Liste des idées développées dans cette section :
 - learnrs (+ perception) -> apprentissage sur le très long terme (> 1 ou deux quadris)
 
 [Next paragraph to be translated and reworked]
-
-La transition du cours classique vers une cours en classe inversée a menée à l'intégration de nouveaux outils permettant de diversifier les types d'exercice proposés aux étudiants (tab M&M). Le tableau XX (il semble avoir disparu dans l'édition du document???) indique la répartition des exercices pour chaque cours. La collecte des données pour chaque exercice permet de construire une note objective pour chaque étudiant. La note des étudiant est construite sur l'évaluation des 5 niveaux d'exercices complémentaires allant des exercices les plus simples (N1) aux exercices les plus complexes (N5). Une moyenne pondérée pour chaque niveau d'exercice est employée pour obtenir une note finale par cours.
 
 Our in-service training includes 26 complementary modules over 3 years and 3 consecutive courses from bab2 to MA1. The number of exercises per type is shown in Table XXX. The goal and the difficulty levels of the exercises are presented in table xxx. The completion of each exercise is recorded in a database which allows an objective grade to be constructed for each student. 
 
@@ -250,50 +254,97 @@ Les groupes réalisés créent des profils d'apprenants ayant des stratégies tr
 
 ## Transition between face-to-face and distance learning
 
-Due to Covid-19 lockdown periods, distance learning had to be adopted abruptly. We analyze the activity and support data collected during academic years 2019-2020 and 2020-2021 to assess the impact of this transition on the progression of the students and
+Due to Covid-19 lockdown periods, distance learning had to be adopted abruptly. We analyze the activity and support data collected during academic years 2019-2020 and 2020-2021 to assess the impact of this transition on the progression of the students.
 
-[TODO : add analyse on the commit or h5P/learnr exercises to follow the student]
+```{r, fig.cap= "cumulative sums of commit and message over time in first term of 2019-2020. The period of each module per course is represented by area."}
+lessons19 %>.%
+  filter(., !topic %in% c("extra_session", "debriefing_S-BIOG-006", "debriefing_S-BIOG-015")) %>.%
+  filter(., icourse %in% c("S-BIOG-027", "S-BIOG-061")) %>.%
+  group_by(., course, module) %>.%
+  summarise(., start = min(start), end = max(end)) -> lessons_red19
 
-```{r}
-log19 %>.% 
+log19 %>.%
   distinct(., commit, .keep_all = TRUE) %>.%
   filter(., is.na(from)) %>.%
   mutate(., date_round = lubridate::round_date(date, "day")) %>.%
   group_by(., date_round) %>.%
   count(.) %>.%
   ungroup(.) %>.%
-  mutate(., cumul_commit = cumsum(n)) -> log19_red
+  mutate(., cumul_commit = cumsum(n)) %>.%
+  filter(., date_round >= courses19$start[courses19$icourse == "S-BIOG-027"] & date_round <= courses19$end[courses19$icourse == "S-BIOG-027"])-> log_temp19
 
+support19 %>.%
+  mutate(., date_round = lubridate::round_date(date, "day")) %>.%
+  group_by(., date_round) %>.%
+  count(.) %>.%
+  ungroup(.) %>.%
+  mutate(., cumul_message = cumsum(n))  %>.%
+  filter(., date_round >= courses19$start[courses19$icourse == "S-BIOG-027"] & date_round <= courses19$end[courses19$icourse == "S-BIOG-027"]) -> sup_temp19
 
-log19_red %>.%
-  filter(., date_round > lubridate::ymd("2020-02-01") & date_round < lubridate::ymd("2020-05-22")) %>.%
-  chart(., cumul_commit ~ date_round) +
-  geom_line() +
+plog19 <- ggplot() +
+  geom_rect(data = lessons_red19, aes(xmin = start, xmax = end , ymin = -Inf,  ymax = Inf, fill = course), alpha = 0.2) +
+  geom_line(data = log_temp19, aes(y = cumul_commit, x = date_round)) +
   geom_vline(xintercept = as.POSIXct("2020-03-15"), color = "red") +
-  labs(x = "Date", y = "cumulative sum of commits") -> p1
+  theme_sciviews() +
+  labs(x = "Date", y = "cumulative sum of \n commits")
 
-log %>.% 
-  distinct(., commit, .keep_all = TRUE) %>.%
-  filter(., is.na(from)) %>.%
-  mutate(., date_round = lubridate::round_date(date, "day")) %>.%
-  group_by(., date_round) %>.%
-  count(.) %>.%
-  ungroup(.) %>.%
-  mutate(., cumul_commit = cumsum(n)) -> log_red
+psup19 <- ggplot() +
+  geom_rect(data = lessons_red19, aes(xmin = start, xmax = end , ymin = -Inf,  ymax = Inf, fill = course), alpha = 0.2) +
+  geom_line(data = sup_temp19, aes(y = cumul_message, x = date_round)) +
+  geom_vline(xintercept = as.POSIXct("2020-03-15"), color = "red") +
+  theme_sciviews() +
+  labs(x = "Date", y = "cumulative sum of  \n messages")
 
-
-log_red %>.%
-  filter(., date_round < lubridate::ymd("2020-11-15")) %>.%
-  chart(., cumul_commit ~ date_round) +
-  geom_line() +
-  geom_vline(xintercept = as.POSIXct("2020-10-21"), color = "red") +
-  labs(x = "Date", y = "cumulative sum of commits") -> p2
-
-combine_charts(list(p1, p2))
-
+combine_charts(list(plog19, psup19), nrow = 2, common.legend = TRUE)
 ```
 
-During the first lockdown, support rapidly switched to the proposed channels, by email and via Discord. However, despite a sustained exchange of message, progression of the students in the course material almost stopped for two weeks before taking over (graph A) .... During the second lockdown ... [make plots and analyse this...]
+During the first lockdown, support rapidly switched to the proposed channels, by email and via Discord. However, we observe a clear halt in the work of the students before the start of the lockdown. After a period of ten days, students started to work and interact with teachers again. After the last hours of class, students continued to work and interact with the teachers. 
+
+```{r, fig.cap= "cumulative sums of commit and message over time in first term of 2020-2021. The period of each module per course is represented by area."}
+lessons %>.%
+  filter(., !topic %in% c("extra_session", "debriefing_S-BIOG-006", "debriefing_S-BIOG-015")) %>.%
+  filter(., icourse %in% c("S-BIOG-006", "S-BIOG-015", "S-BIOG-025")) %>.%
+  group_by(., course, module) %>.%
+  summarise(., start = min(start), end = max(end)) -> lessons_red
+
+log %>.%
+  distinct(., commit, .keep_all = TRUE) %>.%
+  filter(., is.na(from)) %>.%
+  mutate(., date_round = lubridate::round_date(date, "day")) %>.%
+  group_by(., date_round) %>.%
+  count(.) %>.%
+  ungroup(.) %>.%
+  mutate(., cumul_commit = cumsum(n))%>.%
+  filter(., date_round >= courses$start[courses$icourse == "S-BIOG-006"] & date_round <= courses$end[courses$icourse == "S-BIOG-006"])-> log_temp
+
+support %>.%
+  mutate(., date_round = lubridate::round_date(date, "day")) %>.%
+  group_by(., date_round) %>.%
+  count(.) %>.%
+  ungroup(.) %>.%
+  mutate(., cumul_message = cumsum(n))  %>.%
+  filter(., date_round >= courses$start[courses$icourse == "S-BIOG-006"] & date_round <= courses$end[courses$icourse == "S-BIOG-006"]) -> sup_temp
+
+plog <- ggplot() +
+  geom_rect(data = lessons_red, aes(xmin = start, xmax = end , ymin = -Inf,  ymax = Inf, fill = course), alpha = 0.2) +
+  geom_line(data = log_temp, aes(y = cumul_commit, x = date_round)) +
+  geom_vline(xintercept = as.POSIXct("2020-10-21"), color = "red") +
+  theme_sciviews() +
+  labs(x = "Date", y = "cumulative sum of \n commits")
+
+psup <- ggplot() +
+  geom_rect(data = lessons_red, aes(xmin = start, xmax = end , ymin = -Inf,  ymax = Inf, fill = course), alpha = 0.2) +
+  geom_line(data = sup_temp, aes(y = cumul_message, x = date_round)) +
+  geom_vline(xintercept = as.POSIXct("2020-10-21"), color = "red") +
+  theme_sciviews() +
+  labs(x = "Date", y = "cumulative sum of  \n messages")
+
+combine_charts(list(plog, psup), nrow = 2, common.legend = TRUE)
+```
+
+During the second lockdown, the students' work remained constant (graph A) and the remote communication tools were logically more used (graph B). The students did not need a new adaptation phase as observed during the first lockdown. 
+
+[TODO : Change time by quarter with phg function]
 
 ## Learnr tutorials perceived cognitive workload
 
