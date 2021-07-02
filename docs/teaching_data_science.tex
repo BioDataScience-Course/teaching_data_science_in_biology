@@ -41,46 +41,6 @@
   pdfcreator={LaTeX via pandoc}}
 \urlstyle{same} % disable monospaced font for URLs
 \usepackage[margin=1in]{geometry}
-\usepackage{color}
-\usepackage{fancyvrb}
-\newcommand{\VerbBar}{|}
-\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
-\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
-% Add ',fontsize=\small' for more characters per line
-\usepackage{framed}
-\definecolor{shadecolor}{RGB}{248,248,248}
-\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
-\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
-\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
-\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
-\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
-\newcommand{\BuiltInTok}[1]{#1}
-\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
-\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
-\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
-\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
-\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
-\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
-\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
-\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
-\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
-\newcommand{\ExtensionTok}[1]{#1}
-\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
-\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
-\newcommand{\ImportTok}[1]{#1}
-\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
-\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
-\newcommand{\NormalTok}[1]{#1}
-\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
-\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
-\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
-\newcommand{\RegionMarkerTok}[1]{#1}
-\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
-\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
-\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
-\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
-\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
-\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
 \usepackage{longtable,booktabs,array}
 \usepackage{calc} % for calculating minipage widths
 % Correct order of tables after \paragraph or \subparagraph
@@ -428,54 +388,6 @@ exercises are presented in table xxx. The completion of each exercise is
 recorded in a database which allows an objective grade to be constructed
 for each student.
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{\# Tab of number of users and number of exercices by type {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
-\CommentTok{\# users}
-\NormalTok{users }\SpecialCharTok{\%\textgreater{}.\%}
-  \FunctionTok{filter}\NormalTok{(., institution }\SpecialCharTok{==} \StringTok{"UMONS"} \SpecialCharTok{\&}\NormalTok{ term }\SpecialCharTok{==} \StringTok{"Q1"} \SpecialCharTok{\&}\NormalTok{ state }\SpecialCharTok{==} \StringTok{"regular"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}.\%}
-  \FunctionTok{group\_by}\NormalTok{(., course) }\SpecialCharTok{\%\textgreater{}.\%}
-  \FunctionTok{summarise}\NormalTok{(., }\AttributeTok{user =} \FunctionTok{n}\NormalTok{()) }\SpecialCharTok{\%\textgreater{}.\%}
-  \FunctionTok{ungroup}\NormalTok{(.) }\SpecialCharTok{\%\textgreater{}.\%}
-  \FunctionTok{filter}\NormalTok{(., course }\SpecialCharTok{!=} \StringTok{"D"}\NormalTok{)}\OtherTok{{-}\textgreater{}}\NormalTok{ us\_tab}
-
-\CommentTok{\# learnr}
-\NormalTok{learnr }\SpecialCharTok{\%\textgreater{}.\%} 
-  \FunctionTok{filter}\NormalTok{(., }\SpecialCharTok{!}\NormalTok{app }\SpecialCharTok{\%in\%} \FunctionTok{c}\NormalTok{(}\StringTok{"A06Lb\_recombinaison"}\NormalTok{, }\StringTok{"A99La\_avis"}\NormalTok{, }\StringTok{"B00La\_rappel"}\NormalTok{, }\StringTok{"B99La\_avis"}\NormalTok{,}\StringTok{"C99La\_avis"}\NormalTok{) }\SpecialCharTok{\&} \SpecialCharTok{!}\FunctionTok{is.na}\NormalTok{(label)) }\SpecialCharTok{\%\textgreater{}.\%}
-  \FunctionTok{mutate}\NormalTok{(., }\AttributeTok{course =} \FunctionTok{substr}\NormalTok{(app,}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{),}
-    \AttributeTok{app\_label =} \FunctionTok{paste0}\NormalTok{(app, label)) }\SpecialCharTok{\%\textgreater{}.\%}
-  \FunctionTok{filter}\NormalTok{(., course }\SpecialCharTok{\%in\%} \FunctionTok{c}\NormalTok{(}\StringTok{"A"}\NormalTok{, }\StringTok{"B"}\NormalTok{, }\StringTok{"C"}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}.\%}
-  \FunctionTok{group\_by}\NormalTok{(., course) }\SpecialCharTok{\%\textgreater{}.\%}
-  \FunctionTok{summarise}\NormalTok{(., }\AttributeTok{app =} \FunctionTok{length}\NormalTok{(}\FunctionTok{unique}\NormalTok{(app)), }\AttributeTok{questions =} \FunctionTok{length}\NormalTok{(}\FunctionTok{unique}\NormalTok{(app\_label))) }\OtherTok{{-}\textgreater{}}\NormalTok{ learnr\_tab }
-
-\CommentTok{\# projects}
-\NormalTok{projects }\SpecialCharTok{\%\textgreater{}.\%}
-  \FunctionTok{filter}\NormalTok{(., type }\SpecialCharTok{\%in\%} \FunctionTok{c}\NormalTok{(}\StringTok{"ind. github"}\NormalTok{, }\StringTok{"group github"}\NormalTok{) }\SpecialCharTok{\&}\NormalTok{ course }\SpecialCharTok{!=} \StringTok{"D"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}.\%}
-  \FunctionTok{group\_by}\NormalTok{(., course, type) }\SpecialCharTok{\%\textgreater{}.\%}
-  \FunctionTok{count}\NormalTok{(.) }\SpecialCharTok{\%\textgreater{}.\%}
-  \FunctionTok{pivot\_wider}\NormalTok{(., }\AttributeTok{names\_from =} \StringTok{"type"}\NormalTok{, }\AttributeTok{values\_from =} \StringTok{"n"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}.\%}
-  \FunctionTok{ungroup}\NormalTok{(.) }\SpecialCharTok{\%\textgreater{}.\%}
-  \FunctionTok{select}\NormalTok{(., course, }\StringTok{\textasciigrave{}}\AttributeTok{ind. github}\StringTok{\textasciigrave{}}\NormalTok{, }\StringTok{\textasciigrave{}}\AttributeTok{group github}\StringTok{\textasciigrave{}}\NormalTok{)}\OtherTok{{-}\textgreater{}}\NormalTok{ projects\_tab}
-    
-\CommentTok{\# tab number of exercices by type {-}{-}{-}}
-\NormalTok{assessments }\SpecialCharTok{\%\textgreater{}.\%}
-  \FunctionTok{filter}\NormalTok{(., type }\SpecialCharTok{==} \StringTok{"h5p"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}.\%}
-  \FunctionTok{mutate}\NormalTok{(., }
-    \AttributeTok{app\_type =} \FunctionTok{paste0}\NormalTok{(app, }\StringTok{"\_"}\NormalTok{ ,}\StringTok{\textquotesingle{}type\textquotesingle{}}\NormalTok{),}
-    \AttributeTok{course =} \FunctionTok{substr}\NormalTok{(app, }\AttributeTok{start =} \DecValTok{1}\NormalTok{, }\AttributeTok{stop =} \DecValTok{1}\NormalTok{),}
-\NormalTok{    ) }\SpecialCharTok{\%\textgreater{}.\%}
-  \FunctionTok{group\_by}\NormalTok{(., course) }\SpecialCharTok{\%\textgreater{}.\%}
-  \FunctionTok{summarise}\NormalTok{(., }\AttributeTok{h5p =} \FunctionTok{length}\NormalTok{(}\FunctionTok{unique}\NormalTok{(app\_type))) }\OtherTok{{-}\textgreater{}}\NormalTok{ h5P\_tab}
-
-\NormalTok{us\_tab }\SpecialCharTok{\%\textgreater{}.\%}
-  \FunctionTok{mutate}\NormalTok{(., }\AttributeTok{module =} \FunctionTok{c}\NormalTok{(}\DecValTok{12}\NormalTok{, }\DecValTok{8}\NormalTok{, }\DecValTok{6}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}.\%}
-  \FunctionTok{left\_join}\NormalTok{(., h5P\_tab) }\SpecialCharTok{\%\textgreater{}.\%}
-  \FunctionTok{left\_join}\NormalTok{(., }\FunctionTok{mutate}\NormalTok{(learnr\_tab, }\AttributeTok{learnr =} \FunctionTok{paste0}\NormalTok{(app, }\StringTok{" ("}\NormalTok{, questions, }\StringTok{")"}\NormalTok{), }\AttributeTok{.keep =} \StringTok{"unused"}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}.\%}
-  \FunctionTok{left\_join}\NormalTok{(., projects\_tab) }\SpecialCharTok{\%\textgreater{}.\%}
-\NormalTok{  knitr}\SpecialCharTok{::}\FunctionTok{kable}\NormalTok{(., }\AttributeTok{caption =} \StringTok{"Number of users, modules, exercises with h5p, learnr tutorial,individual project and group project by course. The number of quesion by learnr tutorial are in the parentheses."}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
 \begin{longtable}[]{@{}lrrrlrr@{}}
 \caption{Number of users, modules, exercises with h5p, learnr
 tutorial,individual project and group project by course. The number of
@@ -497,52 +409,10 @@ C & 25 & 6 & 19 & 7 (37) & 7 & 1 \\
 \hypertarget{exams-versus-project}{%
 \subsection{Exams versus project}\label{exams-versus-project}}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{assessments18 }\SpecialCharTok{\%\textgreater{}.\%}
-  \CommentTok{\#select(., {-}coral\_growth, result = biometry) \%\textgreater{}.\%}
-  \FunctionTok{mutate}\NormalTok{(., }\AttributeTok{result =}\NormalTok{ (biometry}\SpecialCharTok{+}\NormalTok{coral\_growth)}\SpecialCharTok{/}\DecValTok{2}\NormalTok{, }\AttributeTok{acad\_year =} \StringTok{"2018{-}2019"}\NormalTok{) }\OtherTok{{-}\textgreater{}}\NormalTok{ assess\_result18}
-  
-\NormalTok{q1\_18\_regular }\OtherTok{\textless{}{-}} \FunctionTok{left\_join}\NormalTok{(}\FunctionTok{rename}\NormalTok{(assess\_result18, }\AttributeTok{icourse =}\NormalTok{ course), courses18) }\SpecialCharTok{\%\textgreater{}.\%}
-  \FunctionTok{filter}\NormalTok{(., user }\SpecialCharTok{\%in\%}\NormalTok{ users18}\SpecialCharTok{$}\NormalTok{user[users18}\SpecialCharTok{$}\NormalTok{institution }\SpecialCharTok{==} \StringTok{"UMONS"} \SpecialCharTok{\&}\NormalTok{ users18}\SpecialCharTok{$}\NormalTok{term }\SpecialCharTok{==} \StringTok{"Q1"} \SpecialCharTok{\&}\NormalTok{ users18}\SpecialCharTok{$}\NormalTok{state }\SpecialCharTok{==} \StringTok{"regular"}\NormalTok{])}
-
-\NormalTok{assessments19 }\SpecialCharTok{\%\textgreater{}.\%}
-  \FunctionTok{group\_by}\NormalTok{(., course, evaluation, github\_project, project, user) }\SpecialCharTok{\%\textgreater{}.\%}
-  \FunctionTok{summarise}\NormalTok{(., }\AttributeTok{result =} \FunctionTok{round}\NormalTok{(}\FunctionTok{sum}\NormalTok{(score}\SpecialCharTok{*}\NormalTok{weight),}\DecValTok{4}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}.\%}
-  \FunctionTok{filter}\NormalTok{(., evaluation }\SpecialCharTok{==} \StringTok{"Q1"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}.\%}
-  \FunctionTok{left\_join}\NormalTok{(exam19, .) }\SpecialCharTok{\%\textgreater{}.\%}
-  \FunctionTok{replace\_na}\NormalTok{(., }\FunctionTok{list}\NormalTok{(}\AttributeTok{result =} \DecValTok{0}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}.\%}
-  \FunctionTok{mutate}\NormalTok{(., }\AttributeTok{acad\_year =} \StringTok{"2019{-}2020"}\NormalTok{)}\OtherTok{{-}\textgreater{}}\NormalTok{ assess\_result19}
-
-\NormalTok{q1\_19\_regular }\OtherTok{\textless{}{-}} \FunctionTok{left\_join}\NormalTok{(}\FunctionTok{rename}\NormalTok{(assess\_result19, }\AttributeTok{icourse =}\NormalTok{ course), courses19) }\SpecialCharTok{\%\textgreater{}.\%}
-  \FunctionTok{filter}\NormalTok{(., user }\SpecialCharTok{\%in\%}\NormalTok{ users19}\SpecialCharTok{$}\NormalTok{user[users19}\SpecialCharTok{$}\NormalTok{institution }\SpecialCharTok{==} \StringTok{"UMONS"} \SpecialCharTok{\&}\NormalTok{ users19}\SpecialCharTok{$}\NormalTok{term }\SpecialCharTok{==} \StringTok{"Q1"} \SpecialCharTok{\&}\NormalTok{ users19}\SpecialCharTok{$}\NormalTok{state }\SpecialCharTok{==} \StringTok{"regular"}\NormalTok{])}
-
-\NormalTok{q1 }\OtherTok{\textless{}{-}} \FunctionTok{bind\_rows}\NormalTok{(}
-  \FunctionTok{select}\NormalTok{(q1\_18\_regular, user, acad\_year, course, result, exam),}
-  \FunctionTok{select}\NormalTok{(q1\_19\_regular, user, acad\_year, course, result, exam)}
-\NormalTok{  )}
-\CommentTok{\#table(q1$link) /nrow(q1)}
-\end{Highlighting}
-\end{Shaded}
-
 Until the first four months of the 2019-2020 academic year, students'
 grades were based on the completion of a project and a more conventional
 examination during the examination period. The projects are assessed
 using a grading grid since the 2019-2020 academic year.
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{q1 }\SpecialCharTok{\%\textgreater{}.\%}
-  \FunctionTok{mutate}\NormalTok{(., }\AttributeTok{course\_year =} \FunctionTok{paste0}\NormalTok{(course, }\StringTok{" ("}\NormalTok{,acad\_year,}\StringTok{")"}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}.\%}
-  \FunctionTok{chart}\NormalTok{(., exam }\SpecialCharTok{\textasciitilde{}}\NormalTok{ result }\SpecialCharTok{|}\NormalTok{ course\_year) }\SpecialCharTok{+}
-  \FunctionTok{geom\_vline}\NormalTok{(}\AttributeTok{xintercept =} \DecValTok{5}\NormalTok{, }\AttributeTok{alpha =} \FloatTok{0.2}\NormalTok{) }\SpecialCharTok{+}
-  \FunctionTok{geom\_hline}\NormalTok{(}\AttributeTok{yintercept =} \DecValTok{5}\NormalTok{, }\AttributeTok{alpha =} \FloatTok{0.2}\NormalTok{) }\SpecialCharTok{+}
-  \FunctionTok{geom\_jitter}\NormalTok{(}\AttributeTok{alpha =} \DecValTok{1}\NormalTok{, }\AttributeTok{width =} \FloatTok{0.05}\NormalTok{, }\AttributeTok{height =} \FloatTok{0.05}\NormalTok{, }\AttributeTok{show.legend =} \ConstantTok{FALSE}\NormalTok{) }\SpecialCharTok{+}
-  \FunctionTok{ylim}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{10}\NormalTok{)) }\SpecialCharTok{+}
-  \FunctionTok{xlim}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{10}\NormalTok{)) }\SpecialCharTok{+}
-  \FunctionTok{labs}\NormalTok{(}\AttributeTok{y =} \StringTok{"Exam grade"}\NormalTok{, }\AttributeTok{x =} \StringTok{"Project grade"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
 
 \includegraphics{teaching_data_science_files/figure-latex/unnamed-chunk-3-1.pdf}
 
@@ -585,123 +455,26 @@ abruptly. We analyze the activity and support data collected during
 academic years 2019-2020 and 2020-2021 to assess the impact of this
 transition on the progression of the students.
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{lessons19 }\SpecialCharTok{\%\textgreater{}.\%}
-  \FunctionTok{filter}\NormalTok{(., }\SpecialCharTok{!}\NormalTok{topic }\SpecialCharTok{\%in\%} \FunctionTok{c}\NormalTok{(}\StringTok{"extra\_session"}\NormalTok{, }\StringTok{"debriefing\_S{-}BIOG{-}006"}\NormalTok{, }\StringTok{"debriefing\_S{-}BIOG{-}015"}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}.\%}
-  \FunctionTok{filter}\NormalTok{(., icourse }\SpecialCharTok{\%in\%} \FunctionTok{c}\NormalTok{(}\StringTok{"S{-}BIOG{-}027"}\NormalTok{, }\StringTok{"S{-}BIOG{-}061"}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}.\%}
-  \FunctionTok{group\_by}\NormalTok{(., course, module) }\SpecialCharTok{\%\textgreater{}.\%}
-  \FunctionTok{summarise}\NormalTok{(., }\AttributeTok{start =} \FunctionTok{min}\NormalTok{(start), }\AttributeTok{end =} \FunctionTok{max}\NormalTok{(end)) }\OtherTok{{-}\textgreater{}}\NormalTok{ lessons\_red19}
-
-\NormalTok{log19 }\SpecialCharTok{\%\textgreater{}.\%}
-  \FunctionTok{distinct}\NormalTok{(., commit, }\AttributeTok{.keep\_all =} \ConstantTok{TRUE}\NormalTok{) }\SpecialCharTok{\%\textgreater{}.\%}
-  \FunctionTok{filter}\NormalTok{(., }\FunctionTok{is.na}\NormalTok{(from)) }\SpecialCharTok{\%\textgreater{}.\%}
-  \FunctionTok{mutate}\NormalTok{(., }\AttributeTok{date\_round =}\NormalTok{ lubridate}\SpecialCharTok{::}\FunctionTok{round\_date}\NormalTok{(date, }\StringTok{"day"}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}.\%}
-  \FunctionTok{group\_by}\NormalTok{(., date\_round) }\SpecialCharTok{\%\textgreater{}.\%}
-  \FunctionTok{count}\NormalTok{(.) }\SpecialCharTok{\%\textgreater{}.\%}
-  \FunctionTok{ungroup}\NormalTok{(.) }\SpecialCharTok{\%\textgreater{}.\%}
-  \FunctionTok{mutate}\NormalTok{(., }\AttributeTok{cumul\_commit =} \FunctionTok{cumsum}\NormalTok{(n)) }\SpecialCharTok{\%\textgreater{}.\%}
-  \FunctionTok{filter}\NormalTok{(., date\_round }\SpecialCharTok{\textgreater{}=}\NormalTok{ courses19}\SpecialCharTok{$}\NormalTok{start[courses19}\SpecialCharTok{$}\NormalTok{icourse }\SpecialCharTok{==} \StringTok{"S{-}BIOG{-}027"}\NormalTok{] }\SpecialCharTok{\&}\NormalTok{ date\_round }\SpecialCharTok{\textless{}=}\NormalTok{ courses19}\SpecialCharTok{$}\NormalTok{end[courses19}\SpecialCharTok{$}\NormalTok{icourse }\SpecialCharTok{==} \StringTok{"S{-}BIOG{-}027"}\NormalTok{])}\OtherTok{{-}\textgreater{}}\NormalTok{ log\_temp19}
-
-\NormalTok{support19 }\SpecialCharTok{\%\textgreater{}.\%}
-  \FunctionTok{mutate}\NormalTok{(., }\AttributeTok{date\_round =}\NormalTok{ lubridate}\SpecialCharTok{::}\FunctionTok{round\_date}\NormalTok{(date, }\StringTok{"day"}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}.\%}
-  \FunctionTok{group\_by}\NormalTok{(., date\_round) }\SpecialCharTok{\%\textgreater{}.\%}
-  \FunctionTok{count}\NormalTok{(.) }\SpecialCharTok{\%\textgreater{}.\%}
-  \FunctionTok{ungroup}\NormalTok{(.) }\SpecialCharTok{\%\textgreater{}.\%}
-  \FunctionTok{mutate}\NormalTok{(., }\AttributeTok{cumul\_message =} \FunctionTok{cumsum}\NormalTok{(n))  }\SpecialCharTok{\%\textgreater{}.\%}
-  \FunctionTok{filter}\NormalTok{(., date\_round }\SpecialCharTok{\textgreater{}=}\NormalTok{ courses19}\SpecialCharTok{$}\NormalTok{start[courses19}\SpecialCharTok{$}\NormalTok{icourse }\SpecialCharTok{==} \StringTok{"S{-}BIOG{-}027"}\NormalTok{] }\SpecialCharTok{\&}\NormalTok{ date\_round }\SpecialCharTok{\textless{}=}\NormalTok{ courses19}\SpecialCharTok{$}\NormalTok{end[courses19}\SpecialCharTok{$}\NormalTok{icourse }\SpecialCharTok{==} \StringTok{"S{-}BIOG{-}027"}\NormalTok{]) }\OtherTok{{-}\textgreater{}}\NormalTok{ sup\_temp19}
-
-\NormalTok{plog19 }\OtherTok{\textless{}{-}} \FunctionTok{ggplot}\NormalTok{() }\SpecialCharTok{+}
-  \FunctionTok{geom\_rect}\NormalTok{(}\AttributeTok{data =}\NormalTok{ lessons\_red19, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{xmin =}\NormalTok{ start, }\AttributeTok{xmax =}\NormalTok{ end , }\AttributeTok{ymin =} \SpecialCharTok{{-}}\ConstantTok{Inf}\NormalTok{,  }\AttributeTok{ymax =} \ConstantTok{Inf}\NormalTok{, }\AttributeTok{fill =}\NormalTok{ course), }\AttributeTok{alpha =} \FloatTok{0.2}\NormalTok{) }\SpecialCharTok{+}
-  \FunctionTok{geom\_line}\NormalTok{(}\AttributeTok{data =}\NormalTok{ log\_temp19, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{y =}\NormalTok{ cumul\_commit, }\AttributeTok{x =}\NormalTok{ date\_round)) }\SpecialCharTok{+}
-  \FunctionTok{geom\_vline}\NormalTok{(}\AttributeTok{xintercept =} \FunctionTok{as.POSIXct}\NormalTok{(}\StringTok{"2020{-}03{-}15"}\NormalTok{), }\AttributeTok{color =} \StringTok{"red"}\NormalTok{) }\SpecialCharTok{+}
-  \FunctionTok{theme\_sciviews}\NormalTok{() }\SpecialCharTok{+}
-  \FunctionTok{labs}\NormalTok{(}\AttributeTok{x =} \StringTok{"Date"}\NormalTok{, }\AttributeTok{y =} \StringTok{"cumulative sum of }\SpecialCharTok{\textbackslash{}n}\StringTok{ commits"}\NormalTok{)}
-
-\NormalTok{psup19 }\OtherTok{\textless{}{-}} \FunctionTok{ggplot}\NormalTok{() }\SpecialCharTok{+}
-  \FunctionTok{geom\_rect}\NormalTok{(}\AttributeTok{data =}\NormalTok{ lessons\_red19, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{xmin =}\NormalTok{ start, }\AttributeTok{xmax =}\NormalTok{ end , }\AttributeTok{ymin =} \SpecialCharTok{{-}}\ConstantTok{Inf}\NormalTok{,  }\AttributeTok{ymax =} \ConstantTok{Inf}\NormalTok{, }\AttributeTok{fill =}\NormalTok{ course), }\AttributeTok{alpha =} \FloatTok{0.2}\NormalTok{) }\SpecialCharTok{+}
-  \FunctionTok{geom\_line}\NormalTok{(}\AttributeTok{data =}\NormalTok{ sup\_temp19, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{y =}\NormalTok{ cumul\_message, }\AttributeTok{x =}\NormalTok{ date\_round)) }\SpecialCharTok{+}
-  \FunctionTok{geom\_vline}\NormalTok{(}\AttributeTok{xintercept =} \FunctionTok{as.POSIXct}\NormalTok{(}\StringTok{"2020{-}03{-}15"}\NormalTok{), }\AttributeTok{color =} \StringTok{"red"}\NormalTok{) }\SpecialCharTok{+}
-  \FunctionTok{theme\_sciviews}\NormalTok{() }\SpecialCharTok{+}
-  \FunctionTok{labs}\NormalTok{(}\AttributeTok{x =} \StringTok{"Date"}\NormalTok{, }\AttributeTok{y =} \StringTok{"cumulative sum of  }\SpecialCharTok{\textbackslash{}n}\StringTok{ messages"}\NormalTok{)}
-
-\FunctionTok{combine\_charts}\NormalTok{(}\FunctionTok{list}\NormalTok{(plog19, psup19), }\AttributeTok{nrow =} \DecValTok{2}\NormalTok{, }\AttributeTok{common.legend =} \ConstantTok{TRUE}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{figure}
-\centering
 \includegraphics{teaching_data_science_files/figure-latex/unnamed-chunk-4-1.pdf}
-\caption{cumulative sums of commit and message over time in first term
-of 2019-2020. The period of each module per course is represented by
-area.}
-\end{figure}
 
-During the first lockdown, support rapidly switched to the proposed
-channels, by email and via Discord. However, we observe a clear halt in
-the work of the students before the start of the lockdown. After a
-period of ten days, students started to work and interact with teachers
-again. After the last hours of class, students continued to work and
-interact with the teachers.
+The academic year is divided into work periods of approximately 2 weeks.
+The courses of the second term of the year 2019-2020 start in period
+Y1P09 and the courses of the first term of the year 2020-2020 start in
+period Y2P01. The first lockdown started in period Y1P11 and the second
+in Y2P03. During the first lockdown, support rapidly switched to the
+proposed channels, by email and via Discord.
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{lessons }\SpecialCharTok{\%\textgreater{}.\%}
-  \FunctionTok{filter}\NormalTok{(., }\SpecialCharTok{!}\NormalTok{topic }\SpecialCharTok{\%in\%} \FunctionTok{c}\NormalTok{(}\StringTok{"extra\_session"}\NormalTok{, }\StringTok{"debriefing\_S{-}BIOG{-}006"}\NormalTok{, }\StringTok{"debriefing\_S{-}BIOG{-}015"}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}.\%}
-  \FunctionTok{filter}\NormalTok{(., icourse }\SpecialCharTok{\%in\%} \FunctionTok{c}\NormalTok{(}\StringTok{"S{-}BIOG{-}006"}\NormalTok{, }\StringTok{"S{-}BIOG{-}015"}\NormalTok{, }\StringTok{"S{-}BIOG{-}025"}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}.\%}
-  \FunctionTok{group\_by}\NormalTok{(., course, module) }\SpecialCharTok{\%\textgreater{}.\%}
-  \FunctionTok{summarise}\NormalTok{(., }\AttributeTok{start =} \FunctionTok{min}\NormalTok{(start), }\AttributeTok{end =} \FunctionTok{max}\NormalTok{(end)) }\OtherTok{{-}\textgreater{}}\NormalTok{ lessons\_red}
+In 2019-2020, a drop in the number of commits is observed in Y1P11 which
+corresponds to the beginning of the first lockdown. After one period of
+transition, students start again to work and interact with teachers. The
+last hours of lessons are given in period Y1P13. The higher number of
+commits in Y1P16 and Y1P17 corresponds to the third term.
 
-\NormalTok{log }\SpecialCharTok{\%\textgreater{}.\%}
-  \FunctionTok{distinct}\NormalTok{(., commit, }\AttributeTok{.keep\_all =} \ConstantTok{TRUE}\NormalTok{) }\SpecialCharTok{\%\textgreater{}.\%}
-  \FunctionTok{filter}\NormalTok{(., }\FunctionTok{is.na}\NormalTok{(from)) }\SpecialCharTok{\%\textgreater{}.\%}
-  \FunctionTok{mutate}\NormalTok{(., }\AttributeTok{date\_round =}\NormalTok{ lubridate}\SpecialCharTok{::}\FunctionTok{round\_date}\NormalTok{(date, }\StringTok{"day"}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}.\%}
-  \FunctionTok{group\_by}\NormalTok{(., date\_round) }\SpecialCharTok{\%\textgreater{}.\%}
-  \FunctionTok{count}\NormalTok{(.) }\SpecialCharTok{\%\textgreater{}.\%}
-  \FunctionTok{ungroup}\NormalTok{(.) }\SpecialCharTok{\%\textgreater{}.\%}
-  \FunctionTok{mutate}\NormalTok{(., }\AttributeTok{cumul\_commit =} \FunctionTok{cumsum}\NormalTok{(n))}\SpecialCharTok{\%\textgreater{}.\%}
-  \FunctionTok{filter}\NormalTok{(., date\_round }\SpecialCharTok{\textgreater{}=}\NormalTok{ courses}\SpecialCharTok{$}\NormalTok{start[courses}\SpecialCharTok{$}\NormalTok{icourse }\SpecialCharTok{==} \StringTok{"S{-}BIOG{-}006"}\NormalTok{] }\SpecialCharTok{\&}\NormalTok{ date\_round }\SpecialCharTok{\textless{}=}\NormalTok{ courses}\SpecialCharTok{$}\NormalTok{end[courses}\SpecialCharTok{$}\NormalTok{icourse }\SpecialCharTok{==} \StringTok{"S{-}BIOG{-}006"}\NormalTok{])}\OtherTok{{-}\textgreater{}}\NormalTok{ log\_temp}
-
-\NormalTok{support }\SpecialCharTok{\%\textgreater{}.\%}
-  \FunctionTok{mutate}\NormalTok{(., }\AttributeTok{date\_round =}\NormalTok{ lubridate}\SpecialCharTok{::}\FunctionTok{round\_date}\NormalTok{(date, }\StringTok{"day"}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}.\%}
-  \FunctionTok{group\_by}\NormalTok{(., date\_round) }\SpecialCharTok{\%\textgreater{}.\%}
-  \FunctionTok{count}\NormalTok{(.) }\SpecialCharTok{\%\textgreater{}.\%}
-  \FunctionTok{ungroup}\NormalTok{(.) }\SpecialCharTok{\%\textgreater{}.\%}
-  \FunctionTok{mutate}\NormalTok{(., }\AttributeTok{cumul\_message =} \FunctionTok{cumsum}\NormalTok{(n))  }\SpecialCharTok{\%\textgreater{}.\%}
-  \FunctionTok{filter}\NormalTok{(., date\_round }\SpecialCharTok{\textgreater{}=}\NormalTok{ courses}\SpecialCharTok{$}\NormalTok{start[courses}\SpecialCharTok{$}\NormalTok{icourse }\SpecialCharTok{==} \StringTok{"S{-}BIOG{-}006"}\NormalTok{] }\SpecialCharTok{\&}\NormalTok{ date\_round }\SpecialCharTok{\textless{}=}\NormalTok{ courses}\SpecialCharTok{$}\NormalTok{end[courses}\SpecialCharTok{$}\NormalTok{icourse }\SpecialCharTok{==} \StringTok{"S{-}BIOG{-}006"}\NormalTok{]) }\OtherTok{{-}\textgreater{}}\NormalTok{ sup\_temp}
-
-\NormalTok{plog }\OtherTok{\textless{}{-}} \FunctionTok{ggplot}\NormalTok{() }\SpecialCharTok{+}
-  \FunctionTok{geom\_rect}\NormalTok{(}\AttributeTok{data =}\NormalTok{ lessons\_red, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{xmin =}\NormalTok{ start, }\AttributeTok{xmax =}\NormalTok{ end , }\AttributeTok{ymin =} \SpecialCharTok{{-}}\ConstantTok{Inf}\NormalTok{,  }\AttributeTok{ymax =} \ConstantTok{Inf}\NormalTok{, }\AttributeTok{fill =}\NormalTok{ course), }\AttributeTok{alpha =} \FloatTok{0.2}\NormalTok{) }\SpecialCharTok{+}
-  \FunctionTok{geom\_line}\NormalTok{(}\AttributeTok{data =}\NormalTok{ log\_temp, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{y =}\NormalTok{ cumul\_commit, }\AttributeTok{x =}\NormalTok{ date\_round)) }\SpecialCharTok{+}
-  \FunctionTok{geom\_vline}\NormalTok{(}\AttributeTok{xintercept =} \FunctionTok{as.POSIXct}\NormalTok{(}\StringTok{"2020{-}10{-}21"}\NormalTok{), }\AttributeTok{color =} \StringTok{"red"}\NormalTok{) }\SpecialCharTok{+}
-  \FunctionTok{theme\_sciviews}\NormalTok{() }\SpecialCharTok{+}
-  \FunctionTok{labs}\NormalTok{(}\AttributeTok{x =} \StringTok{"Date"}\NormalTok{, }\AttributeTok{y =} \StringTok{"cumulative sum of }\SpecialCharTok{\textbackslash{}n}\StringTok{ commits"}\NormalTok{)}
-
-\NormalTok{psup }\OtherTok{\textless{}{-}} \FunctionTok{ggplot}\NormalTok{() }\SpecialCharTok{+}
-  \FunctionTok{geom\_rect}\NormalTok{(}\AttributeTok{data =}\NormalTok{ lessons\_red, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{xmin =}\NormalTok{ start, }\AttributeTok{xmax =}\NormalTok{ end , }\AttributeTok{ymin =} \SpecialCharTok{{-}}\ConstantTok{Inf}\NormalTok{,  }\AttributeTok{ymax =} \ConstantTok{Inf}\NormalTok{, }\AttributeTok{fill =}\NormalTok{ course), }\AttributeTok{alpha =} \FloatTok{0.2}\NormalTok{) }\SpecialCharTok{+}
-  \FunctionTok{geom\_line}\NormalTok{(}\AttributeTok{data =}\NormalTok{ sup\_temp, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{y =}\NormalTok{ cumul\_message, }\AttributeTok{x =}\NormalTok{ date\_round)) }\SpecialCharTok{+}
-  \FunctionTok{geom\_vline}\NormalTok{(}\AttributeTok{xintercept =} \FunctionTok{as.POSIXct}\NormalTok{(}\StringTok{"2020{-}10{-}21"}\NormalTok{), }\AttributeTok{color =} \StringTok{"red"}\NormalTok{) }\SpecialCharTok{+}
-  \FunctionTok{theme\_sciviews}\NormalTok{() }\SpecialCharTok{+}
-  \FunctionTok{labs}\NormalTok{(}\AttributeTok{x =} \StringTok{"Date"}\NormalTok{, }\AttributeTok{y =} \StringTok{"cumulative sum of  }\SpecialCharTok{\textbackslash{}n}\StringTok{ messages"}\NormalTok{)}
-
-\FunctionTok{combine\_charts}\NormalTok{(}\FunctionTok{list}\NormalTok{(plog, psup), }\AttributeTok{nrow =} \DecValTok{2}\NormalTok{, }\AttributeTok{common.legend =} \ConstantTok{TRUE}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{figure}
-\centering
-\includegraphics{teaching_data_science_files/figure-latex/unnamed-chunk-5-1.pdf}
-\caption{cumulative sums of commit and message over time in first term
-of 2020-2021. The period of each module per course is represented by
-area.}
-\end{figure}
-
-During the second lockdown, the students' work remained constant (graph
-A) and the remote communication tools were logically more used (graph
-B). The students did not need a new adaptation phase as observed during
-the first lockdown.
-
-{[}TODO : Change time by quarter with phg function{]}
+In 2020-2021, the number of commits gradually increases from Y2P01 to
+Y2P03 and stabilises until Y2P08. The number of messages increases from
+the beginning of the second containment (Y2P03). There is no lag period.
+The number of commits remains constant. The students no longer needed an
+adaptation period.
 
 \hypertarget{learnr-tutorials-perceived-cognitive-workload}{%
 \subsection{Learnr tutorials perceived cognitive
@@ -732,34 +505,7 @@ far as we know, not been studied yet. We used a NASA LTX questionnaire
 to assess it across all three courses {[}indicate here the level of
 participation of the students for each course{]}.
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{c}\NormalTok{(}\StringTok{"A99Wa\_perception"}\NormalTok{, }\StringTok{"B99Wa\_perception"}\NormalTok{, }\StringTok{"C99Wb\_perception:perception"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
-\NormalTok{  purrr}\SpecialCharTok{::}\FunctionTok{map\_dfr}\NormalTok{(learnr\_feeling, }\AttributeTok{df =}\NormalTok{ wo, }\AttributeTok{label =} \StringTok{"Q4"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}.\%}
-  \FunctionTok{mutate}\NormalTok{(., }\AttributeTok{course =} \FunctionTok{substr}\NormalTok{(app, }\AttributeTok{start =} \DecValTok{1}\NormalTok{, }\AttributeTok{stop =} \DecValTok{1}\NormalTok{)) }\OtherTok{{-}\textgreater{}}\NormalTok{ learnr\_workload}
-
-\NormalTok{learnr\_workload }\SpecialCharTok{\%\textgreater{}.\%}
-  \FunctionTok{pivot\_longer}\NormalTok{(.,}\AttributeTok{cols =} \FunctionTok{c}\NormalTok{(mental, physical, time\_pressure, performance, effort, frustration),}
-  \AttributeTok{names\_to =} \StringTok{"category"}\NormalTok{, }\AttributeTok{values\_to =} \StringTok{"grade"}\NormalTok{)  }\SpecialCharTok{\%\textgreater{}.\%}
-  \FunctionTok{left\_join}\NormalTok{(., dplyr}\SpecialCharTok{::}\FunctionTok{distinct}\NormalTok{(courses, course,name), }\AttributeTok{by =} \StringTok{"course"}\NormalTok{)}\OtherTok{{-}\textgreater{}}\NormalTok{ workload}
-
-\NormalTok{workload }\SpecialCharTok{\%\textgreater{}.\%}
-  \FunctionTok{group\_by}\NormalTok{(., user, app, course) }\SpecialCharTok{\%\textgreater{}.\%}
-  \CommentTok{\#filter(., user != "ECAYEO033") \%\textgreater{}.\%}
-  \FunctionTok{summarise}\NormalTok{(., }\AttributeTok{rtlx =} \DecValTok{10}\SpecialCharTok{*}\FunctionTok{mean}\NormalTok{(grade)) }\OtherTok{{-}\textgreater{}}\NormalTok{ workload\_rtlx}
-
-\FunctionTok{set.seed}\NormalTok{(}\DecValTok{222}\NormalTok{)}
-\FunctionTok{chart}\NormalTok{(workload\_rtlx, rtlx }\SpecialCharTok{\textasciitilde{}}\NormalTok{ course) }\SpecialCharTok{+}
-  \FunctionTok{geom\_boxplot}\NormalTok{(}\AttributeTok{fill =} \StringTok{"\#00BFC4"}\NormalTok{) }\SpecialCharTok{+}
-  \FunctionTok{geom\_jitter}\NormalTok{(}\AttributeTok{alpha =} \FloatTok{0.5}\NormalTok{, }\AttributeTok{width =} \FloatTok{0.1}\NormalTok{) }\SpecialCharTok{+}
-  \FunctionTok{labs}\NormalTok{(}\AttributeTok{y =} \StringTok{"RTLX"}\NormalTok{, }\AttributeTok{x =} \StringTok{"Course"}\NormalTok{) }\SpecialCharTok{+}
-  \FunctionTok{stat\_summary}\NormalTok{(}\AttributeTok{fun.y=}\StringTok{"mean"}\NormalTok{, }\AttributeTok{color =} \StringTok{"red"}\NormalTok{)}\SpecialCharTok{+}
-  \FunctionTok{stat\_summary}\NormalTok{(}\AttributeTok{fun.data =}\NormalTok{ n\_fun, }\AttributeTok{geom =} \StringTok{"text"}\NormalTok{, }\AttributeTok{hjust =} \FloatTok{0.5}\NormalTok{) }\SpecialCharTok{+}
-  \FunctionTok{labs}\NormalTok{( }\AttributeTok{y =} \StringTok{"Raw Task Load indeX (2020{-}2021)"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\includegraphics{teaching_data_science_files/figure-latex/unnamed-chunk-6-1.pdf}
+\includegraphics{teaching_data_science_files/figure-latex/unnamed-chunk-5-1.pdf}
 
 The difficulty of the course, and thus, of the exercises in the
 tutorials increase from one course to the other. However, we do not
@@ -768,19 +514,6 @@ significantly lower for course C than for course A (Tukey HSD, p-value =
 0.023). The cognitive load perceived by the students diminishes. This
 may be a consequence of a more fluent R coding and the better mastering
 of all the software tools the students have to use.
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{workload\_rtlx }\SpecialCharTok{\%\textgreater{}.\%}
-  \FunctionTok{mutate}\NormalTok{(., }\AttributeTok{course =} \FunctionTok{as.factor}\NormalTok{(course)) }\OtherTok{{-}\textgreater{}}\NormalTok{ workload\_rtlx}
-
-\CommentTok{\#kruskal.test(data = workload\_rtlx, rtlx \textasciitilde{} course)}
-\CommentTok{\#summary(kw\_comp. \textless{}{-} nparcomp::nparcomp(data = workload\_rtlx, rtlx \textasciitilde{} course))}
-
-\NormalTok{anova. }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(}\AttributeTok{data =}\NormalTok{ workload\_rtlx, rtlx }\SpecialCharTok{\textasciitilde{}}\NormalTok{ course)}
-\FunctionTok{anova}\NormalTok{(anova.)}
-\end{Highlighting}
-\end{Shaded}
 
 \begin{verbatim}
 ## Analysis of Variance Table
@@ -792,16 +525,6 @@ of all the software tools the students have to use.
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 \end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{\#bartlett.test(data = workload\_rtlx, rtlx \textasciitilde{} course)}
-\CommentTok{\#plot(anova., which = 2)}
-
-\FunctionTok{summary}\NormalTok{(anovaComp. }\OtherTok{\textless{}{-}} \FunctionTok{confint}\NormalTok{(multcomp}\SpecialCharTok{::}\FunctionTok{glht}\NormalTok{(anova.,}
-  \AttributeTok{linfct =}\NormalTok{ multcomp}\SpecialCharTok{::}\FunctionTok{mcp}\NormalTok{(}\AttributeTok{course =} \StringTok{"Tukey"}\NormalTok{))))}
-\end{Highlighting}
-\end{Shaded}
 
 \begin{verbatim}
 ## 
@@ -844,15 +567,15 @@ bien sûr.{]}
   de niveau 2, ceci afin de les encourager à réaliser complètement tous
   les exercises et à les faire dans l'ordre croissant de difficulté.
 \item
-  Même au sein d'une cohortez d'étudiants ayant un parcours académique
+  Même au sein d'une cohorte d'étudiants ayant un parcours académique
   similaire, nous notons de très grosses différences de stratégie dans
   les activités d'apprentissage. Si plusieurs stratégies différentes
-  sont associées à une acquisirtion bonne à erxcellente des compétences
+  sont associées à une acquisition bonne à erxcellente des compétences
   telle qu'attestée par les notes obtenues, plusieurs profils sont
   systématiquement associés à des performances faibles. Les profils
   ainsi établis via cartes auto-adaptatives permettront à l'avenir de
   détecter plus tôt les étudiants à suivre plus particulièrement et à
-  réfléchir à des approiches alternatives pour eux afin de les aider
+  réfléchir à des approches alternatives pour eux afin de les aider
   (pédagogie inclusive).
 \item
   Les études portant sur le changements d'attitudes au sein de semestre
