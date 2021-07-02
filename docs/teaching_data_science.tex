@@ -175,8 +175,8 @@ social fracture.
 \hypertarget{introduction}{%
 \section{Introduction}\label{introduction}}
 
-In a context where there is an exponentially growing mass of data
-{[}ref\ldots{]}, a reproducibility crisis in Science (Baker 2016), and a
+In a context where there is an exponentially growing mass of data (Marx
+2013), a reproducibility crisis in Science (Baker 2016), and a
 progressive adoption of Open Science practices (Banks et al. 2019),
 statistics were broaden to a larger discipline called Data Science. For
 the Data Science association, ``the Data Science means the scientific
@@ -222,14 +222,16 @@ learn (Baumer et al. 2014).
 
 Suitable computer hardware and software environments are required in the
 practical sessions of the courses. Different approaches range from
-inline software (RStudio Cloud {[}ref{]}, Chromebook data science
-{[}ref{]}) to local installation on the Student's computers. The former
-requires an infrastructure to run the software on a server, nad that
-software is only accessible to the students during the course. The later
-raises problems of license for proprietary software, but also
-installation and configuration issues. An intermediary solution uses
-preconfigured virtual machines, or containers (e.g., Docker)
-(Çetinkaya-Rundel and Rundel 2018). Such a solution is the most flexible
+inline software (RStudio Cloud (\url{https://rstudio.cloud/}),
+Chromebook data science
+(\url{http://jhudatascience.org/chromebookdatascience/})) to local
+installation on the Student's computers. The former requires an
+infrastructure to run the software on a server, nad that software is
+only accessible to the students during the course. The later raises
+problems of license for proprietary software, but also installation and
+configuration issues. An intermediary solution uses preconfigured
+virtual machines, or containers (e.g., Docker) (Çetinkaya-Rundel and
+Rundel 2018 ; Boettiger 2015). Such a solution is the most flexible
 because it can be deployed almost anywhere (in the computer lab, at
 home, using a laptop, \ldots). To fix theoretical concepts through
 applied exercises is a key aspect of learning data science (Larwin and
@@ -419,18 +421,6 @@ Liste des idées développées dans cette section :
 
 {[}Next paragraph to be translated and reworked{]}
 
-La transition du cours classique vers une cours en classe inversée a
-menée à l'intégration de nouveaux outils permettant de diversifier les
-types d'exercice proposés aux étudiants (tab M\&M). Le tableau XX (il
-semble avoir disparu dans l'édition du document???) indique la
-répartition des exercices pour chaque cours. La collecte des données
-pour chaque exercice permet de construire une note objective pour chaque
-étudiant. La note des étudiant est construite sur l'évaluation des 5
-niveaux d'exercices complémentaires allant des exercices les plus
-simples (N1) aux exercices les plus complexes (N5). Une moyenne pondérée
-pour chaque niveau d'exercice est employée pour obtenir une note finale
-par cours.
-
 Our in-service training includes 26 complementary modules over 3 years
 and 3 consecutive courses from bab2 to MA1. The number of exercises per
 type is shown in Table XXX. The goal and the difficulty levels of the
@@ -593,58 +583,125 @@ learning}\label{transition-between-face-to-face-and-distance-learning}}
 Due to Covid-19 lockdown periods, distance learning had to be adopted
 abruptly. We analyze the activity and support data collected during
 academic years 2019-2020 and 2020-2021 to assess the impact of this
-transition on the progression of the students and
-
-{[}TODO : add analyse on the commit or h5P/learnr exercises to follow
-the student{]}
+transition on the progression of the students.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{log19 }\SpecialCharTok{\%\textgreater{}.\%} 
+\NormalTok{lessons19 }\SpecialCharTok{\%\textgreater{}.\%}
+  \FunctionTok{filter}\NormalTok{(., }\SpecialCharTok{!}\NormalTok{topic }\SpecialCharTok{\%in\%} \FunctionTok{c}\NormalTok{(}\StringTok{"extra\_session"}\NormalTok{, }\StringTok{"debriefing\_S{-}BIOG{-}006"}\NormalTok{, }\StringTok{"debriefing\_S{-}BIOG{-}015"}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}.\%}
+  \FunctionTok{filter}\NormalTok{(., icourse }\SpecialCharTok{\%in\%} \FunctionTok{c}\NormalTok{(}\StringTok{"S{-}BIOG{-}027"}\NormalTok{, }\StringTok{"S{-}BIOG{-}061"}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}.\%}
+  \FunctionTok{group\_by}\NormalTok{(., course, module) }\SpecialCharTok{\%\textgreater{}.\%}
+  \FunctionTok{summarise}\NormalTok{(., }\AttributeTok{start =} \FunctionTok{min}\NormalTok{(start), }\AttributeTok{end =} \FunctionTok{max}\NormalTok{(end)) }\OtherTok{{-}\textgreater{}}\NormalTok{ lessons\_red19}
+
+\NormalTok{log19 }\SpecialCharTok{\%\textgreater{}.\%}
   \FunctionTok{distinct}\NormalTok{(., commit, }\AttributeTok{.keep\_all =} \ConstantTok{TRUE}\NormalTok{) }\SpecialCharTok{\%\textgreater{}.\%}
   \FunctionTok{filter}\NormalTok{(., }\FunctionTok{is.na}\NormalTok{(from)) }\SpecialCharTok{\%\textgreater{}.\%}
   \FunctionTok{mutate}\NormalTok{(., }\AttributeTok{date\_round =}\NormalTok{ lubridate}\SpecialCharTok{::}\FunctionTok{round\_date}\NormalTok{(date, }\StringTok{"day"}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}.\%}
   \FunctionTok{group\_by}\NormalTok{(., date\_round) }\SpecialCharTok{\%\textgreater{}.\%}
   \FunctionTok{count}\NormalTok{(.) }\SpecialCharTok{\%\textgreater{}.\%}
   \FunctionTok{ungroup}\NormalTok{(.) }\SpecialCharTok{\%\textgreater{}.\%}
-  \FunctionTok{mutate}\NormalTok{(., }\AttributeTok{cumul\_commit =} \FunctionTok{cumsum}\NormalTok{(n)) }\OtherTok{{-}\textgreater{}}\NormalTok{ log19\_red}
+  \FunctionTok{mutate}\NormalTok{(., }\AttributeTok{cumul\_commit =} \FunctionTok{cumsum}\NormalTok{(n)) }\SpecialCharTok{\%\textgreater{}.\%}
+  \FunctionTok{filter}\NormalTok{(., date\_round }\SpecialCharTok{\textgreater{}=}\NormalTok{ courses19}\SpecialCharTok{$}\NormalTok{start[courses19}\SpecialCharTok{$}\NormalTok{icourse }\SpecialCharTok{==} \StringTok{"S{-}BIOG{-}027"}\NormalTok{] }\SpecialCharTok{\&}\NormalTok{ date\_round }\SpecialCharTok{\textless{}=}\NormalTok{ courses19}\SpecialCharTok{$}\NormalTok{end[courses19}\SpecialCharTok{$}\NormalTok{icourse }\SpecialCharTok{==} \StringTok{"S{-}BIOG{-}027"}\NormalTok{])}\OtherTok{{-}\textgreater{}}\NormalTok{ log\_temp19}
 
+\NormalTok{support19 }\SpecialCharTok{\%\textgreater{}.\%}
+  \FunctionTok{mutate}\NormalTok{(., }\AttributeTok{date\_round =}\NormalTok{ lubridate}\SpecialCharTok{::}\FunctionTok{round\_date}\NormalTok{(date, }\StringTok{"day"}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}.\%}
+  \FunctionTok{group\_by}\NormalTok{(., date\_round) }\SpecialCharTok{\%\textgreater{}.\%}
+  \FunctionTok{count}\NormalTok{(.) }\SpecialCharTok{\%\textgreater{}.\%}
+  \FunctionTok{ungroup}\NormalTok{(.) }\SpecialCharTok{\%\textgreater{}.\%}
+  \FunctionTok{mutate}\NormalTok{(., }\AttributeTok{cumul\_message =} \FunctionTok{cumsum}\NormalTok{(n))  }\SpecialCharTok{\%\textgreater{}.\%}
+  \FunctionTok{filter}\NormalTok{(., date\_round }\SpecialCharTok{\textgreater{}=}\NormalTok{ courses19}\SpecialCharTok{$}\NormalTok{start[courses19}\SpecialCharTok{$}\NormalTok{icourse }\SpecialCharTok{==} \StringTok{"S{-}BIOG{-}027"}\NormalTok{] }\SpecialCharTok{\&}\NormalTok{ date\_round }\SpecialCharTok{\textless{}=}\NormalTok{ courses19}\SpecialCharTok{$}\NormalTok{end[courses19}\SpecialCharTok{$}\NormalTok{icourse }\SpecialCharTok{==} \StringTok{"S{-}BIOG{-}027"}\NormalTok{]) }\OtherTok{{-}\textgreater{}}\NormalTok{ sup\_temp19}
 
-\NormalTok{log19\_red }\SpecialCharTok{\%\textgreater{}.\%}
-  \FunctionTok{filter}\NormalTok{(., date\_round }\SpecialCharTok{\textgreater{}}\NormalTok{ lubridate}\SpecialCharTok{::}\FunctionTok{ymd}\NormalTok{(}\StringTok{"2020{-}02{-}01"}\NormalTok{) }\SpecialCharTok{\&}\NormalTok{ date\_round }\SpecialCharTok{\textless{}}\NormalTok{ lubridate}\SpecialCharTok{::}\FunctionTok{ymd}\NormalTok{(}\StringTok{"2020{-}05{-}22"}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}.\%}
-  \FunctionTok{chart}\NormalTok{(., cumul\_commit }\SpecialCharTok{\textasciitilde{}}\NormalTok{ date\_round) }\SpecialCharTok{+}
-  \FunctionTok{geom\_line}\NormalTok{() }\SpecialCharTok{+}
+\NormalTok{plog19 }\OtherTok{\textless{}{-}} \FunctionTok{ggplot}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{geom\_rect}\NormalTok{(}\AttributeTok{data =}\NormalTok{ lessons\_red19, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{xmin =}\NormalTok{ start, }\AttributeTok{xmax =}\NormalTok{ end , }\AttributeTok{ymin =} \SpecialCharTok{{-}}\ConstantTok{Inf}\NormalTok{,  }\AttributeTok{ymax =} \ConstantTok{Inf}\NormalTok{, }\AttributeTok{fill =}\NormalTok{ course), }\AttributeTok{alpha =} \FloatTok{0.2}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{geom\_line}\NormalTok{(}\AttributeTok{data =}\NormalTok{ log\_temp19, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{y =}\NormalTok{ cumul\_commit, }\AttributeTok{x =}\NormalTok{ date\_round)) }\SpecialCharTok{+}
   \FunctionTok{geom\_vline}\NormalTok{(}\AttributeTok{xintercept =} \FunctionTok{as.POSIXct}\NormalTok{(}\StringTok{"2020{-}03{-}15"}\NormalTok{), }\AttributeTok{color =} \StringTok{"red"}\NormalTok{) }\SpecialCharTok{+}
-  \FunctionTok{labs}\NormalTok{(}\AttributeTok{x =} \StringTok{"Date"}\NormalTok{, }\AttributeTok{y =} \StringTok{"cumulative sum of commits"}\NormalTok{) }\OtherTok{{-}\textgreater{}}\NormalTok{ p1}
+  \FunctionTok{theme\_sciviews}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{x =} \StringTok{"Date"}\NormalTok{, }\AttributeTok{y =} \StringTok{"cumulative sum of }\SpecialCharTok{\textbackslash{}n}\StringTok{ commits"}\NormalTok{)}
 
-\NormalTok{log }\SpecialCharTok{\%\textgreater{}.\%} 
-  \FunctionTok{distinct}\NormalTok{(., commit, }\AttributeTok{.keep\_all =} \ConstantTok{TRUE}\NormalTok{) }\SpecialCharTok{\%\textgreater{}.\%}
-  \FunctionTok{filter}\NormalTok{(., }\FunctionTok{is.na}\NormalTok{(from)) }\SpecialCharTok{\%\textgreater{}.\%}
-  \FunctionTok{mutate}\NormalTok{(., }\AttributeTok{date\_round =}\NormalTok{ lubridate}\SpecialCharTok{::}\FunctionTok{round\_date}\NormalTok{(date, }\StringTok{"day"}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}.\%}
-  \FunctionTok{group\_by}\NormalTok{(., date\_round) }\SpecialCharTok{\%\textgreater{}.\%}
-  \FunctionTok{count}\NormalTok{(.) }\SpecialCharTok{\%\textgreater{}.\%}
-  \FunctionTok{ungroup}\NormalTok{(.) }\SpecialCharTok{\%\textgreater{}.\%}
-  \FunctionTok{mutate}\NormalTok{(., }\AttributeTok{cumul\_commit =} \FunctionTok{cumsum}\NormalTok{(n)) }\OtherTok{{-}\textgreater{}}\NormalTok{ log\_red}
+\NormalTok{psup19 }\OtherTok{\textless{}{-}} \FunctionTok{ggplot}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{geom\_rect}\NormalTok{(}\AttributeTok{data =}\NormalTok{ lessons\_red19, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{xmin =}\NormalTok{ start, }\AttributeTok{xmax =}\NormalTok{ end , }\AttributeTok{ymin =} \SpecialCharTok{{-}}\ConstantTok{Inf}\NormalTok{,  }\AttributeTok{ymax =} \ConstantTok{Inf}\NormalTok{, }\AttributeTok{fill =}\NormalTok{ course), }\AttributeTok{alpha =} \FloatTok{0.2}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{geom\_line}\NormalTok{(}\AttributeTok{data =}\NormalTok{ sup\_temp19, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{y =}\NormalTok{ cumul\_message, }\AttributeTok{x =}\NormalTok{ date\_round)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_vline}\NormalTok{(}\AttributeTok{xintercept =} \FunctionTok{as.POSIXct}\NormalTok{(}\StringTok{"2020{-}03{-}15"}\NormalTok{), }\AttributeTok{color =} \StringTok{"red"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_sciviews}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{x =} \StringTok{"Date"}\NormalTok{, }\AttributeTok{y =} \StringTok{"cumulative sum of  }\SpecialCharTok{\textbackslash{}n}\StringTok{ messages"}\NormalTok{)}
 
-
-\NormalTok{log\_red }\SpecialCharTok{\%\textgreater{}.\%}
-  \FunctionTok{filter}\NormalTok{(., date\_round }\SpecialCharTok{\textless{}}\NormalTok{ lubridate}\SpecialCharTok{::}\FunctionTok{ymd}\NormalTok{(}\StringTok{"2020{-}11{-}15"}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}.\%}
-  \FunctionTok{chart}\NormalTok{(., cumul\_commit }\SpecialCharTok{\textasciitilde{}}\NormalTok{ date\_round) }\SpecialCharTok{+}
-  \FunctionTok{geom\_line}\NormalTok{() }\SpecialCharTok{+}
-  \FunctionTok{geom\_vline}\NormalTok{(}\AttributeTok{xintercept =} \FunctionTok{as.POSIXct}\NormalTok{(}\StringTok{"2020{-}10{-}21"}\NormalTok{), }\AttributeTok{color =} \StringTok{"red"}\NormalTok{) }\SpecialCharTok{+}
-  \FunctionTok{labs}\NormalTok{(}\AttributeTok{x =} \StringTok{"Date"}\NormalTok{, }\AttributeTok{y =} \StringTok{"cumulative sum of commits"}\NormalTok{) }\OtherTok{{-}\textgreater{}}\NormalTok{ p2}
-
-\FunctionTok{combine\_charts}\NormalTok{(}\FunctionTok{list}\NormalTok{(p1, p2))}
+\FunctionTok{combine\_charts}\NormalTok{(}\FunctionTok{list}\NormalTok{(plog19, psup19), }\AttributeTok{nrow =} \DecValTok{2}\NormalTok{, }\AttributeTok{common.legend =} \ConstantTok{TRUE}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
+\begin{figure}
+\centering
 \includegraphics{teaching_data_science_files/figure-latex/unnamed-chunk-4-1.pdf}
+\caption{cumulative sums of commit and message over time in first term
+of 2019-2020. The period of each module per course is represented by
+area.}
+\end{figure}
 
 During the first lockdown, support rapidly switched to the proposed
-channels, by email and via Discord. However, despite a sustained
-exchange of message, progression of the students in the course material
-almost stopped for two weeks before taking over (graph A) \ldots. During
-the second lockdown \ldots{} {[}make plots and analyse this\ldots{]}
+channels, by email and via Discord. However, we observe a clear halt in
+the work of the students before the start of the lockdown. After a
+period of ten days, students started to work and interact with teachers
+again. After the last hours of class, students continued to work and
+interact with the teachers.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{lessons }\SpecialCharTok{\%\textgreater{}.\%}
+  \FunctionTok{filter}\NormalTok{(., }\SpecialCharTok{!}\NormalTok{topic }\SpecialCharTok{\%in\%} \FunctionTok{c}\NormalTok{(}\StringTok{"extra\_session"}\NormalTok{, }\StringTok{"debriefing\_S{-}BIOG{-}006"}\NormalTok{, }\StringTok{"debriefing\_S{-}BIOG{-}015"}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}.\%}
+  \FunctionTok{filter}\NormalTok{(., icourse }\SpecialCharTok{\%in\%} \FunctionTok{c}\NormalTok{(}\StringTok{"S{-}BIOG{-}006"}\NormalTok{, }\StringTok{"S{-}BIOG{-}015"}\NormalTok{, }\StringTok{"S{-}BIOG{-}025"}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}.\%}
+  \FunctionTok{group\_by}\NormalTok{(., course, module) }\SpecialCharTok{\%\textgreater{}.\%}
+  \FunctionTok{summarise}\NormalTok{(., }\AttributeTok{start =} \FunctionTok{min}\NormalTok{(start), }\AttributeTok{end =} \FunctionTok{max}\NormalTok{(end)) }\OtherTok{{-}\textgreater{}}\NormalTok{ lessons\_red}
+
+\NormalTok{log }\SpecialCharTok{\%\textgreater{}.\%}
+  \FunctionTok{distinct}\NormalTok{(., commit, }\AttributeTok{.keep\_all =} \ConstantTok{TRUE}\NormalTok{) }\SpecialCharTok{\%\textgreater{}.\%}
+  \FunctionTok{filter}\NormalTok{(., }\FunctionTok{is.na}\NormalTok{(from)) }\SpecialCharTok{\%\textgreater{}.\%}
+  \FunctionTok{mutate}\NormalTok{(., }\AttributeTok{date\_round =}\NormalTok{ lubridate}\SpecialCharTok{::}\FunctionTok{round\_date}\NormalTok{(date, }\StringTok{"day"}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}.\%}
+  \FunctionTok{group\_by}\NormalTok{(., date\_round) }\SpecialCharTok{\%\textgreater{}.\%}
+  \FunctionTok{count}\NormalTok{(.) }\SpecialCharTok{\%\textgreater{}.\%}
+  \FunctionTok{ungroup}\NormalTok{(.) }\SpecialCharTok{\%\textgreater{}.\%}
+  \FunctionTok{mutate}\NormalTok{(., }\AttributeTok{cumul\_commit =} \FunctionTok{cumsum}\NormalTok{(n))}\SpecialCharTok{\%\textgreater{}.\%}
+  \FunctionTok{filter}\NormalTok{(., date\_round }\SpecialCharTok{\textgreater{}=}\NormalTok{ courses}\SpecialCharTok{$}\NormalTok{start[courses}\SpecialCharTok{$}\NormalTok{icourse }\SpecialCharTok{==} \StringTok{"S{-}BIOG{-}006"}\NormalTok{] }\SpecialCharTok{\&}\NormalTok{ date\_round }\SpecialCharTok{\textless{}=}\NormalTok{ courses}\SpecialCharTok{$}\NormalTok{end[courses}\SpecialCharTok{$}\NormalTok{icourse }\SpecialCharTok{==} \StringTok{"S{-}BIOG{-}006"}\NormalTok{])}\OtherTok{{-}\textgreater{}}\NormalTok{ log\_temp}
+
+\NormalTok{support }\SpecialCharTok{\%\textgreater{}.\%}
+  \FunctionTok{mutate}\NormalTok{(., }\AttributeTok{date\_round =}\NormalTok{ lubridate}\SpecialCharTok{::}\FunctionTok{round\_date}\NormalTok{(date, }\StringTok{"day"}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}.\%}
+  \FunctionTok{group\_by}\NormalTok{(., date\_round) }\SpecialCharTok{\%\textgreater{}.\%}
+  \FunctionTok{count}\NormalTok{(.) }\SpecialCharTok{\%\textgreater{}.\%}
+  \FunctionTok{ungroup}\NormalTok{(.) }\SpecialCharTok{\%\textgreater{}.\%}
+  \FunctionTok{mutate}\NormalTok{(., }\AttributeTok{cumul\_message =} \FunctionTok{cumsum}\NormalTok{(n))  }\SpecialCharTok{\%\textgreater{}.\%}
+  \FunctionTok{filter}\NormalTok{(., date\_round }\SpecialCharTok{\textgreater{}=}\NormalTok{ courses}\SpecialCharTok{$}\NormalTok{start[courses}\SpecialCharTok{$}\NormalTok{icourse }\SpecialCharTok{==} \StringTok{"S{-}BIOG{-}006"}\NormalTok{] }\SpecialCharTok{\&}\NormalTok{ date\_round }\SpecialCharTok{\textless{}=}\NormalTok{ courses}\SpecialCharTok{$}\NormalTok{end[courses}\SpecialCharTok{$}\NormalTok{icourse }\SpecialCharTok{==} \StringTok{"S{-}BIOG{-}006"}\NormalTok{]) }\OtherTok{{-}\textgreater{}}\NormalTok{ sup\_temp}
+
+\NormalTok{plog }\OtherTok{\textless{}{-}} \FunctionTok{ggplot}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{geom\_rect}\NormalTok{(}\AttributeTok{data =}\NormalTok{ lessons\_red, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{xmin =}\NormalTok{ start, }\AttributeTok{xmax =}\NormalTok{ end , }\AttributeTok{ymin =} \SpecialCharTok{{-}}\ConstantTok{Inf}\NormalTok{,  }\AttributeTok{ymax =} \ConstantTok{Inf}\NormalTok{, }\AttributeTok{fill =}\NormalTok{ course), }\AttributeTok{alpha =} \FloatTok{0.2}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{geom\_line}\NormalTok{(}\AttributeTok{data =}\NormalTok{ log\_temp, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{y =}\NormalTok{ cumul\_commit, }\AttributeTok{x =}\NormalTok{ date\_round)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_vline}\NormalTok{(}\AttributeTok{xintercept =} \FunctionTok{as.POSIXct}\NormalTok{(}\StringTok{"2020{-}10{-}21"}\NormalTok{), }\AttributeTok{color =} \StringTok{"red"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_sciviews}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{x =} \StringTok{"Date"}\NormalTok{, }\AttributeTok{y =} \StringTok{"cumulative sum of }\SpecialCharTok{\textbackslash{}n}\StringTok{ commits"}\NormalTok{)}
+
+\NormalTok{psup }\OtherTok{\textless{}{-}} \FunctionTok{ggplot}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{geom\_rect}\NormalTok{(}\AttributeTok{data =}\NormalTok{ lessons\_red, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{xmin =}\NormalTok{ start, }\AttributeTok{xmax =}\NormalTok{ end , }\AttributeTok{ymin =} \SpecialCharTok{{-}}\ConstantTok{Inf}\NormalTok{,  }\AttributeTok{ymax =} \ConstantTok{Inf}\NormalTok{, }\AttributeTok{fill =}\NormalTok{ course), }\AttributeTok{alpha =} \FloatTok{0.2}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{geom\_line}\NormalTok{(}\AttributeTok{data =}\NormalTok{ sup\_temp, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{y =}\NormalTok{ cumul\_message, }\AttributeTok{x =}\NormalTok{ date\_round)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_vline}\NormalTok{(}\AttributeTok{xintercept =} \FunctionTok{as.POSIXct}\NormalTok{(}\StringTok{"2020{-}10{-}21"}\NormalTok{), }\AttributeTok{color =} \StringTok{"red"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_sciviews}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{x =} \StringTok{"Date"}\NormalTok{, }\AttributeTok{y =} \StringTok{"cumulative sum of  }\SpecialCharTok{\textbackslash{}n}\StringTok{ messages"}\NormalTok{)}
+
+\FunctionTok{combine\_charts}\NormalTok{(}\FunctionTok{list}\NormalTok{(plog, psup), }\AttributeTok{nrow =} \DecValTok{2}\NormalTok{, }\AttributeTok{common.legend =} \ConstantTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+\centering
+\includegraphics{teaching_data_science_files/figure-latex/unnamed-chunk-5-1.pdf}
+\caption{cumulative sums of commit and message over time in first term
+of 2020-2021. The period of each module per course is represented by
+area.}
+\end{figure}
+
+During the second lockdown, the students' work remained constant (graph
+A) and the remote communication tools were logically more used (graph
+B). The students did not need a new adaptation phase as observed during
+the first lockdown.
+
+{[}TODO : Change time by quarter with phg function{]}
 
 \hypertarget{learnr-tutorials-perceived-cognitive-workload}{%
 \subsection{Learnr tutorials perceived cognitive
@@ -702,7 +759,7 @@ participation of the students for each course{]}.
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{teaching_data_science_files/figure-latex/unnamed-chunk-5-1.pdf}
+\includegraphics{teaching_data_science_files/figure-latex/unnamed-chunk-6-1.pdf}
 
 The difficulty of the course, and thus, of the exercises in the
 tutorials increase from one course to the other. However, we do not
@@ -897,6 +954,11 @@ J. Horton. 2014. {``{R Markdown: Integrating A Reproducible Analysis
 Tool into Introductory Statistics}.''} \emph{Technology Innovations in
 Statistics Education} 8 (1). \url{https://doi.org/10.5070/t581020118}.
 
+\leavevmode\hypertarget{ref-Boettiger2015}{}%
+Boettiger, Carl. 2015. {``{An Introduction to Docker for Reproducible
+Research}.''} \emph{SIGOPS Oper. Syst. Rev.} 49 (1): 71--79.
+\url{https://doi.org/10.1145/2723872.2723882}.
+
 \leavevmode\hypertarget{ref-Byers1989}{}%
 Byers, J C, A Bittner, and S Hill. 1989. {``{Traditional and raw task
 load index (TLX) correlations: Are paired comparisons necessary? In
@@ -904,9 +966,8 @@ A}.''} In.
 
 \leavevmode\hypertarget{ref-Cetinkaya-Rundel2021}{}%
 Çetinkaya-Rundel, Mine, and Victoria Ellison. 2021. {``{A Fresh Look at
-Introductory Data Science}.''} \emph{Journal of Statistics and Data
-Science Education} 29 (sup1): S16--26.
-\url{https://doi.org/10.1080/10691898.2020.1804497}.
+Introductory Data Science}.''} \emph{Journal of Statistics Education} 0
+(0): 1--27. \url{https://doi.org/10.1080/10691898.2020.1804497}.
 
 \leavevmode\hypertarget{ref-Cetinkaya-Rundel2018}{}%
 Çetinkaya-Rundel, Mine, and Colin Rundel. 2018. {``{Infrastructure and
@@ -936,8 +997,8 @@ Freeman, Scott, Sarah L. Eddy, Miles McDonough, Michelle K. Smith,
 Nnadozie Okoroafor, Hannah Jordt, and Mary Pat Wenderoth. 2014.
 {``{Active learning increases student performance in science,
 engineering, and mathematics}.''} \emph{Proceedings of the National
-Academy of Sciences of the United States of America} 111 (23): 8410--15.
-\url{https://doi.org/10.1073/pnas.1319030111}.
+Academy of Sciences} 111 (23): 8410--15.
+\url{https://doi.org/10.1073/PNAS.1319030111}.
 
 \leavevmode\hypertarget{ref-Hart1988}{}%
 Hart, Sandra G., and Lowell E. Staveland. 1988. {``{Development of
@@ -954,15 +1015,21 @@ Science Education}, 672--78. SIGCSE '19. New York, NY, USA: Association
 for Computing Machinery. \url{https://doi.org/10.1145/3287324.3287460}.
 
 \leavevmode\hypertarget{ref-Krathwohl2002}{}%
-Krathwohl, David R. 2002. {``{A Revision of Bloom's Taxonomy: An
-Overview}.''} \emph{Theory Into Practice} 41 (4): 212--18.
-\url{https://doi.org/10.1207/s15430421tip4104_2}.
+Krathwohl, David R. 2002. {``{A Revision of Bloom' s Taxonomy: An
+otherview}.''} \emph{Theory Into Practice} 41 (4): 212--18.
+\url{https://doi.org/10.1207/s15430421tip4104}.
 
 \leavevmode\hypertarget{ref-Larwin2011}{}%
-Larwin, Karen, and David Larwin. 2011. {``{A Meta-Analysis Examining the
-Impact of Computer-Assisted Instruction on Postsecondary Statistics
-Education}.''} \emph{Journal of Research on Technology in Education} 43
-(3): 253--78. \url{https://doi.org/10.1080/15391523.2011.10782572}.
+Larwin, Karen, and David Larwin. 2011. {``{A meta-analysis examining the
+impact of computer-assisted instruction on postsecondary statistics
+education: 40 years of research}.''} \emph{Journal of Research on
+Technology in Education} 43 (3): 253--78.
+\url{https://doi.org/10.1080/15391523.2011.10782572}.
+
+\leavevmode\hypertarget{ref-Marx2013}{}%
+Marx, Vivien. 2013. {``{The big challenges of big data}.''}
+\emph{Nature} 498 (7453): 255--60.
+\url{https://doi.org/10.1038/498255a}.
 
 \leavevmode\hypertarget{ref-Onwuegbuzie2003}{}%
 Onwuegbuzie, Anthony J., and Vicki A. Wilson. 2003. {``{Statistics

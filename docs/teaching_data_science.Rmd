@@ -2,15 +2,15 @@
 title: 'Teaching Data Science to Students in Biology using R, RStudio and Learnr:
   Analysis of Three years Data'
 output:
-  html_document: 
-    code_folding: hide
-    fig_caption: yes
-  word_document: default
   pdf_document:
     fig_caption: yes
     number_sections: yes
     latex_engine: xelatex
     keep_tex: yes
+  word_document: default
+  html_document: 
+    code_folding: hide
+    fig_caption: yes
 bibliography: bibliography.bib
 ---
 
@@ -402,7 +402,7 @@ summary(anovaComp. <- confint(multcomp::glht(anova.,
 
 - L'examen en fin de période, même s'il reprend des questions liées à de la pratique et de l'utilisation d'outils, ne mène pas à une évaluation formtement corrélée avec l'activité qui nous intéresse le plus, à savoir, la capacité de l'étudiant à analyser des données billogiques réelles. Cette capacité est parfaitement évaluée dans les projets de niveau 1, et surtout de niveau 2 qui correspondent très précisément à une telle activité. Par conséquent, l'évaluation ne se fait plus via un examen final, mais uniquement via les prestations des étudiants dans les projets, ainsi que (pour une part relativement faible de 15% de la note finale), leur progression dans l'apprentissage de la matière via la réalisation des exercises de niveau 1 et des tutoriels de niveau 2, ceci afin de les encourager à réaliser complètement tous les exercises et à les faire dans l'ordre croissant de difficulté.
 
-- Même au sein d'une cohortez d'étudiants ayant un parcours académique similaire, nous notons de très grosses différences de stratégie dans les activités d'apprentissage. Si plusieurs stratégies différentes sont associées à une acquisirtion bonne à erxcellente des compétences telle qu'attestée par les notes obtenues, plusieurs profils sont systématiquement associés à des performances faibles. Les profils ainsi établis via cartes auto-adaptatives permettront à l'avenir de détecter plus tôt les étudiants à suivre plus particulièrement et à réfléchir à des approiches alternatives pour eux afin de les aider (pédagogie inclusive).
+- Même au sein d'une cohorte d'étudiants ayant un parcours académique similaire, nous notons de très grosses différences de stratégie dans les activités d'apprentissage. Si plusieurs stratégies différentes sont associées à une acquisition bonne à erxcellente des compétences telle qu'attestée par les notes obtenues, plusieurs profils sont systématiquement associés à des performances faibles. Les profils ainsi établis via cartes auto-adaptatives permettront à l'avenir de détecter plus tôt les étudiants à suivre plus particulièrement et à réfléchir à des approches alternatives pour eux afin de les aider (pédagogie inclusive).
 
 - Les études portant sur le changements d'attitudes au sein de semestre ne montre pas différence significative. La comparaison entre les 3 cours met en avant qu'il faut plusieurs cours en continu afin d'observer une changement de la charge cognitive des étudiants.
 
