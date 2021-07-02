@@ -18,6 +18,8 @@ bibliography: bibliography.bib
 knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
 SciViews::R
 
+source("../R/functions.R")
+
 # datasets
 users18 <- read(pcloud("sdd_2018-2019/data/users.csv")) 
 users19 <- read(pcloud("sdd_2019-2020/data/users.csv")) 
@@ -46,35 +48,6 @@ support <- read(pcloud("sdd_2020-2021/data/support.csv"))
 
 lessons19 <- read(pcloud("sdd_2019-2020/data/lessons.csv"))
 lessons <- read(pcloud("sdd_2020-2021/data/lessons.csv"))
-# functions ----
-## RTLX NASA - TLX -------------------------------------------------------------
-learnr_feeling <- function(df, apps, labels) {
-  res <- dplyr::filter(df, app == apps & label == labels)
-  
-  c("(\\d):(Quelle a été l'importance de l'activité mentale et intellectuelle requise)", 
-    "(\\d):(Quelle a été l'importance de l'activité physique requise)",
-    "(\\d):(Quelle a été l'importance de la pression temporelle causée par la rapidité nécessitée pour l'accomplissement de la tâche)",
-    "(\\d):Quelle réussite pensez-vous avoir eu dans l'accomplissement de la tâche",
-    "(\\d):Quel degré d'effort avez-vous dû fournir pour exécuter la tâche demandée",
-    "(\\d):Pendant l'exécution du travail vous êtes-vous senti découragé"
-    ) %>.%
-  purrr::map_dfc(., function(str, pattern) {stringr::str_match(str, pattern = pattern)[,2]}, str = res$value) -> vec
-  
-  names(vec) <- c("mental", "physical", "time_pressure", "performance", "effort", "frustration")
-  
-  vec %>.%
-    map_dfc(.,as.numeric) -> vec1
-  
-  vec1$app <- apps
-  vec1$label <- labels
-  vec1$user <- res$user
-  return(vec1)
-}
-
-
-n_fun <- function(x){
-  return(data.frame(y = max(x) * 1.1, label = paste0("n = ",length(x))))
-}
 ```
 
 # Abstract 
@@ -256,95 +229,57 @@ Les groupes réalisés créent des profils d'apprenants ayant des stratégies tr
 
 Due to Covid-19 lockdown periods, distance learning had to be adopted abruptly. We analyze the activity and support data collected during academic years 2019-2020 and 2020-2021 to assess the impact of this transition on the progression of the students.
 
-```{r, fig.cap= "cumulative sums of commit and message over time in first term of 2019-2020. The period of each module per course is represented by area."}
-lessons19 %>.%
-  filter(., !topic %in% c("extra_session", "debriefing_S-BIOG-006", "debriefing_S-BIOG-015")) %>.%
-  filter(., icourse %in% c("S-BIOG-027", "S-BIOG-061")) %>.%
-  group_by(., course, module) %>.%
-  summarise(., start = min(start), end = max(end)) -> lessons_red19
+```{r}
+time_interval <- interval(as.time("2020/02/01"), as.time("2021/01/15"))
 
-log19 %>.%
+bind_rows(log19, log) %>.%
   distinct(., commit, .keep_all = TRUE) %>.%
   filter(., is.na(from)) %>.%
-  mutate(., date_round = lubridate::round_date(date, "day")) %>.%
-  group_by(., date_round) %>.%
-  count(.) %>.%
-  ungroup(.) %>.%
-  mutate(., cumul_commit = cumsum(n)) %>.%
-  filter(., date_round >= courses19$start[courses19$icourse == "S-BIOG-027"] & date_round <= courses19$end[courses19$icourse == "S-BIOG-027"])-> log_temp19
+  filter(., date %within% time_interval) %>.%
+  mutate(., week = acad_w(date, label = TRUE), period = acad_2w(date, label = TRUE)) -> git_red
 
-support19 %>.%
-  mutate(., date_round = lubridate::round_date(date, "day")) %>.%
-  group_by(., date_round) %>.%
-  count(.) %>.%
-  ungroup(.) %>.%
-  mutate(., cumul_message = cumsum(n))  %>.%
-  filter(., date_round >= courses19$start[courses19$icourse == "S-BIOG-027"] & date_round <= courses19$end[courses19$icourse == "S-BIOG-027"]) -> sup_temp19
+bind_rows(support19, support) %>.%
+  filter(., date %within% time_interval) %>.%
+  mutate(., week = acad_w(date, label = TRUE), period = acad_2w(date, label = TRUE)) %>.%
+  mutate(., sender = c("student", "teacher")[
+    (user %in% c("@display", "@teacher", "id2", "id3", "id6", "id78") |
+    (user == "id121" & course != "S-BIOG-025")) + 1]) %>.%
+  drop_na(., sender) %>.%
+  mutate(., sender = as.factor(sender)) -> sup
 
-plog19 <- ggplot() +
-  geom_rect(data = lessons_red19, aes(xmin = start, xmax = end , ymin = -Inf,  ymax = Inf, fill = course), alpha = 0.2) +
-  geom_line(data = log_temp19, aes(y = cumul_commit, x = date_round)) +
-  geom_vline(xintercept = as.POSIXct("2020-03-15"), color = "red") +
-  theme_sciviews() +
-  labs(x = "Date", y = "cumulative sum of \n commits")
+git_red$period <- as.factor(git_red$period)
+sup$period <- factor(sup$period, levels = levels(git_red$period))
 
-psup19 <- ggplot() +
-  geom_rect(data = lessons_red19, aes(xmin = start, xmax = end , ymin = -Inf,  ymax = Inf, fill = course), alpha = 0.2) +
-  geom_line(data = sup_temp19, aes(y = cumul_message, x = date_round)) +
-  geom_vline(xintercept = as.POSIXct("2020-03-15"), color = "red") +
-  theme_sciviews() +
-  labs(x = "Date", y = "cumulative sum of  \n messages")
+git_red %>.%
+  group_by(., period, user) %>.%
+  summarise(., count = n()) %>.%
+  chart(., count ~ period) +
+  geom_boxplot() +
+  labs(y = "Number of \n commits", x = "Period") +
+  theme(axis.text.x = element_text(angle = 90)) +
+  scale_x_discrete("period", drop=FALSE) -> pcommit
 
-combine_charts(list(plog19, psup19), nrow = 2, common.legend = TRUE)
+
+sup %>.%
+  filter(., course != "S-BIOG-025") %>.%
+  filter(., sender != "teacher") %>.%
+  group_by(., period, user) %>.%
+  summarise(., count = n()) %>.%
+  chart(., count ~ period ) +
+  geom_boxplot() +
+  labs(y = "Number of \n messages", x = "Period") +
+  theme(axis.text.x = element_text(angle = 90)) +
+  scale_x_discrete("period", drop=FALSE) ->psup
+
+combine_charts(list(pcommit, psup), nrow = 2, common.legend = TRUE)
 ```
 
-During the first lockdown, support rapidly switched to the proposed channels, by email and via Discord. However, we observe a clear halt in the work of the students before the start of the lockdown. After a period of ten days, students started to work and interact with teachers again. After the last hours of class, students continued to work and interact with the teachers. 
+The academic year is divided into work periods of approximately 2 weeks. The courses of the second term of the year 2019-2020 start in period Y1P09 and the courses of the first term of the year 2020-2020 start in period Y2P01. The first lockdown started in period Y1P11 and the second in Y2P03. During the first lockdown, support rapidly switched to the proposed channels, by email and via Discord.
 
-```{r, fig.cap= "cumulative sums of commit and message over time in first term of 2020-2021. The period of each module per course is represented by area."}
-lessons %>.%
-  filter(., !topic %in% c("extra_session", "debriefing_S-BIOG-006", "debriefing_S-BIOG-015")) %>.%
-  filter(., icourse %in% c("S-BIOG-006", "S-BIOG-015", "S-BIOG-025")) %>.%
-  group_by(., course, module) %>.%
-  summarise(., start = min(start), end = max(end)) -> lessons_red
+In 2019-2020, a drop in the number of commits is observed in Y1P11 which corresponds to the beginning of the first lockdown. After one period of transition, students start again to work and interact with teachers. The last hours of lessons are given in period Y1P13. The higher number of commits in Y1P16 and Y1P17 corresponds to the third term.
 
-log %>.%
-  distinct(., commit, .keep_all = TRUE) %>.%
-  filter(., is.na(from)) %>.%
-  mutate(., date_round = lubridate::round_date(date, "day")) %>.%
-  group_by(., date_round) %>.%
-  count(.) %>.%
-  ungroup(.) %>.%
-  mutate(., cumul_commit = cumsum(n))%>.%
-  filter(., date_round >= courses$start[courses$icourse == "S-BIOG-006"] & date_round <= courses$end[courses$icourse == "S-BIOG-006"])-> log_temp
+In 2020-2021, the number of commits gradually increases from Y2P01 to Y2P03 and stabilises until Y2P08. The number of messages increases from the beginning of the second containment (Y2P03). There is no lag period. The number of commits remains constant. The students no longer needed an adaptation period. 
 
-support %>.%
-  mutate(., date_round = lubridate::round_date(date, "day")) %>.%
-  group_by(., date_round) %>.%
-  count(.) %>.%
-  ungroup(.) %>.%
-  mutate(., cumul_message = cumsum(n))  %>.%
-  filter(., date_round >= courses$start[courses$icourse == "S-BIOG-006"] & date_round <= courses$end[courses$icourse == "S-BIOG-006"]) -> sup_temp
-
-plog <- ggplot() +
-  geom_rect(data = lessons_red, aes(xmin = start, xmax = end , ymin = -Inf,  ymax = Inf, fill = course), alpha = 0.2) +
-  geom_line(data = log_temp, aes(y = cumul_commit, x = date_round)) +
-  geom_vline(xintercept = as.POSIXct("2020-10-21"), color = "red") +
-  theme_sciviews() +
-  labs(x = "Date", y = "cumulative sum of \n commits")
-
-psup <- ggplot() +
-  geom_rect(data = lessons_red, aes(xmin = start, xmax = end , ymin = -Inf,  ymax = Inf, fill = course), alpha = 0.2) +
-  geom_line(data = sup_temp, aes(y = cumul_message, x = date_round)) +
-  geom_vline(xintercept = as.POSIXct("2020-10-21"), color = "red") +
-  theme_sciviews() +
-  labs(x = "Date", y = "cumulative sum of  \n messages")
-
-combine_charts(list(plog, psup), nrow = 2, common.legend = TRUE)
-```
-
-During the second lockdown, the students' work remained constant (graph A) and the remote communication tools were logically more used (graph B). The students did not need a new adaptation phase as observed during the first lockdown. 
-
-[TODO : Change time by quarter with phg function]
 
 ## Learnr tutorials perceived cognitive workload
 
