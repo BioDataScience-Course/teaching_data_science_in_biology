@@ -77,6 +77,14 @@ As our course were completely reworked, we also decided to use flipped classroom
 
 [TODO: present here the 3-4 research questions that will be elaborated in the manuscript.]
 
+- examen final versus évaluation de projet
+
+- profils d'étudiants.
+
+- timing et support présentiel - distanciel.
+
+- charge cognitive learnr
+
 
 # Methods
 
@@ -110,33 +118,39 @@ The NASA-LTX questionnaire is composed of six questions on a Likert scale to qua
 
 # Results
 
-Liste des idées développées dans cette section :
+In all our three courses in biological data science, practice is the most important activity. Our goal is to ensure that our students are able to analyse all kind of real datasets, using the right techniques and with a critical mind. They also learn how to write these analyses by using R and R Markdown to create reproducible reports managed under version control (git). There are several critical stages:
 
-- exam versus project 2018 et 2019 => elimination de l'examen
-- profiles analyse SOM => sous-groupes + analyse des groupes y compris comparaison avec les grades
-- temporel présentiel -> distanciel
-- learnrs (+ perception) -> apprentissage sur le très long terme (> 1 ou deux quadris)
+- Once they have learnt the principles in the book and auto-evaluated their comprehension of the concepts using H5P exercises (level 1 difficulty), they have to get used to the software environment. Learnr tutorials (level 2) are used to gently introduce them to the R code required for the analyses by guiding them through their first data analysis. These tutorials are thus the entry point for the practice. We assess here the perceived workload of these tutorials to make sure they engage the students without exhausting them.
 
-[Next paragraph to be translated and reworked]
+- Projects, but individual (level 3) and in group of 2 to 4 students (level 4) represent the core activity. Evaluation of these projects constitute, thus, the core information to assess the competences of our students. However, an exam at the end of the course is a common practice. So, we compare grading our students obtain from such an exam with score they obtain directly in their projects. The final exam is written in learnr, and it mixes questions about the theory with partly solved data analyses they have to explain, criticize and continue during the exam session.
 
-Our in-service training includes 26 complementary modules over 3 years and 3 consecutive courses from bab2 to MA1. The number of exercises per type is shown in Table XXX. The goal and the difficulty levels of the exercises are presented in table xxx. The completion of each exercise is recorded in a database which allows an objective grade to be constructed for each student. 
+- Despite we have relatively homogeneous classes of students with similarly (low) level of knowledge for statistics and computing at the beginning, the flipped class approach and the proactive attitude they have to develop (they must formulate their questions whenever they face a problem), we observe they develop very different strategies. Not all students ask questions. Some of them try to find solutions on their own. Some other prefer to ask their questions in private, while others have no problems to expose their difficulties on a public forum (a Discord channel for the course). The way and the timing they progress in the exercises also largely varies. The schedule is not tight and only suggest the rhythm of progression. No student is penalized if the exercises are done later, as soon as they are completed before the final deadline. Some strategies are more efficient than others. We analyse traces from the student activities to separate the different profile and we correlated them with the grade they obtain at the end of the course.
 
+- Finally, lockdown was imposed relatively abruptly and may interfere with the learning strategies they have developed. We analyse whether the switch to face-to-face activities to distance teaching and back has an impact on their productivity.
+
+This study is performed all along the three courses that comprise 26 modules in total in 2020-2021. Table XXX summarizes the number of H5P, learnr, individual and group GitHub projects that students have to complete. It should be noted that for course C, we also introduced a challenge in machine learning that replaced one group GitHub project.
 
 ```{r}
-# Tab of number of users and number of exercices by type ----------------------
+# Table of number of users and number of exercises by type ----------------------
 # users
 users %>.%
-  filter(., institution == "UMONS" & term == "Q1" & state == "regular") %>.%
+  filter(., institution == "UMONS" & term == "Q1" &
+    state %in% c("regular", "repeater", "bridge", "mobility")) %>.%
   group_by(., course) %>.%
   summarise(., user = n()) %>.%
   ungroup(.) %>.%
-  filter(., course != "D")-> us_tab
+  filter(., course != "D") -> us_tab
+# A few students are in both course A and B simultaneously
+ab <- us_tab$user[us_tab$course == "A,B"]
+us_tab$user[us_tab$course %in% c("A", "B")] <- us_tab$user[us_tab$course %in% c("A", "B")] + ab
+us_tab <- filter(us_tab, course != "A,B")
 
 # learnr
 learnr %>.% 
-  filter(., !app %in% c("A06Lb_recombinaison", "A99La_avis", "B00La_rappel", "B99La_avis","C99La_avis") & !is.na(label)) %>.%
-  mutate(., course = substr(app,1,1),
-    app_label = paste0(app, label)) %>.%
+  filter(.,
+    !app %in% c("A06Lb_recombinaison", "A99La_avis", "B00La_rappel", "B99La_avis","C99La_avis") &
+    !is.na(label)) %>.%
+  mutate(., course = substr(app, 1, 1), app_label = paste0(app, label)) %>.%
   filter(., course %in% c("A", "B", "C")) %>.%
   group_by(., course) %>.%
   summarise(., app = length(unique(app)), questions = length(unique(app_label))) -> learnr_tab 
@@ -148,15 +162,12 @@ projects %>.%
   count(.) %>.%
   pivot_wider(., names_from = "type", values_from = "n") %>.%
   ungroup(.) %>.%
-  select(., course, `ind. github`, `group github`)-> projects_tab
+  select(., course, `ind. github`, `group github`) -> projects_tab
     
-# tab number of exercices by type ---
+# table of the number of exercises by type ---
 assessments %>.%
   filter(., type == "h5p") %>.%
-  mutate(., 
-    app_type = paste0(app, "_" ,'type'),
-    course = substr(app, start = 1, stop = 1),
-    ) %>.%
+  mutate(.,  app_type = paste0(app, "_" ,'type'), course = substring(app, 1, 1)) %>.%
   group_by(., course) %>.%
   summarise(., h5p = length(unique(app_type))) -> h5P_tab
 
@@ -165,157 +176,44 @@ us_tab %>.%
   left_join(., h5P_tab) %>.%
   left_join(., mutate(learnr_tab, learnr = paste0(app, " (", questions, ")"), .keep = "unused")) %>.%
   left_join(., projects_tab) %>.%
-  knitr::kable(., caption = "Number of users, modules, exercises with h5p, learnr tutorial,individual project and group project by course. The number of quesion by learnr tutorial are in the parentheses.")
+  transmute(., Course = course, Students = user, Modules = module, H5P = h5p, Learnr = learnr,
+    `Indiv. projects` = `ind. github`, `Group projects` = `group github`) %>.%
+  knitr::kable(., caption = "Number of students, modules, and exercises for each course. For the learnr tutorials, the first number is the amount of tutorial documents and the second number in parentheses is the total number of questions in these tutorials.")
 ```
 
-## Exams versus project
+## Perceived cognitive workload in learnr tutorials
 
-```{r}
-assessments18 %>.%
-  #select(., -coral_growth, result = biometry) %>.%
-  mutate(., result = (biometry+coral_growth)/2, acad_year = "2018-2019") -> assess_result18
-  
-q1_18_regular <- left_join(rename(assess_result18, icourse = course), courses18) %>.%
-  filter(., user %in% users18$user[users18$institution == "UMONS" & users18$term == "Q1" & users18$state == "regular"])
+In our courses, learnr tutorials play an essential role in the progressive acquisition of competences because they are at the transition between the theory (online book chapters) and the practice (projects where student analyse real biological data by themselves). Our goal is to prepare our students optimally for the practice of data science. In the other hand, we don't want to exhaust their mental energy in these tutorials before they start their projects. The efficiency of these tutorials is qualitatively determined by observing the behaviour of the students when they start their practical work.
 
-assessments19 %>.%
-  group_by(., course, evaluation, github_project, project, user) %>.%
-  summarise(., result = round(sum(score*weight),4)) %>.%
-  filter(., evaluation == "Q1") %>.%
-  left_join(exam19, .) %>.%
-  replace_na(., list(result = 0)) %>.%
-  mutate(., acad_year = "2019-2020")-> assess_result19
+A few tutorials were elaborated during the academic year 2018-2019, and positive feedback on their utility (both by direct observation of the pupils, and by their remarks) led us to systematize them into what we now call level 2 activities (see Table XX) in the form of learnr documents in 2019-2020. The tutorials were further refined in 2020-2021: we added contextual hints thanks to the gradethis R package. When students submit their answer to the exercises, the R code is analysed and the results are compared with the solution. In case of differences, heuristics are used to provide contextual hints. Students can then refine their solution and resubmit it. This appears very efficient in self-teaching and self-evaluation of their competences before switching to the practice. However, the cognitive load required to perform these exercises has, as far as we know, not been studied yet. We used a NASA LTX questionnaire to assess it across all three courses. Participation was 48/59 (81%), 35/45 (78%) and 18/26 (69%) for courses A, B, and C respectively.
 
-q1_19_regular <- left_join(rename(assess_result19, icourse = course), courses19) %>.%
-  filter(., user %in% users19$user[users19$institution == "UMONS" & users19$term == "Q1" & users19$state == "regular"])
+```{r rtlx, fig.cap="Perceived workload for the learnr tutorials in the three courses. The black circle is the mean RTLX value. The number above each box is the number of respondants."}
 
-q1 <- bind_rows(
-  select(q1_18_regular, user, acad_year, course, result, exam),
-  select(q1_19_regular, user, acad_year, course, result, exam)
-  )
-#table(q1$link) /nrow(q1)
-```
-
-
-Until the first four months of the 2019-2020 academic year, students' grades were based on the completion of a project and a more conventional examination during the examination period. The projects are assessed using a grading grid since the 2019-2020 academic year.
-
-```{r}
-q1 %>.%
-  mutate(., course_year = paste0(course, " (",acad_year,")")) %>.%
-  chart(., exam ~ result | course_year) +
-  geom_vline(xintercept = 5, alpha = 0.2) +
-  geom_hline(yintercept = 5, alpha = 0.2) +
-  geom_jitter(alpha = 1, width = 0.05, height = 0.05, show.legend = FALSE) +
-  ylim(c(0,10)) +
-  xlim(c(0,10)) +
-  labs(y = "Exam grade", x = "Project grade")
-```
-
-The comparison of the marks obtained between the project and the exam mark shows a strong disparity between these two types of evaluation. 
-
-The 2018-2019 year is the first year of transition to data science courses. Only one student failed the project, while almost one third of the students failed their exams. The level of requirements is being raised for the 2019-2020 academic year. The new expectations and the introduction of evaluation grids to assess projects show a greater disparity in students' grades.
-
-Despite an examination that includes theoretical and practical questions, this type of assessment does not assess a student's ability to correctly process and analyse biological data.
-
-Following these results and the monitoring of more precise exercises, the examination is definitively abandoned for the 2020-2021 academic year to be replaced by a continuous assessment.
-
-## Students' profiles
-
-[TODO : Add SOM analyses, This analysis is stand by as we validate the metrics]
-
-Les groupes réalisés créent des profils d'apprenants ayant des stratégies très différentes. Puisque certains profils sont plutôt associées aux notes plus faible, ces groupes devront faire l'objet d'une attention particulière et peut-être aussi d'une adaptation du matéirel ou de l'approche pédagogique vers un apprentissage plus inclusif.
-
-## Transition between face-to-face and distance learning
-
-Due to Covid-19 lockdown periods, distance learning had to be adopted abruptly. We analyze the activity and support data collected during academic years 2019-2020 and 2020-2021 to assess the impact of this transition on the progression of the students.
-
-```{r}
-time_interval <- interval(as.time("2020/02/01"), as.time("2021/01/15"))
-
-bind_rows(log19, log) %>.%
-  distinct(., commit, .keep_all = TRUE) %>.%
-  filter(., is.na(from)) %>.%
-  filter(., date %within% time_interval) %>.%
-  mutate(., week = acad_w(date, label = TRUE), period = acad_2w(date, label = TRUE)) -> git_red
-
-bind_rows(support19, support) %>.%
-  filter(., date %within% time_interval) %>.%
-  mutate(., week = acad_w(date, label = TRUE), period = acad_2w(date, label = TRUE)) %>.%
-  mutate(., sender = c("student", "teacher")[
-    (user %in% c("@display", "@teacher", "id2", "id3", "id6", "id78") |
-    (user == "id121" & course != "S-BIOG-025")) + 1]) %>.%
-  drop_na(., sender) %>.%
-  mutate(., sender = as.factor(sender)) -> sup
-
-git_red$period <- as.factor(git_red$period)
-sup$period <- factor(sup$period, levels = levels(git_red$period))
-
-git_red %>.%
-  group_by(., period, user) %>.%
-  summarise(., count = n()) %>.%
-  chart(., count ~ period) +
-  geom_boxplot() +
-  labs(y = "Number of \n commits", x = "Period") +
-  theme(axis.text.x = element_text(angle = 90)) +
-  scale_x_discrete("period", drop=FALSE) -> pcommit
-
-
-sup %>.%
-  filter(., course != "S-BIOG-025") %>.%
-  filter(., sender != "teacher") %>.%
-  group_by(., period, user) %>.%
-  summarise(., count = n()) %>.%
-  chart(., count ~ period ) +
-  geom_boxplot() +
-  labs(y = "Number of \n messages", x = "Period") +
-  theme(axis.text.x = element_text(angle = 90)) +
-  scale_x_discrete("period", drop=FALSE) ->psup
-
-combine_charts(list(pcommit, psup), nrow = 2, common.legend = TRUE)
-```
-
-The academic year is divided into work periods of approximately 2 weeks. The courses of the second term of the year 2019-2020 start in period Y1P09 and the courses of the first term of the year 2020-2020 start in period Y2P01. The first lockdown started in period Y1P11 and the second in Y2P03. During the first lockdown, support rapidly switched to the proposed channels, by email and via Discord.
-
-In 2019-2020, a drop in the number of commits is observed in Y1P11 which corresponds to the beginning of the first lockdown. After one period of transition, students start again to work and interact with teachers. The last hours of lessons are given in period Y1P13. The higher number of commits in Y1P16 and Y1P17 corresponds to the third term.
-
-In 2020-2021, the number of commits gradually increases from Y2P01 to Y2P03 and stabilises until Y2P08. The number of messages increases from the beginning of the second containment (Y2P03). There is no lag period. The number of commits remains constant. The students no longer needed an adaptation period. 
-
-
-## Learnr tutorials perceived cognitive workload
-
-The learnr tutorials play an essential role in the progressive acquisition of competences because they are at the transition between the theory (online book chapters) and the practice (projects where student analyze real biological data by themselves). Our goal is to prepare our students optimally for the practice of data science. In the other hand, we don't want to exhaust their mental energy in these tutorials before they start their projects. The efficiency of these tutorials is qualitatively determined by observing the behaviour of the students when they start their practical work. A few tutorials were elaborated during the academic year 2018-2019, and positive feedback on their utility (both by direct observation of the pupils, and by their remarks) led us to systematize them into what we now call level 2 activities (see Table XX) in the form of learnr documents in 2019-2020. The tutorials were further refined in 2020-2021: we added contextual hints thanks to the gradethis R package. When students submit their answer to the exercises, the R code is analyzed and the results are compared with the solution. In case of differences, heuristics are used to provide contextual hints. Students can then refine their solution and resubmit it. This appears very efficient in self-teaching and self-evaluation of their competences before switching to the practice. However, the cognitive load required to perform these exercises has, as far as we know, not been studied yet. We used a NASA LTX questionnaire to assess it across all three courses [indicate here the level of participation of the students for each course].
-
-```{r}
 c("A99Wa_perception", "B99Wa_perception", "C99Wb_perception:perception") %>%
   purrr::map_dfr(learnr_feeling, df = wo, label = "Q4") %>.%
-  mutate(., course = substr(app, start = 1, stop = 1)) -> learnr_workload
-
-learnr_workload %>.%
+  mutate(., course = substr(app, start = 1, stop = 1))  %>.%
   pivot_longer(.,cols = c(mental, physical, time_pressure, performance, effort, frustration),
   names_to = "category", values_to = "grade")  %>.%
-  left_join(., dplyr::distinct(courses, course,name), by = "course")-> workload
-
-workload %>.%
+  left_join(., dplyr::distinct(courses, course,name), by = "course") %>.%
   group_by(., user, app, course) %>.%
   #filter(., user != "ECAYEO033") %>.%
   summarise(., rtlx = 10*mean(grade)) -> workload_rtlx
 
 set.seed(222)
 chart(workload_rtlx, rtlx ~ course) +
-  geom_boxplot(fill = "#00BFC4") +
+  geom_boxplot(fill = "lightgray") +
   geom_jitter(alpha = 0.5, width = 0.1) +
   labs(y = "RTLX", x = "Course") +
-  stat_summary(fun.y="mean", color = "red")+
+  stat_summary(fun.y = "mean", color = "black", size = 1) +
   stat_summary(fun.data = n_fun, geom = "text", hjust = 0.5) +
   labs( y = "Raw Task Load indeX (2020-2021)")
 ```
 
-The difficulty of the course, and thus, of the exercises in the tutorials increase from one course to the other. However, we do not observe an increase in the RTLX index. On the contrary, it is significantly lower for course C than for course A (Tukey HSD, p-value = 0.023). The cognitive load perceived by the students diminishes. This may be a consequence of a more fluent R coding and the better mastering of all the software tools the students have to use.
+The difficulty of the course, and thus, of the exercises in the tutorials increase from one course to the other. However, we do not observe an increase in the RTLX index. On the contrary, it is significantly lower for course C than for course A (Tukey HSD, p-value = 0.023) TODO: INCOMPLETE REFERENCE FOR THE TEST (MUST INDICATE ANOVA RESULTS FIRST !). The cognitive load perceived by the students diminishes. This may be a consequence of a more fluent R coding and the better mastering of the software environment.
 
 
 ```{r}
-workload_rtlx %>.%
-  mutate(., course = as.factor(course)) -> workload_rtlx
+workload_rtlx <- mutate(workload_rtlx, course = as.factor(course))
 
 #kruskal.test(data = workload_rtlx, rtlx ~ course)
 #summary(kw_comp. <- nparcomp::nparcomp(data = workload_rtlx, rtlx ~ course))
@@ -329,6 +227,109 @@ anova(anova.)
 summary(anovaComp. <- confint(multcomp::glht(anova.,
   linfct = multcomp::mcp(course = "Tukey"))))
 ```
+
+## Final exam *versus* project
+
+In 2018-2019 and 2019-2020, the evaluation was based on the completion of a project and on a more conventional examination at the end of the term. [describe a little bit the questions in the exams as being focused on the practice].
+
+```{r exams_projects, fig.cap="Grade (/10) obtained at the final exam in function of grade obtained for the projects for courses A and B (two successive years for A)."}
+assessments18 %>.%
+  #select(., -coral_growth, result = biometry) %>.%
+  mutate(., result = (biometry+coral_growth)/2, acad_year = "2018-2019") -> assess_result18
+  
+q1_18_regular <- left_join(rename(assess_result18, icourse = course), courses18) %>.%
+  filter(., user %in% users18$user[users18$institution == "UMONS" & users18$term == "Q1" & users18$state == "regular"])
+
+assessments19 %>.%
+  group_by(., course, evaluation, github_project, project, user) %>.%
+  summarise(., result = round(sum(score*weight),4)) %>.%
+  filter(., evaluation == "Q1") %>.%
+  left_join(exam19, .) %>.%
+  replace_na(., list(result = 0)) %>.%
+  mutate(., acad_year = "2019-2020") -> assess_result19
+
+q1_19_regular <- left_join(rename(assess_result19, icourse = course), courses19) %>.%
+  filter(., user %in% users19$user[users19$institution == "UMONS" & users19$term == "Q1" & users19$state == "regular"])
+
+q1 <- bind_rows(
+  select(q1_18_regular, user, acad_year, course, result, exam),
+  select(q1_19_regular, user, acad_year, course, result, exam)
+  )
+#table(q1$link) /nrow(q1)
+
+q1 %>.%
+  mutate(., course_year = paste0(course, " (",acad_year,")")) %>.%
+  chart(., exam ~ result | course_year) +
+  geom_vline(xintercept = 5, alpha = 0.2) +
+  geom_hline(yintercept = 5, alpha = 0.2) +
+  geom_jitter(alpha = 1, width = 0.05, height = 0.05, show.legend = FALSE) +
+  ylim(c(0,10)) +
+  xlim(c(0,10)) +
+  labs(y = "Exam grade", x = "Project grade")
+```
+
+The comparison of the marks obtained by each student for a project and a final exam shows only a weak correlation between these two types of evaluations. Year 2018-2019 marks the transition to our flipped classroom approach in teaching data science. Only one student failed in the project, while almost one third of the students failed their final exams. In 2019-2020, we raised a little bit the difficulty for the project, resulting in a more widespread distribution of the results, but with a similar pattern showing very little correlation between the two evaluation methods. The same conclusion can be drawn for course B.
+
+Despite a final examination that includes a series of practical questions (writing R code to analyse data, as in the projects), this type of assessment does not reflects the ability of the students to correctly process and analyse biological data. Following these results, the final examination is abandoned for the year 2020-2021, and it is replaced by a continuous evaluation of the students activity across all four level exercises (H5P, learnr, individual and group projects). These activities are analysed in the following section.
+
+## Students profiles
+
+The course material is enriched and organized in the four successive difficulty levels presented in Table XXX. At all levels, the activity of the students in the level 1 (H5P) and 2 (learnr) exercises is recorded in a database. For the projects (levels 3 and 4), it is the git log data that are used. During lockdown periods, exchange with the students and answers to their questions were exclusively done by email, text or voice exchanges on Discord, either on private or public channels. Students were allowed to freely chose their favourite way to interact with the teachers, or with each other. All these exchanges were recorded too. Finally, all activities were used to establish the final grade for the course, with a varying weight (for instance, course A second term, the next weights were applied: 5% for level 1, 10% for level 2, 35% for level 3 and 40% for level 4). On average, each student received more than 130 assessments that accounted for the final grade. Two third of these assessments were set manually by examining their projects and using evaluation grids. The other third are scores automatically calculated on the various exercises.
+
+For the three courses, we recorded a total of more than 450,000 events, which makes on average, almost 3,500 events for each student. The data is summarize into sixteen metrics to quantify different aspects of their learning strategies:
+
+- questions: the number of questions they asked in total, divided by the number of modules in the course,
+- q_mail: the number of emails send, divided by the number of modules,
+- q_pub%: the fraction of questions that were posted into public areas (%),
+- q_prod: the relative "productivity" of their questions as quantified by the number of lines changed in their reports per message sent,
+- h_ok%: the fraction of H5P exercises that were correctly answered,
+- h_trials: the average number of trials for each H5P exercise (students can retry as often as they want),
+- l_ok%: the fraction of learnr exercises that were completed with a correct answer,
+- l_trials: the average number of trials for each learnr exercise,
+- l_hints: in learnr exercises, students can display hints to help them to solve the problems (but they lose 10% of the score of the exercise for each hint). This is the average number of hints per exercise that were displayed,
+- i_commits: the number of commits in individual projects divided by the number of individual projects,
+- i_changes: the number of lines added or deleted in the reports of individuals projects, divided by the number of individual projects,
+- g_commits: same as i_commits, but for group projects,
+- g_changes: same as i_changes, but for group projects
+- g_contrib%: contribution of the student to the total work in group projects (in % of all line changes done),
+- done%: the fraction of all exercises done by the student,
+- intime%: the fraction of the completed exercises that were done in time in % (respect of the proposed schedule).
+
+[supplementary data: distribution of the metrics and correlation between them]
+
+A Kohonen's self-organizing map was used to create student profiles according to their activity, see Fig. XXX. A 3x3 hexagonal cells pattern was chosen, and students are thus classified into nine different groups.
+
+```{r som, fig.cap="Self-organizing map of the student activities across the three courses in 2020-2021."}
+knitr::include_graphics("figures/som.png", dpi = 300)
+```
+
+The small plots in gray scales show how metrics distribute in the nine cells, from lowest value in white to highest value in black. They allow to understand the way students behave according to their profile. Dots in the central plot are the various students, with colour representing the course (red = An, purple = B, blue = C) and the diameter of the dots representing the grade the students obtained at the end of the course.
+
+- Cell 3 contains students that completed a very small number of exercises (D), all the other students have completed most if not all exercises. These students obtained very low grades, of course. They belong to courses A and B.
+
+- At the opposite, cell 4 contains a large majority of the students of all three courses. These students have done a good portion of their exercises in time (A), have participated actively in public discussions (E) and have contributed on an average way to projects (H, and I). This is the most common pattern, which leads to success (good to excellent grades)
+
+- Cell 1 contrasts with cell 4 because exercises are completed almost always in time (A), the number of trials per learnr exercise if the highest (B, also for H5P exercises, not shown), but the participation to public discussions (E), and even the total number of questions (G) are lower than for cell 4. These students belong almost all to course A. Their pattern corresponds to more "scholar" students that try to solve the exercises by testing (sometimes randomly) various possible answers. They think less and try less to understand what they do. They follow instructions more closely, and consequently, they finish the exercises on time more often that all the others. Although being successful, we try to avoid this pattern since we want them to think about what they do, and to ask questions when they are stuck. It seems they change their behaviour for courses B and C towards cell 4.
+
+- Cell 7 contains a few students that obtained excellent grades, mostly from course C. These students are very active in public discussions (E) and they ask a lot of questions (G). They contribute also a lot to project reports (I). They also show among the lowest trial per learnr exercise (B) and they never used the hints (C). This pattern is typical for students that are very fluent with R code, that understand and apply heavily the concepts, and are curious about everything in the course. This is the typical positive behaviour we would like to observe as much as possible. Note the dynamic from course to course from cell 1 ("scholar" students), to cell 4 ("typical" behaviour), and cell 7 ("active and efficient" students).
+
+- Cells 5 and 8 are mainly characterized by an usually large contribution to group projects (I). We noted this pattern is mostly due to a compensatory behaviour: their colleagues do not make their part of the job, and they take thus a larger part. This denotes groups that do not work well together. Cell 5 correspond to students that are more active on public channels than for cell 8 (E), but for the rest, they exhibit an average pattern.
+
+- Cells 6 and 9 presents students that seems to have more difficulties to communicate with the teachers: the number of questions is low (G), and never or rarely through public channels (E). Cell 6 contains students trhat mainly rely to email for their echanges, with a mild activity in the projects (H, I), but done mainly later (A). Students in cell 9 on the other hand, do not communicate at all (E, F, G). Consequen tly, their production appears artificially high per message (J), but it is poor on average (H & I). These student have a large range of grades: some of them seem to work well in autonomy, while others obtain less good results. Anyway, there are certainly communication problems in distance learning with these students.
+
+- Finally, cell 2 contain students that manifest difficulties in a totally different way: level 2 exercises (learnrs, B & C) already represent a larger difficulty: the number of trials per exercises is high (B), but not as high as those in cell 1 because they are more rapidly discouradged and they rely the most to the hints (C). They do not ask many questions (E, F, G) and contribute midly to projects (H), although a little bit more to group projects (I). They are amongst the latests students to complete the exercises (A).
+
+To summarize, we observe a clear change in the habits from one course to the other from cell 1 to 4 to 7. The other cell emphasize different problems. Cells 5 and 8 correspond to students that have to contribute unusually highly to group projects. Cells 6 and 9 contain students that have difficulties to communicate, and do so quasi exclusively by email (6) or not at all (9). Cell 2 contains students that already have more difficulties than the orthers at the level 2 of difficulty (learnrs) and that are discouradged faster (and look at the hints instead of trying harder to figure out the answer by themselves). finally, cell 3 contain students that fail and do not complete the exercises. 
+
+## Transition between face-to-face and distance learning
+
+Due to Covid-19 lockdown periods, distance learning had to be adopted abruptly. We analyse the activity and support data collected during academic years 2019-2020 and 2020-2021 to assess the impact of this transition on the progression of the students. The academic year is divided into work periods of approximately 2 weeks. The courses of the second term of the year 2019-2020 start in period Y1P09 and the courses of the first term of the year 2020-2020 start in period Y2P01. The first lockdown started in period Y1P11 and the second in Y2P03. During the first lockdown, support rapidly switched to the proposed channels, by email and via Discord.
+
+```{r timing, fig.cap="Support productivity as the number of lines added in the project reports divided by the number of message sent via Discord of by email (log scale). The total number of students that sent one or more messages during each period is indicated on top of the boxplots."}
+knitr::include_graphics("figures/add_per_message.png", dpi = 300)
+```
+
+The activity in the reports remains relatively proportional to the number of questions the students sent by email or Discord messages, no matter the period and the intensity of the work as indicated by the number of modules to be completed during the period, all three courses pooled together. Only the number of students that ask questions by there channels change between face-to-face and distance teaching (much less in face-to-face because most of the students ask their questions directly in the classroom). Transition from direct interaction to electronic exchange was quasi immediate during lockdown. Consequently, support provided by the teachers in distance learning ... to be continued.
 
 
 # Discussion
