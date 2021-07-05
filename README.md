@@ -19,3 +19,12 @@ The aim of this project is to answer the following questions :
 - What is the temporal progression of the students in comparison with the proposed calendar, and is it somehow related to the student profile and/or their final grading?
 
 
+## Running the code
+
+We will make the data and the analyses public. Here will be the steps:
+
+- Download the data... (TODO)
+
+- Run the script **R/data_preparation.R**
+
+- Knit the R markdown file **docs/teaching_data_science.R**

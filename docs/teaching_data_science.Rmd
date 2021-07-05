@@ -187,24 +187,28 @@ In our courses, learnr tutorials play an essential role in the progressive acqui
 
 A few tutorials were elaborated during the academic year 2018-2019, and positive feedback on their utility (both by direct observation of the pupils, and by their remarks) led us to systematize them into what we now call level 2 activities (see Table XX) in the form of learnr documents in 2019-2020. The tutorials were further refined in 2020-2021: we added contextual hints thanks to the gradethis R package. When students submit their answer to the exercises, the R code is analysed and the results are compared with the solution. In case of differences, heuristics are used to provide contextual hints. Students can then refine their solution and resubmit it. This appears very efficient in self-teaching and self-evaluation of their competences before switching to the practice. However, the cognitive load required to perform these exercises has, as far as we know, not been studied yet. We used a NASA LTX questionnaire to assess it across all three courses. Participation was 48/59 (81%), 35/45 (78%) and 18/26 (69%) for courses A, B, and C respectively.
 
-```{r rtlx, fig.cap="Perceived workload for the learnr tutorials in the three courses. The black circle is the mean RTLX value. The number above each box is the number of respondants."}
+```{r rtlx, message=FALSE, warning=FALSE, fig.cap="Perceived workload for the learnr tutorials in the three courses. The black circle is the mean RTLX value. The number above each box is the number of respondants."}
 
 c("A99Wa_perception", "B99Wa_perception", "C99Wb_perception:perception") %>%
   purrr::map_dfr(learnr_feeling, df = wo, label = "Q4") %>.%
   mutate(., course = substr(app, start = 1, stop = 1))  %>.%
   pivot_longer(.,cols = c(mental, physical, time_pressure, performance, effort, frustration),
-  names_to = "category", values_to = "grade")  %>.%
+    names_to = "category", values_to = "grade")  %>.%
   left_join(., dplyr::distinct(courses, course,name), by = "course") %>.%
   group_by(., user, app, course) %>.%
   #filter(., user != "ECAYEO033") %>.%
-  summarise(., rtlx = 10*mean(grade)) -> workload_rtlx
+  summarise(., rtlx = 10*mean(grade)) %>.%
+  drop_na(., rtlx) -> workload_rtlx
+
+n_fun <- function(x)
+  data.frame(y = max(x) * 1.1, label = paste0("n = ", length(x)))
 
 set.seed(222)
 chart(workload_rtlx, rtlx ~ course) +
   geom_boxplot(fill = "lightgray") +
   geom_jitter(alpha = 0.5, width = 0.1) +
   labs(y = "RTLX", x = "Course") +
-  stat_summary(fun.y = "mean", color = "black", size = 1) +
+  stat_summary(fun = "mean", color = "black", size = 1) +
   stat_summary(fun.data = n_fun, geom = "text", hjust = 0.5) +
   labs( y = "Raw Task Load indeX (2020-2021)")
 ```
@@ -227,6 +231,7 @@ anova(anova.)
 summary(anovaComp. <- confint(multcomp::glht(anova.,
   linfct = multcomp::mcp(course = "Tukey"))))
 ```
+
 
 ## Final exam *versus* project
 
@@ -272,54 +277,161 @@ The comparison of the marks obtained by each student for a project and a final e
 
 Despite a final examination that includes a series of practical questions (writing R code to analyse data, as in the projects), this type of assessment does not reflects the ability of the students to correctly process and analyse biological data. Following these results, the final examination is abandoned for the year 2020-2021, and it is replaced by a continuous evaluation of the students activity across all four level exercises (H5P, learnr, individual and group projects). These activities are analysed in the following section.
 
+
 ## Students profiles
 
-The course material is enriched and organized in the four successive difficulty levels presented in Table XXX. At all levels, the activity of the students in the level 1 (H5P) and 2 (learnr) exercises is recorded in a database. For the projects (levels 3 and 4), it is the git log data that are used. During lockdown periods, exchange with the students and answers to their questions were exclusively done by email, text or voice exchanges on Discord, either on private or public channels. Students were allowed to freely chose their favourite way to interact with the teachers, or with each other. All these exchanges were recorded too. Finally, all activities were used to establish the final grade for the course, with a varying weight (for instance, course A second term, the next weights were applied: 5% for level 1, 10% for level 2, 35% for level 3 and 40% for level 4). On average, each student received more than 130 assessments that accounted for the final grade. Two third of these assessments were set manually by examining their projects and using evaluation grids. The other third are scores automatically calculated on the various exercises.
+In 2020-2021, the course material is enriched with exercises organized into four increasing difficulty levels, as presented in Table XXX. The activity of the students in the level 1 (H5P) and 2 (learnr) exercises is directly recorded in a database. For the GitHub projects (levels 3 and 4 exercises), it is the git log data that are analyzed. During lockdown periods, exchange with the students and answers to their questions were exclusively done by email, text or voice messages on Discord, either on private or public channels. Students were allowed to freely chose their favourite way to interact with the teachers, and with each other. All these exchanges were recorded too. Finally, traces in all activities were used to establish the final grade for the course. Final grade is the weighted average of the scores obtained at all four levels. The weight was adjusted from course to course according to the importance of the different projects, mainly. To give an idea, for course A second term, level 1 H5P exercises accounted for 5%, 10% for level 2 learnr tutorials, 35% for level 3 individual projects and 40% for level 4 group works. On average, each student received more than 130 assessments that accounted for the final grade. Two third of these assessments were determined manually, using evaluation grids, on their projects. The other third are scores automatically calculated from the various online exercises.
 
-For the three courses, we recorded a total of more than 450,000 events, which makes on average, almost 3,500 events for each student. The data is summarize into sixteen metrics to quantify different aspects of their learning strategies:
+For the three courses, we recorded a total of more than 450,000 events, which makes on average, almost 3,500 events for each student. These data are summarized into sixteen metrics.
 
-- questions: the number of questions they asked in total, divided by the number of modules in the course,
-- q_mail: the number of emails send, divided by the number of modules,
-- q_pub%: the fraction of questions that were posted into public areas (%),
-- q_prod: the relative "productivity" of their questions as quantified by the number of lines changed in their reports per message sent,
-- h_ok%: the fraction of H5P exercises that were correctly answered,
-- h_trials: the average number of trials for each H5P exercise (students can retry as often as they want),
-- l_ok%: the fraction of learnr exercises that were completed with a correct answer,
-- l_trials: the average number of trials for each learnr exercise,
-- l_hints: in learnr exercises, students can display hints to help them to solve the problems (but they lose 10% of the score of the exercise for each hint). This is the average number of hints per exercise that were displayed,
-- i_commits: the number of commits in individual projects divided by the number of individual projects,
-- i_changes: the number of lines added or deleted in the reports of individuals projects, divided by the number of individual projects,
-- g_commits: same as i_commits, but for group projects,
-- g_changes: same as i_changes, but for group projects
-- g_contrib%: contribution of the student to the total work in group projects (in % of all line changes done),
-- done%: the fraction of all exercises done by the student,
-- intime%: the fraction of the completed exercises that were done in time in % (respect of the proposed schedule).
+For H5P exercises:
+- trials/H5P ex.: the average number of trials for each H5P exercise (students can retry as much as they wish),
+- correct H5P ex.: the fraction of H5P exercises that were correctly answered,
 
-[supplementary data: distribution of the metrics and correlation between them]
+For learnr tutorial exercises:
 
-A Kohonen's self-organizing map was used to create student profiles according to their activity, see Fig. XXX. A 3x3 hexagonal cells pattern was chosen, and students are thus classified into nine different groups.
+- trials/learnr ex.: the average number of trials for each learnr exercise (here also, students can retry as much as they want),
+- hints/learnr ex.: in learnr exercises, students can display hints to help them to solve the problems (but they lose 10% of the score of the exercise for each hint). This is the average number of hints per exercise that were displayed,
+- correct learnr ex.: the fraction of learnr exercises that were completed with a correct answer,
+- time/learnr ex.: the average time required to finish one learnr exercise involving R code writing.
+
+For individual and group projects:
+
+- commits / ind. projects: the average number of commits done by a student in one individual project,
+- contributions/ind. projects: the number of lines changed (added or subtracted) in a .Rmd file, an R Markdown report by one student in one individual project, on average,
+- commits / group projects: same as above, but for group projects,
+- contributions/group projects: same as above, but for group projects,
+- percentage of contribution to group projects: the fraction of work the student did, relative to all the work done in group projects (still only counted for .Rmd files).
+
+For support:
+
+- questions/module: the number of questions student asked in total, divided by the number of modules in the course,
+- percent of public question: the fraction of questions that the student posted in a public channel (a channel dedicated to the course that all the student can read),
+- contributions/question: a metric that catches the relative "productivity" of the student related to the number of questions they ask. A high value could mean lot of production and less questions. At the extreme, we catch students that rarely ask questions, evn if their production is low.
+
+Finally, global measurements:
+
+- work done: the fraction of all exercises that the student finished,
+- work done in time: the fraction the the exercises done in the right time, that is, during preparation or classes related to the same module for H5P and learnr, or during classes or the completion period left before the next module starts.
+
+[TODO: supplementary data: distribution of the metrics and correlation between them]
+
+A Kohonen's self-organizing map is used to create student profiles according to their activity, see Fig. XXX. A 3x3 hexagonal cells pattern was chosen, and students are thus classified into nine different groups.
 
 ```{r som, fig.cap="Self-organizing map of the student activities across the three courses in 2020-2021."}
-knitr::include_graphics("figures/som.png", dpi = 300)
+sdd_metrics <- suppressMessages(read("../data/sdd_metrics.csv"))
+metrics_nograde <- select(sdd_metrics, -user, -course, -state, -grade) # Only metrics
+
+# Perform the SOM now
+library(kohonen)
+set.seed(9433)
+metrics_nograde %>.%
+  scale(.) %>.% # Stadardization of the metrics
+  as.matrix(.) %>.% # supersom() needs a matrix
+  supersom(., grid = somgrid(3, 3, topo = "hexagonal"),
+    rlen = 100L, mode = "online") ->
+  sdd_som
+
+#Plot the results
+set.seed(3749)
+# How variables explain the distribution?
+grays <- function(n, ...) {
+  gray.colors(n, start = 1, end = 0, ...)
+}
+vars <- names(metrics_nograde)
+var_names <- c(
+  question     = "questions/module",
+  `q_pub%`     = "% public questions",
+  q_prod       = "contributions/question",
+  `h_ok%`      = "correct H5P ex.",
+  h_trials     = "trials/H5P ex.",
+  `l_ok%`      = "correct learnr ex.",
+  l_trials     = "trials/learnr ex.",
+  l_hints      = "hints/learnr ex.",
+  l_time       = "time/learnr ex.",
+  i_commits    = "commits/ind. project",
+  i_changes    = "contributions/ind. project",
+  g_commits    = "commits/group project",
+  g_changes    = "contributions/group project",
+  `g_contrib%` = "% contribution to group projects",
+  `done%`      = "work done",
+  `intime%`    = "work done in time"
+  )
+
+# First draw the 10 little explanatory plots
+cex_main <- 0.8
+par(mfrow = c(5, 4), mar = rep(0.4, 4))
+iter_letters <- iterators::iter(LETTERS)
+
+for (var in vars[c(7, 8, 6, 15)]) {
+  plot(sdd_som, type = "property",
+    property = sdd_som$codes[[1]][, var],
+    shape = "straight", main = "", palette.name = grays, heatkey = FALSE)
+  title(paste0("\n", iterators::nextElem(iter_letters), ". ", var_names[var]),
+    cex.main = cex_main)
+}
+
+plot.new(); plot.new(); plot.new(); plot.new()
+
+var <- vars[1]
+plot(sdd_som, type = "property",
+  property = sdd_som$codes[[1]][, var],
+  shape = "straight", main = "", palette.name = grays, heatkey = FALSE)
+title(paste0("\n", iterators::nextElem(iter_letters), ". ", var_names[var]),
+  cex.main = cex_main)
+
+plot.new(); plot.new()
+
+var <- vars[13]
+plot(sdd_som, type = "property",
+  property = sdd_som$codes[[1]][, var],
+  shape = "straight", main = "", palette.name = grays, heatkey = FALSE)
+title(paste0("\n", iterators::nextElem(iter_letters), ". ", var_names[var]),
+  cex.main = cex_main)
+
+plot.new(); plot.new(); plot.new(); plot.new()
+
+for (var in vars[c(2, 16, 10, 12)]) {
+  plot(sdd_som, type = "property",
+    property = sdd_som$codes[[1]][, var],
+    shape = "straight", main = "", palette.name = grays, heatkey = FALSE)
+  title(paste0("\n", iterators::nextElem(iter_letters), ". ", var_names[var]),
+    cex.main = cex_main)
+}
+
+# Then, plot the central item
+cols <- scales::alpha(c(A = "red", B = "purple1", C = "blue"), 0.75)
+
+par(mfrow = c(1, 1), new = TRUE)
+font_cex <- 0.7
+plot_som(sdd_som, shape = "straight", col = cols[as.factor(sdd_metrics$course)],
+  pch = 19, cex = (sdd_metrics$grade / 60) + 0.3, main = " ", keepMargins = TRUE,
+  margins = rep(2.7, 4))
+# Add numbers to cells
+text((1:3) + 0.5, 3, 1:3, cex = font_cex)
+text(1:3, 2.15, 4:6, cex = font_cex)
+text((1:3) + 0.5, 1.3, 7:9, cex = font_cex)
+legend(1.5, 3.65, legend = c("A", "B", "C"), col = cols, pch = 19,
+  horiz = TRUE, bty = "n", title = "Course", cex = font_cex)
+
+rm(sdd_metrics, metrics_nograde)
 ```
 
-The small plots in gray scales show how metrics distribute in the nine cells, from lowest value in white to highest value in black. They allow to understand the way students behave according to their profile. Dots in the central plot are the various students, with colour representing the course (red = An, purple = B, blue = C) and the diameter of the dots representing the grade the students obtained at the end of the course.
 
-- Cell 3 contains students that completed a very small number of exercises (D), all the other students have completed most if not all exercises. These students obtained very low grades, of course. They belong to courses A and B.
+In Fig xxx, the small plots in gray scales show how selected metrics distribute in the nine cells, from lowest value in white to highest value in black. They allow to understand the way students behave according to their profile. Metrics that are not represented behave similarly than others (for instance H5P metrics exhibit a similar pattern as learnr traces and therefore, they are not represented). Dots in the central plot are the various students, with colour representing the course and the diameter of the dots representing the grade the students obtained at the end of the course. The following paragraphs details information in that figure. The numbers between brackets mean the cell number in the central plot, and the uppercase letters in brackets refer to the peripheral subplots.
 
-- At the opposite, cell 4 contains a large majority of the students of all three courses. These students have done a good portion of their exercises in time (A), have participated actively in public discussions (E) and have contributed on an average way to projects (H, and I). This is the most common pattern, which leads to success (good to excellent grades)
+Although most students performed all, or almost all exercises (D), cell (3) collects the few student that did only a very small part of the exercises. These students obtained very low grades, of course. They belong to courses A and B. On the other hand, heavy workers are at the bottom (I & J), and good performers in learnrs (C) are in cells (5-9).  
 
-- Cell 1 contrasts with cell 4 because exercises are completed almost always in time (A), the number of trials per learnr exercise if the highest (B, also for H5P exercises, not shown), but the participation to public discussions (E), and even the total number of questions (G) are lower than for cell 4. These students belong almost all to course A. Their pattern corresponds to more "scholar" students that try to solve the exercises by testing (sometimes randomly) various possible answers. They think less and try less to understand what they do. They follow instructions more closely, and consequently, they finish the exercises on time more often that all the others. Although being successful, we try to avoid this pattern since we want them to think about what they do, and to ask questions when they are stuck. It seems they change their behaviour for courses B and C towards cell 4.
+- Besides the totally absent students of cell (3), cells (2 and 6) collect students that also seldom ask questions (E), and that rarely appear on the public channel (E). Minor differences separate them. For instance, cell (2) sometimes use learnr hints (B), while cell (6) never does, also because they find the correct answer to the exercises more often by themselves (C). Asking questions is at the core of our pedagogical approach. So, these students do not play the game. However, they can possibly succeed. Some of them exchange with other students probably through different channels that we do not monitor. It is interesting to note that the cell (2) -more difficulties with learnr tutorials- are mainly students of course A, while cell (6) collects students of courses B and C. There is a clear evolution in their behaviour from one course to the other.
 
-- Cell 7 contains a few students that obtained excellent grades, mostly from course C. These students are very active in public discussions (E) and they ask a lot of questions (G). They contribute also a lot to project reports (I). They also show among the lowest trial per learnr exercise (B) and they never used the hints (C). This pattern is typical for students that are very fluent with R code, that understand and apply heavily the concepts, and are curious about everything in the course. This is the typical positive behaviour we would like to observe as much as possible. Note the dynamic from course to course from cell 1 ("scholar" students), to cell 4 ("typical" behaviour), and cell 7 ("active and efficient" students).
+- Speaking about the students that have hard time to figure out the answer of auto-evaluation exercises, cell (1) reassemble students that most heavily rely on learnr hints (B), and also are among those who need to retry those exercises more often before figuring out the correct answer (A), a characteristic they share with cell (4). These students also ask a lot of questions (E), both on the public and private channels that are available. Main difference between those two groups, is that students in cell (4) try harder to find the answer without looking at the hints, while in cell (1), they give up faster. Also they respect the proposed schedule much more closely (H). We have students in all courses there, but a majority from course A. 
 
-- Cells 5 and 8 are mainly characterized by an usually large contribution to group projects (I). We noted this pattern is mostly due to a compensatory behaviour: their colleagues do not make their part of the job, and they take thus a larger part. This denotes groups that do not work well together. Cell 5 correspond to students that are more active on public channels than for cell 8 (E), but for the rest, they exhibit an average pattern.
+- All these cells (1-4 plus 6) are students that exhibits sub-optimal behaviours. The remaining cells (5 & 7-9) correspond to students that perform very well. Cell (5) has a majority from course A, but otherwise, also from course B and C. These are average actors in all categories, except they are fluent with level 1 (H5P, not shown) and level 2 (learnr, C) exercises.
 
-- Cells 6 and 9 presents students that seems to have more difficulties to communicate with the teachers: the number of questions is low (G), and never or rarely through public channels (E). Cell 6 contains students trhat mainly rely to email for their echanges, with a mild activity in the projects (H, I), but done mainly later (A). Students in cell 9 on the other hand, do not communicate at all (E, F, G). Consequen tly, their production appears artificially high per message (J), but it is poor on average (H & I). These student have a large range of grades: some of them seem to work well in autonomy, while others obtain less good results. Anyway, there are certainly communication problems in distance learning with these students.
+- Moving from cell (5) to (7), (8) and (9), we encounter top performers. The number of students from course A becomes progressively lower, while course B, and especially C dominate. Cell (7) use largely the public channel (G) and respect the schedule quite well (H). Students in cells (8) and (9) less so, but this is because they are heavier workers in the projects, both individuals (I) and in groups (J). In cell (9) we have also the students that contributes the most to he reports in term of lines added or deleted (F).
 
-- Finally, cell 2 contain students that manifest difficulties in a totally different way: level 2 exercises (learnrs, B & C) already represent a larger difficulty: the number of trials per exercises is high (B), but not as high as those in cell 1 because they are more rapidly discouradged and they rely the most to the hints (C). They do not ask many questions (E, F, G) and contribute midly to projects (H), although a little bit more to group projects (I). They are amongst the latests students to complete the exercises (A).
+In overall, at the top, cells (1-4, plus 6) contain students with not optimal behaviour, cell (5) are average students, and cells (7-9) at the bottom exhibit profiles corresponding to best performers. The pattern is also visible between courses A (more at the top or center) to B and C (more represented at the bottom). This suggests that students need time to get used to the course and its pedagogical approach. They also take time to get used to the software environment used and to write commands in the R language.
 
-To summarize, we observe a clear change in the habits from one course to the other from cell 1 to 4 to 7. The other cell emphasize different problems. Cells 5 and 8 correspond to students that have to contribute unusually highly to group projects. Cells 6 and 9 contain students that have difficulties to communicate, and do so quasi exclusively by email (6) or not at all (9). Cell 2 contains students that already have more difficulties than the orthers at the level 2 of difficulty (learnrs) and that are discouradged faster (and look at the hints instead of trying harder to figure out the answer by themselves). finally, cell 3 contain students that fail and do not complete the exercises. 
 
 ## Transition between face-to-face and distance learning
 

@@ -568,176 +568,195 @@ activities are analysed in the following section.
 \hypertarget{students-profiles}{%
 \subsection{Students profiles}\label{students-profiles}}
 
-The course material is enriched and organized in the four successive
-difficulty levels presented in Table XXX. At all levels, the activity of
-the students in the level 1 (H5P) and 2 (learnr) exercises is recorded
-in a database. For the projects (levels 3 and 4), it is the git log data
-that are used. During lockdown periods, exchange with the students and
-answers to their questions were exclusively done by email, text or voice
-exchanges on Discord, either on private or public channels. Students
-were allowed to freely chose their favourite way to interact with the
-teachers, or with each other. All these exchanges were recorded too.
-Finally, all activities were used to establish the final grade for the
-course, with a varying weight (for instance, course A second term, the
-next weights were applied: 5\% for level 1, 10\% for level 2, 35\% for
-level 3 and 40\% for level 4). On average, each student received more
-than 130 assessments that accounted for the final grade. Two third of
-these assessments were set manually by examining their projects and
-using evaluation grids. The other third are scores automatically
-calculated on the various exercises.
+In 2020-2021, the course material is enriched with exercises organized
+into four increasing difficulty levels, as presented in Table XXX. The
+activity of the students in the level 1 (H5P) and 2 (learnr) exercises
+is directly recorded in a database. For the GitHub projects (levels 3
+and 4 exercises), it is the git log data that are analyzed. During
+lockdown periods, exchange with the students and answers to their
+questions were exclusively done by email, text or voice messages on
+Discord, either on private or public channels. Students were allowed to
+freely chose their favourite way to interact with the teachers, and with
+each other. All these exchanges were recorded too. Finally, traces in
+all activities were used to establish the final grade for the course.
+Final grade is the weighted average of the scores obtained at all four
+levels. The weight was adjusted from course to course according to the
+importance of the different projects, mainly. To give an idea, for
+course A second term, level 1 H5P exercises accounted for 5\%, 10\% for
+level 2 learnr tutorials, 35\% for level 3 individual projects and 40\%
+for level 4 group works. On average, each student received more than 130
+assessments that accounted for the final grade. Two third of these
+assessments were determined manually, using evaluation grids, on their
+projects. The other third are scores automatically calculated from the
+various online exercises.
 
 For the three courses, we recorded a total of more than 450,000 events,
-which makes on average, almost 3,500 events for each student. The data
-is summarize into sixteen metrics to quantify different aspects of their
-learning strategies:
+which makes on average, almost 3,500 events for each student. These data
+are summarized into sixteen metrics.
+
+For H5P exercises: - trials/H5P ex.: the average number of trials for
+each H5P exercise (students can retry as much as they wish), - correct
+H5P ex.: the fraction of H5P exercises that were correctly answered,
+
+For learnr tutorial exercises:
 
 \begin{itemize}
 \tightlist
 \item
-  questions: the number of questions they asked in total, divided by the
-  number of modules in the course,
+  trials/learnr ex.: the average number of trials for each learnr
+  exercise (here also, students can retry as much as they want),
 \item
-  q\_mail: the number of emails send, divided by the number of modules,
+  hints/learnr ex.: in learnr exercises, students can display hints to
+  help them to solve the problems (but they lose 10\% of the score of
+  the exercise for each hint). This is the average number of hints per
+  exercise that were displayed,
 \item
-  q\_pub\%: the fraction of questions that were posted into public areas
-  (\%),
+  correct learnr ex.: the fraction of learnr exercises that were
+  completed with a correct answer,
 \item
-  q\_prod: the relative ``productivity'' of their questions as
-  quantified by the number of lines changed in their reports per message
-  sent,
-\item
-  h\_ok\%: the fraction of H5P exercises that were correctly answered,
-\item
-  h\_trials: the average number of trials for each H5P exercise
-  (students can retry as often as they want),
-\item
-  l\_ok\%: the fraction of learnr exercises that were completed with a
-  correct answer,
-\item
-  l\_trials: the average number of trials for each learnr exercise,
-\item
-  l\_hints: in learnr exercises, students can display hints to help them
-  to solve the problems (but they lose 10\% of the score of the exercise
-  for each hint). This is the average number of hints per exercise that
-  were displayed,
-\item
-  i\_commits: the number of commits in individual projects divided by
-  the number of individual projects,
-\item
-  i\_changes: the number of lines added or deleted in the reports of
-  individuals projects, divided by the number of individual projects,
-\item
-  g\_commits: same as i\_commits, but for group projects,
-\item
-  g\_changes: same as i\_changes, but for group projects
-\item
-  g\_contrib\%: contribution of the student to the total work in group
-  projects (in \% of all line changes done),
-\item
-  done\%: the fraction of all exercises done by the student,
-\item
-  intime\%: the fraction of the completed exercises that were done in
-  time in \% (respect of the proposed schedule).
+  time/learnr ex.: the average time required to finish one learnr
+  exercise involving R code writing.
 \end{itemize}
 
-{[}supplementary data: distribution of the metrics and correlation
+For individual and group projects:
+
+\begin{itemize}
+\tightlist
+\item
+  commits / ind. projects: the average number of commits done by a
+  student in one individual project,
+\item
+  contributions/ind. projects: the number of lines changed (added or
+  subtracted) in a .Rmd file, an R Markdown report by one student in one
+  individual project, on average,
+\item
+  commits / group projects: same as above, but for group projects,
+\item
+  contributions/group projects: same as above, but for group projects,
+\item
+  percentage of contribution to group projects: the fraction of work the
+  student did, relative to all the work done in group projects (still
+  only counted for .Rmd files).
+\end{itemize}
+
+For support:
+
+\begin{itemize}
+\tightlist
+\item
+  questions/module: the number of questions student asked in total,
+  divided by the number of modules in the course,
+\item
+  percent of public question: the fraction of questions that the student
+  posted in a public channel (a channel dedicated to the course that all
+  the student can read),
+\item
+  contributions/question: a metric that catches the relative
+  ``productivity'' of the student related to the number of questions
+  they ask. A high value could mean lot of production and less
+  questions. At the extreme, we catch students that rarely ask
+  questions, evn if their production is low.
+\end{itemize}
+
+Finally, global measurements:
+
+\begin{itemize}
+\tightlist
+\item
+  work done: the fraction of all exercises that the student finished,
+\item
+  work done in time: the fraction the the exercises done in the right
+  time, that is, during preparation or classes related to the same
+  module for H5P and learnr, or during classes or the completion period
+  left before the next module starts.
+\end{itemize}
+
+{[}TODO: supplementary data: distribution of the metrics and correlation
 between them{]}
 
-A Kohonen's self-organizing map was used to create student profiles
+A Kohonen's self-organizing map is used to create student profiles
 according to their activity, see Fig. XXX. A 3x3 hexagonal cells pattern
 was chosen, and students are thus classified into nine different groups.
 
 \begin{figure}
-\includegraphics[width=6.06in]{figures/som} \caption{Self-organizing map of the student activities across the three courses in 2020-2021.}\label{fig:som}
+\centering
+\includegraphics{teaching_data_science_files/figure-latex/som-1.pdf}
+\caption{Self-organizing map of the student activities across the three
+courses in 2020-2021.}
 \end{figure}
 
-The small plots in gray scales show how metrics distribute in the nine
-cells, from lowest value in white to highest value in black. They allow
-to understand the way students behave according to their profile. Dots
+In Fig xxx, the small plots in gray scales show how selected metrics
+distribute in the nine cells, from lowest value in white to highest
+value in black. They allow to understand the way students behave
+according to their profile. Metrics that are not represented behave
+similarly than others (for instance H5P metrics exhibit a similar
+pattern as learnr traces and therefore, they are not represented). Dots
 in the central plot are the various students, with colour representing
-the course (red = An, purple = B, blue = C) and the diameter of the dots
-representing the grade the students obtained at the end of the course.
+the course and the diameter of the dots representing the grade the
+students obtained at the end of the course. The following paragraphs
+details information in that figure. The numbers between brackets mean
+the cell number in the central plot, and the uppercase letters in
+brackets refer to the peripheral subplots.
+
+Although most students performed all, or almost all exercises (D), cell
+(3) collects the few student that did only a very small part of the
+exercises. These students obtained very low grades, of course. They
+belong to courses A and B. On the other hand, heavy workers are at the
+bottom (I \& J), and good performers in learnrs (C) are in cells (5-9).
 
 \begin{itemize}
 \item
-  Cell 3 contains students that completed a very small number of
-  exercises (D), all the other students have completed most if not all
-  exercises. These students obtained very low grades, of course. They
-  belong to courses A and B.
+  Besides the totally absent students of cell (3), cells (2 and 6)
+  collect students that also seldom ask questions (E), and that rarely
+  appear on the public channel (E). Minor differences separate them. For
+  instance, cell (2) sometimes use learnr hints (B), while cell (6)
+  never does, also because they find the correct answer to the exercises
+  more often by themselves (C). Asking questions is at the core of our
+  pedagogical approach. So, these students do not play the game.
+  However, they can possibly succeed. Some of them exchange with other
+  students probably through different channels that we do not monitor.
+  It is interesting to note that the cell (2) -more difficulties with
+  learnr tutorials- are mainly students of course A, while cell (6)
+  collects students of courses B and C. There is a clear evolution in
+  their behaviour from one course to the other.
 \item
-  At the opposite, cell 4 contains a large majority of the students of
-  all three courses. These students have done a good portion of their
-  exercises in time (A), have participated actively in public
-  discussions (E) and have contributed on an average way to projects (H,
-  and I). This is the most common pattern, which leads to success (good
-  to excellent grades)
+  Speaking about the students that have hard time to figure out the
+  answer of auto-evaluation exercises, cell (1) reassemble students that
+  most heavily rely on learnr hints (B), and also are among those who
+  need to retry those exercises more often before figuring out the
+  correct answer (A), a characteristic they share with cell (4). These
+  students also ask a lot of questions (E), both on the public and
+  private channels that are available. Main difference between those two
+  groups, is that students in cell (4) try harder to find the answer
+  without looking at the hints, while in cell (1), they give up faster.
+  Also they respect the proposed schedule much more closely (H). We have
+  students in all courses there, but a majority from course A.
 \item
-  Cell 1 contrasts with cell 4 because exercises are completed almost
-  always in time (A), the number of trials per learnr exercise if the
-  highest (B, also for H5P exercises, not shown), but the participation
-  to public discussions (E), and even the total number of questions (G)
-  are lower than for cell 4. These students belong almost all to course
-  A. Their pattern corresponds to more ``scholar'' students that try to
-  solve the exercises by testing (sometimes randomly) various possible
-  answers. They think less and try less to understand what they do. They
-  follow instructions more closely, and consequently, they finish the
-  exercises on time more often that all the others. Although being
-  successful, we try to avoid this pattern since we want them to think
-  about what they do, and to ask questions when they are stuck. It seems
-  they change their behaviour for courses B and C towards cell 4.
+  All these cells (1-4 plus 6) are students that exhibits sub-optimal
+  behaviours. The remaining cells (5 \& 7-9) correspond to students that
+  perform very well. Cell (5) has a majority from course A, but
+  otherwise, also from course B and C. These are average actors in all
+  categories, except they are fluent with level 1 (H5P, not shown) and
+  level 2 (learnr, C) exercises.
 \item
-  Cell 7 contains a few students that obtained excellent grades, mostly
-  from course C. These students are very active in public discussions
-  (E) and they ask a lot of questions (G). They contribute also a lot to
-  project reports (I). They also show among the lowest trial per learnr
-  exercise (B) and they never used the hints (C). This pattern is
-  typical for students that are very fluent with R code, that understand
-  and apply heavily the concepts, and are curious about everything in
-  the course. This is the typical positive behaviour we would like to
-  observe as much as possible. Note the dynamic from course to course
-  from cell 1 (``scholar'' students), to cell 4 (``typical'' behaviour),
-  and cell 7 (``active and efficient'' students).
-\item
-  Cells 5 and 8 are mainly characterized by an usually large
-  contribution to group projects (I). We noted this pattern is mostly
-  due to a compensatory behaviour: their colleagues do not make their
-  part of the job, and they take thus a larger part. This denotes groups
-  that do not work well together. Cell 5 correspond to students that are
-  more active on public channels than for cell 8 (E), but for the rest,
-  they exhibit an average pattern.
-\item
-  Cells 6 and 9 presents students that seems to have more difficulties
-  to communicate with the teachers: the number of questions is low (G),
-  and never or rarely through public channels (E). Cell 6 contains
-  students trhat mainly rely to email for their echanges, with a mild
-  activity in the projects (H, I), but done mainly later (A). Students
-  in cell 9 on the other hand, do not communicate at all (E, F, G).
-  Consequen tly, their production appears artificially high per message
-  (J), but it is poor on average (H \& I). These student have a large
-  range of grades: some of them seem to work well in autonomy, while
-  others obtain less good results. Anyway, there are certainly
-  communication problems in distance learning with these students.
-\item
-  Finally, cell 2 contain students that manifest difficulties in a
-  totally different way: level 2 exercises (learnrs, B \& C) already
-  represent a larger difficulty: the number of trials per exercises is
-  high (B), but not as high as those in cell 1 because they are more
-  rapidly discouradged and they rely the most to the hints (C). They do
-  not ask many questions (E, F, G) and contribute midly to projects (H),
-  although a little bit more to group projects (I). They are amongst the
-  latests students to complete the exercises (A).
+  Moving from cell (5) to (7), (8) and (9), we encounter top performers.
+  The number of students from course A becomes progressively lower,
+  while course B, and especially C dominate. Cell (7) use largely the
+  public channel (G) and respect the schedule quite well (H). Students
+  in cells (8) and (9) less so, but this is because they are heavier
+  workers in the projects, both individuals (I) and in groups (J). In
+  cell (9) we have also the students that contributes the most to he
+  reports in term of lines added or deleted (F).
 \end{itemize}
 
-To summarize, we observe a clear change in the habits from one course to
-the other from cell 1 to 4 to 7. The other cell emphasize different
-problems. Cells 5 and 8 correspond to students that have to contribute
-unusually highly to group projects. Cells 6 and 9 contain students that
-have difficulties to communicate, and do so quasi exclusively by email
-(6) or not at all (9). Cell 2 contains students that already have more
-difficulties than the orthers at the level 2 of difficulty (learnrs) and
-that are discouradged faster (and look at the hints instead of trying
-harder to figure out the answer by themselves). finally, cell 3 contain
-students that fail and do not complete the exercises.
+In overall, at the top, cells (1-4, plus 6) contain students with not
+optimal behaviour, cell (5) are average students, and cells (7-9) at the
+bottom exhibit profiles corresponding to best performers. The pattern is
+also visible between courses A (more at the top or center) to B and C
+(more represented at the bottom). This suggests that students need time
+to get used to the course and its pedagogical approach. They also take
+time to get used to the software environment used and to write commands
+in the R language.
 
 \hypertarget{transition-between-face-to-face-and-distance-learning}{%
 \subsection{Transition between face-to-face and distance
