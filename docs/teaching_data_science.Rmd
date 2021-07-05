@@ -185,32 +185,36 @@ us_tab %>.%
 
 In our courses, learnr tutorials play an essential role in the progressive acquisition of competences because they are at the transition between the theory (online book chapters) and the practice (projects where student analyse real biological data by themselves). Our goal is to prepare our students optimally for the practice of data science. In the other hand, we don't want to exhaust their mental energy in these tutorials before they start their projects. The efficiency of these tutorials is qualitatively determined by observing the behaviour of the students when they start their practical work.
 
-A few tutorials were elaborated during the academic year 2018-2019, and positive feedback on their utility (both by direct observation of the pupils, and by their remarks) led us to systematize them into what we now call level 2 activities (see Table XX) in the form of learnr documents in 2019-2020. The tutorials were further refined in 2020-2021: we added contextual hints thanks to the gradethis R package. When students submit their answer to the exercises, the R code is analysed and the results are compared with the solution. In case of differences, heuristics are used to provide contextual hints. Students can then refine their solution and resubmit it. This appears very efficient in self-teaching and self-evaluation of their competences before switching to the practice. However, the cognitive load required to perform these exercises has, as far as we know, not been studied yet. We used a NASA LTX questionnaire to assess it across all three courses. Participation was 48/59 (81%), 35/45 (78%) and 18/26 (69%) for courses A, B, and C respectively.
+A few tutorials were elaborated during the academic year 2018-2019, and positive feedback on their utility (both by direct observation of the pupils, and by their remarks) led us to systematize them into what we now call level 2 activities (see Table XX) in the form of learnr documents in 2019-2020. The tutorials were further refined in 2020-2021: we added contextual hints thanks to the gradethis R package. When students submit their answer to the exercises, the R code is analysed and the results are compared with the solution. In case of differences, heuristics are used to provide contextual hints. Students can then refine their solution and resubmit it. This appears very efficient in self-teaching and self-evaluation of their competences before switching to the practice. 
+
+```{r}
+learnr_trials <- read("../data/sdd_learnr.csv")
+set.seed(222)
+chart(learnr_trials, l_trials_exercices ~ course) +
+  geom_boxplot(fill = "lightgray") +
+  geom_jitter(alpha = 0.5, width = 0.1) +
+  stat_summary(fun.data = function(x) c(y = max(x) * 1.1, label = length(x)), 
+    geom = "text", hjust = 0.5) +
+  stat_summary(fun.y = "mean", color = "black", size = 1) +
+  labs(y = "Trials/learnr ex.")
+rm(wlearnr_trials)
+```
+
+
+However, the cognitive load required to perform these exercises has, as far as we know, not been studied yet. We used a NASA LTX questionnaire to assess it across all three courses. Participation was 48/59 (81%), 35/45 (78%) and 18/26 (69%) for courses A, B, and C respectively.
 
 ```{r rtlx, message=FALSE, warning=FALSE, fig.cap="Perceived workload for the learnr tutorials in the three courses. The black circle is the mean RTLX value. The number above each box is the number of respondants."}
-
-c("A99Wa_perception", "B99Wa_perception", "C99Wb_perception:perception") %>%
-  purrr::map_dfr(learnr_feeling, df = wo, label = "Q4") %>.%
-  mutate(., course = substr(app, start = 1, stop = 1))  %>.%
-  pivot_longer(.,cols = c(mental, physical, time_pressure, performance, effort, frustration),
-    names_to = "category", values_to = "grade")  %>.%
-  left_join(., dplyr::distinct(courses, course,name), by = "course") %>.%
-  group_by(., user, app, course) %>.%
-  #filter(., user != "ECAYEO033") %>.%
-  summarise(., rtlx = 10*mean(grade)) %>.%
-  drop_na(., rtlx) -> workload_rtlx
-
-n_fun <- function(x)
-  data.frame(y = max(x) * 1.1, label = paste0("n = ", length(x)))
+workload_rtlx <- read("../data/sdd_rtlx.csv")
 
 set.seed(222)
 chart(workload_rtlx, rtlx ~ course) +
   geom_boxplot(fill = "lightgray") +
   geom_jitter(alpha = 0.5, width = 0.1) +
   labs(y = "RTLX", x = "Course") +
-  stat_summary(fun = "mean", color = "black", size = 1) +
-  stat_summary(fun.data = n_fun, geom = "text", hjust = 0.5) +
+  stat_summary(fun.y = "mean", color = "black", size = 1) +
+  stat_summary(fun.data = function(x) {data.frame(y = max(x) * 1.1, label = paste0("n = ", length(x)))}, geom = "text", hjust = 0.5) +
   labs( y = "Raw Task Load indeX (2020-2021)")
+rm(workload_rtlx)
 ```
 
 The difficulty of the course, and thus, of the exercises in the tutorials increase from one course to the other. However, we do not observe an increase in the RTLX index. On the contrary, it is significantly lower for course C than for course A (Tukey HSD, p-value = 0.023) TODO: INCOMPLETE REFERENCE FOR THE TEST (MUST INDICATE ANOVA RESULTS FIRST !). The cognitive load perceived by the students diminishes. This may be a consequence of a more fluent R coding and the better mastering of the software environment.
@@ -438,7 +442,56 @@ In overall, at the top, cells (1-4, plus 6) contain students with not optimal be
 Due to Covid-19 lockdown periods, distance learning had to be adopted abruptly. We analyse the activity and support data collected during academic years 2019-2020 and 2020-2021 to assess the impact of this transition on the progression of the students. The academic year is divided into work periods of approximately 2 weeks. The courses of the second term of the year 2019-2020 start in period Y1P09 and the courses of the first term of the year 2020-2020 start in period Y2P01. The first lockdown started in period Y1P11 and the second in Y2P03. During the first lockdown, support rapidly switched to the proposed channels, by email and via Discord.
 
 ```{r timing, fig.cap="Support productivity as the number of lines added in the project reports divided by the number of message sent via Discord of by email (log scale). The total number of students that sent one or more messages during each period is indicated on top of the boxplots."}
-knitr::include_graphics("figures/add_per_message.png", dpi = 300)
+log_period <- read("../data/log_period.csv")
+support_period <- read("../data/support_period.csv")
+
+inner_join(log_period, support_period) %>.%
+  # Calculate ration support/production as messages/add
+  mutate(.,
+    add_by_message = add/messages,
+    change_by_message = change/messages) ->
+  supp_prod_period
+
+chart(data = supp_prod_period, change_by_message ~ as.factor(period) %fill=% as.factor(.modules)) +
+  #geom_vline(xintercept = c("Y1P11", "Y2P03"), alpha = 0.3, linetype = "twodash") +
+  geom_boxplot() +
+  theme(axis.text.x = element_text(angle = 90)) +
+  scale_y_log10(breaks = c(0.1, 1, 10, 100, 1000), labels = c(0.1, 1, 10, 100, 1000)) +
+  stat_summary(fun.data = function(x) c(y = max(x) + 0.5, label = length(x)), geom = "text", hjust = 0.5) +
+  scale_fill_grey(start = 0.8,
+  end = 0) +
+  labs(y = "Contributions/question",x = "Period", fill = "Number of modules") -> pchangemessages
+
+log_period %>.%
+  filter(., !period %in%c("Y1P15", "Y1P16", "Y1P17")) %>.%
+  group_by(., period, .modules) %>.%
+  summarise(.,
+    change = sum(change),
+    nus = length(unique(user)),
+    change_user = change/nus) %>.%
+  chart(data = ., change_user ~ as.factor(period) %fill=% as.factor(.modules)) +
+  geom_col() +
+  theme(axis.text.x = element_text(angle = 90)) +
+  scale_fill_grey(start = 0.8,
+  end = 0) +
+  labs( y = "Contributions/user", fill = "Number of modules") -> pchangestudent2
+
+p. <- pchangestudent2 +
+  scale_y_continuous(
+    breaks = c(0, 250,500, 750),
+    labels = c(0, 0250, 500, "  750")) +
+  theme(
+    axis.ticks.x = element_blank(),
+    axis.text.x = element_blank(),
+    axis.title.x=element_blank())
+
+combine_charts(list(p., pchangemessages),
+  nrow = 2,
+  common.legend = TRUE, legend = "bottom",
+  heights = c(0.9, 1),
+  labels = "auto",
+  font.label = list(size = 12))
+rm(log_period, support_period, pchangemessages, pchangestudent2, p.)
 ```
 
 The activity in the reports remains relatively proportional to the number of questions the students sent by email or Discord messages, no matter the period and the intensity of the work as indicated by the number of modules to be completed during the period, all three courses pooled together. Only the number of students that ask questions by there channels change between face-to-face and distance teaching (much less in face-to-face because most of the students ask their questions directly in the classroom). Transition from direct interaction to electronic exchange was quasi immediate during lockdown. Consequently, support provided by the teachers in distance learning ... to be continued.
