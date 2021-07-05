@@ -206,7 +206,6 @@ format = "Y%dP%02d", calendar = getOption("academic_calendar")) {
 }
 
 
-
 acad1week <- function(x, first.year = 2019) {
   if (!is.POSIXct(x)) stop("'x' must be a 'POSIXct' object")
   (lubridate::isoweek(x) +
