@@ -154,7 +154,7 @@ chart(learnr_trials, l_trials_exercices ~ course) +
     geom = "text", hjust = 0.5) +
   stat_summary(fun.y = "mean", color = "black", size = 1) +
   labs(y = "Trials/learnr ex.")
-rm(wlearnr_trials)
+rm(learnr_trials)
 ```
 
 
@@ -199,31 +199,9 @@ summary(anovaComp. <- confint(multcomp::glht(anova.,
 In 2018-2019 and 2019-2020, the evaluation was based on the completion of a project and on a more conventional examination at the end of the term. [describe a little bit the questions in the exams as being focused on the practice].
 
 ```{r exams_projects, fig.cap="Grade (/10) obtained at the final exam in function of grade obtained for the projects for courses A and B (two successive years for A)."}
-assessments18 %>.%
-  #select(., -coral_growth, result = biometry) %>.%
-  mutate(., result = (biometry+coral_growth)/2, acad_year = "2018-2019") -> assess_result18
-  
-q1_18_regular <- left_join(rename(assess_result18, icourse = course), courses18) %>.%
-  filter(., user %in% users18$user[users18$institution == "UMONS" & users18$term == "Q1" & users18$state == "regular"])
+sdd_eval <- read("../data/sdd_eval.csv")
 
-assessments19 %>.%
-  group_by(., course, evaluation, github_project, project, user) %>.%
-  summarise(., result = round(sum(score*weight),4)) %>.%
-  filter(., evaluation == "Q1") %>.%
-  left_join(exam19, .) %>.%
-  replace_na(., list(result = 0)) %>.%
-  mutate(., acad_year = "2019-2020") -> assess_result19
-
-q1_19_regular <- left_join(rename(assess_result19, icourse = course), courses19) %>.%
-  filter(., user %in% users19$user[users19$institution == "UMONS" & users19$term == "Q1" & users19$state == "regular"])
-
-q1 <- bind_rows(
-  select(q1_18_regular, user, acad_year, course, result, exam),
-  select(q1_19_regular, user, acad_year, course, result, exam)
-  )
-#table(q1$link) /nrow(q1)
-
-q1 %>.%
+sdd_eval %>.%
   mutate(., course_year = paste0(course, " (",acad_year,")")) %>.%
   chart(., exam ~ result | course_year) +
   geom_vline(xintercept = 5, alpha = 0.2) +
@@ -232,6 +210,8 @@ q1 %>.%
   ylim(c(0,10)) +
   xlim(c(0,10)) +
   labs(y = "Exam grade", x = "Project grade")
+
+rm(sdd_eval)
 ```
 
 The comparison of the marks obtained by each student for a project and a final exam shows only a weak correlation between these two types of evaluations. Year 2018-2019 marks the transition to our flipped classroom approach in teaching data science. Only one student failed in the project, while almost one third of the students failed their final exams. In 2019-2020, we raised a little bit the difficulty for the project, resulting in a more widespread distribution of the results, but with a similar pattern showing very little correlation between the two evaluation methods. The same conclusion can be drawn for course B.

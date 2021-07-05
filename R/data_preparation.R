@@ -769,3 +769,49 @@ write$csv(tab_summary, "data/sdd_infos.csv")
 rm(users, us_tab, learnr, learnr_tab, assessments, projects, projects_tab, h5P_tab, tab_summary)
 
 
+# Exam vs project : the best choice to evaluate the knownledge of student.------
+
+users18 <- read(pcloud("sdd_2018-2019/data/users.csv"))
+users19 <- read(pcloud("sdd_2019-2020/data/users.csv"))
+assessments18 <- read(pcloud("sdd_2018-2019/data/assessment_temp.csv"))
+exam19 <- read(pcloud("sdd_2019-2020/data/exam.csv"))
+assessments19 <- read(pcloud("sdd_2019-2020/data/assessment.csv"))
+courses18 <- read(pcloud("sdd_2018-2019/data/courses.csv"))
+courses19 <- read(pcloud("sdd_2019-2020/data/courses.csv"))
+
+assessments18 %>.%
+  #select(., -coral_growth, result = biometry) %>.%
+  mutate(., result = (biometry+coral_growth)/2, acad_year = "2018-2019") -> assess_result18
+
+q1_18_regular <- left_join(rename(assess_result18, icourse = course), courses18) %>.%
+  filter(., user %in% users18$user[users18$institution == "UMONS" & users18$term == "Q1" & users18$state == "regular"])
+
+assessments19 %>.%
+  group_by(., course, evaluation, github_project, project, user) %>.%
+  summarise(., result = round(sum(score*weight),4)) %>.%
+  filter(., evaluation == "Q1") %>.%
+  left_join(exam19, .) %>.%
+  replace_na(., list(result = 0)) %>.%
+  mutate(., acad_year = "2019-2020") -> assess_result19
+
+q1_19_regular <- left_join(rename(assess_result19, icourse = course), courses19) %>.%
+  filter(., user %in% users19$user[users19$institution == "UMONS" & users19$term == "Q1" & users19$state == "regular"])
+
+q1 <- bind_rows(
+  select(q1_18_regular, user, acad_year, course, result, exam),
+  select(q1_19_regular, user, acad_year, course, result, exam)
+  )
+#table(q1$link) /nrow(q1)
+
+write$csv(q1, "data/sdd_eval.csv")
+
+# q1 %>.%
+#   mutate(., course_year = paste0(course, " (",acad_year,")")) %>.%
+#   chart(., exam ~ result | course_year) +
+#   geom_vline(xintercept = 5, alpha = 0.2) +
+#   geom_hline(yintercept = 5, alpha = 0.2) +
+#   geom_jitter(alpha = 1, width = 0.05, height = 0.05, show.legend = FALSE) +
+#   ylim(c(0,10)) +
+#   xlim(c(0,10)) +
+#   labs(y = "Exam grade", x = "Project grade")
+
