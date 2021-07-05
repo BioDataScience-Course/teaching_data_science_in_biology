@@ -132,50 +132,7 @@ This study is performed all along the three courses that comprise 26 modules in 
 
 ```{r}
 # Table of number of users and number of exercises by type ----------------------
-# users
-users %>.%
-  filter(., institution == "UMONS" & term == "Q1" &
-    state %in% c("regular", "repeater", "bridge", "mobility")) %>.%
-  group_by(., course) %>.%
-  summarise(., user = n()) %>.%
-  ungroup(.) %>.%
-  filter(., course != "D") -> us_tab
-# A few students are in both course A and B simultaneously
-ab <- us_tab$user[us_tab$course == "A,B"]
-us_tab$user[us_tab$course %in% c("A", "B")] <- us_tab$user[us_tab$course %in% c("A", "B")] + ab
-us_tab <- filter(us_tab, course != "A,B")
-
-# learnr
-learnr %>.% 
-  filter(.,
-    !app %in% c("A06Lb_recombinaison", "A99La_avis", "B00La_rappel", "B99La_avis","C99La_avis") &
-    !is.na(label)) %>.%
-  mutate(., course = substr(app, 1, 1), app_label = paste0(app, label)) %>.%
-  filter(., course %in% c("A", "B", "C")) %>.%
-  group_by(., course) %>.%
-  summarise(., app = length(unique(app)), questions = length(unique(app_label))) -> learnr_tab 
-
-# projects
-projects %>.%
-  filter(., type %in% c("ind. github", "group github") & course != "D") %>.%
-  group_by(., course, type) %>.%
-  count(.) %>.%
-  pivot_wider(., names_from = "type", values_from = "n") %>.%
-  ungroup(.) %>.%
-  select(., course, `ind. github`, `group github`) -> projects_tab
-    
-# table of the number of exercises by type ---
-assessments %>.%
-  filter(., type == "h5p") %>.%
-  mutate(.,  app_type = paste0(app, "_" ,'type'), course = substring(app, 1, 1)) %>.%
-  group_by(., course) %>.%
-  summarise(., h5p = length(unique(app_type))) -> h5P_tab
-
-us_tab %>.%
-  mutate(., module = c(12, 8, 6)) %>.%
-  left_join(., h5P_tab) %>.%
-  left_join(., mutate(learnr_tab, learnr = paste0(app, " (", questions, ")"), .keep = "unused")) %>.%
-  left_join(., projects_tab) %>.%
+read("../data/sdd_infos.csv") %>.%
   transmute(., Course = course, Students = user, Modules = module, H5P = h5p, Learnr = learnr,
     `Indiv. projects` = `ind. github`, `Group projects` = `group github`) %>.%
   knitr::kable(., caption = "Number of students, modules, and exercises for each course. For the learnr tutorials, the first number is the amount of tutorial documents and the second number in parentheses is the total number of questions in these tutorials.")
