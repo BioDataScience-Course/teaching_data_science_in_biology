@@ -152,29 +152,33 @@ c(pcloud("sdd_2019-2020/data/lessons.csv"),
 log %>.%
   group_by(., user, course, period) %>.%
   summarise(., add = sum(add), change = sum(change)) %>.%
-  ungroup(.) ->
+  ungroup(.) %>.%
+  left_join(., lessons_by_period) %>.%
+  replace_na(., list(.modules = 0)) %>.%
+  mutate(., .modules = factor(.modules)) ->
   log_period
+
+write$csv(log_period, "data/log_period.csv")
 
 support %>.%
   group_by(., user, course, period) %>.%
   summarise(., messages = n()) %>.%
-  ungroup(.) ->
+  ungroup(.) %>.%
+  left_join(., lessons_by_period) %>.%
+  replace_na(., list(.modules = 0)) %>.%
+   mutate(., .modules = factor(.modules)) ->
   support_period
 
-inner_join(log_period, support_period) %>.%
-  # Calculate ration support/production as messages/add
-  mutate(.,
-    add_by_message = add/messages,
-    change_by_message = change/messages) ->
-  supp_prod_period
+write$csv(support_period, "data/support_period.csv")
 
-
+# inner_join(log_period, support_period) %>.%
+#   # Calculate ration support/production as messages/add
+#   mutate(.,
+#     add_by_message = add/messages,
+#     change_by_message = change/messages) ->
+#   supp_prod_period
 #
-# supp_prod_period %>.%
-#   left_join(., lessons_by_period) %>.%
-#   replace_na(., list(.modules = 0)) %>.%
-#   mutate(., .modules = factor(.modules)) %>.%
-#   chart(data = ., change_by_message ~ as.factor(period) %fill=% .modules ) +
+# chart(data = supp_prod_period, change_by_message ~ as.factor(period) %fill=% .modules ) +
 #   #geom_vline(xintercept = c("Y1P11", "Y2P03"), alpha = 0.3, linetype = "twodash") +
 #   geom_boxplot() +
 #   theme(axis.text.x = element_text(angle = 90)) +
