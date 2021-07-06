@@ -429,18 +429,18 @@ are several critical stages:
 \end{itemize}
 
 This study is performed all along the three courses that comprise 26
-modules in total in 2020-2021. Table XXX summarizes the number of H5P,
-learnr, individual and group GitHub projects that students have to
-complete. It should be noted that for course C, we also introduced a
-challenge in machine learning that replaced one group GitHub project.
-This challenge is not included in the present analysis, being an isolate
-activity that is difficult to compare to the rest.
+modules in total in 2020-2021. Table \ref{tab:tab_course} summarizes the
+number of H5P, learnr, individual and group GitHub projects that
+students have to complete. It should be noted that for course C, we also
+introduced a challenge in machine learning that replaced one group
+GitHub project. This challenge is not included in the present analysis,
+being an isolate activity that is difficult to compare to the rest.
 
 \begin{longtable}[]{@{}lrrrlrr@{}}
-\caption{Number of students, modules, and exercises for each course. For
-the learnr tutorials, the first number is the amount of tutorial
-documents and the second number in brackets is the total number of
-questions in these tutorials.}\tabularnewline
+\caption{\label{tab:tab_course} Number of students, modules, and
+exercises for each course. For the learnr tutorials, the first number is
+the amount of tutorial documents and the second number in brackets is
+the total number of questions in these tutorials.}\tabularnewline
 \toprule
 Course & Students & Modules & H5P & Learnr & Indiv. projects & Group
 projects \\
@@ -497,20 +497,22 @@ the practice in confidence.
 \begin{figure}
 \centering
 \includegraphics{teaching_data_science_files/figure-latex/fig_learn_trials-1.pdf}
-\caption{Average number of retries that where required for each student
-to find the right answer in learnr tutorials exercises (year 2020-2021).
-This measure is used as an indirect, but objective measurement of the
-cognitive workload. The black dot is the average for the whole classes
-and \emph{n} is the number of observations.}
+\caption{\label{fig:fig_learn_trials} Average number of retries that
+where required for each student to find the right answer in learnr
+tutorials exercises (year 2020-2021). This measure is used as an
+indirect, but objective measurement of the cognitive workload. The black
+dot is the average for the whole classes and \emph{n} is the number of
+observations.}
 \end{figure}
 
 The objective measurement of the cognitive workload based on the average
 number of entries that where required for each student to find the right
-answer in learnr tutorials exercises. This indirect measure varies
-significantly between the 3 courses (ANOVA, F(2,109) = 3.655, p-value =
-0.029). The students in course C need significantly fewer trials to find
-the right answer than students in courses A (Tukey HSD, t = -2.489,
-p-value = 0.0375) and B (Tukey HSD, t = 0.0474, p-value = 0.047)
+answer in learnr tutorials exercises (Fig. \ref{fig:fig_learn_trials} ).
+This indirect measure varies significantly between the 3 courses (ANOVA,
+F(2,109) = 3.655, p-value = 0.029). The students in course C need
+significantly fewer trials to find the right answer than students in
+courses A (Tukey HSD, t = -2.489, p-value = 0.0375) and B (Tukey HSD, t
+= 0.0474, p-value = 0.047)
 
 The perceived cognitive load required to perform these exercises is also
 a key aspect. This measure the emotional state of the students after
@@ -522,20 +524,22 @@ three courses. Participation to the survey was high: 48/59 (81\%), 35/45
 \begin{figure}
 \centering
 \includegraphics{teaching_data_science_files/figure-latex/fig_rtlx-1.pdf}
-\caption{Perceived workload for the learnr tutorials in the three
-courses (year 2020-2021). The black circle is the mean RTLX value. The
-number above each box is the number of respondants.}
+\caption{\label{fig:fig_rtlx} Perceived workload for the learnr
+tutorials in the three courses (year 2020-2021). The black circle is the
+mean RTLX value. The number above each box is the number of
+respondants.}
 \end{figure}
 
 The difficulty of the course, and thus, of the exercises in the
 tutorials increase from one course to the other. However, we do not
 observe an increase, neither in the number of retries, nor in the RTLX
-index. On the contrary, these appear significantly lower for course C
-than for course A (ANOVA, F(2,98) = 3.588, p-value = 0.031; Tukey HSD, t
-= -2.679, p-value = 0.023). The cognitive load perceived by the students
-diminishes at the same time their ability to find the right answer more
-rapidly. This may be a consequence of a more fluent R coding and a
-better mastering of the software environment.
+index (Fig. \ref{fig:fig_rtlx} ). On the contrary, these appear
+significantly lower for course C than for course A (ANOVA, F(2,98) =
+3.588, p-value = 0.031; Tukey HSD, t = -2.679, p-value = 0.023). The
+cognitive load perceived by the students diminishes at the same time
+their ability to find the right answer more rapidly. This may be a
+consequence of a more fluent R coding and a better mastering of the
+software environment.
 
 \hypertarget{final-exam-versus-project}{%
 \subsection{\texorpdfstring{Final exam \emph{versus}
@@ -544,9 +548,10 @@ project}{Final exam versus project}}\label{final-exam-versus-project}}
 \begin{figure}
 \centering
 \includegraphics{teaching_data_science_files/figure-latex/fig_exams_projects-1.pdf}
-\caption{Grades obtained at the final exam in function of grades
-obtained for the projects for courses A and B during two years (course B
-was still in its old form in 2018-2019 and is thus not represented).}
+\caption{\label{fig:fig_exams_projects} Grades obtained at the final
+exam in function of grades obtained for the projects for courses A and B
+during two years (course B was still in its old form in 2018-2019 and is
+thus not represented).}
 \end{figure}
 
 In 2018-2019 and 2019-2020, the summative assessment was based on the
@@ -713,22 +718,23 @@ classified into nine different classes.
 \begin{figure}
 \centering
 \includegraphics{teaching_data_science_files/figure-latex/fig_som-1.pdf}
-\caption{Self-organizing map of the student activities across the three
-courses (year 2020-2021). See the text for the explanations.}
+\caption{\label{fig:fig_som} Self-organizing map of the student
+activities across the three courses (year 2020-2021). See the text for
+the explanations.}
 \end{figure}
 
-In Fig xxx, the small plots in gray show how selected metrics distribute
-in the nine cells, from lowest value in white to highest value in black.
-They help to decrypt the way students behave according to their profile.
-Metrics that are not represented present similar patterns than others
-(for instance H5P metrics exhibit a similar pattern as learnr metrics
-and therefore, they are not represented). Dots in the central plot are
-the various students, with colour representing the course and the
-diameter of the dots representing the grade the students obtained at the
-end of the course. The following paragraphs detail information in that
-figure. The numbers between brackets mean the cell number in the central
-plot, and the upper case letters in brackets refer to the peripheral
-sub-plots.
+In \ref{fig:fig_som}, the small plots in gray show how selected metrics
+distribute in the nine cells, from lowest value in white to highest
+value in black. They help to decrypt the way students behave according
+to their profile. Metrics that are not represented present similar
+patterns than others (for instance H5P metrics exhibit a similar pattern
+as learnr metrics and therefore, they are not represented). Dots in the
+central plot are the various students, with colour representing the
+course and the diameter of the dots representing the grade the students
+obtained at the end of the course. The following paragraphs detail
+information in that figure. The numbers between brackets mean the cell
+number in the central plot, and the upper case letters in brackets refer
+to the peripheral sub-plots.
 
 Although most students finished all, or almost all exercises (D), cell
 (3) collects the few student that did only a very small part of the
@@ -815,12 +821,13 @@ email address for all teachers was installed for a faster reaction.
 \begin{figure}
 \centering
 \includegraphics{teaching_data_science_files/figure-latex/fig_support_by_time-1.pdf}
-\caption{a. Contributions of the students to the projects by periods of
-two weeks of course. b. Contributions by question asked (log scale) as a
-proxy measurement of the effect of student-teacher interactions on the
-progression in data analysis. Light gray background indicates periods
-where distance teaching was mandatory due to Covid-19 lockdown (Y1 is
-2019-2020, Y2 is 2020-2021).}
+\caption{\label{fig:fig_support_by_time} a. Contributions of the
+students to the projects by periods of two weeks of course. b.
+Contributions by question asked (log scale) as a proxy measurement of
+the effect of student-teacher interactions on the progression in data
+analysis. Light gray background indicates periods where distance
+teaching was mandatory due to Covid-19 lockdown (Y1 is 2019-2020, Y2 is
+2020-2021).}
 \end{figure}
 
 {[}TODO: this paragraph must be adapted and reworked!{]} The
@@ -840,8 +847,8 @@ provided by the teachers in distance learning \ldots{} to be continued.
 
 Teaching data science to a population of students that are not very used
 to advanced computer techniques and tools, and that have only basic
-knowledge in mathematics and statistics is a hard task. Our basic
-approach is to extend the training on a very long period: five
+knowledge in mathematics and statistics is a hard task {[}18{]}. Our
+basic approach is to extend the training on a very long period: five
 successive terms spanning on three consecutive years (undergraduate and
 graduate). That way, the many different concepts they have to learn can
 be break down into subunits (26 modules) that last for two week each. We
@@ -854,10 +861,10 @@ followed by exercises where important concepts are repeated at the
 beginning of the practical sessions. They tend to have a passive
 attitude during lectures and they expect the teachers and assistants
 literally feed them with the key concepts. That attitude does not work
-here. Poactivity and autonomy is required. They have thus to learn a
-very different way of learning. The transition between the theory they
-read in the book and the projects where they have to apply these
-concepts is too abrupt without a progression in three stages
+here. Proactivity and autonomy is required {[}14{]}. They have thus to
+learn a very different way of learning. The transition between the
+theory they read in the book and the projects where they have to apply
+these concepts is too abrupt without a progression in three stages
 essentially: (1) auto-evaluation exercises directly in the book, (2)
 recall of the main concepts and guided step-by-step analysis of a first
 dataset with the learnr tutorials and (3) at least one guided individual
@@ -878,9 +885,9 @@ biological data analysis is the group project because they have to
 demonstrate what they can do with a dataset and minimal instructions.
 They have to figure out a suitable question, analyse the data to answer
 that question, present their results in a report and discuss what they
-found with a critical mind. This task is complex, especially for
-undergraduate students. That is why it is run in groups of two to four
-students, depending on the complexity of the problem. Here, they
+found with a critical mind {[}13{]}. This task is complex, especially
+for undergraduate students. That is why it is run in groups of two to
+four students, depending on the complexity of the problem. Here, they
 mobilize their collective intelligence to get results many of them would
 be hardly capable to achieve alone. Yet, the tracking of individual
 activity in the project through git allows to figure out clearly what
@@ -889,27 +896,28 @@ individual contributions in a suitable way.
 
 Sometimes, groups do not work well, and one student has to do most of
 the work. This is a clear weakness in this approach, especially if one
-of the students in Fig XXX cell (3) is involved. If we could identify
-the profile of the different students relatively early during the
-course, we would be able to create better grouping with a blend of
-different complimentary profiles in order to enrich their experience.
-May be should we work exclusively with groups of four students to
-mitigate the impact of one student that does not its job?
+of the students in Fig. \ref{fig:fig_som} cell (3) is involved. If we
+could identify the profile of the different students relatively early
+during the course, we would be able to create better grouping with a
+blend of different complimentary profiles in order to enrich their
+experience. May be should we work exclusively with groups of four
+students to mitigate the impact of one student that does not its job?
 
 Those group projects are also key activities to evaluate the competences
 of ours students. We observed a very low correlation between
 performances in projects and grading obtained at final exams. This led
 us to stop final exams, at the benefit of a continuous evaluation with
-highest weight in the final grade for group projects. It requires to set
-up a system to monitor and score the students' activity in all the
-exercises, either by automatic scoring of online exercises, or by using
-an evaluation grid for manual assessment of their projects. This is
-time-consuming but the partial automatic scoring lowers the charge. It
-would be interesting to design tools that could second teachers in these
-assessments. For instance, reproducible research is one of the
-competences our students have to develop. This implies that their R
-Markdown documents should compile into reports in HTML or PDF format
-without any error. This criterion could be checked automatically.
+highest weight in the final grade for group projects (Fig.
+\ref{fig:fig_exams_projects} ). It requires to set up a system to
+monitor and score the students' activity in all the exercises, either by
+automatic scoring of online exercises, or by using an evaluation grid
+for manual assessment of their projects. This is time-consuming but the
+partial automatic scoring lowers the charge. It would be interesting to
+design tools that could second teachers in these assessments. For
+instance, reproducible research is one of the competences our students
+have to develop. This implies that their R Markdown documents should
+compile into reports in HTML or PDF format without any error. This
+criterion could be checked automatically.
 
 Activity tracking in the exercises, primarily set up for the continuous
 evaluation, offers also the possibility to study the way student
@@ -1085,6 +1093,13 @@ science in education using R}, London, England, Routledge.}
 \CSLRightInline{Byers JC, Bittner A, Hill S (1989) {Traditional and raw
 task load index (TLX) correlations: Are paired comparisons necessary? In
 A}.}
+
+\leavevmode\hypertarget{ref-Sousa2018}{}%
+\CSLLeftMargin{18. }
+\CSLRightInline{Sousa D, Sorto IMA, White A (2018) {Teaching With R---A
+Curse or a Blessing?}, \emph{Looking back, looking forward. Proceedings
+of the tenth international conference on teaching statistics}, Kyoto,
+International Statistical Institute.}
 
 \end{CSLReferences}
 
