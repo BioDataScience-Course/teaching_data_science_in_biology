@@ -12,6 +12,7 @@ output:
     code_folding: hide
     fig_caption: yes
 bibliography: bibliography.bib
+csl: aims-mathematics.csl
 ---
 
 ```{r setup, include=FALSE}
