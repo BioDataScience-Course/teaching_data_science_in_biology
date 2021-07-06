@@ -116,7 +116,7 @@ Our goal with these tutorials is to prepare the students optimally for the pract
 
 A few tutorials were elaborated during the academic year 2018-2019, and positive feedback on their utility (both by direct observation of the students and through their remarks) led us to systematize them into what we now call level 2 activities (see Table XX) in the form of learnr documents in 2019-2020. The tutorials were further refined in 2020-2021: we added contextual hints thanks to the gradethis R package. When students submit their answer to the exercises, the R code is analysed and the result is compared with the solution. In case of differences, heuristics are used to provide contextual hints. Students can then refine their solution and resubmit it. This appears very efficient in self-teaching and self-evaluation of their competences before switching to the practice in confidence. 
 
-```{r fig_learn_trials, fig.cap="Average number of retries that where required for each student to find the right answer in learnr tutorials exercises (year 2020-2021). This measure is used as an indirect, but objective measurement of the cognitive workload."}
+```{r fig_learn_trials, fig.cap="Average number of retries that where required for each student to find the right answer in learnr tutorials exercises (year 2020-2021). This measure is used as an indirect, but objective measurement of the cognitive workload. The black dot is the average for the whole classes and *n* is the number of observations."}
 set.seed(87436)
 read("../data/sdd_learnr.csv") %>.%
   chart(., l_trials_exercices ~ course) +
@@ -134,7 +134,7 @@ read("../data/sdd_learnr.csv") %>.%
 
 The perceived cognitive load required to perform these exercises is also a key aspect. This measure the emotional state of the students after having completed a tutorial. This has, as far as we know, not been studied yet. We used a NASA LTX questionnaire to assess it across all three courses. Participation to the survey was high: 48/59 (81%), 35/45 (78%) and 18/26 (69%) for courses A, B, and C respectively.
 
-```{r fig_rtlx, message=FALSE, warning=FALSE, fig.cap="Perceived workload for the learnr tutorials in the three courses. The black circle is the mean RTLX value. The number above each box is the number of respondants."}
+```{r fig_rtlx, message=FALSE, warning=FALSE, fig.cap="Perceived workload for the learnr tutorials in the three courses (year 2020-2021). The black circle is the mean RTLX value. The number above each box is the number of respondants."}
 set.seed(253)
 read("../data/sdd_rtlx.csv") %>.%
   chart(., rtlx ~ course) +
@@ -175,16 +175,17 @@ rm(workload_rtlx)
 
 ## Final exam *versus* project
 
-```{r fig_exams_projects, fig.cap="Grades obtained at the final exam in function of grades obtained for the projects for courses A and B."}
+```{r fig_exams_projects, fig.asp=0.4, fig.cap="Grades obtained at the final exam in function of grades obtained for the projects for courses A and B during two years (course B was still in its old form in 2018-2019 and is thus not represented)."}
 read("../data/sdd_eval.csv") %>.%
   mutate(., course_year = paste0(course, " (", acad_year, ")")) %>.%
   chart(., exam ~ result | course_year) +
-  geom_vline(xintercept = 5, alpha = 0.2) +
-  geom_hline(yintercept = 5, alpha = 0.2) +
+  geom_vline(xintercept = 5, alpha = 0.3) +
+  geom_hline(yintercept = 5, alpha = 0.3) +
   geom_jitter(alpha = 1, width = 0.05, height = 0.05, show.legend = FALSE) +
   ylim(c(0,10)) +
   xlim(c(0,10)) +
-  labs(y = "Final exam grade (/10)", x = "Project grade (/10)")
+  labs(y = "Final exam grade (/10)", x = "Project grade (/10)") +
+  theme(aspect.ratio = 1)
 ```
 
 In 2018-2019 and 2019-2020, the evaluation was based on the completion of a project and on a more conventional examination at the end of the term. The comparison of the grades obtained by each student for a project and a final exam shows only a weak correlation between these two types of evaluations [TODO: provide values here]. Year 2018-2019 marks the transition to a flipped classroom approach in our teaching of these data science courses. Only one student failed in the project, while almost one third of the same students failed their final exams. The difficulty of the project was similar to previous years, when the course was made of lectures followed by exercises (and when failure was not uncommon). The flipped classroom approach leaves more time in class to work on practical applications, to ask questions, to discuss results, ... We hypothesize that the very low failure rate could be explained by a better preparation to practical data analysis, but not to the final exam.
@@ -334,7 +335,7 @@ var_names <- c(
   )
 ```
 
-```{r fig_som, fig.cap="Self-organizing map of the student activities across the three courses in 2020-2021."}
+```{r fig_som, fig.cap="Self-organizing map of the student activities across the three courses (year 2020-2021). See the text for the explanations."}
 set.seed(3749)
 
 # First draw the 10 little explanatory plots
@@ -420,7 +421,7 @@ In overall, at the top of the SOM, cells (1-4, plus 6) contain students with not
 
 Due to Covid-19 lockdown periods, distance learning had to be adopted abruptly. We analyse the activity collected during academic years 2019-2020 and 2020-2021 to assess the impact of these transition on the progression of the students (contributions they make to the projects per time unit). One academic term is divided here into seven work periods of approximately two weeks (remind that it is the rhythm of the courses: one module every second week). The classes of the second term of the year 2019-2020 start at period Y1P09, since period Y1P08 is reserved for the exams. The courses of the first term of 2020-2021 begins at Y2P01. First lockdown started at period Y1P11 for one month and an half. Second lockdown stared at Y2P03 and lasted at then end of the second term (Y2P15). During the first lockdown, we rapidly opened the dedicated Discord channels and a common email address for all teachers was installed for a faster reaction.
 
-```{r fig_support_by_time, message=FALSE, fig.asp=0.9, fig.cap="a. Contributions of the students to the projects by periods of two weeks of course. b. Contributions by question asked (log scale), as a proxy measure of the effect of student-teacher interactions on the progression of data analysis. Light gray background indicates periods where distance teaching was mandatory due to covid lockdown."}
+```{r fig_support_by_time, message=FALSE, fig.asp=0.9, fig.cap="a. Contributions of the students to the projects by periods of two weeks of course. b. Contributions by question asked (log scale) as a proxy measurement of the effect of student-teacher interactions on the progression in data analysis. Light gray background indicates periods where distance teaching was mandatory due to Covid-19 lockdown (Y1 is 2019-2020, Y2 is 2020-2021)."}
 log_period <- read("../data/log_period.csv")
 support_period <- read("../data/support_period.csv")
 
