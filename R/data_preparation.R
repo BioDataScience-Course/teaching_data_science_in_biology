@@ -702,7 +702,9 @@ learnr %>.%
   filter(., verb %in% c("executed")) %>.%
   group_by(., user, course) %>.%
   summarise(., nexecuted = n(), exercises = length(unique(paste0(app,label)))) %>.%
-  mutate(., l_trials_exercices =nexecuted/exercises) -> learnr_red
+  mutate(.,
+    l_trials_exercices =nexecuted/exercises,
+    course = as.factor(course)) -> learnr_red
 
 write$csv(learnr_red, "data/sdd_learnr.csv")
 

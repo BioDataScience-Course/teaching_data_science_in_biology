@@ -117,6 +117,7 @@ Our goal with these tutorials is to prepare the students optimally for the pract
 A few tutorials were elaborated during the academic year 2018-2019, and positive feedback on their utility (both by direct observation of the students and through their remarks) led us to systematize them into what we now call level 2 activities (see Table XX) in the form of learnr documents in 2019-2020. The tutorials were further refined in 2020-2021: we added contextual hints thanks to the gradethis R package. When students submit their answer to the exercises, the R code is analysed and the result is compared with the solution. In case of differences, heuristics are used to provide contextual hints. Students can then refine their solution and resubmit it. This appears very efficient in self-teaching and self-evaluation of their competences before switching to the practice in confidence. 
 
 ```{r fig_learn_trials, fig.cap="Average number of retries that where required for each student to find the right answer in learnr tutorials exercises (year 2020-2021). This measure is used as an indirect, but objective measurement of the cognitive workload. The black dot is the average for the whole classes and *n* is the number of observations."}
+
 set.seed(87436)
 read("../data/sdd_learnr.csv") %>.%
   chart(., l_trials_exercices ~ course) +
@@ -130,7 +131,24 @@ read("../data/sdd_learnr.csv") %>.%
   ylim(2, 10.5)
 ```
 
-[TODO: a paragraph describing the results + a statistical test here]
+```{r, results='hide'}
+sdd_learnr <- read("../data/sdd_learnr.csv") %>.%
+  mutate(., course = factor(course))
+anova. <- lm(data = sdd_learnr, l_trials_exercices ~ course)
+anova(anova.)
+#bartlett.test(data = sdd_learnr, l_trials_exercices ~ course)
+#plot(anova., which = 2)
+summary(anovaComp. <- confint(multcomp::glht(anova.,
+  linfct = multcomp::mcp(course = "Tukey"))))
+rm(sdd_learnr)
+
+# The qq plot est problématique
+## soit on utilise un test non parématrique qui donne le même résultat statistique et on passe sur un boxplot.
+# kruskal.test(data = sdd_learnr, l_trials_exercices ~ course)
+# summary(kw_comp. <- nparcomp::nparcomp(data = sdd_learnr, l_trials_exercices ~ course))
+```
+
+The objective measurement of the cognitive workload based on the average number of entries that where required for each student to find the right answer in learnr tutorials exercises. This indirect measure varies significantly between the 3 courses (ANOVA, F(2,109) = 3.655, p-value = 0.029). The students in course C need significantly fewer trials to find the right answer than students in courses A (Tukey HSD, t = -2.489, p-value = 0.0375) and B (Tukey HSD, t = 0.0474, p-value = 0.047)
 
 The perceived cognitive load required to perform these exercises is also a key aspect. This measure the emotional state of the students after having completed a tutorial. This has, as far as we know, not been studied yet. We used a NASA LTX questionnaire to assess it across all three courses. Participation to the survey was high: 48/59 (81%), 35/45 (78%) and 18/26 (69%) for courses A, B, and C respectively.
 
@@ -148,30 +166,20 @@ read("../data/sdd_rtlx.csv") %>.%
   labs( y = "Raw Task Load indeX")
 ```
 
-The difficulty of the course, and thus, of the exercises in the tutorials increase from one course to the other. However, we do not observe an increase, neither in the number of retries, nor in the RTLX index. On the contrary, these appear significantly lower for course C than for course A (Tukey HSD, p-value = 0.023) TODO: INCOMPLETE REFERENCE FOR THE TEST (MUST INDICATE ANOVA RESULTS FIRST !). The cognitive load perceived by the students diminishes at the same time their ability to find the right answer more rapidly. This may be a consequence of a more fluent R coding and the better mastering of the software environment.
+The difficulty of the course, and thus, of the exercises in the tutorials increase from one course to the other. However, we do not observe an increase, neither in the number of retries, nor in the RTLX index. On the contrary, these appear significantly lower for course C than for course A (ANOVA, F(2,98) = 3.588, p-value = 0.031; Tukey HSD, t = -2.679, p-value = 0.023). The cognitive load perceived by the students diminishes at the same time their ability to find the right answer more rapidly. This may be a consequence of a more fluent R coding and the better mastering of the software environment.
 
-**TODO: hide this output and include results in the text!**
-
-```{r rtlx_stats}
+```{r rtlx_stats, results='hide'}
 read("../data/sdd_rtlx.csv") %>.%
   mutate(., course = as.factor(course)) ->
   workload_rtlx
-
-#kruskal.test(data = workload_rtlx, rtlx ~ course)
-#summary(kw_comp. <- nparcomp::nparcomp(data = workload_rtlx, rtlx ~ course))
-
 anova. <- lm(data = workload_rtlx, rtlx ~ course)
 anova(anova.)
-
 #bartlett.test(data = workload_rtlx, rtlx ~ course)
 #plot(anova., which = 2)
-
 summary(anovaComp. <- confint(multcomp::glht(anova.,
   linfct = multcomp::mcp(course = "Tukey"))))
-
 rm(workload_rtlx)
 ```
-
 
 ## Final exam *versus* project
 
