@@ -1,157 +1,187 @@
-% Options for packages loaded elsewhere
-\PassOptionsToPackage{unicode}{hyperref}
-\PassOptionsToPackage{hyphens}{url}
-%
-\documentclass[
-]{article}
-\usepackage{amsmath,amssymb}
-\usepackage{lmodern}
-\usepackage{ifxetex,ifluatex}
-\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
-  \usepackage[T1]{fontenc}
-  \usepackage[utf8]{inputenc}
-  \usepackage{textcomp} % provide euro and other symbols
-\else % if luatex or xetex
-  \usepackage{unicode-math}
-  \defaultfontfeatures{Scale=MatchLowercase}
-  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
-\fi
-% Use upquote if available, for straight quotes in verbatim environments
-\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
-\IfFileExists{microtype.sty}{% use microtype if available
-  \usepackage[]{microtype}
-  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
-}{}
-\makeatletter
-\@ifundefined{KOMAClassName}{% if non-KOMA class
-  \IfFileExists{parskip.sty}{%
-    \usepackage{parskip}
-  }{% else
-    \setlength{\parindent}{0pt}
-    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
-}{% if KOMA class
-  \KOMAoptions{parskip=half}}
-\makeatother
-\usepackage{xcolor}
-\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
-\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
-\hypersetup{
-  pdftitle={Teaching Data Science to Students in Biology using R, RStudio and Learnr: Analysis of Three Years Data},
-  hidelinks,
-  pdfcreator={LaTeX via pandoc}}
-\urlstyle{same} % disable monospaced font for URLs
-\usepackage[margin=1in]{geometry}
-\usepackage{longtable,booktabs,array}
-\usepackage{calc} % for calculating minipage widths
-% Correct order of tables after \paragraph or \subparagraph
-\usepackage{etoolbox}
-\makeatletter
-\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
-\makeatother
-% Allow footnotes in longtable head/foot
-\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
-\makesavenoteenv{longtable}
-\usepackage{graphicx}
-\makeatletter
-\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
-\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
-\makeatother
-% Scale images if necessary, so that they will not overflow the page
-% margins by default, and it is still possible to overwrite the defaults
-% using explicit options in \includegraphics[width, height, ...]{}
-\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
-% Set default figure placement to htbp
-\makeatletter
-\def\fps@figure{htbp}
-\makeatother
-\setlength{\emergencystretch}{3em} % prevent overfull lines
+% !!!IMPORTANT NOTE: Please read carefully all information including those preceded by % sign
+%Before you compile the tex file please download the class file AIMS.cls from the following URL link to the
+%local folder where your tex file resides. http://aimsciences.org/journals/tex-sample/AIMS.cls.
+\documentclass{aims}
+\usepackage{amsmath}
+  \usepackage{paralist}
+  \usepackage{graphics} %% add this and next lines if pictures should be in esp format
+  \usepackage{epsfig} %For pictures: screened artwork should be set up with an 85 or 100 line screen
+\usepackage{graphicx}  \usepackage{epstopdf}%This is to transfer .eps figure to .pdf figure; please compile your paper using PDFLeTex or PDFTeXify.
+ \usepackage[colorlinks=true]{hyperref}
+   % Warning: when you first run your tex file, some errors might occur,
+   % please just press enter key to end the compilation process, then it will be fine if you run your tex file again.
+   % Note that it is highly recommended by AIMS to use this package.
+   \hypersetup{urlcolor=blue, citecolor=red}
+%\usepackage{hyperref}
+
+  \textheight=8.2 true in
+   \textwidth=5.0 true in
+    \topmargin 30pt
+     \setcounter{page}{1}
+
+% The next 5 line will be entered by an editorial staff.
+\def\currentvolume{X}
+ \def\currentissue{X}
+  \def\currentyear{200X}
+   \def\currentmonth{XX}
+    \def\ppages{X--XX}
+     \def\DOI{10.3934/xx.xxxxxxx}
+
+ % Please minimize the usage of "newtheorem", "newcommand", and use
+ % equation numbers only situation when they provide essential convenience
+ % Try to avoid defining your own macros
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}
+\newtheorem*{main}{Main Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}{Proposition}
+\newtheorem{conjecture}{Conjecture}
+\newtheorem*{problem}{Problem}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{remark}{Remark}
+\newtheorem*{notation}{Notation}
+\newcommand{\ep}{\varepsilon}
+\newcommand{\eps}[1]{{#1}_{\varepsilon}}
+
 \providecommand{\tightlist}{%
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
-\setcounter{secnumdepth}{5}
-\ifluatex
-  \usepackage{selnolig}  % disable illegal ligatures
-\fi
-\newlength{\cslhangindent}
-\setlength{\cslhangindent}{1.5em}
-\newlength{\csllabelwidth}
-\setlength{\csllabelwidth}{3em}
-\newenvironment{CSLReferences}[2] % #1 hanging-ident, #2 entry spacing
- {% don't indent paragraphs
-  \setlength{\parindent}{0pt}
-  % turn on hanging indent if param 1 is 1
-  \ifodd #1 \everypar{\setlength{\hangindent}{\cslhangindent}}\ignorespaces\fi
-  % set entry spacing
-  \ifnum #2 > 0
-  \setlength{\parskip}{#2\baselineskip}
-  \fi
- }%
- {}
-\usepackage{calc}
-\newcommand{\CSLBlock}[1]{#1\hfill\break}
-\newcommand{\CSLLeftMargin}[1]{\parbox[t]{\csllabelwidth}{#1}}
-\newcommand{\CSLRightInline}[1]{\parbox[t]{\linewidth - \csllabelwidth}{#1}\break}
-\newcommand{\CSLIndent}[1]{\hspace{\cslhangindent}#1}
 
-\title{Teaching Data Science to Students in Biology using R, RStudio and
+    \newlength{\cslhangindent}
+  \setlength{\cslhangindent}{1.5em}
+  \newlength{\csllabelwidth}
+  \setlength{\csllabelwidth}{3em}
+  \newenvironment{CSLReferences}[3] % #1 hanging-ident, #2 entry spacing
+   {% don't indent paragraphs
+    \setlength{\parindent}{0pt}
+    % turn on hanging indent if param 1 is 1
+    \ifodd #1 \everypar{\setlength{\hangindent}{\cslhangindent}}\ignorespaces\fi
+    % set entry spacing
+    \ifnum #2 > 0
+    \setlength{\parskip}{#2\baselineskip}
+    \fi
+   }%
+   {}
+  \usepackage{calc} % for \widthof, \maxof
+  \newcommand{\CSLBlock}[1]{#1\hfill\break}
+  \newcommand{\CSLLeftMargin}[1]{\parbox[t]{\maxof{\widthof{#1}}{\csllabelwidth}}{#1}}
+  \newcommand{\CSLRightInline}[1]{\parbox[t]{\linewidth}{#1}}
+  \newcommand{\CSLIndent}[1]{\hspace{\cslhangindent}#1}
+  
+
+
+%% Place the running title of the paper with 40 letters or less in []
+ %% and the full title of the paper in { }.
+\title[Teaching Data Science in
+Biology] %Use the shortened version of the full title
+      {Teaching Data Science to Students in Biology using R, RStudio and
 Learnr: Analysis of Three Years Data}
-\author{}
-\date{\vspace{-2.5em}}
+
+% Place all authors' names in [ ] shown as running head, Leave { } empty
+% Please use `and' to connect the last two names if applicable
+% Use FirstNameInitial.  MiddleNameInitial. LastName, or only last names of authors if there are too many authors
+\author[Guyliann Engels, Philippe Grosjean and Frédérique Arthus]{}
+
+% It is required to enter 2020 MSC.
+\subjclass{Primary: XXXXX; Secondary: YYYYY.}
+% Please provide minimum  5 keywords.
+ \keywords{Data Science Teaching, Flipped Classroom, R, RStudio, git.}
+
+% Email address of each of all authors is required.
+% You may list email addresses of all other authors, separately.
+ \email{Guyliann.Engels@umons.ac.be}
+ \email{Philippe.Grosjean@umons.ac.be}
+ \email{Frederique.Arthus@umons.ac.be}
+
+% Put your short thanks below. For long thanks/acknowledgements,
+%please go to the last acknowledgments section.
+%\thanks{We would like to acknowledge...}
+
+% Add corresponding author at the footnote of the first page if it is necessary.
+% Please add <dollar>^*<dollar> adjacent to the corresponding author's name on the first page.
+% The example shown in this template is if the first author is the corresponding author.
+\thanks{\textsuperscript{*} Corresponding author: Guyliann Engels}
 
 \begin{document}
 \maketitle
 
-\hypertarget{abstract}{%
-\section{Abstract}\label{abstract}}
+% Enter the first author's name and address:
+\centerline{\scshape Guyliann Engels\textsuperscript{*}, Philippe Grosjean}
+\medskip
+{\footnotesize
+% please put the address of the first author
+ \centerline{Numerical Ecology Department, Complexys and InforTech Institutes, University of Mons}
+   %\centerline{Other lines}
+   \centerline{Avenue du Champ de Mars, 8, 7000 Mons, Belgium}
+} % Do not forget to end the {\footnotesize by the sign }
 
-\textbf{This is the original abstract that should be reworked according
-to final content of the manuscript.}
+\medskip
 
-The courses in biostatistics in biology at the University of Mons,
-Belgium, were completely refactored in 2018 into data science courses
-(see \url{http://bds.sciviews.org}). The content is expanded beyond
-statistics to include computing tools, version management, reproducible
-analyses, critical thinking and open data. Flipped classroom approach is
-used. Students learn with the online material and they apply the
-concepts on individual and group projects using a preconfigured virtual
-machine with R and RStudio. Activities (H5P, learnr or Shiny
-applications) are recorded in a MongoDB database (300,000+ events for
-180+ students and 2,000+ GitHub repositories at
-\url{https://github.com/BioDataScience-Course}). The analysis of these
-data reveals several trends. (1) There is a relatively long lag period
-required for the students to get used to the computing environment, the
-teaching method and the data science in general. (2) Implication is very
-high, with more than 85\% of the students that complete all the
-activities and get good to excellent assessment. (3) There is a gap
-between students' own perception of their skills achievements and their
-assessment results: they tend to underestimate their progress. (4)
-During COVID-19 pandemic lockdown, the intensity of the activities
-largely decreased during two weeks before returning to previous level,
-but for 3/4 of the students only. The remaining fraction never caught
-up. We hypothesize that the technical requirements or the lack of
-motivation during the lockdown were detrimental to roughly one student
-over ten, despite all the efforts the University deployed to reduce the
-social fracture.
+\centerline{\scshape Frederique Arthus}
+\medskip
+{\footnotesize
+ % please put the address of the second  and third author
+ \centerline{ Pedagogical Support and Quality Assurance Department, University of Mons}
+  % \centerline{Other lines}
+   \centerline{Place du Parc, 20, 700 Mons, Belgium}
+}
+
+\bigskip
+
+% The name of the associate editor will be entered by an editorial staff
+% "Communicated by the associate editor name" is not needed for special issue.
+% \centerline{(Communicated by the associate editor name)}
+
+
+%The abstract of your paper
+\begin{abstract}
+  The courses in biostatistics in biology at the University of Mons,
+  Belgium, were completely refactored in 2018 into data science courses
+  (see \url{http://bds.sciviews.org}). The content is expanded beyond
+  statistics to include computing tools, version management,
+  reproducible analyses, critical thinking and open data. Flipped
+  classroom approach is used. Students learn with the online material
+  and they apply the concepts on individual and group projects using a
+  preconfigured virtual machine with R and RStudio. Activities (H5P,
+  learnr or Shiny applications) are recorded in a MongoDB database
+  (300,000+ events for 180+ students and 2,000+ GitHub repositories at
+  \url{https://github.com/BioDataScience-Course}). The analysis of these
+  data reveals several trends. (1) There is a relatively long lag period
+  required for the students to get used to the computing environment,
+  the teaching method and the data science in general. (2) Implication
+  is very high, with more than 85\% of the students that complete all
+  the activities and get good to excellent assessment. (3) There is a
+  gap between students' own perception of their skills achievements and
+  their assessment results: they tend to underestimate their progress.
+  (4) During COVID-19 pandemic lockdown, the intensity of the activities
+  largely decreased during two weeks before returning to previous level,
+  but for 3/4 of the students only. The remaining fraction never caught
+  up. We hypothesize that the technical requirements or the lack of
+  motivation during the lockdown were detrimental to roughly one student
+  over ten, despite all the efforts the University deployed to reduce
+  the social fracture.
+\end{abstract}
 
 \hypertarget{introduction}{%
 \section{Introduction}\label{introduction}}
 
-In a context where there is an exponentially growing mass of data (Marx
-2013), a reproducibility crisis in Science (Baker 2016), and a
-progressive adoption of Open Science practices (Banks et al. 2019),
-statistics were broadened to a wider discipline called Data Science. For
-the Data Science Association, ``the Data Science means the scientific
-study of the creation, validation and transformation of data to create
-meaning'' (\url{http://www.datascienceassn.org/code-of-conduct.html}).
-These changes also led to the emergence of data science programs in
-universities and higher schools (Donoho 2017; Çetinkaya-Rundel and
-Ellison 2021). One example is the Harvard Data Science initiative
-(\url{https://datascience.harvard.edu/about}) initiated in 2017. With a
-broader approach, also comes a broaden public. The data science courses
-are not just limited to computer scientists, mathematicians or
-statisticians, but also welcome students in humanities, social sciences,
-and natural sciences (for instance, the data science training at Duke
-University (Çetinkaya-Rundel and Ellison 2021)).Focus of such courses is
-for students to develop the ability to deal with ``real'' datasets in
+In a context where there is an exponentially growing mass of data
+{[}1{]}, a reproducibility crisis in Science {[}2{]}, and a progressive
+adoption of Open Science practices {[}3{]}, statistics were broadened to
+a wider discipline called Data Science. For the Data Science
+Association, ``the Data Science means the scientific study of the
+creation, validation and transformation of data to create meaning''
+(\url{http://www.datascienceassn.org/code-of-conduct.html}). These
+changes also led to the emergence of data science programs in
+universities and higher schools {[}4,5{]}. One example is the Harvard
+Data Science initiative (\url{https://datascience.harvard.edu/about})
+initiated in 2017. With a broader approach, also comes a broaden public.
+The data science courses are not just limited to computer scientists,
+mathematicians or statisticians, but also welcome students in
+humanities, social sciences, and natural sciences (for instance, the
+data science training at Duke University {[}5{]}).Focus of such courses
+is for students to develop the ability to deal with ``real'' datasets in
 all their complexities and to be able to conduct reproducible analyses,
 and to interpret these data in the light of knowledge in their field of
 expertise.
@@ -162,42 +192,40 @@ to deal with computer languages enter in a foreign world and have to
 deal with many exotic concepts, techniques and tools. This is the same
 for the analysis of these data when students have no background in
 mathematics or statistics. It generates anxiety (see for instance
-(Onwuegbuzie and Wilson 2003), for students in biology). The course must
-be organized in a way that such students' progress by little steps to
-avoid exposition to much intimidating concepts and tools at once. Hence,
-a student in computing science already masters one or more computing
-languages, is acquainted with version control systems, with databases
-and with the way data are manipulated and represented in a computer. A
-student in mathematics or statistics is familiar with various concepts
-that underpins the techniques to analyse the data. On the other hand,
-students in biology, medicine, psychology, social sciences, economics,
-\ldots{} have very different \emph{a priori} knowledge. Version control
-systems like git, and their internet hosting counterparts like GitHub,
-Gitlab or Bitbucket also make part of the tools that data science course
-teaches and use (Fiksel et al. 2019; Hsing and Gennarelli 2019).
-Presentation of the results and the use of document formats that
-dissociate content from presentation, namely LaTeX, Jupyter Notebook, or
-R Markdown to cite a few, also contribute to the large number of
-potentially new tools students have to learn (Baumer et al. 2014).
+{[}6{]}, for students in biology). The course must be organized in a way
+that such students' progress by little steps to avoid exposition to much
+intimidating concepts and tools at once. Hence, a student in computing
+science already masters one or more computing languages, is acquainted
+with version control systems, with databases and with the way data are
+manipulated and represented in a computer. A student in mathematics or
+statistics is familiar with various concepts that underpins the
+techniques to analyse the data. On the other hand, students in biology,
+medicine, psychology, social sciences, economics, \ldots{} have very
+different \emph{a priori} knowledge. Version control systems like git,
+and their internet hosting counterparts like GitHub, Gitlab or Bitbucket
+also make part of the tools that data science course teaches and use
+{[}7,8{]}. Presentation of the results and the use of document formats
+that dissociate content from presentation, namely LaTeX, Jupyter
+Notebook, or R Markdown to cite a few, also contribute to the large
+number of potentially new tools students have to learn {[}9{]}.
 
 Suitable computer hardware and software environments are required in the
-practical sessions of the courses. Different approaches range from
-inline software (RStudio Cloud (\url{https://rstudio.cloud/}),
-Chromebook data science
+practical sessions of the courses. Different approaches range from using
+software accessed from a server (RStudio Cloud
+(\url{https://rstudio.cloud/}), Chromebook data science
 (\url{http://jhudatascience.org/chromebookdatascience/})) to local
 installation on the student's computers. The former requires
 infrastructure to run the software on a server, and that software is
 only accessible to the students during the course. The later raises
 problems of license for proprietary software, but also installation and
 configuration issues. An intermediary solution uses preconfigured
-virtual machines, or containers (e.g.~Docker) (Çetinkaya-Rundel and
-Rundel 2018 ; Boettiger 2015). Such a solution is the most flexible one
-because it can be deployed almost anywhere (in the computer lab, at
-home, in a laptop, \ldots). To fix theoretical concepts through applied
-exercises is a key aspect of learning data science (Larwin and Larwin
-2011). Correct choice of software is critical and exposing students
-early with the tools they are most susceptible to use later in their
-work is desirable. This was highlighted by (Auker and Barthelmess 2020)
+virtual machines, or containers (e.g.~Docker) {[}10,11{]}. Such a
+solution is the most flexible one because it can be deployed almost
+anywhere (in the computer lab, at home, in a laptop, \ldots). To fix
+theoretical concepts through applied exercises is a key aspect of
+learning data science {[}12{]}. Correct choice of software is critical
+and exposing students early with the tools they are most susceptible to
+use later in their work is desirable. This was highlighted by {[}13{]}
 for instance, for the analysis of ecological data.
 
 These data science courses pose several pedagogical challenges various,
@@ -208,21 +236,20 @@ developing high-level cognitive process abilities such as analysing and
 evaluating conceptual, procedural, and even metacognitive knowledge
 {[}Krathwohl 2002{]}. To achieve our learning objectives, we needed to
 switch to active learning methods so that students could better catch up
-with these high-level cognitive skills (Freeman et al. 2014). Our
-teaching and learning framework turned to a scenario including remote
-activities to be done before in-class ones, individual and group
-problem-solving, peer instructions and ongoing assessment. Indeed, the
-flipped classroom approach allows students to be active in their
-learning, which has the benefit of improving student outcomes (Freeman
-et al. 2014). Moreover, it allows flexibility and enables students to
-work at their pace. Their various learning styles are respected as they
-are actors in their learning process {[}Spadafora \& Zopito, 2018: TODO
-ref à ajouter{]}.
+with these high-level cognitive skills {[}14{]}. Our teaching and
+learning framework turned to a scenario including remote activities to
+be done before in-class ones, individual and group problem-solving, peer
+instructions and ongoing assessment. Indeed, the flipped classroom
+approach allows students to be active in their learning, which has the
+benefit of improving student outcomes {[}14{]}. Moreover, it allows
+flexibility and enables students to work at their pace. Their various
+learning styles are respected as they are actors in their learning
+process {[}Spadafora \& Zopito, 2018: TODO ref à ajouter{]}.
 
 Recently, data science is also used to analyse the effect of different
-pedagogical practices on the outcome of these courses {[}Estrellado et
-al. (2020); second ref to add{]}. A vast amount of data can be collected
-on students' activities, and the analysis of these data allows comparing
+pedagogical practices on the outcome of these courses {[}{[}15{]};
+second ref to add{]}. A vast amount of data can be collected on
+students' activities, and the analysis of these data allows comparing
 the impact of different pedagogical approaches, or to quantify and
 document the impact of changes in the courses.
 
@@ -341,41 +368,35 @@ exercises of increasing difficulties, ranging from level 1 to level 4.
 Table 1 summarizes main characteristics of the exercises according to
 the level.
 
-\begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.06}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.78}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.16}}@{}}
-\caption{four levels of increasing difficulties in the
-exercises.}\tabularnewline
-\toprule
-Level & Description & Type \\
-\midrule
-\endfirsthead
-\toprule
-Level & Description & Type \\
-\midrule
-\endhead
-L1 & Short exercise directly integrated in the course and with direct
-feedback for self-assessment & h5p \\
-L2 & Guided exercise with contextual feedback within a short tutorial &
-learnr \\
-L3 & Individual and guided data analysis & individual project \\
-L4 & More complex and free data analysis and reporting (group of 2 or 4
-students) & group project \\
-\bottomrule
-\end{longtable}
+\begin{table}
+
+\caption{\label{tab:tab_ex_levels_summary}\label{tab:tab_ex_levels} Four levels of increasing difficulties in the exercises.}
+\centering
+\begin{tabular}[t]{l|l|l}
+\hline
+Level & Description & Type\\
+\hline
+L1 & Interactive exercise in the course, direct feedback & h5p\\
+\hline
+L2 & Tutorial with guided exercises, feedback and hints & learnr\\
+\hline
+L3 & Individual and guided data analysis & individual project\\
+\hline
+L4 & Free data analysis and reporting (by 2 or 4 students) & group project\\
+\hline
+\end{tabular}
+\end{table}
 
 {[}one or two paragraphs to describe statistical methods used
 here\ldots{]}
 
 The NASA-LTX questionnaire is composed of six questions on a Likert
-scale to quantify the perceived workload to complete a task (Hart and
-Staveland 1988). The questions concern mental load, physical load, time
-pressure, expected success, effort required, and frustration experienced
-during the accomplishment of the task. The average value for the six
-questions constitutes a Raw Task Load indeX (RTLX) (Byers, Bittner, and
-Hill 1989) that we used to quantify how students perceive the workload
-of a task.
+scale to quantify the perceived workload to complete a task {[}16{]}.
+The questions concern mental load, physical load, time pressure,
+expected success, effort required, and frustration experienced during
+the accomplishment of the task. The average value for the six questions
+constitutes a Raw Task Load indeX (RTLX) {[}17{]} that we used to
+quantify how students perceive the workload of a task.
 
 \hypertarget{results}{%
 \section{Results}\label{results}}
@@ -441,26 +462,22 @@ challenge in machine learning that replaced one group GitHub project.
 This challenge is omitted from the present analysis, being an isolate
 activity that is difficult to compare to the rest.
 
-\begin{longtable}[]{@{}lrrrlrr@{}}
-\caption{\label{tab:tab_course} Number of students, modules, and
-exercises for each course. For the learnr tutorials, the first number is
-the amount of tutorial documents and the second number in brackets is
-the total number of questions in these tutorials.}\tabularnewline
-\toprule
-Course & Students & Modules & H5P & Learnr & Indiv. projects & Group
-projects \\
-\midrule
-\endfirsthead
-\toprule
-Course & Students & Modules & H5P & Learnr & Indiv. projects & Group
-projects \\
-\midrule
-\endhead
-A & 59 & 12 & 59 & 24 (211) & 10 & 4 \\
-B & 45 & 8 & 29 & 11 (108) & 12 & 2 \\
-C & 26 & 6 & 19 & 7 (37) & 7 & 1 \\
-\bottomrule
-\end{longtable}
+\begin{table}
+
+\caption{\label{tab:tab_course_summary}\label{tab:tab_course} Number of students, modules, and exercises for each course. For the learnr tutorials, the first number is the amount of tutorial documents and the second number in brackets is the total number of questions in these tutorials.}
+\centering
+\begin{tabular}[t]{l|r|r|r|l|r|r}
+\hline
+Course & Students & Modules & H5P & Learnr & Indiv. projects & Group projects\\
+\hline
+A & 59 & 12 & 59 & 24 (211) & 10 & 4\\
+\hline
+B & 45 & 8 & 29 & 11 (108) & 12 & 2\\
+\hline
+C & 26 & 6 & 19 & 7 (37) & 7 & 1\\
+\hline
+\end{tabular}
+\end{table}
 
 \hypertarget{measured-and-perceived-cognitive-workload-in-learnr-tutorials}{%
 \subsection{Measured and perceived cognitive workload in learnr
@@ -500,14 +517,7 @@ self-teaching and self-assessing their competences before switching to
 the practice with confidence.
 
 \begin{figure}
-\centering
-\includegraphics{teaching_data_science_files/figure-latex/fig_learn_trials-1.pdf}
-\caption{\label{fig:fig_learn_trials} Average number of retries that
-where required for each student to find the right answer in learnr
-tutorials exercises (year 2020-2021). This measure is used as an
-indirect, but objective measurement of the cognitive workload. The black
-dot is the average for the whole classes and \emph{n} is the number of
-observations.}
+\includegraphics[width=1\linewidth]{teaching_data_science_files/figure-latex/fig_learn_trials-1} \caption{\label{fig:fig_learn_trials} Average number of retries that where required for each student to find the right answer in learnr tutorials exercises (year 2020-2021). This measure is used as an indirect, but objective measurement of the cognitive workload. The black dot is the average for the whole classes and *n* is the number of observations.}\label{fig:fig_learn_trials}
 \end{figure}
 
 The objective measurement of the cognitive workload based on the average
@@ -527,12 +537,7 @@ three courses. Participation to the survey was high: 48/59 (81\%), 35/45
 (78\%) and 18/26 (69\%) for courses A, B, and C respectively.
 
 \begin{figure}
-\centering
-\includegraphics{teaching_data_science_files/figure-latex/fig_rtlx-1.pdf}
-\caption{\label{fig:fig_rtlx} Perceived workload for the learnr
-tutorials in the three courses (year 2020-2021). The black circle is the
-mean RTLX value. The number above each box is the number of
-respondants.}
+\includegraphics[width=1\linewidth]{teaching_data_science_files/figure-latex/fig_rtlx-1} \caption{\label{fig:fig_rtlx} Perceived workload for the learnr tutorials in the three courses (year 2020-2021). The black circle is the mean RTLX value. The number above each box is the number of respondants.}\label{fig:fig_rtlx}
 \end{figure}
 
 The difficulty of the course, and thus, of the exercises in the
@@ -551,12 +556,7 @@ software environment.
 project}{Final exam versus project}}\label{final-exam-versus-project}}
 
 \begin{figure}
-\centering
-\includegraphics{teaching_data_science_files/figure-latex/fig_exams_projects-1.pdf}
-\caption{\label{fig:fig_exams_projects} Grades obtained at the final
-exam in function of grades obtained for the projects for courses A and B
-during two years (course B was still in its old form in 2018-2019 and is
-thus not represented).}
+\includegraphics[width=1\linewidth]{teaching_data_science_files/figure-latex/fig_exams_projects-1} \caption{\label{fig:fig_exams_projects}  Grades obtained at the final exam in function of grades obtained for the projects for courses A and B during two years (course B was still in its old form in 2018-2019 and is thus not represented).}\label{fig:fig_exams_projects}
 \end{figure}
 
 In 2018-2019 and 2019-2020, the summative assessment was based on the
@@ -721,11 +721,7 @@ XXX. A 3x3 hexagonal cells pattern was chosen, and students are thus
 classified into nine different groups.
 
 \begin{figure}
-\centering
-\includegraphics{teaching_data_science_files/figure-latex/fig_som-1.pdf}
-\caption{\label{fig:fig_som} Self-organizing map of the student
-activities across the three courses (year 2020-2021). See the text for
-the explanations.}
+\includegraphics[width=1\linewidth]{teaching_data_science_files/figure-latex/fig_som-1} \caption{\label{fig:fig_som} Self-organizing map of the student activities across the three courses (year 2020-2021). See the text for the explanations.}\label{fig:fig_som}
 \end{figure}
 
 In \ref {fig:fig_som}, the small plots in gray show how selected metrics
@@ -825,15 +821,7 @@ lockdown, we rapidly opened the dedicated Discord channels and a common
 email address for all teachers were installed for a faster reaction.
 
 \begin{figure}
-\centering
-\includegraphics{teaching_data_science_files/figure-latex/fig_support_by_time-1.pdf}
-\caption{\label{fig:fig_support_by_time} a. Contributions of the
-students to the projects by periods of two weeks of course. b.
-Contributions by question asked (log scale) as a proxy measurement of
-the effect of student-teacher interactions on the progression in data
-analysis. Light gray background indicates periods where distance
-teaching was mandatory due to Covid-19 lockdown (Y1 is 2019-2020, Y2 is
-2020-2021).}
+\includegraphics[width=1\linewidth]{teaching_data_science_files/figure-latex/fig_support_by_time-1} \caption{\label{fig:fig_support_by_time} a. Contributions of the students to the projects by periods of two weeks of course. b. Contributions by question asked (log scale) as a proxy measurement of the effect of student-teacher interactions on the progression in data analysis. Light gray background indicates periods where distance teaching was mandatory due to Covid-19 lockdown (Y1 is 2019-2020, Y2 is 2020-2021).}\label{fig:fig_support_by_time}
 \end{figure}
 
 {[}TODO: this paragraph must be adapted and reworked!{]} The
@@ -854,53 +842,52 @@ Consequently, support provided by the teachers in distance learning
 
 Teaching data science to a population of students that are not very used
 to advanced computer techniques and tools, and that have only basic
-knowledge in mathematics and statistics is a hard task (Sousa, Sorto,
-and White 2018). Our basic approach is to extend the training on a very
-long period: five successive terms spanning on three consecutive years
-(undergraduate and graduate). That way, the many different concepts they
-have to learn can be broken down into subunits (26 modules) that last
-for two weeks each. We also used flipped classrooms and blended course,
-with an emphasis on proactive exchange with the teachers: students have
-to ask questions to progress.
+knowledge in mathematics and statistics is a hard task {[}18{]}. Our
+basic approach is to extend the training on a very long period: five
+successive terms spanning on three consecutive years (undergraduate and
+graduate). That way, the many different concepts they have to learn can
+be broken down into subunits (26 modules) that last for two weeks each.
+We also used flipped classrooms and blended course, with an emphasis on
+proactive exchange with the teachers: students have to ask questions to
+progress.
 
 Our students are more used to a traditional approach made of lectures
 followed by exercises where important concepts are repeated at the
 beginning of the practical sessions. They tend to have a passive
 attitude during lectures and they expect the teachers and assistants
 feed them with the key concepts. That attitude does not work here.
-Proactive behaviour and autonomy are required (Freeman et al. 2014).
-They thus have to learn a very different way of learning. The transition
-between the theory they read in the book and the projects where they
-have to apply these concepts is too abrupt without a progression in
-three stages essentially: (1) auto-evaluation exercises directly in the
-book, (2) recall of the main concepts and guided step-by-step analysis
-of a first dataset with the learnr tutorials and (3) at least one guided
-individual project with another dataset. The middle task, the learnr
-tutorial, was immediately spotted by our students as a key activity in
-2018-2019. So, we have focused our attention on these documents in the
-following years. In 2020-2021, we have also tested the addition of a
-heuristic engine (gradethis) to provide contextual feedback on the
-errors students make in their answers. The RTLX index measured in
-2020-2021 will serve in the future as reference to work towards
-correctly designed tutorials, with lower perceived workload without
-sacrificing the content. The significant decrease in RTLX value from
-course A to C indicates that there is a still a margin of progression.
-We would like to see this decrease sooner, perhaps already in the second
-course.
+Proactive behaviour and autonomy are required {[}14{]}. They thus have
+to learn a very different way of learning. The transition between the
+theory they read in the book and the projects where they have to apply
+these concepts is too abrupt without a progression in three stages
+essentially: (1) auto-evaluation exercises directly in the book, (2)
+recall of the main concepts and guided step-by-step analysis of a first
+dataset with the learnr tutorials and (3) at least one guided individual
+project with another dataset. The middle task, the learnr tutorial, was
+immediately spotted by our students as a key activity in 2018-2019. So,
+we have focused our attention on these documents in the following years.
+In 2020-2021, we have also tested the addition of a heuristic engine
+(gradethis) to provide contextual feedback on the errors students make
+in their answers. The RTLX index measured in 2020-2021 will serve in the
+future as reference to work towards correctly designed tutorials, with
+lower perceived workload without sacrificing the content. The
+significant decrease in RTLX value from course A to C indicates that
+there is a still a margin of progression. We would like to see this
+decrease sooner, perhaps already in the second course.
 
 Ultimately, the task that better evaluates their practical skills in
 biological data analysis is the group project because they have to
 demonstrate what they can do with a dataset and minimal instructions.
 They have to figure out a suitable question, analyse the data to answer
 that question, present their results in a report and discuss what they
-found with a critical mind (Auker and Barthelmess 2020). This task is
-complex, especially for undergraduate students. That is why it is run in
-groups of two to four students, depending on the complexity of the
-problem. Here, they mobilize their collective intelligence to get
-results many of them would be hardly capable of achieving alone. Yet,
-the tracking of individual activity in the project through git allows
-figuring out clearly what was the contribution of each student in the
-group and to score their individual contributions suitably.
+found with a critical mind {[}13{]}. This task is complex, especially
+for undergraduate students. That is why it is run in groups of two to
+four students, depending on the complexity of the problem. Here, they
+mobilize their collective intelligence to get results many of them would
+be hardly capable of achieving alone. Yet, the tracking of individual
+activity in the project through git allows figuring out clearly what was
+the contribution of each student in the group and to score their
+individual contributions suitably.
 
 Sometimes, groups do not work well, and one student has to do most of
 the work. This is a clear weakness in this approach, especially if one
@@ -999,116 +986,128 @@ be quite different to what we are using today!
 \addcontentsline{toc}{section}{References}
 
 \hypertarget{refs}{}
-\begin{CSLReferences}{1}{0}
-\leavevmode\hypertarget{ref-Auker2020}{}%
-Auker, Linda A., and Erika L. Barthelmess. 2020. {``{Teaching R in the
-undergraduate ecology classroom: approaches, lessons learned, and
-recommendations}.''} \emph{Ecosphere} 11 (4): e03060.
-https://doi.org/\url{https://doi.org/10.1002/ecs2.3060}.
+\begin{CSLReferences}{0}{0}
+\leavevmode\hypertarget{ref-Marx2013}{}%
+\CSLLeftMargin{1. }
+\CSLRightInline{Marx V (2013) {The big challenges of big data}.
+\emph{Nature} 498: 255--260.}
 
 \leavevmode\hypertarget{ref-Baker2016}{}%
-Baker, Monya. 2016. {``1,500 Scientists Lift the Lid on
-Reproducibility.''} \emph{Nature} 533 (7604): 452--54.
-\url{https://doi.org/10.1038/533452a}.
+\CSLLeftMargin{2. }
+\CSLRightInline{Baker M (2016) 1,500 scientists lift the lid on
+reproducibility. \emph{Nature} 533: 452--454.}
 
 \leavevmode\hypertarget{ref-Banks2019}{}%
-Banks, George C., James G. Field, Frederick L. Oswald, Ernest H.
-O'Boyle, Ronald S. Landis, Deborah E. Rupp, and Steven G. Rogelberg.
-2019. {``{Answers to 18 Questions About Open Science Practices}.''}
-\emph{Journal of Business and Psychology} 34 (3): 257--70.
-\url{https://doi.org/10.1007/s10869-018-9547-8}.
-
-\leavevmode\hypertarget{ref-Baumer2014}{}%
-Baumer, Ben, Mine Cetinkaya-Rundel, Andrew Bray, Linda Loi, and Nicholas
-J. Horton. 2014. {``{R Markdown: Integrating A Reproducible Analysis
-Tool into Introductory Statistics}.''} \emph{Technology Innovations in
-Statistics Education} 8 (1). \url{https://doi.org/10.5070/t581020118}.
-
-\leavevmode\hypertarget{ref-Boettiger2015}{}%
-Boettiger, Carl. 2015. {``{An Introduction to Docker for Reproducible
-Research}.''} \emph{SIGOPS Oper. Syst. Rev.} 49 (1): 71--79.
-\url{https://doi.org/10.1145/2723872.2723882}.
-
-\leavevmode\hypertarget{ref-Byers1989}{}%
-Byers, J C, A Bittner, and S Hill. 1989. {``{Traditional and raw task
-load index (TLX) correlations: Are paired comparisons necessary? In
-A}.''} In.
-
-\leavevmode\hypertarget{ref-Cetinkaya-Rundel2021}{}%
-Çetinkaya-Rundel, Mine, and Victoria Ellison. 2021. {``{A Fresh Look at
-Introductory Data Science}.''} \emph{Journal of Statistics Education} 0
-(0): 1--27. \url{https://doi.org/10.1080/10691898.2020.1804497}.
-
-\leavevmode\hypertarget{ref-Cetinkaya-Rundel2018}{}%
-Çetinkaya-Rundel, Mine, and Colin Rundel. 2018. {``{Infrastructure and
-Tools for Teaching Computing Throughout the Statistical Curriculum}.''}
-\emph{American Statistician} 72 (1): 58--65.
-\url{https://doi.org/10.1080/00031305.2017.1397549}.
+\CSLLeftMargin{3. }
+\CSLRightInline{Banks GC, Field JG, Oswald FL, et al. (2019) {Answers to
+18 Questions About Open Science Practices}. \emph{Journal of Business
+and Psychology} 34: 257--270.}
 
 \leavevmode\hypertarget{ref-Donoho2017}{}%
-Donoho, David. 2017. {``{50 Years of Data Science}.''} \emph{Journal of
-Computational and Graphical Statistics} 26 (4): 745--66.
-\url{https://doi.org/10.1080/10618600.2017.1384734}.
+\CSLLeftMargin{4. }
+\CSLRightInline{Donoho D (2017) {50 Years of Data Science}.
+\emph{Journal of Computational and Graphical Statistics} 26: 745--766.}
 
-\leavevmode\hypertarget{ref-Estrellado2020}{}%
-Estrellado, Ryan A., Emily A. Bovee, Jesse Mostipak, Joshua M.
-Rosenberg, and Isabella C. Velásquez. 2020. \emph{{Data science in
-education using R}}. London, England: Routledge.
-\url{https://datascienceineducation.com/}.
-
-\leavevmode\hypertarget{ref-Fiksel2019}{}%
-Fiksel, Jacob, Leah R. Jager, Johannna S. Johanna S Hardin, and Margaret
-A. Taub. 2019. {``{Using GitHub Classroom To Teach Statistics}.''}
-\emph{Journal of Statistics Education} 27 (2): 110--19.
-\url{https://doi.org/10.1080/10691898.2019.1617089}.
-
-\leavevmode\hypertarget{ref-Freeman2014}{}%
-Freeman, Scott, Sarah L. Eddy, Miles McDonough, Michelle K. Smith,
-Nnadozie Okoroafor, Hannah Jordt, and Mary Pat Wenderoth. 2014.
-{``{Active learning increases student performance in science,
-engineering, and mathematics}.''} \emph{Proceedings of the National
-Academy of Sciences} 111 (23): 8410--15.
-\url{https://doi.org/10.1073/PNAS.1319030111}.
-
-\leavevmode\hypertarget{ref-Hart1988}{}%
-Hart, Sandra G., and Lowell E. Staveland. 1988. {``{Development of
-NASA-TLX (Task Load Index): Results of Empirical and Theoretical
-Research}.''} \emph{Advances in Psychology} 52 (C): 139--83.
-\url{https://doi.org/10.1016/S0166-4115(08)62386-9}.
-
-\leavevmode\hypertarget{ref-Hsing2019}{}%
-Hsing, Courtney, and Vanessa Gennarelli. 2019. {``{Using GitHub in the
-Classroom Predicts Student Learning Outcomes and Classroom Experiences:
-Findings from a Survey of Students and Teachers}.''} In
-\emph{Proceedings of the 50th ACM Technical Symposium on Computer
-Science Education}, 672--78. SIGCSE '19. New York, NY, USA: Association
-for Computing Machinery. \url{https://doi.org/10.1145/3287324.3287460}.
-
-\leavevmode\hypertarget{ref-Larwin2011}{}%
-Larwin, Karen, and David Larwin. 2011. {``{A meta-analysis examining the
-impact of computer-assisted instruction on postsecondary statistics
-education: 40 years of research}.''} \emph{Journal of Research on
-Technology in Education} 43 (3): 253--78.
-\url{https://doi.org/10.1080/15391523.2011.10782572}.
-
-\leavevmode\hypertarget{ref-Marx2013}{}%
-Marx, Vivien. 2013. {``{The big challenges of big data}.''}
-\emph{Nature} 498 (7453): 255--60.
-\url{https://doi.org/10.1038/498255a}.
+\leavevmode\hypertarget{ref-Cetinkaya-Rundel2021}{}%
+\CSLLeftMargin{5. }
+\CSLRightInline{Çetinkaya-Rundel M, Ellison V (2021) {A Fresh Look at
+Introductory Data Science}. \emph{Journal of Statistics Education} 0:
+1--27.}
 
 \leavevmode\hypertarget{ref-Onwuegbuzie2003}{}%
-Onwuegbuzie, Anthony J., and Vicki A. Wilson. 2003. {``{Statistics
-Anxiety: Nature, etiology, antecedents, effects, and treatments--a
-comprehensive review of the literature}.''} \emph{Teaching in Higher
-Education} 8 (2): 195--209.
-\url{https://doi.org/10.1080/1356251032000052447}.
+\CSLLeftMargin{6. }
+\CSLRightInline{Onwuegbuzie AJ, Wilson VA (2003) {Statistics Anxiety:
+Nature, etiology, antecedents, effects, and treatments--a comprehensive
+review of the literature}. \emph{Teaching in Higher Education} 8:
+195--209.}
+
+\leavevmode\hypertarget{ref-Fiksel2019}{}%
+\CSLLeftMargin{7. }
+\CSLRightInline{Fiksel J, Jager LR, Hardin JSJS, et al. (2019) {Using
+GitHub Classroom To Teach Statistics}. \emph{Journal of Statistics
+Education} 27: 110--119.}
+
+\leavevmode\hypertarget{ref-Hsing2019}{}%
+\CSLLeftMargin{8. }
+\CSLRightInline{Hsing C, Gennarelli V (2019) {Using GitHub in the
+Classroom Predicts Student Learning Outcomes and Classroom Experiences:
+Findings from a Survey of Students and Teachers}, \emph{Proceedings of
+the 50th ACM technical symposium on computer science education}, New
+York, NY, USA, Association for Computing Machinery, 672--678.}
+
+\leavevmode\hypertarget{ref-Baumer2014}{}%
+\CSLLeftMargin{9. }
+\CSLRightInline{Baumer B, Cetinkaya-Rundel M, Bray A, et al. (2014) {R
+Markdown: Integrating A Reproducible Analysis Tool into Introductory
+Statistics}. \emph{Technology Innovations in Statistics Education} 8.}
+
+\leavevmode\hypertarget{ref-Cetinkaya-Rundel2018}{}%
+\CSLLeftMargin{10. }
+\CSLRightInline{Çetinkaya-Rundel M, Rundel C (2018) {Infrastructure and
+Tools for Teaching Computing Throughout the Statistical Curriculum}.
+\emph{American Statistician} 72: 58--65.}
+
+\leavevmode\hypertarget{ref-Boettiger2015}{}%
+\CSLLeftMargin{11. }
+\CSLRightInline{Boettiger C (2015) {An Introduction to Docker for
+Reproducible Research}. \emph{SIGOPS Oper Syst Rev} 49: 71--79.}
+
+\leavevmode\hypertarget{ref-Larwin2011}{}%
+\CSLLeftMargin{12. }
+\CSLRightInline{Larwin K, Larwin D (2011) {A meta-analysis examining the
+impact of computer-assisted instruction on postsecondary statistics
+education: 40 years of research}. \emph{Journal of Research on
+Technology in Education} 43: 253--278.}
+
+\leavevmode\hypertarget{ref-Auker2020}{}%
+\CSLLeftMargin{13. }
+\CSLRightInline{Auker LA, Barthelmess EL (2020) {Teaching R in the
+undergraduate ecology classroom: approaches, lessons learned, and
+recommendations}. \emph{Ecosphere} 11: e03060.}
+
+\leavevmode\hypertarget{ref-Freeman2014}{}%
+\CSLLeftMargin{14. }
+\CSLRightInline{Freeman S, Eddy SL, McDonough M, et al. (2014) {Active
+learning increases student performance in science, engineering, and
+mathematics}. \emph{Proceedings of the National Academy of Sciences}
+111: 8410--8415.}
+
+\leavevmode\hypertarget{ref-Estrellado2020}{}%
+\CSLLeftMargin{15. }
+\CSLRightInline{Estrellado RA, Bovee EA, Mostipak J, et al. (2020) {Data
+science in education using R}, London, England, Routledge.}
+
+\leavevmode\hypertarget{ref-Hart1988}{}%
+\CSLLeftMargin{16. }
+\CSLRightInline{Hart SG, Staveland LE (1988) {Development of NASA-TLX
+(Task Load Index): Results of Empirical and Theoretical Research}.
+\emph{Advances in Psychology} 52: 139--183.}
+
+\leavevmode\hypertarget{ref-Byers1989}{}%
+\CSLLeftMargin{17. }
+\CSLRightInline{Byers JC, Bittner A, Hill S (1989) {Traditional and raw
+task load index (TLX) correlations: Are paired comparisons necessary? In
+A}.}
 
 \leavevmode\hypertarget{ref-Sousa2018}{}%
-Sousa, De, In M A Sorto, and A White. 2018. {``{Teaching With R---A
-Curse or a Blessing?}''} In \emph{Looking Back, Looking Forward.
-Proceedings of the Tenth International Conference on Teaching
-Statistics}. Vol. 10. Kyoto: International Statistical Institute.
+\CSLLeftMargin{18. }
+\CSLRightInline{Sousa D, Sorto IMA, White A (2018) {Teaching With R---A
+Curse or a Blessing?}, \emph{Looking back, looking forward. Proceedings
+of the tenth international conference on teaching statistics}, Kyoto,
+International Statistical Institute.}
 
 \end{CSLReferences}
+
+% You may incorporate your references as follows in your main tex file.
+% Using BibTex is not recommended but can be handled.
+
+\begin{thebibliography}{99}
+bibliography.bib
+\end{thebibliography}
+
+\medskip
+% The data information below will be filled by AIMS editorial staff
+Received xxxx 20xx; revised xxxx 20xx.
+\medskip
 
 \end{document}

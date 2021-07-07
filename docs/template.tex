@@ -1,0 +1,156 @@
+% !!!IMPORTANT NOTE: Please read carefully all information including those preceded by % sign
+%Before you compile the tex file please download the class file AIMS.cls from the following URL link to the
+%local folder where your tex file resides. http://aimsciences.org/journals/tex-sample/AIMS.cls.
+\documentclass{aims}
+\usepackage{amsmath}
+  \usepackage{paralist}
+  \usepackage{graphics} %% add this and next lines if pictures should be in esp format
+  \usepackage{epsfig} %For pictures: screened artwork should be set up with an 85 or 100 line screen
+\usepackage{graphicx}  \usepackage{epstopdf}%This is to transfer .eps figure to .pdf figure; please compile your paper using PDFLeTex or PDFTeXify.
+ \usepackage[colorlinks=true]{hyperref}
+   % Warning: when you first run your tex file, some errors might occur,
+   % please just press enter key to end the compilation process, then it will be fine if you run your tex file again.
+   % Note that it is highly recommended by AIMS to use this package.
+   \hypersetup{urlcolor=blue, citecolor=red}
+%\usepackage{hyperref}
+
+  \textheight=8.2 true in
+   \textwidth=5.0 true in
+    \topmargin 30pt
+     \setcounter{page}{1}
+
+% The next 5 line will be entered by an editorial staff.
+\def\currentvolume{X}
+ \def\currentissue{X}
+  \def\currentyear{200X}
+   \def\currentmonth{XX}
+    \def\ppages{X--XX}
+     \def\DOI{10.3934/xx.xxxxxxx}
+
+ % Please minimize the usage of "newtheorem", "newcommand", and use
+ % equation numbers only situation when they provide essential convenience
+ % Try to avoid defining your own macros
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}
+\newtheorem*{main}{Main Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}{Proposition}
+\newtheorem{conjecture}{Conjecture}
+\newtheorem*{problem}{Problem}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{remark}{Remark}
+\newtheorem*{notation}{Notation}
+\newcommand{\ep}{\varepsilon}
+\newcommand{\eps}[1]{{#1}_{\varepsilon}}
+
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
+  $if(csl-refs)$
+  \newlength{\cslhangindent}
+  \setlength{\cslhangindent}{1.5em}
+  \newlength{\csllabelwidth}
+  \setlength{\csllabelwidth}{3em}
+  \newenvironment{CSLReferences}[3] % #1 hanging-ident, #2 entry spacing
+   {% don't indent paragraphs
+    \setlength{\parindent}{0pt}
+    % turn on hanging indent if param 1 is 1
+    \ifodd #1 \everypar{\setlength{\hangindent}{\cslhangindent}}\ignorespaces\fi
+    % set entry spacing
+    \ifnum #2 > 0
+    \setlength{\parskip}{#2\baselineskip}
+    \fi
+   }%
+   {}
+  \usepackage{calc} % for \widthof, \maxof
+  \newcommand{\CSLBlock}[1]{#1\hfill\break}
+  \newcommand{\CSLLeftMargin}[1]{\parbox[t]{\maxof{\widthof{#1}}{\csllabelwidth}}{#1}}
+  \newcommand{\CSLRightInline}[1]{\parbox[t]{\linewidth}{#1}}
+  \newcommand{\CSLIndent}[1]{\hspace{\cslhangindent}#1}
+  $endif$
+
+
+
+%% Place the running title of the paper with 40 letters or less in []
+ %% and the full title of the paper in { }.
+\title[$runtitle$] %Use the shortened version of the full title
+      {$title$}
+
+% Place all authors' names in [ ] shown as running head, Leave { } empty
+% Please use `and' to connect the last two names if applicable
+% Use FirstNameInitial.  MiddleNameInitial. LastName, or only last names of authors if there are too many authors
+\author[Guyliann Engels, Philippe Grosjean and Frédérique Arthus]{}
+
+% It is required to enter 2020 MSC.
+\subjclass{Primary: XXXXX; Secondary: YYYYY.}
+% Please provide minimum  5 keywords.
+ \keywords{Data Science Teaching, Flipped Classroom, R, RStudio, git.}
+
+% Email address of each of all authors is required.
+% You may list email addresses of all other authors, separately.
+ \email{Guyliann.Engels@umons.ac.be}
+ \email{Philippe.Grosjean@umons.ac.be}
+ \email{Frederique.Arthus@umons.ac.be}
+
+% Put your short thanks below. For long thanks/acknowledgements,
+%please go to the last acknowledgments section.
+%\thanks{We would like to acknowledge...}
+
+% Add corresponding author at the footnote of the first page if it is necessary.
+% Please add <dollar>^*<dollar> adjacent to the corresponding author's name on the first page.
+% The example shown in this template is if the first author is the corresponding author.
+\thanks{\textsuperscript{*} Corresponding author: Guyliann Engels}
+
+\begin{document}
+\maketitle
+
+% Enter the first author's name and address:
+\centerline{\scshape Guyliann Engels\textsuperscript{*}, Philippe Grosjean}
+\medskip
+{\footnotesize
+% please put the address of the first author
+ \centerline{Numerical Ecology Department, Complexys and InforTech Institutes, University of Mons}
+   %\centerline{Other lines}
+   \centerline{Avenue du Champ de Mars, 8, 7000 Mons, Belgium}
+} % Do not forget to end the {\footnotesize by the sign }
+
+\medskip
+
+\centerline{\scshape Frederique Arthus}
+\medskip
+{\footnotesize
+ % please put the address of the second  and third author
+ \centerline{ Pedagogical Support and Quality Assurance Department, University of Mons}
+  % \centerline{Other lines}
+   \centerline{Place du Parc, 20, 700 Mons, Belgium}
+}
+
+\bigskip
+
+% The name of the associate editor will be entered by an editorial staff
+% "Communicated by the associate editor name" is not needed for special issue.
+% \centerline{(Communicated by the associate editor name)}
+
+
+%The abstract of your paper
+\begin{abstract}
+  $abstract$
+\end{abstract}
+
+$body$
+
+% You may incorporate your references as follows in your main tex file.
+% Using BibTex is not recommended but can be handled.
+
+\begin{thebibliography}{99}
+$bibliography$
+\end{thebibliography}
+
+\medskip
+% The data information below will be filled by AIMS editorial staff
+Received xxxx 20xx; revised xxxx 20xx.
+\medskip
+
+\end{document}
