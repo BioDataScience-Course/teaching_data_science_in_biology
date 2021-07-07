@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020) (preloaded format=xelatex 2021.1.3)  7 JUL 2021 08:38
+This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020) (preloaded format=xelatex 2021.1.3)  7 JUL 2021 08:43
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -526,31 +526,34 @@ Overfull \hbox (32.22pt too wide) in paragraph at lines 1092--1098
 [][][] [] 
  []
 
-No file teaching_data_science.bbl.
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1111.
+
+LaTeX Warning: Empty `thebibliography' environment on input line 1106.
+
 
 Overfull \vbox (1.356pt too high) has occurred while \output is active []
 
-[16] [17]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 1111.
+[16]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1113.
+[17]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 1113.
 (./teaching_data_science.aux)
-Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 1111.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1111.
+Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 1113.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1113.
 
 Package rerunfilecheck Info: File `teaching_data_science.out' has not changed.
-(rerunfilecheck)             Checksum: 90ACBA31743F4A09BDD58ADB5A04EC43;817.
+(rerunfilecheck)             Checksum: E0E881694A15D02C24E80EFFEFEB445E;864.
 
 LaTeX Warning: There were multiply-defined labels.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1111.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1113.
  ) 
 Here is how much of TeX's memory you used:
- 9856 strings out of 479418
- 143094 string characters out of 5884586
- 407432 words of memory out of 5000000
+ 9857 strings out of 479418
+ 143144 string characters out of 5884586
+ 407499 words of memory out of 5000000
  27037 multiletter control sequences out of 15000+600000
- 538307 words of font info for 62 fonts, out of 8000000 for 9000
+ 538315 words of font info for 63 fonts, out of 8000000 for 9000
  1515 hyphenation exceptions out of 8191
- 34i,9n,42p,658b,394s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 34i,9n,46p,658b,394s stack positions out of 5000i,500n,10000p,200000b,80000s
 
 Output written on teaching_data_science.pdf (17 pages).
