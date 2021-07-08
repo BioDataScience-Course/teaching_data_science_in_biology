@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020) (preloaded format=xelatex 2021.1.3)  8 JUL 2021 10:53
+This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020) (preloaded format=xelatex 2021.1.3)  8 JUL 2021 12:17
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -375,7 +375,7 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 Overfull \vbox (1.356pt too high) has occurred while \output is active []
 
 [2] [3]
-Overfull \hbox (1.55006pt too wide) in paragraph at lines 361--374
+Overfull \hbox (1.55006pt too wide) in paragraph at lines 364--377
  [][] 
  []
 
@@ -429,24 +429,24 @@ Overfull \vbox (1.356pt too high) has occurred while \output is active []
 Overfull \vbox (1.356pt too high) has occurred while \output is active []
 
 [16]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1091.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1104.
 [17]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 1091.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 1104.
 (./teaching_data_science.aux)
-Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 1091.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1091.
+Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 1104.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1104.
 
 Package rerunfilecheck Info: File `teaching_data_science.out' has not changed.
 (rerunfilecheck)             Checksum: 3DDA0382F8988A95EA31E44FDC62B8F3;770.
 
 LaTeX Warning: There were multiply-defined labels.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1091.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1104.
  ) 
 Here is how much of TeX's memory you used:
  9791 strings out of 479418
  142191 string characters out of 5884586
- 409062 words of memory out of 5000000
+ 410062 words of memory out of 5000000
  26975 multiletter control sequences out of 15000+600000
  538315 words of font info for 63 fonts, out of 8000000 for 9000
  1515 hyphenation exceptions out of 8191
