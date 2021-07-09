@@ -152,11 +152,12 @@ Learnr: Analysis of Three Years Data}
 In a context where there is an exponentially growing mass of data
 \cite{Marx2013}, a reproducibility crisis in Science \cite{Baker2016},
 and a progressive adoption of Open Science practices \cite{Banks2019},
-statistics were broadened to a wider discipline called Data Science. For
-the Data Science Association, ``the Data Science means the scientific
-study of the creation, validation and transformation of data to create
-meaning'' (\url{http://www.datascienceassn.org/code-of-conduct.html}).
-These changes also led to the emergence of data science programs in
+statistics were broadened to a wider discipline called Data Science
+\cite{Cleveland2001}. For the Data Science Association, ``the Data
+Science means the scientific study of the creation, validation and
+transformation of data to create meaning''
+(\url{http://www.datascienceassn.org/code-of-conduct.html}). These
+changes also led to the emergence of data science programs in
 universities and higher schools \cite{Donoho2017, Cetinkaya-Rundel2021}.
 One example is the Harvard Data Science initiative
 (\url{https://datascience.harvard.edu/about}) launched in 2017. With a
@@ -211,28 +212,32 @@ lab, at home, on a laptop, \ldots). To apply theoretical concepts
 through exercises is a key aspect of learning data science
 \cite{Larwin2011}. Correct choice of software is critical and exposing
 students early with the tools they are most susceptible to use later in
-their work is desirable. This was highlighted by \cite{Auker2020} for
-instance, in the case of ecological data.
+their work is desirable. This was highlighted by Auker and Barthelmess
+\cite{Auker2020} for instance, for ecologists and by Alvarenga da Silva
+and Sampaio Moura \cite{Alvarenga2020} for physicians.
 
 These data science courses pose several pedagogical challenges because
 numerous and unfamiliar concepts must be acquired by a heterogeneous
-class population. Learning objectives span a large range of cognitive
-abilities and, in these courses, the intended learning outcomes aim at
-developing high-level cognitive process abilities such as conceptual,
-procedural, and even metacognitive knowledge \cite{Krathwohl2002}. To
-meet such learning objectives, active learning methods are useful so
-that students could better catch up with these high-level cognitive
-skills \cite{Freeman2014}. Teaching and learning frameworks turn to a
-blended learning scenario including remote activities to be done before
-and after in-class ones, individual and group problem-solving, peer
-instructions and ongoing assessment. Indeed, the flipped classroom
-approach allows students to be active in their learning, which has the
-benefit of improving student outcomes \cite{Freeman2014}. Moreover, it
-allows flexibility and enables students to work at their pace. Their
-various learning styles are respected as they are actors in their
-learning process \cite{Spadafora2018}. Such frameworks are open,
-learning centered, and supported by a varied and rich environment
-\cite{Burton2011}.
+class population \cite{Guzman2019}. Learning objectives span a large
+range of cognitive abilities and, in these courses, the intended
+learning outcomes aim at developing high-level cognitive process
+abilities such as conceptual, procedural, and even metacognitive
+knowledge \cite{Krathwohl2002}. To meet such learning objectives, active
+learning methods are useful so that students could better catch up with
+these high-level cognitive skills \cite{Freeman2014}. Advances in
+educational psychology, reviewed by Kirchner \& Hendrick
+\cite{Kirschner2020}, give a scientific background to understand why a
+pedagogical practice works or not. Many teaching and learning frameworks
+involving numerical tools turn to a blended learning scenario including
+remote activities to be done before and after in-class ones, individual
+and group problem-solving, peer instructions and ongoing assessment.
+Indeed, the flipped classroom approach allows students to be active in
+their learning, which has the benefit of improving student outcomes
+\cite{Freeman2014}. Moreover, it allows flexibility and enables students
+to work at their pace. Their various learning styles are respected as
+they are actors in their learning process \cite{Spadafora2018}. Such
+frameworks are open, learning centered, and supported by a varied and
+rich environment \cite{Burton2011}.
 
 Recently, data science is also used to analyze the effect of different
 pedagogical practices on the outcome of these courses thanks to learning
@@ -261,11 +266,12 @@ cyclical approach that consists in stating goals, building pedagogical
 material with a large emphasis on numerical tools and collection of
 students' activities, and finally, analysis of the data collected. These
 results let us regulate our teaching activities the following academic
-year with refined goals and improved pedagogical techniques. Here, we
-present the main results spanning on three successive academic years
-from 2018 to 2021, including two particular periods where distance
-learning was forced due to Covid-19 pandemic lockdown. In this paper, we
-will focus on the following four questions:
+year with refined goals and improved pedagogical techniques. This
+technique is known as educational data mining knowledge discovery cycle
+\cite{Romero2020}. Here, we present the main results spanning on three
+successive academic years from 2018 to 2021, including two particular
+periods where distance learning was forced due to Covid-19 pandemic
+lockdown. In this paper, we will focus on the following four questions:
 
 \begin{itemize}
 \item
@@ -372,12 +378,12 @@ Data about users, courses, lectures and projects, as well as grading
 items (on average, more that 130 grading items were established for each
 student in 2020-2021) are anonymized: names, emails and all the personal
 information are replaced by random identifiers. The different tables are
-ultimately exported into CSV files and made public. These data are
-available at {[}\ldots{} Zenodo?{]}. Data collection, treatment, and use
-respect European GDPR (General Data Protection Regulation) since each
-student had to agree explicitly with the way data are collected and used
-(including for research purpose) before each course begins. They can
-visualize their data through personalized reports at any time.
+ultimately exported into CSV files and made public. Data collection,
+treatment, and use respect European GDPR (General Data Protection
+Regulation) since each student had to agree explicitly with the way data
+are collected and used (including for research purpose) before each
+course begins. They can visualize their data through personalized
+reports at any time.
 
 The course material is organized in a way that favors autonomy and
 self-assessment (direct feedback in the exercises, hints and retry
@@ -404,17 +410,17 @@ L4 & Free data analysis and reporting (by 2 or 4 students) & group project\\
 \end{tabular}
 \end{table}
 
-R and tidyverse packages (\url{https://www.tidyverse.org}) were user to
-prepare the data and for the analyses. A GitHub repository with the code
-used to create the figures and table in this paper is available at
+R and tidyverse \cite{Wickham2019} packages
+(\url{https://www.tidyverse.org}) were user to prepare the data and for
+the analyses. A GitHub repository with the code used to create the
+figures and table in this paper is available at
 \url{https://github.com/BioDataScience-Course/teaching_data_science_in_biology}.
-The analysis of variance and the post-hoc Honest Significant Difference
-(HSD) of Tukey is used for the comparison between courses. The
-Self-Organizing Map (SOM) allow an n-dimensional object to be projected
-into a 2-dimensional object \cite{Kohonen1995}. Like a principal
-component analysis (PCA), this method will bring similar objects closer
-together and different objects further apart. The \{kohonen\} R package
-implements these methods \cite{Wehrens2018}.
+An analysis of variance and a Tukey's post-hoc Honest Significant
+Difference (HSD) test are used for the comparison between courses. A
+Self-Organizing Map (SOM) allows an n-dimensional table to be projected
+into a 2-dimensional object \cite{Kohonen1995}, and it is used to
+classify students' profiles. The \{kohonen\} R package is used to
+compute the model \cite{Wehrens2018}.
 
 A NASA-LTX questionnaire was used to study perceived workload to
 complete a task. It is composed of six questions on a Likert scale
@@ -1080,6 +1086,11 @@ probably be quite different to what we are used today!
      \newblock Applications of data science to game learning analytics data: A systematic literature review,
      \newblock \emph{Computers \& Education}, \textbf{141} (2019), 103612.
 
+\bibitem{Alvarenga2020} [10.1080/10691898.2020.1773354]
+     \newblock  H. Alvarenga da Silva and A. Sampaio,
+     \newblock Teaching introductory statistical classes in medical schools using RStudio and R statistical language: Evaluating technology acceptance and change in attitude toward statistics,
+     \newblock \emph{Journal of Statistics Education}, \textbf{28} (2020), 212--219.
+
 \bibitem{Auker2020} [10.1002/ecs2.3060]
      \newblock  L. A. Auker and E. L. Barthelmess,
      \newblock Teaching R in the undergraduate ecology classroom: approaches, lessons learned, and recommendations,
@@ -1130,6 +1141,11 @@ probably be quite different to what we are used today!
      \newblock A Fresh Look at Introductory Data Science,
      \newblock \emph{Journal of Statistics Education}, \textbf{0} (2021), 1--27.
 
+\bibitem{Cleveland2001} [10.2307/1403527]
+     \newblock W.S. Cleveland,
+     \newblock Data science: An action plan for expanding the technical areas of the field of statistics,
+     \newblock \emph{International Statistical Review}, \textbf{1} (2001), 21--26.
+
 \bibitem{Compeau2019} [10.1080/10691898.2020.1804497]
      \newblock P. Compeau,
      \newblock Establishing a computational biology flipped classroom,
@@ -1155,6 +1171,11 @@ probably be quite different to what we are used today!
      \newblock Active learning increases student performance in science, engineering, and mathematics,
      \newblock \emph{Proceedings of the National Academy of Sciences}, \textbf{111} (2014), 8410--8415.
 
+\bibitem{Guzman2019} [10.1187/cbe.19-02-0041]
+     \newblock L.M. Guzman, M.W. Pennell, E. Nikelski and D.S. Srivastava,
+     \newblock Successful integration of data science in undergraduate biostatistics courses using cognitive load theory,
+     \newblock \emph{CBE-Life Sciences Education}, \textbf{18} (2019), ar49 1--10.
+
 \bibitem{Hart1988}
      \newblock S. G. Hart and L. E. Staveland,
      \newblock Development of NASA-TLX (Task Load Index): Results of Empirical and Theoretical Research,
@@ -1164,6 +1185,11 @@ probably be quite different to what we are used today!
      \newblock C. Hsing and V. Gennarelli,
      \newblock Using GitHub in the Classroom Predicts Student Learning Outcomes and Classroom Experiences: Findings from a Survey of Students and Teachers,
      \newblock In Proceedings of \emph{the 50th ACM Technical Symposium on Computer Science Education (SIGCSE '19)}, 2019, 672–678.
+
+\bibitem{Kirschner2020} [10.4324/9780429061523]
+     \newblock P.A. Kirschner and C. Hendrick,
+     \newblock \emph{How learning happens: seminal works in educational psychology and what they mean in practice},
+     \newblock 1st edition, Routledge, London, New York, 2020.
 
 \bibitem{Kohonen1995} [10.1007/978-3-642-97610-0]
      \newblock T.  Kohonen,
@@ -1205,7 +1231,6 @@ probably be quite different to what we are used today!
      \newblock Educational data mining and learning analytics: An updated survey,
      \newblock \emph{WIREs Data Mining Knowl Discov}, \textbf{10} (2020), e1355.
 
-
 \bibitem{Rcoreteam2021}
      \newblock R Core Team (2021),
      \newblock R: A Language and Environment for Statistical Computing,
@@ -1242,6 +1267,11 @@ probably be quite different to what we are used today!
      \newblock R. Wehrens and J. Kruisselbrink,
      \newblock  Flexible Self-Organizing Maps in kohonen 3.0,
      \newblock \emph{Journal of Statistical Software, Articles}, \textbf{87} (2018), 1--18.
+
+\bibitem{Wickham2019} [10.21105/joss.01686]
+     \newblock H. Wickham et al,
+     \newblock  Welcome to the Tidyverse,
+     \newblock \emph{Journal of Open Source Software}, \textbf{43} (2019), 1686.
 
 \end{thebibliography}
 
