@@ -239,8 +239,7 @@ pedagogical practices on the outcome of these courses thanks to learning
 analytics \cite{Estrellado2020}. A vast amount of data can be collected
 on students' activities, and the analysis of these data allows comparing
 the impact of different pedagogical approaches, or to quantify and
-document the impact of regulations in the courses. {[}TODO: detail a
-little bit with one more reference{]}
+document the impact of changes in the courses \cite{Romero2020}.
 
 At the University of Mons in Belgium, we have started to rework our
 biostatistics courses in the biology curriculum in 2018. A series of
@@ -409,17 +408,13 @@ R and tidyverse packages (\url{https://www.tidyverse.org}) were user to
 prepare the data and for the analyses. A GitHub repository with the code
 used to create the figures and table in this paper is available at
 \url{https://github.com/BioDataScience-Course/teaching_data_science_in_biology}.
-{[}TODO: more details on statistic analyses, in particular SOM to put
-here + refs\ldots{} Guyliann?{]}
-
 The analysis of variance and the post-hoc Honest Significant Difference
-(HSD) of Tukey.
-
-The Self-Organizing Map (SOM) allow an n-dimensional object to be
-projected into a 2-dimensional object \cite{Kohonen1995}. Like a
-principal component analysis (PCA), this method will bring similar
-objects closer together and different objects further apart. The
-\{kohonen\} R package implements these methods \cite{Wehrens2018}.
+(HSD) of Tukey is used for the comparison between courses. The
+Self-Organizing Map (SOM) allow an n-dimensional object to be projected
+into a 2-dimensional object \cite{Kohonen1995}. Like a principal
+component analysis (PCA), this method will bring similar objects closer
+together and different objects further apart. The \{kohonen\} R package
+implements these methods \cite{Wehrens2018}.
 
 A NASA-LTX questionnaire was used to study perceived workload to
 complete a task. It is composed of six questions on a Likert scale
@@ -1063,15 +1058,15 @@ Experience gathered during forced distance learning during Covid-19
 lockdown will be used too to improve our courses. The radical changes
 that were required in that context showed that students can accommodate
 to a large extent, but also that a diversification of the activities is
-beneficial to guarantee their engagement {[}TODO: add reference: Young
-2002 in Lloyd-Smidth 2010{]}. Speaking about diversification, in
-2020-2021 we have successfully tested a kaggle-like challenge
-(\url{https://www.kaggle.com/competitions}) in one of the machine
-learning modules. Such ludic activities would also contribute to the
-diversification of pedagogical practices, interest and motivation of the
-students {[}TODO: refs needed if possible{]}. We would also be happy to
-share experience with other teachers in data science. Altogether, we are
-on the way to reshape the post-covid teaching landscape, and it will
+beneficial to guarantee their engagement \cite{Spadafora2018} {[}TODO:
+add reference: Young 2002 in Lloyd-Smidth 2010{]}. Speaking about
+diversification, in 2020-2021 we have successfully tested a kaggle-like
+challenge (\url{https://www.kaggle.com/competitions}) in one of the
+machine learning modules. Such playful activities would also contribute
+to the diversification of pedagogical practices, interest and motivation
+of the students \cite{Alonso2019}. We would also be happy to share
+experience with other teachers in data science. Altogether, we are on
+the way to reshape the post-covid teaching landscape, and it will
 probably be quite different to what we are used today!
 
 % You may incorporate your references as follows in your main tex file.
@@ -1079,7 +1074,13 @@ probably be quite different to what we are used today!
 
 \begin{thebibliography}{99}
 %bibliography.bib
-\bibitem{Auker2020} [https://doi.org/10.1002/ecs2.3060]
+
+\bibitem{Alonso2019} [10.1016/j.compedu.2019.103612]
+     \newblock  C. Alonso-Fernandez,  A. Calvo-Morata, M. Freire, I. Martínez-Ortiz and B. Fernandez-Manjon,
+     \newblock Applications of data science to game learning analytics data: A systematic literature review,
+     \newblock \emph{Computers & Education}, \textbf{141} (2019), 103612.
+
+\bibitem{Auker2020} [10.1002/ecs2.3060]
      \newblock  L. A. Auker and E. L. Barthelmess,
      \newblock Teaching R in the undergraduate ecology classroom: approaches, lessons learned, and recommendations,
      \newblock \emph{Ecosphere}, \textbf{11} (2020), e03060.
@@ -1099,19 +1100,22 @@ probably be quite different to what we are used today!
      \newblock R Markdown: Integrating A Reproducible Analysis Tool into Introductory Statistics,
      \newblock \emph{Technology Innovations in Statistics Education}, \textbf{8} (2014).
 
+\bibitem{Bernard2014} [10.1007/s12528-013-9077-3]
+     \newblock  L. Lloyd-Smith,
+     \newblock A meta-analysis of blended learning and technology use in higher education: from the general to the applied,
+     \newblock \emph{J Comput High Educ}, \textbf{26} (2014), 87–-122.
+
 \bibitem{Boettiger2015} [10.1145/2723872.2723882]
      \newblock  C. Boettiger,
      \newblock An Introduction to Docker for Reproducible Research,
      \newblock \emph{SIGOPS Oper. Syst. Rev.}, \textbf{49} (2015), 71--79.
-
-%, Docq, F .. & Villiot-Leclercq, E. (2011). Vers une typologie des dispositifs hybrides de formation en enseignement supérieur.
 
 \bibitem{Burton2011}
      \newblock  R. Burton, S. Borruat, B. Charlier, N. Coltice, N. Deschryver, F. Docq and al.,
      \newblock Vers une typologie des dispositifs hybrides de formation en enseignement supérieur,
      \newblock \emph{Distances et savoirs}, \textbf{9} (2011), 69--96.
 
-\bibitem{Byers1989} -
+\bibitem{Byers1989}
      \newblock  J.C. Byers, A. Bittner and S. Hill,
      \newblock Traditional and raw task load index (TLX) correlations: Are paired comparisons necessary?,
      \newblock \emph{Advances in Industrial Ergonomics and Safety}, 1989, 481--485.
@@ -1176,6 +1180,16 @@ probably be quite different to what we are used today!
      \newblock A meta-analysis examining the impact of computer-assisted instruction on postsecondary statistics education: 40 years of research,
      \newblock \emph{Journal of Research on Technology in Education}, \textbf{43} (2011), 253--278.
 
+\bibitem{Lloyd-smith2010}
+     \newblock  L. Lloyd-Smith,
+     \newblock Exploring the Advantages of Blended Instruction at Community Colleges and Technical Schools,
+     \newblock \emph{Journal of Online Learning and Teaching}, \textbf{6} (2010).
+
+\bibitem{Martin2016}
+     \newblock  F. Martin and A. Ndoye,
+     \newblock Using Learning Analytics to Assess Student Learning in Online Courses,
+     \newblock \emph{Journal of University Teaching & Learning Practice}, \textbf{13} (2016), 69--96.
+
 \bibitem{Marx2013} [10.1038/498255a]
      \newblock  V. Marx,
      \newblock The big challenges of big data,
@@ -1185,6 +1199,12 @@ probably be quite different to what we are used today!
      \newblock J. A. Onwuegbuzie  and V. A. Wilson,
      \newblock Statistics Anxiety: Nature, etiology, antecedents, effects, and treatments--A comprehensive review of the literature,
      \newblock \emph{Teaching in Higher Education}, \textbf{8} (2003), 195--209.
+
+\bibitem{Romero2020} [10.1002/widm.1355]
+     \newblock C. Romero and S. Vetura,
+     \newblock Educational data mining and learning analytics: An updated survey,
+     \newblock \emph{WIREs Data Mining Knowl Discov}, \textbf{10} (2020), e1355.
+
 
 \bibitem{Rcoreteam2021}
      \newblock R Core Team (2021),
