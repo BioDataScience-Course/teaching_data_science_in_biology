@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020) (preloaded format=xelatex 2021.1.3)  9 JUL 2021 09:43
+This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020) (preloaded format=xelatex 2021.1.3)  9 JUL 2021 14:51
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -284,8 +284,23 @@ File: l3backend-xdvipdfmx.def 2020-03-12 L3 backend support: xdvipdfmx
 \l__pdf_internal_box=\box49
 \g__pdf_backend_object_int=\count269
 \g__pdf_backend_annotation_int=\count270
+) (./teaching_data_science.aux
+
+LaTeX Warning: Label `fig:fig_learn_trials' multiply defined.
+
+
+LaTeX Warning: Label `fig:fig_rtlx' multiply defined.
+
+
+LaTeX Warning: Label `fig:fig_exams_projects' multiply defined.
+
+
+LaTeX Warning: Label `fig:fig_som' multiply defined.
+
+
+LaTeX Warning: Label `fig:fig_support_by_time' multiply defined.
+
 )
-No file teaching_data_science.aux.
 \openout1 = `teaching_data_science.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 88.
@@ -339,11 +354,9 @@ Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 LaTeX Info: Redefining \ref on input line 88.
 LaTeX Info: Redefining \pageref on input line 88.
 LaTeX Info: Redefining \nameref on input line 88.
+(./teaching_data_science.out) (./teaching_data_science.out)
 \@outlinefile=\write3
 \openout3 = `teaching_data_science.out'.
-
-
-Package hyperref Warning: Rerun to get /PageLabels entry.
 
 
 Class aims Warning: Abstract should precede \maketitle in AMS documentclasses; 
@@ -353,104 +366,24 @@ reported on input line 121.
 File: se-ascii-print.def 2019/11/29 v1.12 stringenc: Printable ASCII characters
 
 )
-
-LaTeX Warning: Citation `Marx2013' on page 1 undefined on input line 153.
-
-
-LaTeX Warning: Citation `Baker2016' on page 1 undefined on input line 153.
-
-
-LaTeX Warning: Citation `Banks2019' on page 1 undefined on input line 154.
-
-
-LaTeX Warning: Citation `Donoho2017' on page 1 undefined on input line 160.
-
-
-LaTeX Warning: Citation `Cetinkaya-Rundel2021' on page 1 undefined on input lin
-e 160.
-
-
-LaTeX Warning: Citation `Cetinkaya-Rundel2021' on page 1 undefined on input lin
-e 167.
-
-
 Overfull \vbox (5.87941pt too high) has occurred while \output is active []
 
 [1]
-
-LaTeX Warning: Citation `Fiksel2019' on page 2 undefined on input line 179.
-
-
-LaTeX Warning: Citation `Hsing2019' on page 2 undefined on input line 179.
-
-
-LaTeX Warning: Citation `Baumer2014' on page 2 undefined on input line 183.
-
-
-LaTeX Warning: Citation `Onwuegbuzie2003' on page 2 undefined on input line 193
-.
-
-
-LaTeX Warning: Citation `Theobold2021' on page 2 undefined on input line 199.
-
-
-LaTeX Warning: Citation `Rstudio2015' on page 2 undefined on input line 200.
-
-
-LaTeX Warning: Citation `Cetinkaya-Rundel2018' on page 2 undefined on input lin
-e 208.
-
-
-LaTeX Warning: Citation `Boettiger2015' on page 2 undefined on input line 208.
-
-
-LaTeX Warning: Citation `Larwin2011' on page 2 undefined on input line 212.
-
-
-LaTeX Warning: Citation `Auker2020' on page 2 undefined on input line 214.
-
-
-LaTeX Warning: Citation `Krathwohl2002' on page 2 undefined on input line 223.
-
-
-LaTeX Warning: Citation `Freeman2014' on page 2 undefined on input line 225.
-
-
-LaTeX Warning: Citation `Freeman2014' on page 2 undefined on input line 230.
-
-
-LaTeX Warning: Citation `Spadafora2018' on page 2 undefined on input line 233.
-
-
-LaTeX Warning: Citation `Burton2011' on page 2 undefined on input line 235.
-
-
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
 
 Overfull \vbox (1.356pt too high) has occurred while \output is active []
 
 [2]
-
-LaTeX Warning: Citation `Estrellado2020' on page 3 undefined on input line 239.
-
+Underfull \vbox (badness 10000) has occurred while \output is active []
 
 [3]
-
-LaTeX Warning: Citation `Rcoreteam2021' on page 4 undefined on input line 358.
-
-
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
 
 Overfull \vbox (1.356pt too high) has occurred while \output is active []
 
 [4]
-
-LaTeX Warning: Reference `tab:tab_ex_levels_summary' on page 5 undefined on inp
-ut line 386.
-
-
 Overfull \hbox (4.78001pt too wide) in paragraph at lines 383--388
 []\TU/lmr/m/n/10 The course material is organized in a way that favors autonomy
  and self-assessment
@@ -468,55 +401,20 @@ Overfull \hbox (43.25pt too wide) in paragraph at lines 408--414
  []
  []
 
-
-LaTeX Warning: Citation `Kohonen1995' on page 5 undefined on input line 419.
-
-
-LaTeX Warning: Citation `Wehrens2018' on page 5 undefined on input line 422.
-
-
-LaTeX Warning: Citation `Hart1988' on page 5 undefined on input line 426.
-
-
-LaTeX Warning: Citation `Byers1989' on page 5 undefined on input line 429.
-
-
-LaTeX Warning: Reference `tab:tab_course' on page 5 undefined on input line 437
-.
-
-
-Underfull \vbox (badness 5563) has occurred while \output is active []
-
 [5]
-
-LaTeX Warning: Reference `tab:tab_course' on page 6 undefined on input line 501
-.
-
-
 Overfull \vbox (1.356pt too high) has occurred while \output is active []
 
 [6]
 File: teaching_data_science_files/figure-latex/fig_learn_trials-1.pdf Graphic f
 ile (type pdf)
 <use teaching_data_science_files/figure-latex/fig_learn_trials-1.pdf>
-
-LaTeX Warning: Reference `fig:fig_learn_trials' on page 7 undefined on input li
-ne 519.
-
 File: teaching_data_science_files/figure-latex/fig_rtlx-1.pdf Graphic file (typ
 e pdf)
 <use teaching_data_science_files/figure-latex/fig_rtlx-1.pdf>
-
-LaTeX Warning: Reference `fig:fig_rtlx' on page 7 undefined on input line 542.
-
 [7]
 File: teaching_data_science_files/figure-latex/fig_exams_projects-1.pdf Graphic
  file (type pdf)
 <use teaching_data_science_files/figure-latex/fig_exams_projects-1.pdf>
-
-LaTeX Warning: Reference `fig:fig_exams_projects' on page 8 undefined on input 
-line 569.
-
 
 Overfull \vbox (1.356pt too high) has occurred while \output is active []
 
@@ -530,100 +428,56 @@ d or subtracted-
 Overfull \vbox (1.356pt too high) has occurred while \output is active []
 
 [10]
-
-LaTeX Warning: Reference `fig:fig_som' on page 11 undefined on input line 731.
-
 File: teaching_data_science_files/figure-latex/fig_som-1.pdf Graphic file (type
  pdf)
 <use teaching_data_science_files/figure-latex/fig_som-1.pdf>
-
-LaTeX Warning: Reference `fig:fig_som' on page 11 undefined on input line 739.
-
 [11]
 Overfull \vbox (1.356pt too high) has occurred while \output is active []
 
 [12]
-
-LaTeX Warning: Reference `fig:fig_support_by_time' on page 13 undefined on inpu
-t line 829.
-
 File: teaching_data_science_files/figure-latex/fig_support_by_time-1.pdf Graphi
 c file (type pdf)
 <use teaching_data_science_files/figure-latex/fig_support_by_time-1.pdf>
-
-LaTeX Warning: Reference `fig:fig_support_by_time' on page 13 undefined on inpu
-t line 844.
-
-
-LaTeX Warning: Reference `fig:fig_support_by_time' on page 13 undefined on inpu
-t line 856.
-
-
-LaTeX Warning: Reference `fig:fig_support_by_time' on page 13 undefined on inpu
-t line 870.
-
-
-LaTeX Warning: Citation `Sousa2018' on page 13 undefined on input line 886.
-
-
-LaTeX Warning: Citation `Spadafora2018' on page 13 undefined on input line 894.
-
-
-
-LaTeX Warning: Citation `Compeau2019' on page 13 undefined on input line 897.
-
 [13]
 Overfull \vbox (1.356pt too high) has occurred while \output is active []
 
 [14]
-
-LaTeX Warning: Citation `Freeman2014' on page 15 undefined on input line 906.
-
-
-LaTeX Warning: Citation `Spadafora2018' on page 15 undefined on input line 927.
-
-
-
-LaTeX Warning: Citation `Auker2020' on page 15 undefined on input line 935.
-
-
-LaTeX Warning: Reference `fig:fig_som' on page 15 undefined on input line 946.
-
-
-LaTeX Warning: Reference `fig:fig_exams_projects' on page 15 undefined on input
- line 954.
-
-
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
 [15]
-
-LaTeX Warning: Citation `Siemens2013' on page 16 undefined on input line 993.
-
-
-LaTeX Warning: Citation `Freeman2014' on page 16 undefined on input line 1023.
-
-
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
 
 Overfull \vbox (1.356pt too high) has occurred while \output is active []
 
-[16]
+[16] [17]
+Underfull \vbox (badness 10000) has occurred while \output is active []
 
-LaTeX Warning: Citation `Spadafora2018' on page 17 undefined on input line 1049
-.
 
-! Misplaced alignment tab character &.
-l.1091 , Docq, F .. &
-                      Villiot-Leclercq, E. (2011). Vers une typologie des di...
- 
+Overfull \vbox (1.356pt too high) has occurred while \output is active []
+
+[18]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1233.
+[19]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 1233.
+(./teaching_data_science.aux)
+Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 1233.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1233.
+
+Package rerunfilecheck Info: File `teaching_data_science.out' has not changed.
+(rerunfilecheck)             Checksum: D2EB8C9B431C1B3A58AEDDC7E02F4106;774.
+
+LaTeX Warning: There were multiply-defined labels.
+
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1233.
+ ) 
 Here is how much of TeX's memory you used:
- 9749 strings out of 479418
- 141393 string characters out of 5884586
- 402431 words of memory out of 5000000
- 26941 multiletter control sequences out of 15000+600000
+ 9798 strings out of 479418
+ 142284 string characters out of 5884586
+ 406462 words of memory out of 5000000
+ 26982 multiletter control sequences out of 15000+600000
  538315 words of font info for 63 fonts, out of 8000000 for 9000
  1515 hyphenation exceptions out of 8191
- 34i,9n,46p,781b,388s stack positions out of 5000i,500n,10000p,200000b,80000s
-Output written on teaching_data_science.pdf (16 pages).
+ 34i,9n,46p,781b,492s stack positions out of 5000i,500n,10000p,200000b,80000s
+
+Output written on teaching_data_science.pdf (19 pages).
