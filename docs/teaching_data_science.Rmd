@@ -63,7 +63,7 @@ As our course were reworked, we also decided to use flipped classroom and progre
 
 - Transition from theory to practice is critical and tutorials build with learnr (<https://rstudio.github.io/learnr/>) are capstones in our courses. What cognitive workload and perceived workload do these tutorials represent for the students?
 
-- Many universities and high-schools resort to exams at the end of an academic term. Do such final exams correctly assess the major learning outcomes that we expect from our data science courses that is, the ability to properly analyse biological data?
+- Many universities and high-schools resort to exams at the end of an academic term. Do such final exams correctly assess the major learning outcomes that we expect from our data science courses that is, the ability to properly analyze biological data?
 
 - Could we use learning analytics to spot suboptimal learning strategies and discriminate different student profiles in our biological data science courses?
 
