@@ -5,11 +5,15 @@
 # Download the datasets (TODO: from where?)
 # Indicate the root folder where these data are located here:
 root <- svMisc::pcloud() # Replace this if you have a different directory!
+if (!fs::dir_exists(root))
+  stop("The directory 'root' (", root, ") will contain raw data. ",
+    "You must indicate an existing directory!")
+# Data will be in <root>/sdd_<acad_year>/data
+
 
 # Initialisation ----------------------------------------------------------
 
 # SciViews::R is a series of packages and additions for R
-# TODO: code to install the required packages here
 
 SciViews::R
 source("R/sciviews_r_addons.R")
@@ -627,7 +631,7 @@ rm(support_metrics, h5p_metrics, learnr_metrics, log_metrics, assess_metrics)
 rm(users, modules_timings, projects, courses_modules)
 
 
-# Analysis ----------------------------------------------------------------
+# Final datasets ----------------------------------------------------------
 
 plot(correlation(sdd_metrics_temp[, -(1:7)], method = "spearman")) # Zoom in!
 # There is a correlation between all the metrics that reflect the % of work done

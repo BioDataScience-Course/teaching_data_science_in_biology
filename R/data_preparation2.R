@@ -1,16 +1,35 @@
-# Transition between face-to-face and distance learning
+# Data preparation 2 for teaching data science...
+# Philippe Grosjean (phgrosjean@sciviews.org) &
+# Guyliann Engels (Guyliann.Engels@umons.ac.be)
+
+# Download the datasets (TODO: from where?)
+# Indicate the root folder where these data are located here:
+root <- svMisc::pcloud() # Replace this if you have a different directory!
+if (!fs::dir_exists(root))
+  stop("The directory 'root' (", root, ") will contain raw data. ",
+    "You must indicate an existing directory!")
+# Data will be in <root>/sdd_<acad_year>/data
+
+
+# Initialisation ----------------------------------------------------------
+
+# SciViews::R is a series of packages and additions for R
 SciViews::R
-library(lubridate)
 source("R/functions.R")
 
-set_attr <- data.table::setattr
 
-### Parameters ###
+# Parameterization --------------------------------------------------------
+
+acad_years <- c("2019-2020", "2020-2021")
+sdd_folders <- glue("sdd_{acad_years}")
+sdd_folder2 <- glue("sdd_{acad_year2}")
+data_dirs <- path(root, sdd_folders, "data")
 time_interval <- interval(as.time("2020/03/05"), as.time("2021/05/15"))
 
-### Git log ###
-c(pcloud("sdd_2019-2020/data/git_log.csv"),
-  pcloud("sdd_2020-2021/data/git_log.csv")) %>.%
+
+# Extract data from git logs ----------------------------------------------
+
+path(data_dirs, "git_log.csv") %>.%
   purrr::map_dfr(., read) %>.%
   set_attr(., "spec", NULL) %>.% # Eliminate extra info from the readr function
   set_attr(., "comment", NULL) %>.% # Idem
@@ -51,7 +70,7 @@ c(pcloud("sdd_2019-2020/data/git_log.csv"),
     icourse %in% c("S-BIOG-006", "S-BIOG-015", "S-BIOG-025") ~ "Q1",
     icourse %in% c("S-BIOG-027", "S-BIOG-061") ~ "Q2"
   )) %>.%
-  # TODO: simialr corrections are required for urchin, human and zooplankton in
+  # TODO: similar corrections are required for urchin, human and zooplankton in
   # 2019-2020 !!!
   # Keep only logs from the right institution and courses
   filter(., institution %in% "UMONS") %>.%
@@ -74,9 +93,10 @@ c(pcloud("sdd_2019-2020/data/git_log.csv"),
     period = acad_2w(date, label = TRUE)) ->
   log
 
-### Support data #####
-c(pcloud("sdd_2019-2020/data/support.csv"),
-  pcloud("sdd_2020-2021/data/support.csv")) %>.%
+
+# Extract support data ----------------------------------------------------
+
+path(data_dirs, "support.csv") %>.%
   map_dfr(., read) %>.%
   set_attr(., "spec", NULL) %>.% # Eliminate extra info from the readr function
   set_attr(., "comment", NULL) %>.% # Idem
@@ -128,9 +148,10 @@ support %>.%
   ungroup(.) ->
   sup_week
 
-###Lessons preparation des données #####
-c(pcloud("sdd_2019-2020/data/lessons.csv"),
-  pcloud("sdd_2020-2021/data/lessons.csv")) %>.%
+
+# Modules by period -------------------------------------------------------
+
+path(data_dirs, "lessons.csv") %>.%
   purrr::map_dfr(., read) %>.%
   set_attr(., "spec", NULL) %>.% # Eliminate extra info from the readr function
   set_attr(., "comment", NULL) %>.%
@@ -146,14 +167,17 @@ c(pcloud("sdd_2019-2020/data/lessons.csv"),
     period = acad_2w(date, label = TRUE)
   ) %>.%
   group_by(., acad_year, period) %>.%
-  summarise(., .modules = n()) -> lessons_by_period
+  summarise(., .modules = n()) ->
+  modules_by_period
 
-# combine dataset --------------------------------------------------------------
+
+# Combine datasets ---------------------------------------------------------
+
 log %>.%
   group_by(., user, course, period) %>.%
   summarise(., add = sum(add), change = sum(change)) %>.%
   ungroup(.) %>.%
-  left_join(., lessons_by_period) %>.%
+  left_join(., modules_by_period) %>.%
   replace_na(., list(.modules = 0)) %>.%
   mutate(., .modules = factor(.modules)) ->
   log_period
@@ -164,32 +188,39 @@ support %>.%
   group_by(., user, course, period) %>.%
   summarise(., messages = n()) %>.%
   ungroup(.) %>.%
-  left_join(., lessons_by_period) %>.%
+  left_join(., modules_by_period) %>.%
   replace_na(., list(.modules = 0)) %>.%
    mutate(., .modules = factor(.modules)) ->
   support_period
 
 write$csv(support_period, "data/support_period.csv")
 
+
+# TODO: add this in supplemental material
 # inner_join(log_period, support_period) %>.%
-#   # Calculate ration support/production as messages/add
+#   # Calculate ratio support/production as messages/add
 #   mutate(.,
 #     add_by_message = add/messages,
 #     change_by_message = change/messages) ->
 #   supp_prod_period
 #
-# chart(data = supp_prod_period, change_by_message ~ as.factor(period) %fill=% .modules ) +
-#   #geom_vline(xintercept = c("Y1P11", "Y2P03"), alpha = 0.3, linetype = "twodash") +
+# chart(data = supp_prod_period,
+#   change_by_message ~ as.factor(period) %fill=% .modules ) +
+#   #geom_vline(xintercept = c("Y1P11", "Y2P03"),
+#     alpha = 0.3, linetype = "twodash") +
 #   geom_boxplot() +
 #   theme(axis.text.x = element_text(angle = 90)) +
-#   scale_y_log10(breaks = c(0.1, 1, 10, 100, 1000), labels = c(0.1, 1, 10, 100, 1000)) +
-#   stat_summary(fun.data = function(x) c(y = max(x) + 0.5, label = length(x)), geom = "text", hjust = 0.5) +
+#   scale_y_log10(breaks = c(0.1, 1, 10, 100, 1000),
+#     labels = c(0.1, 1, 10, 100, 1000)) +
+#   stat_summary(fun.data = function(x) c(y = max(x) + 0.5,
+#     label = length(x)), geom = "text", hjust = 0.5) +
 #   scale_fill_grey(start = 0.8,
 #   end = 0) +
 #   labs(
 #     y = "Contributions/question",
 #     x = "Period",
-#     fill = "Number of modules") -> pchangemessages
+#     fill = "Number of modules") ->
+# pchangemessages
 # pchangemessages
 #
 # log_period %>.%
@@ -207,7 +238,8 @@ write$csv(support_period, "data/support_period.csv")
 #   theme(axis.text.x = element_text(angle = 90)) +
 #   scale_fill_grey(start = 0.8,
 #   end = 0) +
-#   labs( y = "Contributions/student", fill = "Number of modules") -> pchangestudent2
+#   labs( y = "Contributions/student", fill = "Number of modules") ->
+# pchangestudent2
 # pchangestudent2
 #
 # p. <- pchangestudent2 +
