@@ -24,6 +24,8 @@ acad_years <- c("2019-2020", "2020-2021")
 sdd_folders <- glue("sdd_{acad_years}")
 sdd_folder2 <- glue("sdd_{acad_year2}")
 data_dirs <- path(root, sdd_folders, "data")
+courses <- c("A", "B") # Don't include courses C, D & E in the analysis
+institutions <- "UMONS" # Don't include Campus UCharleroi
 time_interval <- interval(as.time("2020/03/05"), as.time("2021/05/15"))
 
 
@@ -73,20 +75,22 @@ path(data_dirs, "git_log.csv") %>.%
   # TODO: similar corrections are required for urchin, human and zooplankton in
   # 2019-2020 !!!
   # Keep only logs from the right institution and courses
-  filter(., institution %in% "UMONS") %>.%
-  filter(., course %in% c("A", "B")) %>.%
+  filter(., institution %in% institutions) %>.%
+  filter(., course %in% courses) %>.%
   # The "from" column specifies if the commit is by staff ("staff") or not (NA)
   # Keep only info about commits by students
   filter(., is.na(from)) %>.%
   # We only consider text change => bin_before must be NA
   filter(., is.na(bin_before)) %>.%
-  # We consider only (R) Markdown and R script files
-  filter(., extension %in% c(".Rmd", ".rmd")) %>.% # c(".Rmd", ".R", ".r", ".md", ".rmd")
+  # We consider only (R) Markdown
+  filter(., tolower(extension) == ".rmd") %>.%
   select(., -from, -bin_before, -bin_after) %>.%
   filter(., date %within% time_interval) %>.%
-  # Aggegations
+  # Aggregations
   group_by(., user, date, commit, app, type, modules, course) %>.%
-  summarise(., add = sum(add, na.rm = TRUE), change = sum(change, na.rm = TRUE)) %>.%
+  summarise(.,
+    add    = sum(add, na.rm = TRUE),
+    change = sum(change, na.rm = TRUE)) %>.%
   ungroup(.) %>.%
   mutate(.,
     week = acad_w(date, label = TRUE),
@@ -113,13 +117,13 @@ path(data_dirs, "support.csv") %>.%
     icourse == "S-BIOG-921" ~ "A",
     icourse == "S-BIOG-970" ~ "A",
     icourse == "S-BIOG-937-958-959" ~ "B",
-    icourse == "S-BIOG-006,S-BIOG-015" ~ "A+B", # Bridge students take two courses
+    icourse == "S-BIOG-006,S-BIOG-015" ~ "A+B", # Bridge students take 2 courses
     icourse == "S-BIOG-027,S-BIOG-061" ~ "A+B" # Idem for Q2
   )) %>.%
   select(., -quarter) %>.%
   # Restrict courses & institutions
-  filter(., institution %in% "UMONS") %>.%
-  filter(., course %in% c("A", "B")) %>.%
+  filter(., institution %in% institutions) %>.%
+  filter(., course %in% courses) %>.%
   filter(., date %within% time_interval) %>.%
   # Allow to aggregate by week or by two weeks
   mutate(.,
@@ -155,7 +159,8 @@ path(data_dirs, "lessons.csv") %>.%
   purrr::map_dfr(., read) %>.%
   set_attr(., "spec", NULL) %>.% # Eliminate extra info from the readr function
   set_attr(., "comment", NULL) %>.%
-  filter(., course != "C") %>.%
+  filter(., institution %in% institutions) %>.%
+  filter(., course %in% courses) %>.%
   filter(., !topic %in% c("extra_session", "install_party")) %>.%
   group_by(., acad_year, course, modules) %>.%
   summarise(., date = max(end)) %>.%
