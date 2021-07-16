@@ -1,0 +1,110 @@
+---
+title: "Teaching Data Science in Biology: Supplemental Material"
+author: "Philippe Grosjean & Guyliann Engels"
+output: html_notebook
+---
+
+```{r setup}
+SciViews::R
+source("../R/sciviews_r_addons.R")
+```
+
+This document presents additional material to the manuscript "Teaching Data Science to Students in Biology using R, RStudio and Learnr: Analysis of Three Years Data", submitted for the special issue on "Data Science Education Research" of Foundations of Data Science.
+
+## Multivariate analysis
+
+In the manuscript, we use self-organizing map to create students' profiles. We have tested more conventional techniques like PCA, or hierarchical clustering, with less convincing results:
+
+```{r}
+sdd_metrics <- suppressMessages(read("../data/sdd_metrics.csv"))
+metrics_nograde <- select(sdd_metrics, -user, -course, -state, -grade) # Only metrics
+plot(correlation(metrics_nograde, method = "spearman"))
+```
+
+Distribution of the metrics:
+
+```{r}
+# Distribution of metrics
+par(mar = c(4.1, 6.1, 2.1, 1.1)); boxplot(metrics_nograde,
+  horizontal = TRUE, col = 'lightgray', las = 1, xlab = "Value")
+```
+
+```{r}
+par(mar = c(4.1, 6.1, 2.1, 1.1)); boxplot(scale(metrics_nograde),
+  horizontal = TRUE, col = 'lightgray', las = 1, xlab = "Value")
+```
+
+### PCA
+
+```{r}
+sdd_pca <- pca(metrics_nograde, scale = TRUE)
+summary(sdd_pca)
+```
+
+```{r}
+chart$scree(sdd_pca)
+```
+
+There are many PCs to consider here (8 to get 80%, 11 for 90%). This indicates that our metrics express many different features and are not easily summarized by a few axes. PCA is not suitable here.
+
+With caution, we could look at first two planes, just to have an idea...
+
+```{r}
+chart$loadings(sdd_pca, choices = c(1, 2))
+```
+
+```{r}
+chart$loadings(sdd_pca, choices = c(1, 3))
+```
+
+Just look if we differentiate de courses here... but interpret this very, very carefully!!!
+
+```{r}
+chart$score(sdd_pca, choices = c(1, 2), labels = sdd_metrics$course) +
+  stat_ellipse()
+```
+
+```{r}
+chart$score(sdd_pca, choices = c(1, 3), labels = sdd_metrics$course) +
+  stat_ellipse()
+```
+
+We see, may be, a very slight evolution from A to B to C? But there are several extreme points.
+
+
+### Groups
+
+We use hierarchical clustering to group students into various profiles according to their activities.
+
+```{r}
+sdd_dist <- dissimilarity(metrics_nograde, method = "euclidean", scale = TRUE)
+sdd_clust <- cluster(sdd_dist, method = "complete")
+chart(sdd_clust) +
+  geom_dendroline(h = 9, color = "red")
+```
+
+Not easy: the groups that are most easily separated contain very few students. Here again, the methods does not work very well.
+
+```{r}
+table(groups <- predict(sdd_clust, h = 9))
+```
+
+Most students are in one group!
+
+```{r}
+sdd_g <- augment(sdd_clust, sdd_metrics, h = 9)
+table(sdd_g$.fitted, sdd_metrics$course)
+```
+
+No visible association between groups and courses.
+
+```{r}
+chart(data = sdd_g, grade ~ factor(.fitted)) +
+  geom_boxplot()
+```
+
+Conclusion: PCA and hierarchical clustering do not produce convincing results here. This is why we used the Self-Organizing Map method instead.
+
+
+### SOM
+

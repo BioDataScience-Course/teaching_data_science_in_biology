@@ -1,4 +1,5 @@
 # Data preparation for teaching data science...
+# Data from 2020-2021
 # Philippe Grosjean (phgrosjean@sciviews.org) &
 # Guyliann Engels (Guyliann.Engels@umons.ac.be)
 
@@ -355,6 +356,7 @@ learnr_metrics %>.%
   learnr_metrics
 # rm(learnr) using learnr data lower and remove after
 
+
 # Extract metrics for git log --------------------------------------------
 
 # First get more info about the various projects
@@ -411,8 +413,8 @@ log %>.%
   # Get modules from projects...
   left_join(., select(projects, app, modules)) %>.%
   # TODO: this is the end of work done to adapt the dataset to new format ------
-# Keep only logs from the right institution and courses
-filter(., institution %in% institutions) %>.%
+  # Keep only logs from the right institution and courses
+  filter(., institution %in% institutions) %>.%
   filter(., course %in% courses) %>.%
   # The "from" column specifies if the commit is by staff ("staff") or not (NA)
   # Keep only info about commits by students
@@ -673,6 +675,7 @@ write$csv(sdd_metrics, "data/sdd_metrics.csv")
 # Clean up
 rm(sdd_metrics)
 
+
 # Perceived workload for the learnr tutorials in the three courses -----------
 wo <- read(path(data_dir, "wooclap.csv"))
 
@@ -688,16 +691,8 @@ c("A99Wa_perception", "B99Wa_perception", "C99Wb_perception:perception") %>%
 
 write$csv(workload_rtlx, "data/sdd_rtlx.csv")
 
-# set.seed(222)
-# chart(workload_rtlx, rtlx ~ course) +
-#   geom_boxplot(fill = "lightgray") +
-#   geom_jitter(alpha = 0.5, width = 0.1) +
-#   labs(y = "RTLX", x = "Course") +
-#   stat_summary(fun.y = "mean", color = "black", size = 1) +
-#   stat_summary(fun.data = function(x) {data.frame(y = max(x) * 1.1, label = paste0("n = ", length(x)))}, geom = "text", hjust = 0.5) +
-#   labs( y = "Raw Task Load indeX (2020-2021)")
-
 rm(wo, workload_rtlx)
+
 
 # Trials by question in learnr : objective workload ----------------------------
 
@@ -711,10 +706,6 @@ learnr %>.%
     course = as.factor(course)) -> learnr_red
 
 write$csv(learnr_red, "data/sdd_learnr.csv")
-
-# chart(learnr_red, l_trials_exercices ~ course) +
-#   geom_boxplot() +
-#   stat_summary(fun.data = function(x) c(y = max(x) * 1.1, label = length(x)), geom = "text", hjust = 0.5)
 
 rm(learnr, learnr_red)
 
@@ -773,51 +764,3 @@ us_tab %>.%
 write$csv(tab_summary, "data/sdd_infos.csv")
 
 rm(users, us_tab, learnr, learnr_tab, assessments, projects, projects_tab, h5P_tab, tab_summary)
-
-
-# Exam vs project : the best choice to evaluate the knownledge of student.------
-
-users18 <- read(pcloud("sdd_2018-2019/data/users.csv"))
-users19 <- read(pcloud("sdd_2019-2020/data/users.csv"))
-assessments18 <- read(pcloud("sdd_2018-2019/data/assessment_temp.csv"))
-exam19 <- read(pcloud("sdd_2019-2020/data/exam.csv"))
-assessments19 <- read(pcloud("sdd_2019-2020/data/assessment.csv"))
-courses18 <- read(pcloud("sdd_2018-2019/data/courses.csv"))
-courses19 <- read(pcloud("sdd_2019-2020/data/courses.csv"))
-
-assessments18 %>.%
-  #select(., -coral_growth, result = biometry) %>.%
-  mutate(., result = (biometry+coral_growth)/2, acad_year = "2018-2019") -> assess_result18
-
-q1_18_regular <- left_join(rename(assess_result18, icourse = course), courses18) %>.%
-  filter(., user %in% users18$user[users18$institution == "UMONS" & users18$term == "Q1" & users18$state == "regular"])
-
-assessments19 %>.%
-  group_by(., course, evaluation, github_project, project, user) %>.%
-  summarise(., result = round(sum(score*weight),4)) %>.%
-  filter(., evaluation == "Q1") %>.%
-  left_join(exam19, .) %>.%
-  replace_na(., list(result = 0)) %>.%
-  mutate(., acad_year = "2019-2020") -> assess_result19
-
-q1_19_regular <- left_join(rename(assess_result19, icourse = course), courses19) %>.%
-  filter(., user %in% users19$user[users19$institution == "UMONS" & users19$term == "Q1" & users19$state == "regular"])
-
-q1 <- bind_rows(
-  select(q1_18_regular, user, acad_year, course, result, exam),
-  select(q1_19_regular, user, acad_year, course, result, exam)
-  )
-#table(q1$link) /nrow(q1)
-
-write$csv(q1, "data/sdd_eval.csv")
-
-# q1 %>.%
-#   mutate(., course_year = paste0(course, " (",acad_year,")")) %>.%
-#   chart(., exam ~ result | course_year) +
-#   geom_vline(xintercept = 5, alpha = 0.2) +
-#   geom_hline(yintercept = 5, alpha = 0.2) +
-#   geom_jitter(alpha = 1, width = 0.05, height = 0.05, show.legend = FALSE) +
-#   ylim(c(0,10)) +
-#   xlim(c(0,10)) +
-#   labs(y = "Exam grade", x = "Project grade")
-

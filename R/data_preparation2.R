@@ -1,4 +1,5 @@
 # Data preparation 2 for teaching data science...
+# Data from 2019-2020 & 2020-2021
 # Philippe Grosjean (phgrosjean@sciviews.org) &
 # Guyliann Engels (Guyliann.Engels@umons.ac.be)
 
@@ -22,7 +23,6 @@ source("R/functions.R")
 
 acad_years <- c("2019-2020", "2020-2021")
 sdd_folders <- glue("sdd_{acad_years}")
-sdd_folder2 <- glue("sdd_{acad_year2}")
 data_dirs <- path(root, sdd_folders, "data")
 courses <- c("A", "B") # Don't include courses C, D & E in the analysis
 institutions <- "UMONS" # Don't include Campus UCharleroi
@@ -175,6 +175,7 @@ path(data_dirs, "lessons.csv") %>.%
   summarise(., .modules = n()) ->
   modules_by_period
 
+write$csv(modules_by_period, "data/modules_by_period.csv")
 
 # Combine datasets ---------------------------------------------------------
 
@@ -200,66 +201,5 @@ support %>.%
 
 write$csv(support_period, "data/support_period.csv")
 
-
-# TODO: add this in supplemental material
-# inner_join(log_period, support_period) %>.%
-#   # Calculate ratio support/production as messages/add
-#   mutate(.,
-#     add_by_message = add/messages,
-#     change_by_message = change/messages) ->
-#   supp_prod_period
-#
-# chart(data = supp_prod_period,
-#   change_by_message ~ as.factor(period) %fill=% .modules ) +
-#   #geom_vline(xintercept = c("Y1P11", "Y2P03"),
-#     alpha = 0.3, linetype = "twodash") +
-#   geom_boxplot() +
-#   theme(axis.text.x = element_text(angle = 90)) +
-#   scale_y_log10(breaks = c(0.1, 1, 10, 100, 1000),
-#     labels = c(0.1, 1, 10, 100, 1000)) +
-#   stat_summary(fun.data = function(x) c(y = max(x) + 0.5,
-#     label = length(x)), geom = "text", hjust = 0.5) +
-#   scale_fill_grey(start = 0.8,
-#   end = 0) +
-#   labs(
-#     y = "Contributions/question",
-#     x = "Period",
-#     fill = "Number of modules") ->
-# pchangemessages
-# pchangemessages
-#
-# log_period %>.%
-#   filter(., !period %in%c("Y1P15", "Y1P16", "Y1P17")) %>.%
-#   left_join(., lessons_by_period) %>.%
-#   replace_na(., list(.modules = 0)) %>.%
-#   mutate(., .modules = factor(.modules)) %>.%
-#   group_by(., period, .modules) %>.%
-#   summarise(.,
-#     change = sum(change),
-#     nus = length(unique(user)),
-#     change_user = change/nus) %>.%
-#   chart(data = ., change_user ~ as.factor(period) %fill=% .modules ) +
-#   geom_col() +
-#   theme(axis.text.x = element_text(angle = 90)) +
-#   scale_fill_grey(start = 0.8,
-#   end = 0) +
-#   labs( y = "Contributions/student", fill = "Number of modules") ->
-# pchangestudent2
-# pchangestudent2
-#
-# p. <- pchangestudent2 +
-#   labs(y = "Contributions/user") +
-#   scale_y_continuous(
-#     breaks = c(0, 250,500, 750),
-#     labels = c(0, 0250, 500, "  750")) +
-#   theme(
-#     axis.ticks.x = element_blank(),
-#     axis.text.x = element_blank(),
-#     axis.title.x=element_blank())
-#
-# combine_charts(list(p., pchangemessages),
-#   nrow = 2,
-#   common.legend = TRUE, legend = "bottom",
-#   heights = c(0.9, 1),
-#   labels = "auto",
-#   font.label = list(size = 12))
+rm(log, log_period, support, sup_period, sup_week, support_period)
+rm(modules_by_period)

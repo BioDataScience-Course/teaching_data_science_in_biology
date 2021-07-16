@@ -6,25 +6,42 @@ Guyliann Engels (1), Philippe Grosjean (1) & Frédérique Artus (2)
 (2) Pedagogical Support and Quality Assurance Department, University of Mons, Belgium
 
 
-The courses in biostatistics in biology at the University of Mons, Belgium, were completely refactored in 2018 into data science courses (see http://bds.sciviews.org). The content is expanded beyond statistics to include computing tools, version management, reproducible analyses, critical thinking and open data. Flipped classroom approach is used. Students learn with the online material and they apply the concepts on individual and group projects using a preconfigured virtual machine with R and RStudio. Activities (H5P, learnr or Shiny applications) are recorded in a MongoDB database (300,000+ events for 180+ students and 2,000+ GitHub repositories at https://github.com/BioDataScience-Course). The analysis of these data reveals several trends. (1) There is a relatively long lag period required for the students to get used to the computing environment, the teaching method and the data science in general. (2) Implication is very high, with more than 85% of the students that complete all the activities and got good to excellent assessment. (3) There is a gap between students' own perception of their skills achievements and their assessment results: they tend to underestimate their progress. (4) During COVID-19 pandemic lockdown, the intensity of the activities largely decreased during two weeks before returning to previous level, but for 3/4 of the students only. The remaining fraction never caught up. We hypothesize that the technical requirements or the lack of motivation during the lockdown were detrimental to roughly one student over ten, despite all the efforts the University deployed to reduce the social fracture.
+We examine the impact of transforming courses in biostatistics into three data science courses for a curriculum in biology at the University of Mons, Belgium. The study spans over three complete academic years. A blended learning and flipped classroom approaches were adopted, with an emphasis on project-based biological data analysis. Four successive types of exercises of increasing difficulties are proposed to the students. Tutorials written with the R package learnr are identified as a critical step to transition between theory and application of the concepts. Cognitive workload to complete the learnr tutorials is measured for the three courses and is only lower for the last course, suggesting students need a long time to get used to their software environment (R, RStudio and git). A comparison between final summative assessment and grading of applied biological data analysis (projects) exhibits a low correlation. It suggests that the final exam does not assess practical skills very well. The final exam was dropped at the benefit of an ongoing assessment. Data relative to students' activity, collected primarily for the ongoing assessment, are also used to establish students profiles according to their learning strategies. Several suboptimal strategies are observed and discussed. Finally, the timing of students contributions, and the efficiency of teacher-learner interactions related to these contributions are analyzed before, during and after mandatory distance learning due to covid-19 lockdown. A lag phase was visible at the beginning of the first lockdown, but the work of the students was not markedly affected during the second lockdown period that lasted much longer.
 
-The aim of this project is to answer the following questions :
+The aim of this project is to answer the following questions:
 
-- Are grades obtained by the students at a final exam correlated to their recorded activity during the course? If yes, (1) derive tools that predict student possible final results for early mitigation, and (2) investigate whether the grade from a final exam could be replaced by a grade calculated on student’s activities during the semesters. Ici, l’analyse ne peut bien sûr se faire que pour 2018-2019 et 2019-2020.
+- How do the student perceive the approach of the course and the tools used? In particular, what is the general emotional state of the students? What is the workload of the learnr tutorials (NASA-TLX)?
 
-- Are there different student profiles that can be identified from their activities? If yes, how these profiles correlate with the metrics and with the performances?
+- Are grades obtained by the students at a final exam correlated to their recorded activity during the course (projects)?
 
-- How do the student perceive the approach of the course and the tools used? In particular, what is the general emotional state of the students? What is the System Usability Scale of the software environment used in the course and why? What is the workload of the learnr tutorials (NASA-TLX) ? How is the timing of the course perceived?
+- Are there different student profiles that can be identified from their activities? If yes, how these profiles correlate with their grade?
 
-- What is the temporal progression of the students in comparison with the proposed calendar, and is it somehow related to the student profile and/or their final grading?
+- What is the temporal progression of the students, and the intensity of support required during COVID lockdown periods? Did it impact students' productivity?
 
 
-## Running the code
+## Workflow
 
-We will make the data and the analyses public. Here will be the steps:
+We will make the data and the analyses public, most probably via Zenodo. In the meantime, the anonymized data are downloadable from <https://filedn.com/lzGVgfOGxb6mHFQcRn9ueUb/sdd_data.zip>. Raw data are processed with these steps:
 
-- Download the data... (TODO)
+1. Data from our MongoDB database are anonymized and saved into `.csv` files. That step is not documented because it contains sensible personal data that we are not allowed to disclose. However, we made this pretreatment as minimal as possible, focusing mainly on the replacement of personal data with random identifiers for the students.
 
-- Run the script **R/data_preparation.R**
+2. Anonymized data are processed to produce table of final results in the `\data` subdirectory in this repository.
 
-- Knit the R markdown file **docs/teaching_data_science.R**
+3. Data from the `/data` subdirectory are used to run the analyses, and to create tables and figures in the manuscript.
+
+
+## How to reproduce the analyses?
+
+First, make sure you have R, RStudio & LaTeX installed on your computer. We used R 4.0.5 for these analyses. R can be installed from <https://cran.r-project.org>, RStudio Desktop is here: <https://www.rstudio.com/products/rstudio/>. The LaTeX installation depends on your system, see: <https://www.latex-project.org/get/>. For explanations about R Markdown documents, see: <https://support.rstudio.com/hc/en-us/articles/200552056-Using-Sweave-and-knitr>.
+
+Once R and RStudio are installed, you will need to get additional R packages. You should run `R/install.R` to do so:
+
+```
+source("R/install.R")
+```
+
+You should be able to regenerate the manuscript `docs/teaching_data_science.Rmd` (step 3 above), or the `docs/supplemental_materials.Rmd` notebook just be knitting them (open the `.Rmd` file inside RStudio and click on the **knit** button there).
+
+If you want to regenerate the tables in `/data`, you will have to run the three `R/data_preparationX.R` files. Before doing so, you will have to download the anonymized datasets from <https://filedn.com/lzGVgfOGxb6mHFQcRn9ueUb/sdd_data.zip>. Unzip this file somewhere. You should have three directories: `sdd_2018-2019`,  `sdd_2019-2020` & `sdd_2020-2021` with a `data`subdirectory and various `.csv` files inside (`users.csv`, `projects.csv`, ...). In the `R/data_preparationX.R` file, you will have to change line 8 and indicate the actual directory on your computer where you unzipped the anonymized data. At that point, running the code in these scripts should regenerate the tables in `/data`.
+
+Of course, the code in the `.Rmd` and `.R` file can be examined in more details to understand the logic of the analyses done.
