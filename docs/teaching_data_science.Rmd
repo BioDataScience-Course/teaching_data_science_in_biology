@@ -64,7 +64,7 @@ At the University of Mons in Belgium (UMONS), we started to rework our biostatis
 
 <!-- Added to answer main objection of rev Q => introduire learnibng outsomes: reprendre dans la discussion (papragraph continue) -->
 
-The learning outcomes are thus to be able to analyze most recurrent biological data in practice and to present clearly and accurately the results in a scientific report. In order to achieve these learning outcomes the students have to master skills in biostatiscs, scientific writing and computer tools (like R and RStudio in our case). They also have to develop a critical mind in statistical analysis.
+The learning outcomes are thus to be able to analyze most recurrent biological data in practice and to present clearly and accurately the results in a scientific report. In order to achieve these learning outcomes the students have to master skills in biostatiscs, scientific writing and computer tools (like R and RStudio in our case). They also have to develop a critical mind in statistical analysis. All learning outcomes are described in the students' study programme \cite{ds1bio2021, ds2bio2021, ds3bio2021}.
 
 <!-- TODO: add a reference to the ECTS file in the last sentence -->
 
@@ -585,8 +585,6 @@ rm(log_period, support_period, p1, p2)
 Contributions per student (Fig. \ref {fig:fig_support_by_time}a) is relatively constant during the second year, starting essentially at Y2P03, when the second lockdown was established. The highest activity is observable at the end (Y2P15), although there is no module taught during that period. This is because of the late students that finalize their reports at the last minute. Y2P01, Y2P02 and Y2P09 exhibit the lowest activity, and these are the start of the first and second terms. Y2P01 and Y2P01 were also teach in face-to-face and they correspond to the start of all three courses.
 
 <!-- Add a added a sentence to justify the use of the log scale -->
-
-<!-- How to prove that the contributions divided by the questions is a good proxy to study the efficiency of learners-teachers interactions-->
 
 The intensity of learners-teachers interactions for that contribution, quantified by the contributions divided by the questions (Fig. \ref {fig:fig_support_by_time}b) is very widespread from one student to the other. The logarithmic scale is use on the ratio because it spreads on several orders of magnitude. However, median value -the bar inside the boxes- varies much less. Global number of questions during each period is less variable, as is the absolute contributions, leading to a rather stable ratio. Highest median ratios are observed at the last period of each term (Y2P07 and Y2P15) although no module was teach at that time. More contributions are observed relative to the questions at the end: students essentially finalize their reports.
 

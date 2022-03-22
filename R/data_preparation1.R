@@ -729,6 +729,22 @@ ab <- us_tab$user[us_tab$course == "A,B"]
 us_tab$user[us_tab$course %in% c("A", "B")] <- us_tab$user[us_tab$course %in% c("A", "B")] + ab
 us_tab <- filter(us_tab, course != "A,B")
 
+# if I want only regular students
+ # users %>.%
+ #   filter(., institution == "UMONS" & term == "Q1" &
+ #     state %in% c("regular", "repeater")) %>.%
+ #   group_by(., course) %>.%
+ #   summarise(., user = n()) %>.%
+ #   ungroup(.) %>.%
+ #   filter(., course != "D") -> us_tab
+ #
+ #users %>.%
+ #   filter(., institution == "UMONS" & term == "Q1" &
+ #      state %in% c("regular")) %>.%
+ #   ungroup(.) %>.%
+ #    filter(., course != "D") -> t
+ #idus <- t$user
+
 # learnr
 learnr %>.%
   filter(.,
