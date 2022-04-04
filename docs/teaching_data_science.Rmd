@@ -3,7 +3,7 @@ title: 'Teaching Data Science to Students in Biology using R, RStudio and Learnr
   Analysis of Three Years Data'
 runtitle: Teaching Data Science in Biology
 abstract: |
-    <abstract rev Y: sentence changed> We examine the impact of implementing active pedagogical methodologies in three
+    <abstract rev Y: sentence changed> We examine the impact of implementing active pedagogical methodologies in three successive
     data science courses for a curriculum in biology at the University of Mons,
     Belgium. A blended
     learning and flipped classroom approaches were adopted, with an emphasis on
@@ -610,13 +610,9 @@ Monitoring the perceived and measured cognitive workload is indeed important "to
 
 ## Final exam *versus* projects
 
-<!-- Est-il possible de placer ce paragraphe plus bas RQ3 pour ne pas diluer la discussion de la RQ2? -->
-
-We observed a low correlation between performances in group projects and in grades obtained at final exams (Fig. \ref {fig:fig_exams_projects}). This led us to stop using final exams, at the benefit of an ongoing assessment with emphasis into projects, despite a final exam is easier and faster to implement. 
-
 The task that better evaluates their practical skills in biological data analysis is the group project because students have to demonstrate what they can do in a situation with a complex dataset, and minimal instructions. It meets more closely with the courses' learning outcomes as they have to figure out a suitable question, analyze the data to answer that question, present their results in a report and discuss what they found with a critical mind \cite{Auker2020}. This task is complex, especially for undergraduate students. That is why we organize it in groups of two to four students, depending on the complexity of the problem. Here, they mobilize their collective intelligence to get results as many of them would be hardly capable of achieving the task alone. The tracking of individual activity in the project thanks to git allows for figuring out clearly what was the contribution of each student in the group and to score their individual contributions suitably.
 
-The elimination of the final exams led to the setting up of a procedure to monitor and score the students' activity in all the exercises by automatic scoring online exercises, and to manually score all projects against evaluation grids. This is time-consuming despite the partially automatic scoring lowers the charge. It would be interesting to investigate whether tools derived from learning analytics and computing science could second teachers in this work. For instance, reproducible research is one of the competences our students have to develop. It implies that their R Markdown documents should compile into reports in HTML or PDF format without any error. This criterion could be checked automatically.
+We observed a low correlation between performances in group projects and in grades obtained at final exams (Fig. \ref {fig:fig_exams_projects}). This led us to stop using final exams, at the benefit of an ongoing assessment with emphasis into projects, despite a final exam is easier and faster to implement. The elimination of the final exams led to the setting up of a procedure to monitor and score the students' activity in all the exercises by automatic scoring online exercises, and to manually score all projects against evaluation grids. This is time-consuming despite the partially automatic scoring lowers the charge. It would be interesting to investigate whether tools derived from learning analytics and computing science could second teachers in this work. For instance, reproducible research is one of the competences our students have to develop. It implies that their R Markdown documents should compile into reports in HTML or PDF format without any error. This criterion could be checked automatically.
 
 ## Students activity profiles with ongoing assessment
 
