@@ -127,7 +127,7 @@ tibble::tribble(
   knitr::kable(., format = "latex", caption = "\\label{tab:tab_ex_levels} Four levels of increasing difficulties in the exercises.")
 ```
 
-R and tidyverse \cite{Wickham2019} packages (<https://www.tidyverse.org>) were used to prepare the data and the analyses. A GitHub repository with the code used to create the figures and table in this paper is available at <https://github.com/BioDataScience-Course/teaching_data_science_in_biology>.
+R and tidyverse \cite{Wickham2019} packages (<https://www.tidyverse.org>) were used to prepare the data and the analyses. All three years of anonymised data are available on Zenodo \cite{Grosjeandataset2020, Grosjeandataset2019, Grosjeandataset2018}. A GitHub repository with the code used to create the figures and table in this paper is available at <https://github.com/BioDataScience-Course/teaching_data_science_in_biology>. 
 
 <!-- Subsections were added to follow the same organisation between Methods and Results section -->
 
