@@ -21,14 +21,19 @@ The aim of this project is to answer the following questions:
 
 ## Workflow
 
-We will make the data and the analyses public, most probably via Zenodo. In the meantime, the anonymized data are downloadable from <https://filedn.com/lzGVgfOGxb6mHFQcRn9ueUb/sdd_data.zip>. Raw data are processed with these steps:
+The anonymized data are downloadable from [Zenodo](https://zenodo.org/):
+
+- Biological data science courses at UMONS, Belgium: student's activity for 2020-2021 : <https://zenodo.org/record/6420917>
+- Biological data science courses at UMONS, Belgium: student's activity for 2019-2020 : <https://zenodo.org/record/6420879>
+- Biological data science courses at UMONS, Belgium: student's activity for 2018-2019 : <https://zenodo.org/record/6420348>
+
+Raw data are processed with these steps:
 
 1. Data from our MongoDB database are anonymized and saved into `.csv` files. That step is not documented because it contains sensible personal data that we are not allowed to disclose. However, we made this pretreatment as minimal as possible, focusing mainly on the replacement of personal data with random identifiers for the students.
 
 2. Anonymized data are processed to produce table of final results in the `\data` subdirectory in this repository.
 
 3. Data from the `/data` subdirectory are used to run the analyses, and to create tables and figures in the manuscript.
-
 
 ## How to reproduce the analyses?
 
@@ -42,6 +47,6 @@ source("R/install.R")
 
 You should be able to regenerate the manuscript `docs/teaching_data_science.Rmd` (step 3 above), or the `docs/supplemental_materials.Rmd` notebook just be knitting them (open the `.Rmd` file inside RStudio and click on the **knit** button there).
 
-If you want to regenerate the tables in `/data` (step 2 above), you will have to run the three `R/data_preparationX.R` files. Before doing so, you will have to download the anonymized datasets from <https://filedn.com/lzGVgfOGxb6mHFQcRn9ueUb/sdd_data.zip>. Unzip this file somewhere. You should have three directories: `sdd_2018-2019`,  `sdd_2019-2020` & `sdd_2020-2021` with a `data`subdirectory and various `.csv` files inside (`users.csv`, `projects.csv`, ...). In the `R/data_preparationX.R` file, you will have to change line 8 and indicate the actual directory on your computer where you unzipped the anonymized data. At that point, running the code in these scripts should regenerate the tables in `/data`.
+If you want to regenerate the tables in `/data` (step 2 above), you will have to run the three `R/data_preparationX.R` files. Before doing so, you will have to download the anonymized datasets from Zenodo with `R/data_download.R`. You should have three directories: `sdd_2018-2019`,  `sdd_2019-2020` & `sdd_2020-2021` with  various `.csv` files inside (`users.csv`, `projects.csv`, ...). In the `R/data_preparationX.R` file, you will have to change line 8 and indicate the actual directory on your computer where you saved the anonymized data. At that point, running the code in these scripts should regenerate the tables in `/data`.
 
 Of course, the code in the `.Rmd` and `.R` file can be examined in more details to understand the logic of the analyses done.
