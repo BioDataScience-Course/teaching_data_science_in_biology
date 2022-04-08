@@ -3,14 +3,16 @@
 # Philippe Grosjean (phgrosjean@sciviews.org) &
 # Guyliann Engels (Guyliann.Engels@umons.ac.be)
 
-# Download the datasets (TODO: from where?)
+# Import Raw Datasets -----------------------------------------------------
 # Indicate the root folder where these data are located here:
 root <- svMisc::pcloud() # Replace this if you have a different directory!
+#root <- "~/Desktop/zenodo_repos/"
+
 if (!fs::dir_exists(root))
   stop("The directory 'root' (", root, ") will contain raw data. ",
     "You must indicate an existing directory!")
-# Data will be in <root>/sdd_<acad_year>/data
-
+# Use `data_download.R` to download raw data.
+# Data will be in <root>/sdd_<acad_year>/
 
 # Initialisation ----------------------------------------------------------
 
@@ -18,16 +20,14 @@ if (!fs::dir_exists(root))
 SciViews::R
 source("R/functions.R")
 
-
 # Parameterization --------------------------------------------------------
 
 acad_years <- c("2019-2020", "2020-2021")
 sdd_folders <- glue("sdd_{acad_years}")
-data_dirs <- path(root, sdd_folders, "data")
+data_dirs <- path(root, sdd_folders)
 courses <- c("A", "B") # Don't include courses C, D & E in the analysis
 institutions <- "UMONS" # Don't include Campus UCharleroi
 time_interval <- interval(as.time("2020/03/05"), as.time("2021/05/15"))
-
 
 # Extract data from git logs ----------------------------------------------
 

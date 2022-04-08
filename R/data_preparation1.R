@@ -3,14 +3,16 @@
 # Philippe Grosjean (phgrosjean@sciviews.org) &
 # Guyliann Engels (Guyliann.Engels@umons.ac.be)
 
-# Download the datasets (TODO: from where?)
+# Import Raw Datasets -----------------------------------------------------
 # Indicate the root folder where these data are located here:
 root <- svMisc::pcloud() # Replace this if you have a different directory!
+#root <- "~/Desktop/zenodo_repos/"
+
 if (!fs::dir_exists(root))
   stop("The directory 'root' (", root, ") will contain raw data. ",
     "You must indicate an existing directory!")
-# Data will be in <root>/sdd_<acad_year>/data
-
+# Use `data_download.R` to download raw data.
+# Data will be in <root>/sdd_<acad_year>/
 
 # Initialisation ----------------------------------------------------------
 
@@ -20,12 +22,11 @@ SciViews::R
 source("R/sciviews_r_addons.R")
 source("R/functions.R")
 
-
 # Parameterization --------------------------------------------------------
 
 acad_year <- "2020-2021"
 sdd_folder <- glue("sdd_{acad_year}")
-data_dir <- path(root, sdd_folder, "data")
+data_dir <- path(root, sdd_folder)
 courses <- c("A", "B", "C") # Don't include courses D & E in the analysis
 institutions <- "UMONS" # Don't include Campus UCharleroi
 ignore_modules <- c("A00", "A99", "B00", "B99", "C00", "C99", "D99")
@@ -73,7 +74,6 @@ read(path(data_dir, "lessons.csv")) %>.%
     interval_complete = interval(start, completion)) ->
   modules_timings
 # Note: we could also get the number of modules per course from this table
-
 
 # Extract users data ------------------------------------------------------
 
