@@ -119,29 +119,29 @@ Learnr: Analysis of Three Years Data}
 
 %The abstract of your paper
 \begin{abstract}
-   We examine the impact of implementing active pedagogical
-  methodologies in three successive data science courses for a
-  curriculum in biology at the University of Mons, Belgium. A blended
-  learning and flipped classroom approaches were adopted, with an
-  emphasis on project-based biological data analysis. Four successive
-  types of exercises of increasing difficulties are proposed to the
-  students. Tutorials written with the R package learnr are identified
-  as a critical step to transition between theory and application of the
-  concepts. Cognitive workload to complete the learnr tutorials is
-  measured for the three courses and is only lower for the last course,
-  suggesting students need a long time to get used to their software
-  environment (R, RStudio and git). A comparison between final summative
-  assessment and grading of applied biological data analysis (projects)
-  exhibits a low correlation. It suggests that the final exam does not
-  assess practical skills very well. The final exam was dropped at the
-  benefit of an ongoing assessment. Data relative to students' activity,
+  We examine the impact of implementing active pedagogical methodologies
+  in three successive data science courses for a curriculum in biology
+  at the University of Mons, Belgium. Blended learning and flipped
+  classroom approaches were adopted, with an emphasis on project-based
+  biological data analysis. Four successive types of exercises of
+  increasing difficulties are proposed to the students. Tutorials
+  written with the R package learnr are identified as a critical step to
+  transition between theory and application of the concepts. Cognitive
+  workload to complete the learnr tutorials is measured for the three
+  courses and is only lower for the last course, suggesting students
+  need a long time to get used to their software environment (R, RStudio
+  and git). A comparison between final summative assessment and grading
+  of applied biological data analysis (projects) exhibits a low
+  correlation. This suggests that the final exam does not assess
+  practical skills very well. The final exam was dropped at the benefit
+  of an ongoing assessment. Data relative to students' activity,
   collected primarily for the ongoing assessment, are also used to
-  establish students profiles according to their learning strategies.
-  Several suboptimal strategies are observed and discussed. Finally, the
-  timing of students contributions, and the efficiency of
+  establish profiles of the students according to their learning
+  strategies. Several suboptimal strategies are observed and discussed.
+  Finally, the timing of students contributions, and the intensity of
   teacher-learner interactions related to these contributions are
   analyzed before, during and after mandatory distance learning due to
-  covid-19 lockdown. A lag phase was visible at the beginning of the
+  COVID-19 lockdown. A lag phase was visible at the beginning of the
   first lockdown, but the work of the students was not markedly affected
   during the second lockdown period that lasted much longer.
 \end{abstract}
@@ -168,7 +168,7 @@ sciences also attend them (for instance, the data science training at
 Duke University \cite{Cetinkaya-Rundel2021}). Focus of such courses is
 for students to develop the ability to deal with real datasets in all
 their complexities, to be able to conduct reproducible analyses, and to
-interpret these data in the light of knowledge in their field of
+interpret these analyses in the light of knowledge in their field of
 expertise.
 
 These data science courses pose several pedagogical challenges because
@@ -178,48 +178,50 @@ range of cognitive abilities and, in these courses, the intended
 learning outcomes aim at developing high-level cognitive process
 abilities such as conceptual, procedural, and even metacognitive
 knowledge \cite{Krathwohl2002}. To meet such learning objectives, active
-learning methods are useful so that students could better catch up with
-these high-level cognitive skills \cite{Freeman2014}. Advances in
-educational psychology, reviewed by Kirchner \& Hendrick
-\cite{Kirschner2020}, give a scientific background to understand why a
-pedagogical practice works or not. Many teaching and learning frameworks
-involving numerical tools turn to a blended learning scenario including
-remote activities to be done before and after in-class ones, individual
-and group problem-solving, peer instructions and ongoing assessment. The
-flipped classroom approach also involves a mix between at home and in
-class activities, but learning occurs before the classes that are
-dedicated to discussions and problem solving. This allows students to be
-active in their learning, which has the benefit of improving student
-outcomes \cite{Freeman2014}. Moreover, it allows flexibility and enables
-students to work at their pace. Their various learning strategies are
-respected as they are actors in their learning process
-\cite{Spadafora2018}. Such frameworks are open, learning centered, and
-supported by a varied and rich environment \cite{Burton2011}.
+learning methods are useful so that students could better acquire these
+high-level cognitive skills \cite{Freeman2014}. Advances in educational
+psychology, reviewed by Kirchner \& Hendrick \cite{Kirschner2020}, give
+a scientific background to understand why a pedagogical practice works
+or not. Many teaching and learning frameworks involving numerical tools
+turn to a blended learning scenario including remote activities to be
+done before and after in-class work, individual and group
+problem-solving, peer instructions and ongoing assessment. The flipped
+classroom approach also involves a mix between at home and in class
+activities, but learning occurs before the classes that are dedicated to
+discussions and problem solving. This allows students to be active in
+their learning, which has the benefit of improving student competences
+\cite{Freeman2014}. Moreover, this approach enables students to work at
+their own pace. Their various learning strategies are respected as they
+are actors in their learning process \cite{Spadafora2018}. Such
+frameworks are open learning centered, and are supported by a varied and
+rich pedagogical environment \cite{Burton2011}.
 
 The data transformation part of the process in data science is a
 challenge for students with little or no background at all in computing
 sciences. Students that do not master one or more computer languages
 enter into an unfamiliar world and have to deal with many exotic
 concepts, techniques and tools. Version control systems like git, and
-their internet hosting counterparts like GitHub, Gitlab or Bitbucket are
-also tools that a data science course teaches and uses
-\cite{Fiksel2019, Hsing2019}. Presentation of the results and the use of
-document formats that dissociate content from presentation, namely
-LaTeX, Jupyter Notebook, or R Markdown to cite a few, also contribute to
-the large number of potentially new tools learners have to discover
-\cite{Baumer2014}. On the other hand, a student in computing science who
-already masters one or more computing languages, is acquainted with
-version control systems, with databases and with the way data are
-manipulated and represented in a computer, but he or she may have
-difficulties grasping the context of datasets related to different
-disciplines. A student in mathematics or statistics is familiar with
-various concepts that underpin the techniques used to analyze the data.
-Students in biology, medicine, psychology, social sciences, economics,
-\ldots{} have obviously very different \emph{a priori} knowledge. The
-gap between knowledge and requirements generates anxiety (see for
-instance \cite{Onwuegbuzie2003}). The course must be organized in a way
-that learners progress by little steps to avoid exposure to many
-intimidating concepts and tools at once.
+their Internet hosting counterparts like GitHub, Gitlab or Bitbucket are
+also tools that are taught and used in data science courses
+\cite{Fiksel2019, Hsing2019}. The use of document formats that
+dissociate content from presentation, namely LaTeX, Jupyter Notebook, R
+Markdown or Quarto to cite a few, also contribute to the large number of
+potentially new tools learners have to discover \cite{Baumer2014}. On
+the other hand, a student in computing science already masters one or
+more computing languages. He or she is acquainted with version control
+systems, with databases and with the way data are manipulated and
+represented in a computer. Yet, the same student in computing science
+may have difficulties grasping the context of the study related to
+foreign disciplines. A student in mathematics or statistics is familiar
+with various concepts that underpin the techniques used to analyze the
+data. Students in biology, medicine, psychology, social sciences,
+economics, \ldots{} have obviously very different \emph{a priori}
+knowledge. The gap between knowledge and requirements generates anxiety
+(see for instance \cite{Onwuegbuzie2003}). The course must thus be
+organized in a way that learners progress by little steps to avoid
+exposure to many intimidating concepts and tools at once, taking into
+account their respective \emph{a priori} knowledge and their initial
+weaknesses.
 
 Suitable computer hardware and software environments are required to
 apply the concepts learned in data science courses. Different approaches
@@ -237,7 +239,7 @@ virtual machines, or containers (e.g.~Docker)
 flexible one because it can be deployed almost anywhere (in the computer
 lab, at home, on a laptop, \ldots). As practical applications are
 important to learn data science \cite{Larwin2011}, correct choice of
-software is critical and exposing students early with the tools they are
+software is critical. Exposing students early with the tools they are
 most susceptible to use later in their work is desirable. This was
 highlighted by Auker and Barthelmess \cite{Auker2020} for instance, for
 ecologists and by Alvarenga da Silva and Sampaio Moura
@@ -246,46 +248,50 @@ ecologists and by Alvarenga da Silva and Sampaio Moura
 Recently, data science has also been used to analyze the effect of
 different pedagogical practices on the outcome of these courses thanks
 to learning analytics \cite{Estrellado2020}. A vast amount of data can
-be collected on students' activities, and the analysis of these data
+be collected about students' activities, and the analysis of these data
 allows comparing the impact of different pedagogical approaches, or to
 quantify and document the impact of changes in the courses
 \cite{Romero2020}.
 
-At the University of Mons in Belgium (UMONS), we started to rework our
+At the University of Mons in Belgium (UMONS), we reworked our
 biostatistics courses in the biology curriculum in 2018. A series of
 Data Science courses were introduced, both for our undergraduate and
-graduate students. The goal of these courses is to form biological data
+graduate students. The goal of these courses was to form biological data
 scientists capable of extracting meaningful information from raw
-biological data, and to do so in a reproducible way, with the correct
-application of statistical tools and an adequate critical mind.
+biological data. They must be able to do so in a reproducible way and
+with the correct application of statistical tools and an adequate
+critical mind. The goal was thus vastly broaden and it did not solely
+targets skills in biostatistics any more.
 
-The learning outcomes are thus to be able to analyze most recurrent
-biological data in practice and to present clearly and accurately the
-results in a scientific report. In order to achieve these learning
-outcomes the students have to master skills in biostatiscs, scientific
-writing and computer tools (like R and RStudio in our case). They also
-have to develop a critical mind in statistical analysis. All learning
-outcomes are described in the students' study programme
-\cite{ds1bio2021, ds2bio2021, ds3bio2021}.
-
-A preconfigured VirtualBox machine with R, RStudio, R Markdown, git, and
-a series of R packages preinstalled is used
+The learning outcomes defined for these Biological Data Science courses
+were thus to be able to analyze most recurrent biological data in
+practice and to present the results clearly and accurately in a
+scientific report. In order to achieve these learning outcomes the
+students had to master skills in biostatistics, scientific writing and
+they had to become proficient in the use of computer tools like R,
+RStudio, git, GitHub and R Markdown. They also had to develop a critical
+mind in statistical thinking. All these learning outcomes are described
+in the students' study programme at UMONS, see for instance for the
+academic year 2020-2021 \cite{ds1bio2021, ds2bio2021, ds3bio2021}. A
+preconfigured VirtualBox machine with R, RStudio, R Markdown, git, and a
+series of R packages preinstalled is used
 (\url{https://www.sciviews.org/software/svbox/}) as a very flexible way
 to deploy the same software environment both on the university computers
 and on the student's own laptops.
 
 As our courses were reworked, we also decided to use flipped classroom
-and progressive adoption of suitable pedagogical practices with a
-cyclical approach that consists of stating goals, building pedagogical
-material with a large emphasis on numerical tools and collection of
-students' activities, and finally, analysis of the data collected. These
-results let us regulate our teaching activities the following academic
-year with refined goals and improved pedagogical techniques. This
+and progressive adoption of suitable pedagogical practices in that
+particular context with a cyclical approach that consists of stating
+goals, building pedagogical material with a large emphasis on numerical
+tools and collection of students' activities, and finally, analysing the
+data collected. This approach let us enhance our teaching activities the
+following academic year with improved pedagogical techniques. This
 technique is known as educational data mining knowledge discovery cycle
 \cite{Romero2020}. Here, we present the main results spanning on three
-successive academic years from 2018 to 2021, including two particular
-periods where distance learning was forced due to Covid-19 pandemic
-lockdown. In this paper, we will focus on the following four questions:
+successive academic years from 2018-2019 to 2020-2021, including two
+particular periods where distance learning was forced due to COVID-19
+pandemic lockdown. In this paper, we will focus on the following four
+questions:
 
 \begin{itemize}
 \item
@@ -305,7 +311,7 @@ lockdown. In this paper, we will focus on the following four questions:
   biological data science courses?
 \item
   Did the quick shift from face-to-face to distance learning imposed by
-  Covid-19 lockdown periods affected the production of our students and
+  COVID-19 lockdown periods affected the production of our students and
   did it require increased exchanges with the teaching staff to support
   it?
 \end{itemize}
@@ -314,137 +320,139 @@ lockdown. In this paper, we will focus on the following four questions:
 \section{Methods}\label{methods}}
 
 This study focuses on three successive courses of increasing
-difficulties, called here A, B and C designed as a continuum. These
-courses are part of the core curriculum and are thus mandatory to all
+difficulties, called here A, B and C and designed as a continuum. These
+courses were part of the core curriculum and were thus mandatory to all
 students enrolled in the Bachelor, or Master in Biology at UMONS.
 
 \begin{itemize}
 \item
-  Course A is about data preparation, description and visualization. It
-  also introduces inference with most common hypothesis tests in biology
-  (\emph{t} test, ANOVA, \ldots). It is taught in the second year of the
-  bachelor. Course A is built to match background knowledge acquired by
-  the students during their first year of the same bachelor in biology
-  at UMONS.
+  Course A was about data preparation, description and visualization. It
+  also introduced inference with most common hypothesis tests in biology
+  (\emph{t} test, ANOVA, \ldots). It was taught in the second year of
+  the bachelor. Course A was set up to assume only background knowledge
+  acquired by the students during their first year of the same Bachelor
+  in Biology at UMONS.
 \item
-  Course B teaches data modeling (linear, generalized linear and
+  Course B taught data modeling (linear, generalized linear and
   nonlinear models) and multivariate analyses (PCA, MDS, clustering,
-  \ldots) to students enrolled in the third year of the bachelor in
-  biology at UMONS. Course A is a prerequisite (all students following
+  \ldots) to students enrolled in the third year of the Bachelor in
+  Biology at UMONS. Course A is a prerequisite (all students following
   course B have previously passed course A).
 \item
-  Course C is taught to all master students in the biology section
-  (first year of the master). This course focuses on machine learning,
+  Course C was taught to all Master students in the Biology section
+  (first year of the Master). This course focused on machine learning,
   time series analysis and the analysis and visualization of
-  georeferenced data. These students have either passed both course A
-  and B at UMONS, or they can demonstrate similar knowledge. Only a very
-  few number of students (only one in 2020-2021 for a total of 26
-  students) came from a different bachelor and had thus different
-  courses that A and B in their bachelor.
+  georeferenced data. These students had either passed both course A and
+  B at UMONS, or they demonstrated similar knowledge. Only a very few
+  number of students (only one in 2020-2021 on a total of 26 students)
+  came from a different bachelor and had thus different courses that A
+  and B in their Bachelor.
 \end{itemize}
 
-The sample contains all students who follow the scheme described above.
-
 The course material is available online (\url{https://wp.sciviews.org})
-and is centralized in a Wordpress site. Students have to login with
-their GitHub account and their academic data are collected from the
-UMONS Moodle server (\url{https://moodle.umons.ac.be}). The courses are
+and is centralized in a Wordpress site. Students had to login with their
+GitHub account and their academic data were collected from the UMONS
+Moodle server (\url{https://moodle.umons.ac.be}). The courses were
 broken down into modules that amount roughly to 15h of work each. There
-are two sessions of 2h and 4h in-class (outside lockdown periods, of
-course), with roughly 3h of preparation at home before each session, and
-3h of work to complete one module. Main activities in the class are
-analyzing actual data (projects), answering student questions, and
-lecturing briefly (1/4 h) on selected topics. Students propose and vote
-for the topics to be covered during these short lectures. Finally, we
-encourage students to help each other and to explain what they
-understand to their colleagues. Indeed, students' questions may be
-redirected by the teacher to other students that have already mastered
-the topic. Teachers rarely answer questions directly. When it is
-possible, they rather propose new tracks or ideas to investigate and
-help learners to find the solution by themselves. Students who go
-through the activities before the others are encouraged to help their
-colleagues too.
+were two in-class sessions of 2h and 4h per module (outside lockdown
+periods, of course). There was roughly 3h of preparation at home before
+each session, and 3h of work to complete one module. Main activities in
+the class were analysis of actual data (projects). Students also asked
+questions and followed brief lectures (1/4 h) on selected topics in the
+class. They has to propose and vote for the topics to be covered during
+these short lectures. Finally, we encouraged students to help each other
+and to explain what they understood to their colleagues. Indeed,
+students' questions were sometimes redirected by the teacher to other
+students that had already mastered the topic. Teachers rarely answered
+questions directly. When it was possible, they rather proposed new
+tracks or ideas to investigate and help learners to find the solution by
+themselves. Students who go through the activities before the others
+were also encouraged to help their slower colleagues.
 
-Regarding the timing, one module is taught every second week so that
-students have enough time to prepare the material at home before
-in-class session, and after it, to finalize their projects. As a term is
-made of 14 weeks, we do not teach more than six modules in a course unit
-to avoid compacting them too much in time. After reading the theory,
-students are exposed to exercises of four increasing levels of
-difficulty. They thus have to apply the concepts repeatedly but in
-different contexts, which breaks monotony and maintains a stimulating
-rhythm all along their progression. Once they have learned the
-principles in the book and self-assessed their comprehension of the
-concepts using H5P (\url{https://h5p.org}) exercises (level 1
-difficulty) These exercises are simple questions (TRUE/FALSE, multiple
-choice,\ldots). Learnr tutorials
-(\url{https://rstudio.github.io/learnr/}, level 2) are used to gently
-introduce them to the R code required for the analyses by guiding them
-through their first data analysis. These tutorials are thus the entry
-point to the practice. These exercises are mainly R instructions to be
-completed. Project implementation is the next step. The use of R
-instructions is not sufficient to complete a project. Students should be
-familiar with Git, GitHub, R markdown and RStudio. They must interpret
-the results obtained. The individual projects (level 3) contain guidance
-on how to perform the different step of the analysis to help the
-students. The group projects (level 4) do not contain guidance.
-According to the biological data, the students determine by themselve
-the question they will answer and they perform their analysis freely.
-Projects, first individual (level 3), then in groups of two to four
-students (level 4) represent the core activities. Evaluating these
-projects constitute, thus, the most important information to assess the
-competences of our students. By construction, L1 to L4 represent
-increasing levels of difficulties according to bloom's taxonomy
-\cite{Krathwohl2002}.
+Regarding the timing, one module was taught every second week so that
+students had enough time to prepare the material at home before in-class
+session, and after it, to finalize their projects for the module. As a
+term is made of 14 weeks, we did not taught more than six modules in a
+course unit to avoid compacting them too much in time. After reading the
+theory, students were exposed to exercises of four increasing levels of
+difficulty. They thus had to apply the concepts repeatedly but in
+different contexts, which broke monotony and maintained a stimulating
+rhythm all along their progression. They had to learn the principles in
+the online book (\url{https://wp.sciviews.org}) and self-assessed their
+comprehension of the concepts using H5P (\url{https://h5p.org})
+exercises (level 1 difficulty). These exercises were simple questions
+(TRUE/FALSE, multiple choice,\ldots). Learnr tutorials
+(\url{https://rstudio.github.io/learnr/} were used for the level 2
+exercises. They were gently introducing the students to the R code
+required for the analyses by guiding them step by step through their
+first data analysis. These tutorials were thus the entry point to the
+practice.
+
+Most of the practical work was dedicated to GitHub project (level 3 and
+level 4 difficulties). At this stage, the use of R instructions was not
+sufficient to complete the exercices. Students had to also become
+acquainted with git, GitHub, R markdown and RStudio to manage the
+projects. They also had to interpret the results they obtained. The
+individual projects (level 3) contained guidance on how to perform the
+different step of the analysis. The group projects (level 4, groups of
+two or four students) did not contain such guidance. At level 3, goals
+were clearly specified in the projects. At level 4, students had to
+imagine suitable biological and statistical questions that could be
+answered by analyzing the data proposed in the project. Working on these
+projects represented both the core of in class activities and the best
+expression of their learning progression. By construction, level 1 to
+level 4 exercises represent thus increasing difficulties according to
+Bloom's taxonomy \cite{Krathwohl2002}.
 
 All students' activities in H5P exercises (self-assessing), and in
-learnr tutorials (transitioning smoothly from theory to practice) are
+learnr tutorials (transitioning smoothly from theory to practice) were
 recorded in a MongoDB database. The learnitdown R package
 (\url{https://www.sciviews.org/learnitdown/}) provides the code required
 to manage user login, user identification and activity tracking for this
 interactive material.
 
-Projects containing the data, the analyses and the reports are hosted in
-GitHub repositories. These repositories are cloned and edited by the
+Projects containing the data, the analyses and the reports were hosted
+in GitHub repositories. These repositories were cloned and edited by the
 students in their virtual machines (SciViews Box) with RStudio
 (\url{https://www.rstudio.com/products/rstudio/}), either on their
-laptops or on the computers in the lab. We encourage our students to
+laptops or on the computers in the lab. We encouraged our students to
 install the virtual machine for the course on their computer so that
-they can work comfortably at home and also use it for other activities
-too. Assignment and creation of the GitHub repositories for each
-student, or group of students, is orchestrated by GitHub Classroom
-(\url{https://classroom.github.com}). Reports are written in R Markdown
-(\url{https://rmarkdown.rstudio.com/}) that combines the prose with R
-code to produce analyses results, plots and tables directly inside the
-documents. All repositories are ultimately cloned by the teacher in a
-centralized area on our servers and data about commits (git logs) are
-collected using git version 2.31.1 and R version 4.0.5
-\cite{Rcoreteam2021}. To give an idea of the data recorded, in 2020-2021
-we have a little bit more than 3,500 events recorded for each student.
+they were able to work comfortably at home and also could use it for
+other activities too. Assignment and creation of the GitHub repositories
+for each student, or group of students, was orchestrated by GitHub
+Classroom (\url{https://classroom.github.com}). Reports were written in
+R Markdown (\url{https://rmarkdown.rstudio.com/}), a file format that
+combines the prose with R code to produce analyses results, plots and
+tables directly inside the documents. All repositories were ultimately
+cloned by the teacher in a centralized area on our servers and data
+about commits (git logs) were collected using git version 2.31.1 and R
+version 4.0.5 \cite{Rcoreteam2021}. To give an idea of the data
+recorded, in 2020-2021 we had a little bit more than 3,500 events
+recorded for each student.
 
 In distance learning, students' support was done via email and Discord
 (\url{https://discord.com}). At the end of an academic term, all
 recorded messages were collected into text files. These files were
 scraped using custom R code to create a table with key information
-(basically, who, when, and what) for each message. Surveys are done
-periodically in-class through Wooclap questionnaires
+(basically, who, when, and what) for each message. Surveys were done
+periodically in class through Wooclap questionnaires
 (\url{https://www.wooclap.com}). Such questionnaires were used to query
-perceived workload of the learnr tutorials. Results are manually
-exported out of Wooclap by means of Excel files. These data are then
+perceived workload of the learnr tutorials. Results were manually
+exported out of Wooclap by means of Excel files. These data were then
 incorporated into a table in our database thanks to an R script.
 
 Data about users, courses, lectures and projects, as well as grading
 items (on average, more than 130 grading items were established for each
-student in 2020-2021) are anonymized: names, emails and all the personal
-information are replaced by random identifiers. The different tables are
-ultimately exported into CSV files and made public. Data collection,
-treatment, and use respect European GDPR (General Data Protection
-Regulation) since each student had to agree explicitly with the way data
-are collected and used (including for research purpose) before each
-course begins. They can visualize their data through personalized
-reports at any time.
+student in 2020-2021) were anonymized: names, emails and all the
+personal information were replaced by random identifiers. The different
+tables were ultimately exported into CSV files and made public
+\cite{Grosjeandataset2020}. Data collection, treatment, and use respect
+European GDPR (General Data Protection Regulation) since each student
+had to agree explicitly with the way data were collected and used
+(including for research purpose) before each course started. They were
+able to visualize their data through personalized reports at any time.
 
-The course material is organized in a way that favors autonomy and
+The course material was organized in a way that favors autonomy and
 self-assessment (direct feedback in the exercises, hints and retry
 buttons in case of wrong answers). Table
 \ref {tab:tab_ex_levels_summary} summarizes main characteristics of the
@@ -480,60 +488,62 @@ figures and table in this paper is available at
 tutorials}\label{measured-and-perceived-cognitive-workload-in-learnr-tutorials}}
 
 The average number of trials that were required for each student to find
-the right answer in learnr tutorial exercises is use as a proxy of
-measured workload. In comparison, the perceived cognitive workload is
-established with the NASA LTX questionnaire. This questionnaire was used
-to study perceived workload to complete a task. It is composed of six
-questions on a Likert scale \cite{Hart1988}. The questions concern
-mental load, physical load, time pressure, expected success, effort
-required, and frustration experienced during the accomplishment of the
-task. The average value for the six questions constitutes a Raw Task
-Load indeX (RTLX) \cite{Byers1989} that we used to quantify how students
-feel when using these learnr tutorials. An analysis of variance and a
-Tukey's post-hoc Honest Significant Difference (HSD) test are used for
-the comparison between courses.
+the right answer in learnr tutorial exercises was used as a proxy of
+measured workload. In comparison, the perceived cognitive workload was
+established with a NASA LTX questionnaire. This questionnaire is
+composed of six questions on a Likert scale \cite{Hart1988}. The
+questions concern mental load, physical load, time pressure, expected
+success, effort required, and frustration experienced during the
+accomplishment of the task. The average value for the six questions
+constitutes a Raw Task Load indeX (RTLX) \cite{Byers1989} that we used
+to quantify how students felt when using these learnr tutorials. An
+analysis of variance and a Tukey's post-hoc Honest Significant
+Difference (HSD) tests were used for the comparison between courses.
 
 \hypertarget{final-exam-versus-projects}{%
 \subsection{\texorpdfstring{Final exam \emph{versus}
 projects}{Final exam versus projects}}\label{final-exam-versus-projects}}
 
-The evaluation grids are used to determine the students' grade for the
-projects. These grades are compared to the grade obtained in the
-traditional exams. Pearson correlation tests are used to define the
-correlation between the grades obtained.
+Evaluation grids containing rubrics were used to grade students'
+projects. These grades were then compared to the results obtained in the
+traditional exams administered at the end of the term. Pearson
+correlation coefficients were used to quantify the correlation between
+the grades in the projects and at the final exams.
 
 \hypertarget{students-activity-profiles-with-ongoing-assessment}{%
 \subsection{Students activity profiles with ongoing
 assessment}\label{students-activity-profiles-with-ongoing-assessment}}
 
-Data from the L1-L4 exercices and the studend's support (email and
-discorsd) is used to determine the students activity profiles.
-Self-Organizing Map (SOM) allows a n-dimensional table to be projected
-into a 2-dimensional object \cite{Kohonen1995}, and it is used to
-classify students' profiles. The \{kohonen\} R package is used to
-compute the model \cite{Wehrens2018}.
+Data from the L1-L4 exercises and the student's support (email and
+Discord) were used to characterize the students activity profiles. A
+non-supervised classification technique called Self-Organizing Map (SOM)
+\cite{Kohonen1995} was used to characterize various learning profiles.
+The \{kohonen\} R package was used to compute the model
+\cite{Wehrens2018}.
 
 \hypertarget{transition-between-face-to-face-to-distance-learning-imposed-by-covid-19-lockdown}{%
 \subsection{Transition between face-to-face to distance learning imposed
-by Covid-19
+by COVID-19
 lockdown}\label{transition-between-face-to-face-to-distance-learning-imposed-by-covid-19-lockdown}}
 
-The transition between face-to-face to distance learning is studied by
-the contribution of each student in projects with the commits (git logs)
-and students' support is done via email and Discord.
+The transition between face-to-face to distance learning was studied
+through the contribution of each student in projects with the commits
+(git logs) and students' questions they asked by email and on Discord.
+Only descriptive analysis of these data was done, but interesting
+patterns were observed.
 
 \hypertarget{results}{%
 \section{Results}\label{results}}
 
-This study is performed on data originating from three successive
-courses that comprise 26 modules in total in 2020-2021. Table
+This study was performed on data related to the three successive courses
+that comprise 26 modules in total in 2020-2021. Table
 \ref {tab:tab_course} summarizes the number of H5P, learnr, individual
 and group GitHub projects that students had to complete. Group projects
-usually span over several modules. It should be noted that for course C,
-we also introduced a challenge in machine learning that replaced one
+usually spanned over several modules. It should be noted that for course
+C, we also introduced a challenge in machine learning that replaced one
 group GitHub project. This challenge is omitted from the present
 analysis, being an isolate activity that is difficult to compare to the
-rest. However, this explains why there is only one group project in
+rest. However, this explains why there was only one group project in
 course C.
 
 \begin{table}
@@ -553,40 +563,39 @@ C & 26 & 6 & 19 & 7 (37) & 7 & 1\\
 \end{tabular}
 \end{table}
 
-Retrospective data from 2018-2019 (only course A) and 2019-2020 (courses
-A and B) are also used when it is pertinent. For instance, final exams
-were only used during these two years. It should be kept in mind that
-the pedagogical material was written and improved progressively during
-the three academic years. The H5P exercises and the auto-checking of
-learnr answers were not available before 2020-2021. We do not use data
-corresponding to our former courses in biostatistics given in a more
-traditional way because we consider the comparison would not be
-unbiased: the content of these courses is quite different. However,
-experience gathered with these former courses during 15 years was
-critical in the redesign of the new ones.
+Retrospective data from 2018-2019 (only course A)
+\cite{Grosjeandataset2018} and 2019-2020 (courses A and B)
+\cite{Grosjeandataset2019} were also used when it is pertinent. For
+instance, final exams were only used during these two years. It should
+be kept in mind that the pedagogical material was written and improved
+progressively during the three academic years. The H5P exercises and the
+auto-checking of learnr answers were not available before 2020-2021. We
+do not use data corresponding to our former courses in biostatistics
+that were given in a more traditional way because we consider the
+comparison would not be unbiased: the content of these courses was quite
+different. However, experience gathered with these former courses during
+15 years was critical in the redesign of the new ones.
 
 \hypertarget{measured-and-perceived-cognitive-workload-in-learnr-tutorials-1}{%
 \subsection{Measured and perceived cognitive workload in learnr
 tutorials}\label{measured-and-perceived-cognitive-workload-in-learnr-tutorials-1}}
 
-In our courses, learnr tutorials play an essential role in the
-progressive acquisition of competences because they are at the
-transition between the theory (online book chapters) and the practice
-(projects). These tutorials are online interactive documents that recall
-main concepts, and take the students by the hand to perform their first
-data analysis step by step. At each step, they have at least one
-exercise or one quiz. The exercise consists in writing R code, or
-filling missing parts in R code to progress in the analysis.
+In our courses, learnr tutorials help students to transition from the
+theory (online book chapters) to the practice (projects). These
+tutorials are online interactive documents that recall main concepts,
+and take the students by the hand to perform their first data analysis
+step by step. At each step, they have at least one exercise or one quiz.
+The exercise consists in writing R code, or filling missing parts in R
+code to progress in the analysis.
 
-Our goal with these tutorials is to prepare the students optimally for
-the practice of data science. On the other hand, we do not want to
-exhaust their mental energy just before they start working on their
-projects. The efficiency of these tutorials is qualitatively determined
-by observing the behavior of the students when they start their
-practical work, but we also have quantitative indicators available, like
-the number or retries necessary to complete an exercise on average, the
-number of exercises correctly answered, or the time needed to complete
-one tutorial.
+Our goal with these tutorials was to prepare the students optimally for
+the practice of data science. The usefulness of these tutorials was
+qualitatively determined by observing the behavior of the students when
+they started their practical work. On the other hand, the number or
+retries necessary to complete an exercise on average, the number of
+exercises correctly answered, or the time needed to complete one
+tutorial were quantitative measurements and could be analyzed in order
+to optimize these tutorials.
 
 A few tutorials were elaborated during the academic year 2018-2019, and
 positive feedback on their utility (both by direct observation of the
@@ -594,13 +603,13 @@ students and thanks to their remarks) led us to systematize them into
 what we now call level 2 activities (see Table \ref {tab:tab_course}) in
 the form of learnr documents in 2019-2020. The tutorials were further
 refined in 2020-2021: we added contextual hints thanks to the gradethis
-R package (\url{https://pkgs.rstudio.com/gradethis/}). When students
-submit their answer to the exercises, the R code is parsed, analyzed and
-the result is compared with the solution. In case of differences,
-heuristics are used to provide contextual hints. Students can then
-refine their solution and resubmit it. This appears very efficient in
-self-learning and self-assessing their competences before switching to
-the practice with confidence.
+R package (\url{https://pkgs.rstudio.com/gradethis/}). In ther latest
+version, when students submit their answer to the exercises, the R code
+is parsed, analyzed and the result is compared with the solution. In
+case of differences, heuristics are used to provide contextual hints.
+Students can then refine their solution and resubmit it. This appears
+very efficient in self-learning and self-assessing their competences
+before switching to the practice with confidence.
 
 \begin{figure}
 \includegraphics[width=1\linewidth]{teaching_data_science_files/figure-latex/fig_learn_trials-1} \caption{\label{fig:fig_learn_trials} Average number of retries that were required for each student to find the right answer in learnr tutorials exercises (year 2020-2021). This measure is used as a proxy to quantify the cognitive workload (with caution as explained in the text). The black dot is the average for the whole class and n is the number of observations.}\label{fig:fig_learn_trials}
@@ -608,7 +617,7 @@ the practice with confidence.
 
 A fully objective quantitative measurement of the cognitive workload is
 near to impossible to obtain in these asynchronous activities done at
-home. It is estimated here by using a proxy: the average number of
+home. It was thus estimated by using a proxy: the average number of
 trials that were required for each student to find the right answer in
 learnr tutorial exercises (Fig. \ref {fig:fig_learn_trials}). Caution is
 required here as a large number of trials could also be the result of
@@ -618,20 +627,21 @@ level of understanding of both the R syntax and the question are
 required to obtain correct answers. Only data from students that
 correctly answered to most of the exercises (\textgreater{} 90\%) were
 used here, as it also rules out the students that appear to have
-insufficient knowledge to master the concepts in the tutorials. For
-course A, 13 out of 59 students did not passed this filter, 5 out of 45
-for course B and 1 out of 26 for course C. This variable varies
-significantly between the three courses (Kruskal-Wallis rank sum test,
-chi-squared = 8.820, df = 2, p-value = 0.0121). The students in course C
-need significantly fewer trials to find the right answer than students
-in courses A at \(\alpha\) level of 5\% (Tukey HSD, t = -2.481, p-value
-= 0.0342) and B (Tukey HSD, t = -2.365, p-value = 0.0460).
+insufficient knowledge to master the concepts in the tutorials and are
+probably just guessing. For course A, 13 out of 59 students did not
+passed this filter, 5 out of 45 for course B and 1 out of 26 for course
+C. This variable varies significantly between the three courses
+(Kruskal-Wallis rank sum test, chi-squared = 8.820, df = 2, p-value =
+0.0121). The students in course C need significantly fewer trials to
+find the right answer than students in courses A at \(\alpha\) level of
+5\% (Tukey HSD, t = -2.481, p-value = 0.0342) and B (Tukey HSD, t =
+-2.365, p-value = 0.0460).
 
-The perceived cognitive load required to perform these exercises is also
-determined on the same students and for the same exercises. The Raw Task
-Load indeX measures emotional state of the students after having
-completed a tutorial. This has, as far as we know, not been studied yet.
-We used a NASA LTX questionnaire to assess it across all three courses.
+The perceived cognitive load required to perform these exercises was
+also determined on the same students and for the same exercises. The Raw
+Task Load indeX measured emotional state of the students after having
+completed a tutorial. This has, as far as we know, not been done yet. We
+used a NASA LTX questionnaire to assess it across all three courses.
 Participation to the survey was high: 48/59 (81\%), 35/45 (78\%) and
 18/26 (69\%) for courses A, B, and C respectively.
 
@@ -640,15 +650,15 @@ Participation to the survey was high: 48/59 (81\%), 35/45 (78\%) and
 \end{figure}
 
 The difficulty of the course, and thus, of the exercises in the
-tutorials increase from one course to the other. However, we do not
+tutorials increased from one course to the other. However, we do not
 observe any increase, neither in the number of retries, nor in the Raw
 Task Load indeX (Fig. \ref {fig:fig_rtlx}). On the contrary, these
 appear significantly lower for course C than for course A at the
 \(\alpha\) level of 5\% (ANOVA, F(2,98) = 3.588, p-value = 0.031; Tukey
 HSD, t = -2.679, p-value = 0.023). The homogeneity of variances
-(Bartlett Test, K2 = 4.17, df =2, p-value = 0.1243) and the normal
-distribution of the residues is verified. The cognitive load perceived
-by the students diminishes at the same pace as their ability to find the
+(Bartlett Test, K2 = 4.17, df =2, p-value = 0.1243) and the Normal
+distribution of the residuals was verified. The cognitive load perceived
+by the students diminished at the same pace as their ability to find the
 right answer in fewer trials. This may be a consequence of a more fluent
 R coding ability and a better mastering of the software environment.
 
@@ -658,19 +668,23 @@ projects}{Final exam versus projects}}\label{final-exam-versus-projects-1}}
 
 An exam at the end of an academic term is a common practice as summative
 assessment. So, we compare grades our students got from such an exam
-with score they obtain directly in their projects in 2018-2019 and
-2019-2020. The final exam is written in learnr, and it mixes a few
+with score they obtained directly in their projects in 2018-2019 and
+2019-2020. The final exam was written in learnr and it mixed a few
 questions about the theory with many partly solved data analyses that
-students have to explain, criticize and finalize during the exam session
-on the computer. The exam is thus largely focusing on practical
-analysis, in line with the expected outcomes. Projects represent the
-reference here as they closely match expected learning outcomes
-(real-life cases). In this context, the correlation between grades at
-final exams and in projects is used to estimate if final exams also
-match expected learning outcomes. Final exams are easier to grade in a
-shorter time than the projects, but we are not sure whether they
+students had to explain, criticize and finalize during the exam session
+on the computer. The exam was thus largely focused on practical analyses
+in line with the expected outcomes. Projects represent the reference
+here as they closely match expected learning outcomes (practical
+analysis of real-life cases). In this context, the correlation between
+grades at final exams and in projects is used to estimate if final exams
+also match expected learning outcomes. Final exams are easier to grade
+in a shorter time than the projects, but we are not sure whether they
 evaluate correctly the practical abilities students have to develop
-during these courses.
+during these courses. Stress related to examination and questions out of
+the broader context that student can only grasp within their projects
+(e.g., bibliographic research, lengthy exploration of the dataset, group
+discussions, \ldots{} are no feasible during the final exam) could bias
+the evaluation.
 
 \begin{figure}
 \includegraphics[width=1\linewidth]{teaching_data_science_files/figure-latex/fig_exams_projects-1} \caption{\label{fig:fig_exams_projects}  Grades obtained at the final exam in function of grades obtained for the projects for courses A and B during two years (course B was still in its old form in 2018-2019 and is thus not represented). Course A (2018-2019) and course B (2019-2020) present the same cohort of students, while course A (2019-2020) is a different cohort. R is the Pearson correlation coefficient.}\label{fig:fig_exams_projects}
@@ -683,60 +697,61 @@ comparisons are significantly correlated at the 5\% alpha level (Pearson
 correlation test, A (2018-2019), r = 0.48, t = 3.092, df = 32, p-value =
 0.0041 ; A (2019-2020), r = 0.39, t = 2.710, df = 42, p-value = 0.0096 ;
 B (2019-2020), r = 0.44, t = 2.672, df = 30, p-value = 0.0121). In
-2018-2019, only one student failed in the project, while almost one
-third of them failed their final exams. The difficulty of the project
-was similar to previous years with the old course in biostatistics (and
-failure was not uncommon at that time). The flipped classroom approach
+2018-2019, only one student failed in the projects, while almost one
+third of them failed their final exam. As the flipped classroom approach
 allows more time to work in-class on practical applications, to ask
-questions, to discuss results, \ldots{} We hypothesize that the very low
-failure rate in the projects could be explained by a better preparation
-to practical data analysis, but not to the final exam.
+questions and to discuss results, we hypothesize that the very low
+failure rate in the projects could be explained by better environmental
+conditions for the students to express their practical data analysis
+skills. However, in the exam conditions, a larger part of these students
+produced much less convincing results.
 
-In 2019-2020, we raised a little bit the difficulty for the projects,
-resulting in a more widespread distribution of the results, but with a
-similar pattern showing very little correlation between the two
-evaluation methods. The same conclusion can be drawn for course B, with
-several students failing in one of the two evaluations, but not in the
-other one.
+Of course, this discrepancy could be also due to a different level of
+difficulty between the projects and the final exam. In 2019-2020, we
+raised the difficulty for the projects, resulting in a more widespread
+distribution of the results, but with a similar pattern showing only a
+weak correlation between the two evaluation methods. The same conclusion
+can be drawn for course B, with several students failing in one of the
+two evaluations, but not in the other one.
 
-Despite, a summative assessment (including a series of questions
-involving writing R code to analyze data in the final exam) does not
-reflect properly the ability of the students to correctly process and
-analyze biological data, as in their projects. Alignment with intended
-learning outcomes seems thus to be more present in the projects. Due to
-these results, the final examination was abandoned for the academic year
-2020-2021, and it has been replaced by an ongoing assessment of the
-students' activities across all four level exercises. These activities
-are analyzed in the following section.
+These results suggest that a summative assessment (even including a
+series of questions involving writing R code to analyze data in the
+final exam) does not reflect properly the ability of the students to
+correctly process and analyze biological data, as in their projects.
+Alignment with intended learning outcomes seems thus to be more present
+in the projects. Due to these observations, the final examination was
+abandoned for the academic year 2020-2021, and it has been replaced by
+an ongoing assessment of the students' activities across all four level
+exercises. These activities are analyzed in the following section.
 
 \hypertarget{students-activity-profiles-with-ongoing-assessment-1}{%
 \subsection{Students activity profiles with ongoing
 assessment}\label{students-activity-profiles-with-ongoing-assessment-1}}
 
-Despite the fact that we have classes of students with relatively low
-abilities and experiences in statistics and computing, the flipped
-classroom approach and the proactive attitude we expect from our
-learners (they must formulate questions correctly whenever they face a
-problem) lead to different and contrasted learning strategies. Not all
-students ask questions. Some of them try to find solutions on their own.
-Some other prefer to ask their questions privately, while others have no
-problems exposing their difficulties on a public forum (the Discord
-channel dedicated to the course). The way and the timing learners
-progress in the exercises also largely vary. The schedule is not tight
-and only suggests a rhythm of progression. No student is penalized if
-the exercises are done later, as long as they are completed before a
-final deadline. As expected, a part of our students prefer to stick to
-the proposed schedule, while others procrastinate and differ the
-completion of their exercises. Some strategies are more efficient than
-others. We analyzed records of the students' activities to distinguish
-these profiles and we compare them with the grade they obtain at the end
-of the course.
+Despite the fact that we had classes of students with relatively low
+abilities and experiences in statistics and computing initially, the
+flipped classroom approach and the proactive attitude we expected from
+our learners (they had to formulate questions correctly whenever they
+face a problem) led to different and contrasted learning strategies. Not
+all students asked questions. Some of them tried to find solutions on
+their own. Some other preferred to ask their questions privately, while
+others had no problems exposing their difficulties on a public forum
+(the Discord channel dedicated to the course). The way and the timing
+learners progressed in the exercises also largely varied. The schedule
+was not tight and only suggested a rhythm of progression. No student was
+penalized if the exercises were done later, as long as they were
+completed before the deadline. As expected, a part of our students
+preferred to stick to the proposed schedule, while others procrastinated
+and differed the completion of their exercises. Some strategies are
+probably more efficient than others. We analyzed records of the
+students' activities to distinguish the different learning profiles and
+we compared them with the grade they obtained at the end of the course.
 
 In 2020-2021, to support the ongoing assessment without a final exam,
 the activity of each student in level 1 (H5P) and 2 (learnr) exercises
 were exhaustively recorded in a database. For the GitHub projects
-(levels 3 and 4 exercises), it is the GitHub repositories and the git
-log data that are analyzed. During lockdown periods, exchange with
+(levels 3 and 4 exercises), it was the GitHub repositories and the git
+log data that were analyzed. During lockdown periods, exchange with
 students and answers to their questions were exclusively done by email,
 text or voice messages on Discord on private or public channels.
 Students were allowed to freely choose their favorite tool to interact
@@ -758,8 +773,9 @@ various online exercises.
 
 For the three courses, we recorded more than 450,000 events, which makes
 on average almost 3,500 events for each student. These data contain
-information used to characterize the behavior and learning patterns that
-the students use. They are summarized into sixteen metrics.
+information that we use to characterize the behavior and learning
+patterns that the students exhibit. They are summarized into sixteen
+metrics.
 
 For H5P exercises:
 
@@ -858,13 +874,13 @@ show how selected metrics distribute in the nine cells, from lowest
 value in white to highest value in black. They help to decipher the way
 students behave according to their profile. Metrics that are not
 represented in the figure exhibit similar patterns to others (for
-instance H5P metrics have a similar pattern as learnr metrics). Dots in
+instance H5P metrics have a similar pattern to learnr metrics). Dots in
 the central plot are the various students, with color representing the
 course and the diameter of the dots indicating the grade the students
 obtained at the end of the course. The following paragraphs detail
-information in that figure. The numbers between brackets mean the cell
-number in the central plot, and the upper case letters in brackets refer
-to the peripheral subplots.
+information in that figure. The numbers between parentheses mean the
+cell number in the central plot, and the upper case letters in
+parentheses refer to the peripheral subplots.
 
 Although most students completed all, or almost all exercises (D), cell
 (3) collects the few students that did only a tiny part of these
@@ -884,7 +900,7 @@ cells (5-9).
   students do not play the game. However, they can possibly succeed.
   Some of them probably exchange with other students through different
   channels that we do not monitor. Cell (2) -more difficulty with learnr
-  tutorials- mainly contains students belonging to course, A, while cell
+  tutorials- mainly contains students belonging to course A, while cell
   (6) contains students of courses B and C. There is a clear evolution
   in their behavior from one course to the other in terms of ease at
   realizing the exercises, even if they remain silent in the
@@ -912,7 +928,7 @@ cells (5-9).
   exercises.
 \item
   Moving from cell (5) to (7), (8) and (9), we encounter increasingly
-  top performers. The number of students from course A becomes
+  good performers. The number of students from course A becomes
   progressively lower, while course B, and especially C dominate in
   these groups. In cell (7), they largely use the public channel (G) and
   also respect the schedule quite well (H) as main differences from
@@ -933,30 +949,30 @@ represented at the bottom). This probably suggests that students need
 time to get used to the course, its pedagogical approach, and/or the
 software environment they have to use. Since only a small fraction of
 the participating students fail, excluding the defeating ones in cell
-(4), the course pattern can hardly be explained by a filter of the low
-performers from one course to the other.
+(4), the inter-course pattern can hardly be explained by a filter of the
+low performers from one course to the other.
 
 \hypertarget{transition-between-face-to-face-to-distance-learning-imposed-by-covid-19-lockdown-1}{%
 \subsection{Transition between face-to-face to distance learning imposed
-by Covid-19
+by COVID-19
 lockdown}\label{transition-between-face-to-face-to-distance-learning-imposed-by-covid-19-lockdown-1}}
 
-Due to Covid-19 lockdown periods, distance learning had to be adopted
+Due to COVID-19 lockdown periods, distance learning had to be adopted
 abruptly. We analyze the activity collected during academic years
 2019-2020 and 2020-2021 to evaluate the impact of these transitions on
-the progression of the students In Fig. \ref {fig:fig_support_by_time},
+the progression of the students. In Fig. \ref {fig:fig_support_by_time},
 the academic term is divided into seven work periods of approximately
-two weeks each (remind that it is the suggested rhythm of the courses:
-one module every second week). The classes of the second term start at
+two weeks each (remind that it was the suggested rhythm of the courses:
+one module every second week). The classes of the second term started at
 period~Y1P09, since period~Y1P08 is reserved for the first term exams
-session. The courses of the first term of 2020-2021 begins at Y2P01.
+session. The courses of the first term of 2020-2021 begun at Y2P01.
 First lockdown started at period~Y1P11 for one month and a half. Second
-lockdown stared at Y2P03 and lasted to the end of the second term
+lockdown started at Y2P03 and lasted to the end of the second term
 (Y2P15). During the first lockdown, we quickly opened the dedicated
 Discord channels that were available without any latency.
 
 \begin{figure}
-\includegraphics[width=1\linewidth]{teaching_data_science_files/figure-latex/fig_support_by_time-1} \caption{\label{fig:fig_support_by_time} a. Average contributions of the students to the projects by periods of two weeks of course. b. Contributions by question asked (log scale) for each student as a proxy measurement of the intensity of teacher-learner interactions on the progression in data analyses. Light gray background indicates periods where distance teaching was mandatory due to Covid-19 lockdown. The number of students that interacted during each period is indicated on top of the boxlots (Y1 is 2019-2020, Y2 is 2020-2021).}\label{fig:fig_support_by_time}
+\includegraphics[width=1\linewidth]{teaching_data_science_files/figure-latex/fig_support_by_time-1} \caption{\label{fig:fig_support_by_time} a. Average contributions of the students to the projects by periods of two weeks of course. b. Contributions by question asked (log scale) for each student as a measurement of the intensity of teacher-learner interactions. Light gray background indicates periods where distance teaching was mandatory due to COVID-19 lockdown. The number of students that interacted during each period is indicated on top of the boxlots (Y1 is 2019-2020, Y2 is 2020-2021).}\label{fig:fig_support_by_time}
 \end{figure}
 
 Contributions per student (Fig. \ref {fig:fig_support_by_time}a) is
@@ -966,18 +982,18 @@ observable at the end (Y2P15), although there is no module taught during
 that period. This is because of the late students that finalize their
 reports at the last minute. Y2P01, Y2P02 and Y2P09 exhibit the lowest
 activity, and these are the start of the first and second terms. Y2P01
-and Y2P01 were also teach in face-to-face and they correspond to the
+and Y2P01 were also taught in face-to-face and they correspond to the
 start of all three courses.
 
 The intensity of learners-teachers interactions for that contribution,
 quantified by the contributions divided by the questions (Fig.
 \ref {fig:fig_support_by_time}b) is very widespread from one student to
-the other. The logarithmic scale is use on the ratio because it spreads
+the other. The logarithmic scale is used on the ratio because it spreads
 on several orders of magnitude. However, median value -the bar inside
 the boxes- varies much less. Global number of questions during each
 period is less variable, as is the absolute contributions, leading to a
 rather stable ratio. Highest median ratios are observed at the last
-period of each term (Y2P07 and Y2P15) although no module was teach at
+period of each term (Y2P07 and Y2P15) although no module was taught at
 that time. More contributions are observed relative to the questions at
 the end: students essentially finalize their reports.
 
@@ -1004,17 +1020,16 @@ to advanced computer techniques and tools, and that have only basic
 knowledge in mathematics and statistics is a hard task \cite{Sousa2018}.
 Our basic approach is to extend the training on a very long period: five
 successive terms spanning on three consecutive years (undergraduate and
-graduate). That way, the many different concepts they have to learn can
-be broken down into subunits (26 modules) that last for two weeks each.
-We also used highly developed flipped classrooms and blended teaching
-and learning (following Spadafora \& Zopito's definition of ``any
-educational model where online delivery ranges from 50\% to 80\%''
-\cite{Spadafora2018}), with an emphasis on proactive exchange with the
-teachers: students have to ask questions to progress. Overall, these are
-winning choices because most of our students are successful, excluding a
-few defeating ones. Compeau also obtained good results using the flipped
-classroom with its course targeting students in biology
-\cite{Compeau2019}.
+graduate). That way, the different concepts they have to learn can be
+broken down into subunits (26 modules) that last for two weeks each. We
+also used flipped classrooms and blended teaching and learning
+(following Spadafora \& Zopito's definition of ``any educational model
+where online delivery ranges from 50\% to 80\%'' \cite{Spadafora2018}),
+with an emphasis on proactive exchange with the teachers: students have
+to ask questions to progress. Overall, these are winning choices because
+most of our students are successful, excluding a few defeating ones.
+Compeau also obtained good results using the flipped classroom with its
+course targeting students in biology \cite{Compeau2019}.
 
 Despite our courses framework, the students are more used to a
 traditional face-to-face approach made of lectures followed by exercises
@@ -1026,41 +1041,40 @@ developing autonomy are required \cite{Freeman2014}. They thus have to
 engage themselves in a very different way of learning. The transition
 between the theory they read in the book and the projects where they
 have to apply these concepts is too sharp without a progression that
-facilitates students' engagement, in four stages, which are: (1)
-auto-evaluation exercises directly in the online book, (2) recall of the
-main concepts and guided step-by-step analysis of a first dataset with
-the learnr tutorials and (3) at least one guided individual project with
-another dataset, before (4) they are presented yet another dataset, with
-limited instructions this time.
+facilitates students' engagement, in four stages, which are: (L1)
+auto-evaluation exercises directly in the online book, (L2) recall of
+the main concepts and guided step-by-step analysis of a first dataset
+with the learnr tutorials, (L3) at least one guided individual project
+with another dataset, before (L4) they are presented yet another dataset
+to analyse with limited instructions this time.
 
 \hypertarget{measured-and-perceived-cognitive-workload-in-learnr-tutorials-2}{%
 \subsection{Measured and perceived cognitive workload in learnr
 tutorials}\label{measured-and-perceived-cognitive-workload-in-learnr-tutorials-2}}
 
-The learnr tutorial, task two, was immediately spotted as a key activity
-in the learning process during academic year 2018-2019. So, we have
-focused our attention on these learnr documents. In 2020-2021, the use
-of a heuristic engine (gradethis) to provide contextual feedback on the
-errors students make in their answers was much appreciated.
+The learnr tutorial was immediately spotted as a key activity in the
+learning process during academic year 2018-2019. So, we have focused our
+attention on these learnr documents. In 2020-2021, the use of a
+heuristic engine (gradethis) to provide contextual feedback on the
+errors students made in their answers was much appreciated.
 
-The number of trials needed to find the right answer seems to us to be a
-good proxy for the cognitive workload. Contextual feedback allows the
-student to correct these answers on their own to find the expected
-answer. For example, a high number of trials may indicate that students
-try many solutions at random in order to find the right solution and are
-not expressing a high workload. This indicator alone is not sufficient
-and we combine it with the perceived cognitive workload. The measured
-RTLX index will serve in the future as a reference to gauge possible
-optimization of the tutorials, with lower perceived workload without
-sacrificing the content. The significant decrease in RTLX value from
-course A to C indicates that there is still a margin of progression. We
-would like to observe such a decrease sooner, perhaps already in the
-second course.
-
-Monitoring the perceived and measured cognitive workload is indeed
-important ``to maintain reflective and systematic approaches in both the
-development and evaluation {[}of our{]} blended approach''
-\cite{Spadafora2018}.
+The number of trials needed to find the right answer is here considered
+as a workable proxy for the cognitive workload. Contextual feedback
+allowed the student to correct these answers on their own to find the
+expected answer. A high number of trials may definitely indicate that
+students had hard time to find the right answer. They could
+misunderstand the concepts, but they could also be trying many solutions
+at random in order to find the right solution. This indicator alone is
+not sufficient and we combine it with the perceived cognitive workload.
+The measured RTLX index will serve in the future as a reference to gauge
+possible optimization of the tutorials, with lower perceived workload
+without sacrificing the content. The significant decrease in RTLX value
+from course A to C indicates that there is still a margin of
+progression. We would like to observe such a decrease sooner, perhaps
+already in the second course. Monitoring the perceived and measured
+cognitive workload is indeed important ``to maintain reflective and
+systematic approaches in both the development and evaluation {[}of
+our{]} blended approach'' \cite{Spadafora2018}.
 
 \hypertarget{final-exam-versus-projects-2}{%
 \subsection{\texorpdfstring{Final exam \emph{versus}
@@ -1073,7 +1087,7 @@ instructions. It meets more closely with the courses' learning outcomes
 as they have to figure out a suitable question, analyze the data to
 answer that question, present their results in a report and discuss what
 they found with a critical mind \cite{Auker2020}. This task is complex,
-especially for undergraduate students. That is why we organize it in
+especially for undergraduate students. This is why we organize it in
 groups of two to four students, depending on the complexity of the
 problem. Here, they mobilize their collective intelligence to get
 results as many of them would be hardly capable of achieving the task
@@ -1082,9 +1096,9 @@ allows for figuring out clearly what was the contribution of each
 student in the group and to score their individual contributions
 suitably.
 
-We observed a low correlation between performances in group projects and
-in grades obtained at final exams (Fig. \ref {fig:fig_exams_projects}).
-This led us to stop using final exams, at the benefit of an ongoing
+We observed a low correlation between performances in projects and in
+grades obtained at final exams (Fig. \ref {fig:fig_exams_projects}).
+This led us to stop using final exams at the benefit of an ongoing
 assessment with emphasis into projects, despite a final exam is easier
 and faster to implement. The elimination of the final exams led to the
 setting up of a procedure to monitor and score the students' activity in
@@ -1098,15 +1112,15 @@ develop. It implies that their R Markdown documents should compile into
 reports in HTML or PDF format without any error. This criterion could be
 checked automatically.
 
-\hypertarget{students-activity-profiles-with-ongoing-assessment-2}{%
-\subsection{Students activity profiles with ongoing
-assessment}\label{students-activity-profiles-with-ongoing-assessment-2}}
+\hypertarget{student-activity-profiles-with-ongoing-assessment}{%
+\subsection{Student activity profiles with ongoing
+assessment}\label{student-activity-profiles-with-ongoing-assessment}}
 
 Activity tracking in the exercises, primarily set up for the ongoing
 assessment, also offers the opportunity to study the way learning
 happens (or not). Indeed, learning analytics provides opportunities to
 monitor learning events but also to adjust teaching to improve student
-learning \cite{Martin2016, Romero2020}, even if they are primarily used
+outcome \cite{Martin2016, Romero2020}, even if they are primarily used
 to early predict success or failure. In our courses, failure rate is
 already rather low and essentially limited to a few defeating students
 that do not work at all. We are more interested to classify our
@@ -1125,15 +1139,12 @@ alternate discussion channel where teachers never post but have read
 access. In case of an error, the teacher will contact the student
 privately to explain him or her what is wrong. That student would then
 have the responsibility to reexplain correctly to its classmates. This
-way, its error is never publicly spotted by the teacher. This approach
-was very successful with our so-called ``eleve-assitants''
-tutor-students from higher classes that have brilliantly succeeded in
-the course one or two years ago and that second the teaching staff-.
-With tools like the self-organizing map, we should be able to predict
-suboptimal student profiles early. We could engage in a discussion with
-the concerned students to determine the cause and find a solution as
-early as possible. Learning analytics used that way would promote a
-differential pedagogical approach, a key for more inclusive teaching
+way, its error is never publicly spotted by the teacher. With tools like
+the self-organizing map, we should be able to predict suboptimal student
+profiles early. We could engage in a discussion with the concerned
+students to determine the cause and find a solution as early as
+possible. Learning analytics used that way would promote a differential
+pedagogical approach, a key for more inclusive teaching
 \cite{Siemens2013}.
 
 Group projects are one of the keys to our method. Sometimes, groups do
@@ -1152,10 +1163,10 @@ our future challenges.
 
 \hypertarget{transition-between-face-to-face-to-distance-learning-imposed-by-covid-19-lockdown-2}{%
 \subsection{Transition between face-to-face to distance learning imposed
-by Covid-19
+by COVID-19
 lockdown}\label{transition-between-face-to-face-to-distance-learning-imposed-by-covid-19-lockdown-2}}
 
-Forced distance learning, due to Covid-19 lockdown did not appear to be
+Forced distance learning, due to COVID-19 lockdown did not appear to be
 a barrier in the production of our students in their projects. A pattern
 is observed during the first lockdown with a marked decrease in their
 contributions, followed by a large, compensatory activity. All this
@@ -1186,8 +1197,9 @@ in-class presence remains different to video chats. Blended learning
 combines the best of the two practices if pedagogical setups are
 accurate and well-balanced \cite{Bernard2014}.
 
-\hypertarget{conclusion}{%
-\section{Conclusion}\label{conclusion}}
+\hypertarget{conclusion-and-perspectives}{%
+\section{Conclusion and
+perspectives}\label{conclusion-and-perspectives}}
 
 Teaching data science comes with challenges. The discipline is quite
 young, and we are still seeking for the best pedagogical approach. After
@@ -1207,7 +1219,7 @@ following years. We will monitor how these students apply their skills
 in their master's thesis, and later, in their career or during their PhD
 thesis. Meanwhile, we will continue to improve our courses by further
 exploiting the data we accumulate on the activity of our students.
-Experience gathered during forced distance learning during Covid-19
+Experience gathered during forced distance learning during COVID-19
 lockdown will be used too to improve our courses framework. The radical
 changes that were required in that context showed that students can
 accommodate to a large extent, but also that a diversification of the
@@ -1219,8 +1231,8 @@ learning modules. Such playful activities would also contribute to the
 diversification of pedagogical practices, interest and motivation of the
 students \cite{Alonso2019}. We would also be happy to share experience
 with other teachers in data science. Altogether, we are on the way to
-reshape the post-covid teaching landscape, and it will probably be quite
-different than what we are used today!
+reshape the post-COVID teaching landscape, and it will probably be quite
+different than what we were used to!
 
 % You may incorporate your references as follows in your main tex file.
 % Using BibTex is not recommended but can be handled.
@@ -1317,6 +1329,21 @@ different than what we are used today!
      \newblock  D. R. Krathwohl,
      \newblock Active learning increases student performance in science, engineering, and mathematics,
      \newblock \emph{Proceedings of the National Academy of Sciences}, \textbf{111} (2014), 8410--8415.
+
+\bibitem{Grosjeandataset2020} [10.5281/zenodo.6420917]
+     \newblock Philippe Grosjean and Guyliann Engels,
+     \newblock Biological data science courses at UMONS, Belgium: student's activity for 2020-2021 (1.0.0) [Data set].,
+     \newblock \emph{Zenodo}, (2022).
+
+\bibitem{Grosjeandataset2019} [10.5281/zenodo.6420879]
+     \newblock Philippe Grosjean and Guyliann Engels,
+     \newblock Biological data science courses at UMONS, Belgium: student's activity for 2019-2020 (1.0.0) [Data set].,
+     \newblock \emph{Zenodo}, (2022).
+
+\bibitem{Grosjeandataset2018} [10.5281/zenodo.6420348]
+     \newblock Philippe Grosjean and Guyliann Engels,
+     \newblock Biological data science courses at UMONS, Belgium: student's activity for 2018-2019 (1.0.0) [Data set].,
+     \newblock \emph{Zenodo}, (2022).
 
 \bibitem{Guzman2019} [10.1187/cbe.19-02-0041]
      \newblock L.M. Guzman, M.W. Pennell, E. Nikelski and D.S. Srivastava,
