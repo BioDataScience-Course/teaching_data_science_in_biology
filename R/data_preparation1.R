@@ -346,7 +346,7 @@ learnr_metrics %>.%
     `l_done%` = (.l_ok_answered + .l_ok_submitted) /
       (.l_max_ans + .l_max_sub) * 100,
     `l_ok%` = (.l_ok_submitted - revealed) / submitted * 100,
-    `l_intime%`= (.l_intime) / (.l_ok_answered + .l_ok_submitted) * 100,
+    `l_intime%` = (.l_intime) / (.l_ok_answered + .l_ok_submitted) * 100,
     l_trials = executed / .l_ok_submitted,
     l_hints = assisted / .l_ok_submitted,
     l_time = as.numeric(l_time)) %>.%
@@ -702,7 +702,7 @@ learnr %>.%
   group_by(., user, course) %>.%
   summarise(., nexecuted = n(), exercises = length(unique(paste0(app,label)))) %>.%
   mutate(.,
-    l_trials_exercices =nexecuted/exercises,
+    l_trials_exercices = nexecuted/exercises,
     course = as.factor(course)) -> learnr_red
 
 write$csv(learnr_red, "data/sdd_learnr.csv")

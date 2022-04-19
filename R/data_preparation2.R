@@ -25,8 +25,8 @@ source("R/functions.R")
 acad_years <- c("2019-2020", "2020-2021")
 sdd_folders <- glue("sdd_{acad_years}")
 data_dirs <- path(root, sdd_folders)
-courses <- c("A", "B") # Don't include courses C, D & E in the analysis
-institutions <- "UMONS" # Don't include Campus UCharleroi
+courses <- c("A", "B") # Do not include courses C, D & E in the analysis
+institutions <- "UMONS" # Do not include Campus UCharleroi
 time_interval <- interval(as.time("2020/03/05"), as.time("2021/05/15"))
 
 # Extract data from git logs ----------------------------------------------

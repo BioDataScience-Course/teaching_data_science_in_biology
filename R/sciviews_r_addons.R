@@ -294,6 +294,7 @@ dissimilarity <- function(data, formula = ~ ., subset = NULL,
 
 as.dissimilarity <- function(x, ...)
   UseMethod("as.dissimilarity")
+
 as_dissimilarity <- as.dissimilarity # Synonym
 
 as.dissimilarity.matrix <- function(x, ...) {
@@ -556,5 +557,3 @@ chart.cluster <- function(data, ...,
 # I define geom_dendroline(h = ....)
 geom_dendroline <- function(h, ...)
   geom_hline(yintercept = h, ...)
-
-
