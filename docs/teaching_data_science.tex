@@ -614,30 +614,34 @@ very efficient in self-learning and self-assessing their competences
 before switching to the practice with confidence.
 
 \begin{figure}
-\includegraphics[width=1\linewidth]{teaching_data_science_files/figure-latex/fig_learn_trials-1} \caption{\label{fig:fig_learn_trials} Average number of retries that were required for each student to find the right answer in learnr tutorials exercises (year 2020-2021). This measure is used as a proxy to quantify the cognitive workload (with caution as explained in the text). The black dot is the average for the whole class and n is the number of observations.}\label{fig:fig_learn_trials}
+\includegraphics[width=1\linewidth]{teaching_data_science_files/figure-latex/fig_learn_trials-1} \caption{\label{fig:fig_learn_trials} Logarithm of the average number of retries that were required for each student to find the right answer in learnr tutorials exercises (year 2020-2021). This measure is used as a proxy to quantify the cognitive workload (with caution as explained in the text). The black dot is the average for the whole class and n is the number of observations.}\label{fig:fig_learn_trials}
 \end{figure}
+
+\includegraphics{teaching_data_science_files/figure-latex/unnamed-chunk-1-1.pdf}
 
 A fully objective quantitative measurement of the cognitive workload is
 near to impossible to obtain in these asynchronous activities done at
-home. It was thus estimated by using a proxy: the average number of
-trials that were required for each student to find the right answer in
-learnr tutorial exercises (Fig. \ref {fig:fig_learn_trials}). Caution is
-required here as a large number of trials could also be the result of
-students that are just guessing. However, answers being pieces of R
-code, pure guessing most probably leads to nothing useful. A certain
-level of understanding of both the R syntax and the question are
-required to obtain correct answers. Only data from students that
-correctly answered most of the exercises (\textgreater{} 90\%) were used
-here, as it also rules out the students that appear to have insufficient
-knowledge to master the concepts in the tutorials and are probably just
-guessing. For course A, 13 out of 59 students did not passed this
-filter, 5 out of 45 for course B and 1 out of 26 for course C. This
-variable varies significantly between the three courses (Kruskal-Wallis
-rank sum test, chi-squared = 8.820, df = 2, p-value = 0.0121). The
-students in course C need significantly fewer trials to find the right
-answer than students in courses A at \(\alpha\) level of 5\% (Tukey HSD,
-t = -2.481, p-value = 0.0342) and B (Tukey HSD, t = -2.365, p-value =
-0.0460).
+home. It was thus estimated by using a proxy: the logarithm of the
+average number of trials that were required for each student to find the
+right answer in learnr tutorial exercises (Fig.
+\ref {fig:fig_learn_trials}). Caution is required here as a large number
+of trials could also be the result of students that are just guessing.
+However, answers being pieces of R code, pure guessing most probably
+leads to nothing useful. A certain level of understanding of both the R
+syntax and the question are required to obtain correct answers. Only
+data from students that correctly answered most of the exercises
+(\textgreater{} 90\%) were used here, as it also rules out the students
+that appear to have insufficient knowledge to master the concepts in the
+tutorials and are probably just guessing. For course A, 12 out of 59
+students did not passed this filter, 5 out of 45 for course B and 1 out
+of 26 for course C. This variable varies significantly between the three
+courses (ANOVA, F(2,109) = 4.4936, p-value = 0.0133). The homogeneity of
+variances (Bartlett Test, K2 = 0.3006, df =2, p-value = 0.8604) and the
+Normal distribution of the residuals was verified using a
+quantile-quantile plot. The students in course C need significantly
+fewer trials to find the right answer than students in courses A at
+\(\alpha\) level of 5\% (Tukey HSD, t = -2.740, p-value = 0.0192) and B
+(Tukey HSD, t = -2.677, p-value = 0.0230).
 
 The perceived cognitive load required to perform these exercises was
 also determined on the same students and for the same exercises. The Raw
@@ -659,10 +663,11 @@ appear significantly lower for course C than for course A at the
 \(\alpha\) level of 5\% (ANOVA, F(2,98) = 3.588, p-value = 0.031; Tukey
 HSD, t = -2.679, p-value = 0.023). The homogeneity of variances
 (Bartlett Test, K2 = 4.17, df =2, p-value = 0.1243) and the Normal
-distribution of the residuals was verified. The cognitive load perceived
-by the students diminished at the same pace as their ability to find the
-right answer in fewer trials. This may be a consequence of a more fluent
-R coding ability and a better mastering of the software environment.
+distribution of the residuals was verified using a quantile-quantile
+plot. The cognitive load perceived by the students diminished at the
+same pace as their ability to find the right answer in fewer trials.
+This may be a consequence of a more fluent R coding ability and a better
+mastering of the software environment.
 
 \hypertarget{final-exam-versus-projects-1}{%
 \subsection{\texorpdfstring{Final exam \emph{versus}
