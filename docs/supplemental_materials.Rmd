@@ -71,7 +71,6 @@ chart$score(sdd_pca, choices = c(1, 3), labels = sdd_metrics$course) +
 
 We see, may be, a very slight evolution from A to B to C? But there are several extreme points.
 
-
 ### Groups
 
 We use hierarchical clustering to group students into various profiles according to their activities.
@@ -105,7 +104,6 @@ chart(data = sdd_g, grade ~ factor(.fitted)) +
 
 Conclusion: PCA and hierarchical clustering do not produce convincing results here. This is why we used the Self-Organizing Map method instead.
 
-
 ### SOM
 
 Self-Organizing Map produced for the publication and additional plots.
@@ -123,21 +121,94 @@ metrics_nograde %>.%
 plot(sdd_som, type = "changes")
 ```
 
-```{r}
+```{r, eval=FALSE}
 # Distribution of students according to courses and grades
 set.seed(3566)
+#set.seed(3749) The same set.seed used in the paper
 par(mar = c(0, 0, 3.1, 3.1)); plot(sdd_som, type = "mapping", shape = "straight",
   col = scales::alpha(
     c(A = "red", B = "purple1", C = "blue")[as.factor(sdd_metrics$course)], 0.75),
   pch = 19, cex = (sdd_metrics$grade / 30) + 0.5, main = "")
 #add.cluster.boundaries(sdd_som,  clustering = as.factor(sdd$course))
-
 ```
 
-Same model, but different position of dots in the map, due to random parameter, in comparison to the publication.
+Same model, but different position of dots in the map, due to random parameter, in comparison to the publication. The graph below is the same as the previous one with the same layout as the graph in the paper.
 
 ```{r}
-plot(sdd_som, type = "codes", codeRendering = "segments")
+plot_som <- function(x, classif = NULL, main = "", labels = NULL, pchs = NULL,
+  bgcol = NULL, keepMargins = FALSE, shape = c("round", "straight"),
+  border = "black", margins = rep(0.6, 4), ...) {
+  if (is.null(main))
+    main <- "Mapping plot"
+  #margins <- rep(0.6, 4)
+  if (main != "")
+    margins[3] <- margins[3] + 2
+  if (!keepMargins) {
+    opar <- par("mar")
+    on.exit(par(mar = opar))
+  }
+  par(mar = margins)
+  if (is.null(classif) & !is.null(x$unit.classif)) {
+    classif <- x$unit.classif
+  } else {
+    if (is.list(classif) && !is.null(classif$unit.classif))
+      classif <- classif$unit.classif
+  }
+  if (is.null(classif))
+    stop("No mapping available")
+  kohonen:::plot.somgrid(x$grid, ...)
+  title.y <- max(x$grid$pts[, 2]) + 1.2
+  if (title.y > par("usr")[4] - 0.2) {
+    title(main)
+  } else {
+    text(mean(range(x$grid$pts[, 1])), title.y, main, adj = 0.5,
+      cex = par("cex.main"), font = par("font.main"))
+  }
+  if (is.null(bgcol))
+    bgcol <- "transparent"
+  shape <- match.arg(shape)
+  sym <- ifelse(shape == "round", "circle", ifelse(x$grid$topo ==
+      "rectangular", "square", "hexagon"))
+  switch(sym,
+    circle = symbols(x$grid$pts[, 1], x$grid$pts[, 2],
+      circles = rep(0.5, nrow(x$grid$pts)), inches = FALSE,
+      add = TRUE, fg = border, bg = bgcol),
+    hexagon = kohonen:::hexagons(x$grid$pts[,
+      1], x$grid$pts[, 2], unitcell = 1, col = bgcol, border = border),
+    square = symbols(x$grid$pts[, 1], x$grid$pts[, 2],
+      squares = rep(1,
+        nrow(x$grid$pts)), inches = FALSE, add = TRUE, fg = border,
+      bg = bgcol))
+  if (is.null(pchs))
+    pchs <- 1
+  if (is.null(labels) & !is.null(pchs))
+    points(x$grid$pts[classif, 1] + rnorm(length(classif),
+      0, 0.12), x$grid$pts[classif, 2] + rnorm(length(classif),
+        0, 0.12), pch = pchs, ...)
+  if (!is.null(labels))
+    text(x$grid$pts[classif, 1] + rnorm(length(classif),
+      0, 0.12), x$grid$pts[classif, 2] + rnorm(length(classif),
+        0, 0.12), labels, ...)
+  invisible()
+}
+
+cols <- scales::alpha(c(A = "#E69F00", B = "#56B4E9", C = "#009E73"), 0.75)
+font_cex <- 0.7
+plot_som(sdd_som, shape = "straight", col = cols[as.factor(sdd_metrics$course)],
+  pch = 19, cex = (sdd_metrics$grade / 60) + 0.3, main = " ", keepMargins = TRUE,
+  margins = rep(2.7, 4))
+# Add numbers to cells
+text((1:3) + 0.5, 3, 1:3, cex = font_cex)
+text(1:3, 2.15, 4:6, cex = font_cex)
+text((1:3) + 0.5, 1.3, 7:9, cex = font_cex)
+legend(1.5, 3.65, legend = c("A", "B", "C"), col = cols, pch = 19,
+  horiz = TRUE, bty = "n", title = "Course", cex = font_cex)
+```
+
+The Codes plot shows the importance of each variable on each cell. The number of variables is too large to describe each cell in detail.
+
+```{r}
+plot(sdd_som, type = "codes", codeRendering = "segments", shape = "straight")
 ```
 
 Extract profile from the SOM analysis.
@@ -179,3 +250,41 @@ for (var in vars) {
 }
 ```
 
+The plots in gray scale show how metrics distribute in the nine cells, from lowest value in white to highest value in black.
+
+```{r}
+codessom <- sdd_som[["codes"]][[1]]
+row.names(codessom) <- paste0("gr", c(7:9, 4:6, 1:3)) 
+
+range01 <- function(x) {
+    (x-min(x))/(max(x)-min(x))
+}
+
+codessom <- apply(codessom, 2, range01)
+codessom <- rownames_to_column(as.data.frame(codessom), var = "gr")
+codessom <- arrange(codessom, gr)
+
+for(var in vars)
+  colnames(codessom)[colnames(codessom) == var] <- var_names[names(var_names) == var] 
+
+# codessom %>.%
+#   pivot_longer(., `questions/module`:`work done in time`, names_to = "qu", values_to = "n") %>.%
+#   chart(., gr ~ qu %fill=% n) +
+#   geom_raster() +
+#   scale_fill_gradient() +
+#   theme(
+#     axis.text.x = element_text(angle = 80, hjust=1), 
+#     axis.title.x = element_blank(),
+#     axis.title.y = element_blank())
+
+codessom %>.%
+  pivot_longer(., `questions/module`:`work done in time`, names_to = "qu", values_to = "n") %>.%
+  chart(., gr ~ qu %fill=% n) +
+  geom_raster() +
+  scale_fill_gradient(low = "white", high = "black") +
+  theme(
+    axis.text.x = element_text(angle = 80, hjust=1), 
+    axis.title = element_blank())
+```
+
+This single graph summarises the distribution of metrics in the nine cells, from the lowest value in white to the highest value in black, in grey scale.
