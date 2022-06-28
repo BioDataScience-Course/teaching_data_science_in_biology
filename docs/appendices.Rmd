@@ -1,0 +1,69 @@
+---
+title: 'Appendices'
+output:
+  pdf_document:
+    fig_caption: yes
+    number_sections: yes
+    latex_engine: xelatex
+    keep_tex: yes
+    #template: template.tex
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE)
+SciViews::R
+```
+
+```{r som}
+sdd_metrics <- suppressMessages(read("../data/sdd_metrics.csv"))
+metrics_nograde <- select(sdd_metrics, -user, -course, -state, -grade) # Only metrics
+
+# Perform the SOM now
+library(kohonen)
+set.seed(9433)
+metrics_nograde %>.%
+  scale(.) %>.% # Standardization of the metrics
+  as.matrix(.) %>.% # supersom() needs a matrix
+  supersom(., grid = somgrid(3, 3, topo = "hexagonal"),
+    rlen = 100L, mode = "online") ->
+  sdd_som
+
+vars <- names(metrics_nograde)
+var_names <- c(
+  question     = "questions/module",
+  `q_pub%`     = "% public questions",
+  q_prod       = "contributions/question",
+  `h_ok%`      = "correct H5P ex.",
+  h_trials     = "trials/H5P ex.",
+  `l_ok%`      = "correct learnr ex.",
+  l_trials     = "trials/learnr ex.",
+  l_hints      = "hints/learnr ex.",
+  l_time       = "time/learnr ex.",
+  i_commits    = "commits/ind. project",
+  i_changes    = "contributions/ind. project",
+  g_commits    = "commits/group project",
+  g_changes    = "contributions/group project",
+  `g_contrib%` = "% contribution to group projects",
+  `done%`      = "work done",
+  `intime%`    = "work done in time"
+  )
+```
+
+```{r somtab1}
+codes <- sdd_som[["codes"]][[1]]
+row.names(codes) <- c(7:9, 4:6, 1:3)
+
+for(var in vars)
+  colnames(codes)[colnames(codes) == var] <- var_names[names(var_names) == var] 
+
+#codessom
+codes_tbl <- as.data.frame(t(codes))
+codes_tbl <- codes_tbl[ , order(names(codes_tbl))]
+#knitr::kable(codes_tbl, format = "latex", caption = "\\label{tab:tab_som} Importance of each variable for each cell with the self-organizing map of the student activities across the three courses (year 2020-2021).")
+
+knitr::kable(round(codes_tbl[,1:5],digits = 3), format = "latex", caption = "\\label{tab:tab_som1} Importance of each variable for each cell (1-5) with the self-organizing map of the student activities across the three courses (year 2020-2021).")
+```
+
+```{r somtab2}
+knitr::kable(round(codes_tbl[,6:9],digits = 3), format = "latex", caption = "\\label{tab:tab_som2} Importance of each variable for each cell (6-9) with the self-organizing map of the student activities across the three courses (year 2020-2021).")
+```

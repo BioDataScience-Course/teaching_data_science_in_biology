@@ -1,0 +1,158 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{lmodern}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  pdftitle={Appendices},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{5}
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+
+\title{Appendices}
+\author{}
+\date{\vspace{-2.5em}}
+
+\begin{document}
+\maketitle
+
+\begin{table}
+
+\caption{\label{tab:somtab1}\label{tab:tab_som1} Importance of each variable for each cell (1-5) with the self-organizing map of the student activities across the three courses (year 2020-2021).}
+\centering
+\begin{tabular}[t]{l|r|r|r|r|r}
+\hline
+  & 1 & 2 & 3 & 4 & 5\\
+\hline
+questions/module & 0.958 & -0.984 & -0.684 & 1.103 & -0.220\\
+\hline
+\% public questions & 0.378 & -1.101 & -1.183 & 0.309 & -0.132\\
+\hline
+contributions/question & -0.613 & 0.676 & -0.462 & -0.574 & -0.368\\
+\hline
+correct H5P ex. & 0.152 & 0.059 & -2.763 & 0.137 & 0.067\\
+\hline
+trials/H5P ex. & 0.825 & 0.825 & -0.718 & 0.540 & 0.050\\
+\hline
+correct learnr ex. & -2.956 & -0.243 & -0.991 & -0.086 & 0.336\\
+\hline
+trials/learnr ex. & 0.628 & 0.101 & -1.171 & 0.580 & -0.342\\
+\hline
+hints/learnr ex. & 1.996 & 0.466 & 1.117 & -0.143 & -0.183\\
+\hline
+time/learnr ex. & 1.331 & -0.048 & 0.798 & -0.106 & -0.309\\
+\hline
+commits/ind. project & 0.589 & -0.702 & -1.136 & -0.383 & -0.535\\
+\hline
+contributions/ind. project & 0.086 & -0.571 & -0.623 & -0.508 & -0.501\\
+\hline
+commits/group project & 0.366 & -0.266 & -1.656 & 0.660 & -0.715\\
+\hline
+contributions/group project & 0.080 & -0.175 & -0.821 & -0.184 & -0.532\\
+\hline
+\% contribution to group projects & 0.885 & 1.043 & -1.417 & 0.209 & -0.653\\
+\hline
+work done & 0.036 & 0.144 & -4.495 & 0.210 & 0.072\\
+\hline
+work done in time & -0.343 & -0.554 & -0.842 & 0.866 & -0.485\\
+\hline
+\end{tabular}
+\end{table}
+
+\begin{table}
+
+\caption{\label{tab:somtab2}\label{tab:tab_som2} Importance of each variable for each cell (6-9) with the self-organizing map of the student activities across the three courses (year 2020-2021).}
+\centering
+\begin{tabular}[t]{l|r|r|r|r}
+\hline
+  & 6 & 7 & 8 & 9\\
+\hline
+questions/module & -1.146 & -0.206 & 0.428 & 0.006\\
+\hline
+\% public questions & -1.252 & 1.003 & 0.277 & -0.144\\
+\hline
+contributions/question & 2.235 & -0.280 & -0.082 & -0.026\\
+\hline
+correct H5P ex. & 0.167 & 0.155 & 0.165 & 0.185\\
+\hline
+trials/H5P ex. & -0.287 & -0.695 & -0.364 & -0.355\\
+\hline
+correct learnr ex. & 0.273 & 0.364 & 0.608 & 0.456\\
+\hline
+trials/learnr ex. & -0.153 & -0.043 & -0.276 & -0.251\\
+\hline
+hints/learnr ex. & -0.331 & -0.458 & -0.442 & 0.405\\
+\hline
+time/learnr ex. & -0.232 & -0.072 & -0.013 & -0.055\\
+\hline
+commits/ind. project & 0.355 & 0.116 & 1.318 & 1.484\\
+\hline
+contributions/ind. project & 0.046 & 0.238 & 0.917 & 2.037\\
+\hline
+commits/group project & -0.513 & -0.238 & 1.069 & 0.739\\
+\hline
+contributions/group project & -0.193 & -0.171 & 0.537 & 4.063\\
+\hline
+\% contribution to group projects & -0.472 & -0.257 & 0.007 & 1.364\\
+\hline
+work done & 0.256 & 0.294 & 0.266 & 0.232\\
+\hline
+work done in time & -0.818 & 0.505 & -0.187 & -0.455\\
+\hline
+\end{tabular}
+\end{table}
+
+\end{document}
