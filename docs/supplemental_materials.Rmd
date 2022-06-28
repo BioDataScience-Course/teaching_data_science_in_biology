@@ -1,7 +1,10 @@
 ---
-title: "Teaching Data Science in Biology: Supplemental Material"
+title: 'Teaching Data Science in Biology: Supplemental Material'
 author: "Philippe Grosjean & Guyliann Engels"
-output: html_notebook
+output:
+  html_document:
+    df_print: paged
+  html_notebook: default
 ---
 
 ```{r setup}
@@ -250,11 +253,23 @@ for (var in vars) {
 }
 ```
 
-The plots in gray scale show how metrics distribute in the nine cells, from lowest value in white to highest value in black.
+The plots in gray scale show how metrics distribute in the nine cells, from lowest value in white to highest value in black. The table below shows the values of each variable for each cell.
 
 ```{r}
 codessom <- sdd_som[["codes"]][[1]]
-row.names(codessom) <- paste0("gr", c(7:9, 4:6, 1:3)) 
+row.names(codessom) <- c(7:9, 4:6, 1:3)
+
+for(var in vars)
+  colnames(codessom)[colnames(codessom) == var] <- var_names[names(var_names) == var] 
+
+#codessom
+codessom_table <- as.data.frame(t(codessom))
+codessom_table[ , order(names(codessom_table))]
+```
+
+This single graph summarises the distribution of metrics in the nine cells, from the lowest value in white to the highest value in black, in grey scale.
+
+```{r}
 
 range01 <- function(x) {
     (x-min(x))/(max(x)-min(x))
@@ -263,19 +278,6 @@ range01 <- function(x) {
 codessom <- apply(codessom, 2, range01)
 codessom <- rownames_to_column(as.data.frame(codessom), var = "gr")
 codessom <- arrange(codessom, gr)
-
-for(var in vars)
-  colnames(codessom)[colnames(codessom) == var] <- var_names[names(var_names) == var] 
-
-# codessom %>.%
-#   pivot_longer(., `questions/module`:`work done in time`, names_to = "qu", values_to = "n") %>.%
-#   chart(., gr ~ qu %fill=% n) +
-#   geom_raster() +
-#   scale_fill_gradient() +
-#   theme(
-#     axis.text.x = element_text(angle = 80, hjust=1), 
-#     axis.title.x = element_blank(),
-#     axis.title.y = element_blank())
 
 codessom %>.%
   pivot_longer(., `questions/module`:`work done in time`, names_to = "qu", values_to = "n") %>.%
@@ -286,5 +288,3 @@ codessom %>.%
     axis.text.x = element_text(angle = 80, hjust=1), 
     axis.title = element_blank())
 ```
-
-This single graph summarises the distribution of metrics in the nine cells, from the lowest value in white to the highest value in black, in grey scale.
