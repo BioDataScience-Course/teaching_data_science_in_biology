@@ -42,7 +42,7 @@ Once R and RStudio are installed, you will need to get additional R packages. Yo
 
     source("R/install.R")
 
-You should be able to regenerate the manuscript `docs/teaching_data_science.Rmd` (step 3 above), or the `docs/supplemental_materials.Rmd` notebook just by "knitting" them (open the `.Rmd` file inside RStudio and click on the **knit** button there).
+You should be able to regenerate the manuscript (`docs/teaching_data_science.Rmd`), the appendices (`docs/appendices.Rmd`), (step 3 above), the notebooks (`docs/supplemental_materials.Rmd` or `exam_vs_project.Rmd`) just by "knitting" them (open the `.Rmd` file inside RStudio and click on the **knit** button there).
 
 If you want to regenerate the datasets in `/data` (step 2 above), you will have to run the three `R/data_preparationX.R` files. Before doing so, you will have to download the pseudonymized datasets from Zenodo with `R/data_download.R`. You should have three directories: `sdd_2018-2019`, `sdd_2019-2020` & `sdd_2020-2021` with various `.csv` files inside (`users.csv`, `projects.csv`, ...). In the `R/data_preparationX.R` files, you will have to change line 8 and indicate the actual directory on your computer where you saved the pseudonymized data. At that point, running the code in these scripts should regenerate the datasets in `/data`.
 
