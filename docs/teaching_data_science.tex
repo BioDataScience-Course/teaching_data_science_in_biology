@@ -290,7 +290,7 @@ approach is known as educational data mining knowledge discovery cycle
 \cite{Romero2020}. Here, we present the main results spanning on three
 successive academic years from 2018-2019 to 2020-2021, including two
 particular periods where distance learning was forced due to COVID-19
-pandemic lockdown. In this paper, we will focus on the following four
+pandemic lockdown. In this paper, we will focus on the following three
 questions:
 
 \begin{itemize}
@@ -299,12 +299,6 @@ questions:
   with learnr (\url{https://rstudio.github.io/learnr/}) are capstones in
   our courses. What cognitive workload and perceived workload do these
   tutorials represent for the students?
-\item
-  Traditionally, evaluative exams are organized at the end of an
-  academic term. In the case of our data science courses, does a final
-  exam accurately assess the expected learning outcomes as good as the
-  ongoing assessment of students' project where they analyze biological
-  data in practice?
 \item
   How could we use learning analytics to spot suboptimal learning
   strategies and discriminate different student profiles in our
@@ -502,16 +496,6 @@ to quantify how students felt when using these learnr tutorials. An
 analysis of variance and a Tukey's post-hoc Honest Significant
 Difference (HSD) tests were used for the comparison between courses.
 
-\hypertarget{final-exam-versus-projects}{%
-\subsection{\texorpdfstring{Final exam \emph{versus}
-projects}{Final exam versus projects}}\label{final-exam-versus-projects}}
-
-Evaluation grids containing rubrics were used to grade students'
-projects. These grades were then compared to the results obtained in the
-traditional exams administered at the end of the term. Pearson
-correlation coefficients were used to quantify the correlation between
-the grades in the projects and at the final exams.
-
 \hypertarget{students-activity-profiles-with-ongoing-assessment}{%
 \subsection{Students activity profiles with ongoing
 assessment}\label{students-activity-profiles-with-ongoing-assessment}}
@@ -668,68 +652,6 @@ to find the right answer in fewer trials. This may be a consequence of a
 more fluent R coding ability and a better mastering of the software
 environment.
 
-\hypertarget{final-exam-versus-projects-1}{%
-\subsection{\texorpdfstring{Final exam \emph{versus}
-projects}{Final exam versus projects}}\label{final-exam-versus-projects-1}}
-
-An exam at the end of an academic term is a common practice as summative
-assessment. So, we compare grades our students got from such an exam
-with the score they obtained directly in their projects in 2018-2019 and
-2019-2020. The final exam was written in learnr and it mixed a few
-questions about the theory with many partly solved data analyses that
-students had to explain, criticize and finalize during the exam session
-on the computer. The exam was thus largely focused on practical analyses
-in line with the expected outcomes. Projects represent the reference
-here as they closely match expected learning outcomes (practical
-analysis of real-life cases). In this context, the correlation between
-grades at final exams and in projects is used to estimate if final exams
-also match expected learning outcomes. Final exams are easier to grade
-in a shorter time than the projects, but we are not sure whether they
-evaluate correctly the practical ability students develop during these
-courses. Stress related to examination and questions out of the broader
-context that students can only grasp within their projects (e.g.,
-bibliographic research, lengthy exploration of the dataset, group
-discussions, \ldots) are not feasible during the final exam. This could
-possibly bias the evaluation.
-
-\begin{figure}
-\includegraphics[width=1\linewidth]{teaching_data_science_files/figure-latex/fig_exams_projects-1} \caption{\label{fig:fig_exams_projects}  Grades obtained at the final exam versus grades obtained for the projects for courses A and B during two years (course B was still in its old form in 2018-2019 and is thus not represented). Course A (2018-2019) and course B (2019-2020) present the same cohort of students, while course A (2019-2020) is a different cohort. R is the Pearson correlation coefficient.}\label{fig:fig_exams_projects}
-\end{figure}
-
-The comparison of the grades obtained by each student for projects, and
-final exams shows only a weak correlation between these two types of
-evaluations (Fig. \ref {fig:fig_exams_projects}). However, all three
-comparisons are significantly correlated at the 5\% alpha level (Pearson
-correlation test, A (2018-2019), r = 0.48, t = 3.09, df = 32, p-value =
-0.0041 ; A (2019-2020), r = 0.39, t = 2.71, df = 42, p-value = 0.0096 ;
-B (2019-2020), r = 0.44, t = 2.67, df = 30, p-value = 0.012). In
-2018-2019, only one student failed in the projects, while almost one
-third of them failed their final exam. As the flipped classroom approach
-allows more time to work in-class on practical applications, to ask
-questions and to discuss results, we hypothesize that the very low
-failure rate in the projects could be explained by better environmental
-conditions for the students to express their practical data analysis
-skills. However, in the exam conditions, a larger part of these students
-produced much less convincing results.
-
-Of course, this discrepancy could also be due to a different level of
-difficulty between the projects and the final exam. In 2019-2020, we
-raised the difficulty for the projects, resulting in a more widespread
-distribution of the results, but with a similar pattern showing only a
-weak correlation between the two evaluation methods. The same conclusion
-can be drawn for course B, with several students failing in one of the
-two evaluations, but not in the other one.
-
-These results suggest that a summative assessment (even including a
-series of questions involving writing R code to analyze data in the
-final exam) does not reflect properly the ability of the students to
-correctly process and analyze biological data, as in their projects, at
-least in the particular context of our Biological Data Science courses
-at UMONS. Due to these observations, the final examination was abandoned
-for the academic year 2020-2021, and it was replaced by an ongoing
-assessment of the students' activities across all four level exercises.
-These activities are analyzed in the following section.
-
 \hypertarget{students-activity-profiles-with-ongoing-assessment-1}{%
 \subsection{Students activity profiles with ongoing
 assessment}\label{students-activity-profiles-with-ongoing-assessment-1}}
@@ -878,13 +800,21 @@ show how selected metrics distribute in the nine cells, from lowest
 value in white to highest value in black. They help to decipher the way
 students behave according to their profile. Metrics that are not
 represented in the Figure exhibit similar patterns to others (for
-instance H5P metrics have a similar pattern to learnr metrics). Dots in
-the central plot are the various students, with color representing the
-course and the diameter of the dots indicating the grade the students
-obtained at the end of the course. The following paragraphs detail
-information in that figure. The numbers between parentheses are the cell
-numbers in the central plot, and the uppercase letters in parentheses
-refer to the peripheral subplots.
+instance H5P metrics have a similar pattern to learnr metrics). A table
+of the importance of each variable on each cell is presented in the
+Appendix. Dots in the central plot are the various students, with color
+representing the course and the diameter of the dots indicating the
+grade the students obtained at the end of the course. The following
+paragraphs detail information in that figure. The numbers between
+parentheses are the cell numbers in the central plot, and the uppercase
+letters in parentheses refer to the peripheral subplots.
+
+Each cell (1-9) represents a learning strategy used by the students. The
+effectiveness of the learning strategy can be determined by the score
+obtained. An optimal learning strategy leads to the student achieving a
+very high grade. A poor learning strategy leads to the student's failure
+(3). Between the two extreme strategies there are several strategies
+that are considered suboptimal.
 
 Although most students completed all, or almost all exercises (D), cell
 (3) collects the few students that did only a tiny part of these
@@ -1085,41 +1015,6 @@ already in the second course. Monitoring the perceived and measured
 cognitive workload is indeed important ``to maintain reflective and
 systematic approaches in both the development and evaluation {[}of
 our{]} blended approach'' \cite{Spadafora2018}.
-
-\hypertarget{final-exam-versus-projects-2}{%
-\subsection{\texorpdfstring{Final exam \emph{versus}
-projects}{Final exam versus projects}}\label{final-exam-versus-projects-2}}
-
-The task that better evaluates their practical skills in biological data
-analysis is the group project because students have to demonstrate what
-they can do in a situation with a complex dataset and minimal
-instructions. It meets more closely with the courses' learning outcomes
-as they have to figure out a suitable question, analyze the data to
-answer that question, present their results in a report and discuss what
-they found with a critical mind \cite{Auker2020}. This task is complex,
-especially for undergraduate students. This is why we organize it in
-groups of two to four students, depending on the complexity of the
-problem. Here, they mobilize their collective intelligence to get
-results as many of them would be hardly capable of achieving the task
-alone. The tracking of individual activity in the project thanks to git
-allows for figuring out clearly what the contribution of each student
-was in the group and to score their individual contributions suitably.
-
-We observed a low correlation between performances in projects and in
-grades obtained at final exams (Fig. \ref {fig:fig_exams_projects}).
-This led us to stop using final exams at the benefit of an ongoing
-assessment with emphasis into projects, despite a final exam is easier
-and faster to implement. The elimination of the final exams led to the
-setting up of a procedure to monitor and score the students' activity in
-all the exercises by automatic scoring online exercises and manual
-grading of all the projects against evaluation grids. This is
-time-consuming despite the partially automatic scoring lowers the
-charge. It would be interesting to investigate whether tools derived
-from learning analytics and computing science could second teachers in
-this work. For instance, reproducible research is one of the competences
-our students have to develop. It implies that their R Markdown documents
-should compile into reports in HTML or PDF format without any error.
-This criterion could be checked automatically.
 
 \hypertarget{student-activity-profiles-with-ongoing-assessment}{%
 \subsection{Student activity profiles with ongoing
