@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020) (preloaded format=xelatex 2020.11.16)  28 JUL 2022 09:55
+This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020) (preloaded format=xelatex 2020.11.16)  11 AUG 2022 07:02
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -271,19 +271,37 @@ Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 2
 86.
 )
 \Hy@SectionHShift=\skip61
+) (/usr/local/texlive/2020/texmf-dist/tex/latex/lineno/lineno.sty
+Package: lineno 2005/11/02 line numbers on paragraphs v4.41
+Invalid UTF-8 byte or sequence at line 296 replaced by U+FFFD.
+\linenopenalty=\count196
+\output=\toks28
+\linenoprevgraf=\count197
+\linenumbersep=\dimen154
+\linenumberwidth=\dimen155
+\c@linenumber=\count198
+\c@pagewiselinenumber=\count266
+\c@LN@truepage=\count267
+\c@internallinenumber=\count268
+\c@internallinenumbers=\count269
+\quotelinenumbersep=\dimen156
+\bframerule=\dimen157
+\bframesep=\dimen158
+\bframebox=\box49
+LaTeX Info: Redefining \\ on input line 3056.
 )
-\c@theorem=\count196
-\c@corollary=\count197
-\c@proposition=\count198
-\c@conjecture=\count266
-\c@remark=\count267
+\c@theorem=\count270
+\c@corollary=\count271
+\c@proposition=\count272
+\c@conjecture=\count273
+\c@remark=\count274
 
 (/usr/local/texlive/2020/texmf-dist/tex/latex/l3backend/l3backend-xdvipdfmx.def
 File: l3backend-xdvipdfmx.def 2020-03-12 L3 backend support: xdvipdfmx
-\g__graphics_track_int=\count268
-\l__pdf_internal_box=\box49
-\g__pdf_backend_object_int=\count269
-\g__pdf_backend_annotation_int=\count270
+\g__graphics_track_int=\count275
+\l__pdf_internal_box=\box50
+\g__pdf_backend_object_int=\count276
+\g__pdf_backend_annotation_int=\count277
 ) (./teaching_data_science.aux
 
 LaTeX Warning: Label `fig:fig_learn_trials' multiply defined.
@@ -300,43 +318,43 @@ LaTeX Warning: Label `fig:fig_support_by_time' multiply defined.
 )
 \openout1 = `teaching_data_science.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 88.
-LaTeX Font Info:    ... okay on input line 88.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 88.
-LaTeX Font Info:    ... okay on input line 88.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 88.
-LaTeX Font Info:    ... okay on input line 88.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 88.
-LaTeX Font Info:    ... okay on input line 88.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 88.
-LaTeX Font Info:    Trying to load font information for TS1+cmr on input line 8
-8.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 91.
+LaTeX Font Info:    ... okay on input line 91.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 91.
+LaTeX Font Info:    ... okay on input line 91.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 91.
+LaTeX Font Info:    ... okay on input line 91.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 91.
+LaTeX Font Info:    ... okay on input line 91.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 91.
+LaTeX Font Info:    Trying to load font information for TS1+cmr on input line 9
+1.
 (/usr/local/texlive/2020/texmf-dist/tex/latex/base/ts1cmr.fd
 File: ts1cmr.fd 2019/12/16 v2.5j Standard LaTeX font definitions
 )
-LaTeX Font Info:    ... okay on input line 88.
-LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 88.
-LaTeX Font Info:    ... okay on input line 88.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 88.
-LaTeX Font Info:    ... okay on input line 88.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 88.
-LaTeX Font Info:    ... okay on input line 88.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 88.
-LaTeX Font Info:    ... okay on input line 88.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 88.
-LaTeX Font Info:    ... okay on input line 88.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 88.
+LaTeX Font Info:    ... okay on input line 91.
+LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 91.
+LaTeX Font Info:    ... okay on input line 91.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 91.
+LaTeX Font Info:    ... okay on input line 91.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 91.
+LaTeX Font Info:    ... okay on input line 91.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 91.
+LaTeX Font Info:    ... okay on input line 91.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 91.
+LaTeX Font Info:    ... okay on input line 91.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 91.
 
 (/usr/local/texlive/2020/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 88.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 91.
 
 (/usr/local/texlive/2020/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-\AtBeginShipoutBox=\box50
-Package hyperref Info: Link coloring ON on input line 88.
+\AtBeginShipoutBox=\box51
+Package hyperref Info: Link coloring ON on input line 91.
 (/usr/local/texlive/2020/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2019/09/16 v2.46 Cross-referencing by name of section
 (/usr/local/texlive/2020/texmf-dist/tex/latex/refcount/refcount.sty
@@ -346,21 +364,21 @@ Package: refcount 2019/12/15 v3.6 Data extraction from label references (HO)
 ty
 Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 )
-\c@section@level=\count271
+\c@section@level=\count278
 )
-LaTeX Info: Redefining \ref on input line 88.
-LaTeX Info: Redefining \pageref on input line 88.
-LaTeX Info: Redefining \nameref on input line 88.
+LaTeX Info: Redefining \ref on input line 91.
+LaTeX Info: Redefining \pageref on input line 91.
+LaTeX Info: Redefining \nameref on input line 91.
 (./teaching_data_science.out) (./teaching_data_science.out)
 \@outlinefile=\write3
 \openout3 = `teaching_data_science.out'.
 
 
 Class aims Warning: Abstract should precede \maketitle in AMS documentclasses; 
-reported on input line 121.
+reported on input line 124.
 
 
-Overfull \hbox (4.31406pt too wide) in paragraph at lines 122--148
+Overfull \hbox (4.31406pt too wide) in paragraph at lines 125--151
 []\TU/lmr/m/n/8 We examine the impact of implementing active pedagogical method
 -
  []
@@ -372,7 +390,7 @@ File: se-ascii-print.def 2019/11/29 v1.12 stringenc: Printable ASCII characters
 Overfull \vbox (5.8874pt too high) has occurred while \output is active []
 
 [1]
-Overfull \hbox (14.34001pt too wide) in paragraph at lines 228--249
+Overfull \hbox (14.34001pt too wide) in paragraph at lines 231--252
 \TU/lmr/m/n/10 Chromebook data science ([][]$[][][][] [] [] [] [][][][][][][][]
 [][][][][][] [] [][][] [] [][][][][][][][][][][][][][][][][][][][][][]$[][]))
  []
@@ -390,7 +408,7 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 Overfull \vbox (1.356pt too high) has occurred while \output is active []
 
 [4]
-Overfull \hbox (4.79002pt too wide) in paragraph at lines 410--428
+Overfull \hbox (4.79002pt too wide) in paragraph at lines 413--431
 \TU/lmr/m/n/10 tual machines (SciViews Box) with RStudio ([][]$[][][][][] [] []
  [] [][][] [] [][][][][][][] [] [][][] [] [][][][][][][][] []
  []
@@ -399,12 +417,12 @@ Overfull \hbox (4.79002pt too wide) in paragraph at lines 410--428
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
 [5]
-Overfull \hbox (1.55006pt too wide) in paragraph at lines 462--475
+Overfull \hbox (1.55006pt too wide) in paragraph at lines 465--478
  [][] 
  []
 
 
-Overfull \hbox (12.61pt too wide) in paragraph at lines 477--484
+Overfull \hbox (12.61pt too wide) in paragraph at lines 480--487
 \TU/lmr/m/n/10 and table in this paper is available at [][]$[][][][][] [] [] []
  [][][][][][] [] [][][] [] [][][][][][][][][][][][][][][][][][][][][][] []
  []
@@ -427,7 +445,7 @@ e pdf)
 Overfull \vbox (1.356pt too high) has occurred while \output is active []
 
 [10]
-Overfull \hbox (1.23502pt too wide) in paragraph at lines 748--753
+Overfull \hbox (1.23502pt too wide) in paragraph at lines 751--756
 []\TU/lmr/m/n/10 contributions/ind. projects: the number of lines changed -adde
 d or subtracted-
  []
@@ -451,40 +469,37 @@ Overfull \vbox (1.356pt too high) has occurred while \output is active []
 [14] [15]
 Overfull \vbox (1.356pt too high) has occurred while \output is active []
 
-[16]
-Underfull \vbox (badness 2512) has occurred while \output is active []
-
-[17]
+[16] [17]
 Overfull \vbox (1.356pt too high) has occurred while \output is active []
 
 [18]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
 [19]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1394.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1397.
 
 Overfull \vbox (1.356pt too high) has occurred while \output is active []
 
 [20]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 1394.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 1397.
 (./teaching_data_science.aux)
-Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 1394.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1394.
+Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 1397.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1397.
 
 Package rerunfilecheck Info: File `teaching_data_science.out' has not changed.
 (rerunfilecheck)             Checksum: 4B0A40F84B1B2BED3CFE50CB6CFE07E4;1615.
 
 LaTeX Warning: There were multiply-defined labels.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1394.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1397.
  ) 
 Here is how much of TeX's memory you used:
- 9812 strings out of 479418
- 142437 string characters out of 5884584
- 410325 words of memory out of 5000000
- 26999 multiletter control sequences out of 15000+600000
- 538307 words of font info for 62 fonts, out of 8000000 for 9000
+ 10023 strings out of 479418
+ 145636 string characters out of 5884584
+ 414644 words of memory out of 5000000
+ 27204 multiletter control sequences out of 15000+600000
+ 538315 words of font info for 63 fonts, out of 8000000 for 9000
  1515 hyphenation exceptions out of 8191
- 34i,9n,46p,750b,498s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 34i,9n,46p,750b,518s stack positions out of 5000i,500n,10000p,200000b,80000s
 
 Output written on teaching_data_science.pdf (20 pages).

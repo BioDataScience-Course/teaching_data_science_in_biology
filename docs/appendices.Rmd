@@ -59,11 +59,7 @@ for(var in vars)
 #codessom
 codes_tbl <- as.data.frame(t(codes))
 codes_tbl <- codes_tbl[ , order(names(codes_tbl))]
-#knitr::kable(codes_tbl, format = "latex", caption = "\\label{tab:tab_som} Importance of each variable for each cell with the self-organizing map of the student activities across the three courses (year 2020-2021).")
 
-knitr::kable(round(codes_tbl[,1:5],digits = 3), format = "latex", caption = "\\label{tab:tab_som1} Importance of each variable for each cell (1-5) with the self-organizing map of the student activities across the three courses (year 2020-2021).")
-```
-
-```{r somtab2}
-knitr::kable(round(codes_tbl[,6:9],digits = 3), format = "latex", caption = "\\label{tab:tab_som2} Importance of each variable for each cell (6-9) with the self-organizing map of the student activities across the three courses (year 2020-2021).")
+knitr::kable(round(codes_tbl,digits = 3), format = "latex", caption = "\\label{tab:tab_som} Importance of each variable for each cell with the self-organizing map of the student activities across the three courses (year 2020-2021).") %>.%
+  kableExtra::landscape(.)
 ```
