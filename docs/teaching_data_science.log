@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020) (preloaded format=xelatex 2020.11.16)  11 AUG 2022 07:02
+This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020) (preloaded format=xelatex 2020.11.16)  26 OCT 2022 15:39
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -378,7 +378,7 @@ Class aims Warning: Abstract should precede \maketitle in AMS documentclasses;
 reported on input line 124.
 
 
-Overfull \hbox (4.31406pt too wide) in paragraph at lines 125--151
+Overfull \hbox (4.31406pt too wide) in paragraph at lines 125--146
 []\TU/lmr/m/n/8 We examine the impact of implementing active pedagogical method
 -
  []
@@ -386,11 +386,8 @@ Overfull \hbox (4.31406pt too wide) in paragraph at lines 125--151
 (/usr/local/texlive/2020/texmf-dist/tex/generic/stringenc/se-ascii-print.def
 File: se-ascii-print.def 2019/11/29 v1.12 stringenc: Printable ASCII characters
 
-)
-Overfull \vbox (5.8874pt too high) has occurred while \output is active []
-
-[1]
-Overfull \hbox (14.34001pt too wide) in paragraph at lines 231--252
+) [1]
+Overfull \hbox (14.34001pt too wide) in paragraph at lines 226--247
 \TU/lmr/m/n/10 Chromebook data science ([][]$[][][][] [] [] [] [][][][][][][][]
 [][][][][][] [] [][][] [] [][][][][][][][][][][][][][][][][][][][][][]$[][]))
  []
@@ -401,14 +398,11 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 
 Overfull \vbox (1.356pt too high) has occurred while \output is active []
 
-[2]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-[3]
+[2] [3]
 Overfull \vbox (1.356pt too high) has occurred while \output is active []
 
 [4]
-Overfull \hbox (4.79002pt too wide) in paragraph at lines 413--431
+Overfull \hbox (4.79002pt too wide) in paragraph at lines 408--426
 \TU/lmr/m/n/10 tual machines (SciViews Box) with RStudio ([][]$[][][][][] [] []
  [] [][][] [] [][][][][][][] [] [][][] [] [][][][][][][][] []
  []
@@ -417,14 +411,8 @@ Overfull \hbox (4.79002pt too wide) in paragraph at lines 413--431
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
 [5]
-Overfull \hbox (1.55006pt too wide) in paragraph at lines 465--478
+Overfull \hbox (1.55006pt too wide) in paragraph at lines 460--473
  [][] 
- []
-
-
-Overfull \hbox (12.61pt too wide) in paragraph at lines 480--487
-\TU/lmr/m/n/10 and table in this paper is available at [][]$[][][][][] [] [] []
- [][][][][][] [] [][][] [] [][][][][][][][][][][][][][][][][][][][][][] []
  []
 
 
@@ -442,10 +430,13 @@ File: teaching_data_science_files/figure-latex/fig_rtlx-1.pdf Graphic file (typ
 e pdf)
 <use teaching_data_science_files/figure-latex/fig_rtlx-1.pdf>
 [9]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
 Overfull \vbox (1.356pt too high) has occurred while \output is active []
 
 [10]
-Overfull \hbox (1.23502pt too wide) in paragraph at lines 751--756
+Overfull \hbox (1.23502pt too wide) in paragraph at lines 746--751
 []\TU/lmr/m/n/10 contributions/ind. projects: the number of lines changed -adde
 d or subtracted-
  []
@@ -454,6 +445,9 @@ File: teaching_data_science_files/figure-latex/fig_som-1.pdf Graphic file (type
  pdf)
 <use teaching_data_science_files/figure-latex/fig_som-1.pdf>
 [11]
+Underfull \vbox (badness 1881) has occurred while \output is active []
+
+
 Overfull \vbox (1.356pt too high) has occurred while \output is active []
 
 [12]
@@ -463,6 +457,9 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 File: teaching_data_science_files/figure-latex/fig_support_by_time-1.pdf Graphi
 c file (type pdf)
 <use teaching_data_science_files/figure-latex/fig_support_by_time-1.pdf>
+
+Underfull \vbox (badness 2512) has occurred while \output is active []
+
 
 Overfull \vbox (1.356pt too high) has occurred while \output is active []
 
@@ -476,27 +473,27 @@ Overfull \vbox (1.356pt too high) has occurred while \output is active []
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
 [19]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1397.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1395.
 
 Overfull \vbox (1.356pt too high) has occurred while \output is active []
 
 [20]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 1397.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 1395.
 (./teaching_data_science.aux)
-Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 1397.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1397.
+Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 1395.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1395.
 
 Package rerunfilecheck Info: File `teaching_data_science.out' has not changed.
 (rerunfilecheck)             Checksum: 4B0A40F84B1B2BED3CFE50CB6CFE07E4;1615.
 
 LaTeX Warning: There were multiply-defined labels.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1397.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1395.
  ) 
 Here is how much of TeX's memory you used:
  10023 strings out of 479418
  145636 string characters out of 5884584
- 414644 words of memory out of 5000000
+ 415801 words of memory out of 5000000
  27204 multiletter control sequences out of 15000+600000
  538315 words of font info for 63 fonts, out of 8000000 for 9000
  1515 hyphenation exceptions out of 8191
