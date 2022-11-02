@@ -474,7 +474,7 @@ L4 & Free data analysis and reporting (by 2 or 4 students) & group project\\
 
 R and tidyverse \cite{Wickham2019} packages
 (\url{https://www.tidyverse.org}) were used to prepare the data and the
-analyses. \textbf{The pseudonymized data are available in Zenodo}
+analyses. \textbf{The pseudonymized data are available from Zenodo}
 \cite{Grosjeandataset2020, Grosjeandataset2019}. A GitHub repository
 with the code used to create the figures and table in this paper is
 available at
@@ -553,10 +553,8 @@ C & 26 & 6 & 19 & 7 (37) & 7 & 1\\
 \textbf{Retrospective data 2019-2020} \cite{Grosjeandataset2019} were
 also used when pertinent. It should be kept in mind that the pedagogical
 material was written and improved progressively over the three academic
-years. The 15 years of experience gathered all along these former
-courses was critical in the redesign of the new ones. The H5P exercises
-and the auto-checking of learnr answers were not available before
-2020-2021.
+years. The H5P exercises and the auto-checking of learnr answers were
+not available before 2020-2021.
 
 \hypertarget{measured-and-perceived-cognitive-workload-in-learnr-tutorials-1}{%
 \subsection{Measured and Perceived Cognitive Workload in learnr
@@ -593,7 +591,7 @@ very efficient in self-learning and self-assessing their competences
 before switching to the practice with confidence.
 
 \begin{figure}
-\includegraphics[width=1\linewidth]{teaching_data_science_files/figure-latex/fig_learn_trials-1} \caption{\label{fig:fig_learn_trials} Logarithm of the average number of retries that were required for each student to find the right answer in learnr tutorials exercises (2020-2021 academic year). This measure is used as a proxy to quantify the cognitive workload (with caution as explained in the text). **The big black diamond is the average for the whole class. The small black dots are the outliers of the boxplot. The number above each box is the number of students.**}\label{fig:fig_learn_trials}
+\includegraphics[width=1\linewidth]{teaching_data_science_files/figure-latex/fig_learn_trials-1} \caption{\label{fig:fig_learn_trials} Logarithm of the average number of retries that were required for each student to find the right answer in learnr tutorials exercises (2020-2021 academic year). This measure is used as a proxy to quantify the cognitive workload (with caution as explained in the text). The big black diamond is the average for the whole class. The small black dots are the outliers of the boxplot. The gray dots are the actual observations with small random horizontal shift to separate them. The number n above each box is the number of students.}\label{fig:fig_learn_trials}
 \end{figure}
 
 A fully objective quantitative measurement of the cognitive workload is
@@ -611,17 +609,16 @@ data from students that correctly answered most of the exercises
 that appeared to have insufficient knowledge to master the concepts in
 the tutorials and were probably just guessing. For Course A, 12 out of
 59 students did not pass this filter, 5 out of 45 for Course B and 1 out
-of 26 for Course C. \textbf{The averages and standard deviations of
-logarithm of the average number of retriex are 1.375 +/- 0.260 for the
-Course A, 1.377 +/- 0.239 for the Course B and 1.205 +/- 10.252 for the
-Course C. At least one course differs significantly from the other two
-courses} (ANOVA, F(2, 109) = 4.49, p-value = 0.013). The homogeneity of
-variances (Bartlett Test, K2 = 0.30, df = 2, p-value = 0.86) and the
-Normal distribution of the residuals using a quantile-quantile plot were
-verified. The students on Course C need significantly fewer trials to
-find the right answer than students on Courses A at \(\alpha\) level of
-5\% (Tukey HSD, t = -2.74, p-value = 0.019) and B (Tukey HSD, t = -2.68,
-p-value = 0.023).
+of 26 for Course C. \textbf{Log(trials / learnr exercise) is (mean +/-
+standard deviation): 1.38 +/- 0.26 for Course A, 1.38 +/- 0.24 for
+Course B and 1.21 +/- 0.25 for Course C. At least one course differs
+significantly at 5\% alpha level from the other two} (ANOVA, F(2, 109) =
+4.49, p-value = 0.013). The homogeneity of variances (Bartlett Test, K2
+= 0.30, df = 2, p-value = 0.86) and the Normal distribution of the
+residuals using a quantile-quantile plot were verified. The students on
+Course C need significantly fewer trials to find the right answer than
+students on Courses A at \(\alpha\) level of 5\% (Tukey HSD, t = -2.74,
+p-value = 0.019) and B (Tukey HSD, t = -2.68, p-value = 0.023).
 
 The perceived cognitive load required to perform these exercises was
 also determined on the same students and for the same exercises. The Raw
@@ -632,25 +629,25 @@ three courses. Participation in the survey was high: 48/59 (81\%), 35/45
 (78\%) and 18/26 (69\%) for Courses A, B, and C respectively.
 
 \begin{figure}
-\includegraphics[width=1\linewidth]{teaching_data_science_files/figure-latex/fig_rtlx-1} \caption{\label{fig:fig_rtlx} Perceived workload for the learnr tutorials in the three courses (year 2020-2021). The big black diamond is the mean RTLX value. **The small black dots are the outliers of the boxplot. The number above each box is the number of anonymous respondents.**}\label{fig:fig_rtlx}
+\includegraphics[width=1\linewidth]{teaching_data_science_files/figure-latex/fig_rtlx-1} \caption{\label{fig:fig_rtlx} Perceived workload for the learnr tutorials in the three courses (year 2020-2021). The big black diamond is the mean RTLX value. The small black dots are the outliers of the boxplot. The gray dots are the actual observations with small random horizontal shift to separate them. The number n above each box is the number of anonymous respondents.**}\label{fig:fig_rtlx}
 \end{figure}
 
-\textbf{The averages and standard deviations of RTLX are 52.12 +/- 9.70
-for the Course A, 49.76 +/-1 1.90 for the Course B and 43.70 +/- 14.19
-for the Course C.} The difficulty of the course, and thus, of the
-exercises in the tutorials increased from one course to the other.
-However, we did not observe any increase, neither in the number of
-retries, nor in the RTLX (Fig. \ref {fig:fig_rtlx}). On the contrary,
-these appeared significantly lower for Course C than for Course A at the
-\(\alpha\) level of 5\% (ANOVA, F(2, 98) = 3.59, p-value = 0.031; Tukey
-HSD, t = -2.68, p-value = 0.023). The homogeneity of variances (Bartlett
-Test, K2 = 4.17, df = 2, p-value = 0.12) and the distribution of the
-residuals using a quantile-quantile plot were verified and indicated
-that they did not depart significantly from a Normal distribution. The
-cognitive load perceived by the students diminished at the same pace as
-their ability to find the right answer in fewer trials. This may be a
-consequence of a more fluent R coding ability and a better mastery of
-the software environment.
+\textbf{The RTLX are (mean +/- standard deviation) 52.1 +/- 9.7 for
+Course A, 49.8 +/- 11.9 for Course B and 43.7 +/- 14.2 for Course C.}
+The difficulty of the course, and thus, of the exercises in the
+tutorials increased from one course to the other. However, we did not
+observe any increase, neither in the number of retries, nor in the RTLX
+(Fig. \ref {fig:fig_rtlx}). On the contrary, these appeared
+significantly lower for Course C than for Course A at the \(\alpha\)
+level of 5\% (ANOVA, F(2, 98) = 3.59, p-value = 0.031; Tukey HSD, t =
+-2.68, p-value = 0.023). The homogeneity of variances (Bartlett Test, K2
+= 4.17, df = 2, p-value = 0.12) and the distribution of the residuals
+using a quantile-quantile plot were verified and indicated that they did
+not depart significantly from a Normal distribution. The cognitive load
+perceived by the students diminished at the same pace as their ability
+to find the right answer in fewer trials. This may be a consequence of a
+more fluent R coding ability and a better mastery of the software
+environment.
 
 \hypertarget{student-activity-profiles-with-ongoing-assessment}{%
 \subsection{Student' Activity Profiles with Ongoing
@@ -803,23 +800,25 @@ students behave according to their profile. Metrics that are not
 represented in the figure exhibit similar patterns to others (for
 instance H5P metrics have a similar pattern to learnr metrics).
 \textbf{The codebook vectors of the self-organizing map is presented in
-the Appendix. These codebook represent the importance of each variable
-on each cell is presented in the Appendix.} Dots in the central plot are
-the various students, with the color representing the course and the
-diameter of the dots indicating the grade the students obtained at the
-end of the course. The following paragraphs detail the information in
-this figure. The numbers between parentheses are the cell numbers in the
-central plot, and the uppercase letters in parentheses refer to the
-peripheral subplots.
+the Appendix. These codebook vectors represent the importance of each
+variable in each cell.} Dots in the central plot are the various
+students, with the color representing the course and the diameter of the
+dots indicating the grade the students obtained at the end of the
+course. The following paragraphs detail the information in this figure.
+The numbers between parentheses are the cell numbers in the central
+plot, and the uppercase letters in parentheses refer to the peripheral
+subplots.
 
 Each cell (1-9) represents a learning strategy used by the students.
 \textbf{The metric used to determine the effectiveness of the learning
-strategy is the score. A very high grade is associated with an optimal
-learning strategy and a low grade with a poor learning strategy.}
-Strategies that are considered as suboptimal are not only related to the
-grade but they can be related to the time students need to learn (e.g.,
-large number of trials per exercise) or to a lack of interaction in the
-group (e.g., very few questions asked).
+strategy is the grade each student obtained for the course. Learning
+strategies associated with high grade are qualified as ``optimal'', and
+those corresponding to low grades are qualified as ``suboptimal''. No
+causal relationship between the two is inferred: good or bad grades
+could results from other variables not studied here.} We observe that
+suboptimal strategies are also associated with the time students need to
+learn (e.g., large number of trials per exercise) or to a lack of
+interaction in the group (e.g., very few questions asked).
 
 Although most students completed all, or almost all of the exercises
 (D), Cell (3) collects the few students that did only a tiny part of
@@ -1080,18 +1079,16 @@ be a barrier in the production of our students in their projects. A
 pattern was observed during the first lockdown with a marked decrease in
 their contributions, followed by a large, compensatory activity. All
 this happened in a time frame of a couple of weeks. That was the time
-needed to adapt to the new situation.\textbf{Several causes can be put
-forward to explain this adaptation time. Our study does not attempt to
-determine the main cause or causes. However, the first problem
-identified} was the access to a powerful-enough computer for roughly 15
-to 20\% of our students. In a normal situation, these students had
-access to computers on the university premises, both in-class and
-outside of class time. \textbf{When the lockdown was imposed, these
-students suffered a lack of hardware.} However, to reduce the social
-numeric divide, the university quickly reacted and computers were lent
-to them. During the second lockdown, a larger part of our students had
-acquired their own computer, and solutions were immediately available
-for the others.
+needed to adapt to the new situation. \textbf{Several reasons can be
+hypothesized to explain the adaptation period. Among them,} the access
+to a powerful-enough computer for roughly 15 to 20\% of our students
+during lockdown. In a normal situation, these students had access to
+computers on the university premises, both in-class and outside of class
+time. \textbf{When the lockdown was imposed, these students suffered a
+lack of hardware.} However, to reduce the social numeric divide, the
+university quickly reacted and computers were lent to them. During the
+second lockdown, a larger part of our students had acquired their own
+computer, and solutions were immediately available for the others.
 
 While the contributions/questions remained globally at a similar level
 in face-to-face an distance learning, their impact on the teacher'

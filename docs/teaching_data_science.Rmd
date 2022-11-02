@@ -9,18 +9,20 @@ abstract: |
     approaches were adopted, with an emphasis on project-based biological data
     analysis. Four successive types of exercises of increasing difficulties were
     proposed to the students. Tutorials written with the R package learnr were
-    identified as a critical step to transition between theory and the application
-    of the concepts. The cognitive workload needed to complete the learnr tutorials was
-    measured for the three courses and it was only lower for the last course,
-    suggesting students needed a long time to get used to their software
-    environment (R, RStudio and git). Data relative to students' activity, collected
-    primarily from the ongoing assessment, were also used to establish student profiles according to their learning strategies. Several suboptimal
-    strategies were observed and discussed. Finally, the timing of students
-    contributions, and the intensity of teacher-learner interactions related to
-    these contributions were analyzed before, during and after the mandatory distance
-    learning due to the COVID-19 lockdown. A lag phase was visible at the beginning
-    of the first lockdown, but the students' work was not markedly
-    affected during the second lockdown period which lasted much longer.
+    identified as a critical step to transition between theory and the
+    application of the concepts. The cognitive workload needed to complete the
+    learnr tutorials was measured for the three courses and it was only lower
+    for the last course, suggesting students needed a long time to get used to
+    their software environment (R, RStudio and git). Data relative to students'
+    activity, collected primarily from the ongoing assessment, were also used to
+    establish student profiles according to their learning strategies. Several
+    suboptimal strategies were observed and discussed. Finally, the timing of
+    students contributions, and the intensity of teacher-learner interactions
+    related to these contributions were analyzed before, during and after the
+    mandatory distance learning due to the COVID-19 lockdown. A lag phase was
+    visible at the beginning of the first lockdown, but the students' work was
+    not markedly affected during the second lockdown period which lasted much
+    longer.
 output:
   pdf_document:
     fig_caption: yes
@@ -120,7 +122,7 @@ tibble::tribble(
   knitr::kable(., format = "latex", caption = "\\label{tab:tab_ex_levels} Four levels of increasing difficulties in the exercises.")
 ```
 
-R and tidyverse \cite{Wickham2019} packages (<https://www.tidyverse.org>) were used to prepare the data and the analyses. **The pseudonymized data are available in Zenodo** \cite{Grosjeandataset2020, Grosjeandataset2019}. A GitHub repository with the code used to create the figures and table in this paper is available at <https://github.com/BioDataScience-Course/teaching_data_science_in_biology>.
+R and tidyverse \cite{Wickham2019} packages (<https://www.tidyverse.org>) were used to prepare the data and the analyses. **The pseudonymized data are available from Zenodo** \cite{Grosjeandataset2020, Grosjeandataset2019}. A GitHub repository with the code used to create the figures and table in this paper is available at <https://github.com/BioDataScience-Course/teaching_data_science_in_biology>.
 
 <!-- Subsections were added to follow the same organisation between Methods and Results section -->
 
@@ -148,7 +150,7 @@ read("../data/sdd_infos.csv") %>.%
   knitr::kable(., format = "latex", caption = "\\label{tab:tab_course} Number of students, modules, and exercises for each course. For the learnr tutorials, the first number is the amount of tutorial documents and the second number in brackets is the total number of questions in these tutorials (year 2020-2021).")
 ```
 
-**Retrospective data 2019-2020** \cite{Grosjeandataset2019} were also used when pertinent. It should be kept in mind that the pedagogical material was written and improved progressively over the three academic years. The 15 years of experience gathered all along these former courses was critical in the redesign of the new ones. The H5P exercises and the auto-checking of learnr answers were not available before 2020-2021.
+**Retrospective data 2019-2020** \cite{Grosjeandataset2019} were also used when pertinent. It should be kept in mind that the pedagogical material was written and improved progressively over the three academic years. The H5P exercises and the auto-checking of learnr answers were not available before 2020-2021.
 
 ## Measured and Perceived Cognitive Workload in learnr Tutorials
 
@@ -158,7 +160,7 @@ Our goal with these tutorials was to optimally prepare the students for the prac
 
 A few tutorials were elaborated during the academic year 2018-2019, and positive feedback on their utility (both from direct observation of the students and thanks to their remarks) led us to systematize them into what we now call Level 2 activities (see Table \ref {tab:tab_course}) in the form of learnr documents in 2019-2020. The tutorials were further refined in 2020-2021: we added contextual hints with the {gradethis} R package (<https://pkgs.rstudio.com/gradethis/>). In their latest version, when students submit their answer to the exercises, the R code is parsed, analyzed and the result is compared with the solution. In case of differences, heuristics are used to provide contextual hints. Students can then refine their solution and resubmit it. This appears very efficient in self-learning and self-assessing their competences before switching to the practice with confidence.
 
-```{r fig_learn_trials, out.width='100%', fig.cap="\\label{fig:fig_learn_trials} Logarithm of the average number of retries that were required for each student to find the right answer in learnr tutorials exercises (2020-2021 academic year). This measure is used as a proxy to quantify the cognitive workload (with caution as explained in the text). **The big black diamond is the average for the whole class. The small black dots are the outliers of the boxplot. The number above each box is the number of students.**"}
+```{r fig_learn_trials, out.width='100%', fig.cap="\\label{fig:fig_learn_trials} Logarithm of the average number of retries that were required for each student to find the right answer in learnr tutorials exercises (2020-2021 academic year). This measure is used as a proxy to quantify the cognitive workload (with caution as explained in the text). The big black diamond is the average for the whole class. The small black dots are the outliers of the boxplot. The gray dots are the actual observations with small random horizontal shift to separate them. The number n above each box is the number of students."}
 set.seed(87436)
 
 # read("../data/sdd_learnr.csv") %>.%
@@ -210,11 +212,11 @@ rm(sdd_learnr)
 
 <!-- This paragraph is modified to answer an objection by reviewer Q about the value of the number of tries to quantify cognitive workload as students may be just guessing. -->
 
-A fully objective quantitative measurement of the cognitive workload is near impossible to obtain in these asynchronous activities done at home. It was thus estimated by using a proxy: the logarithm of the average number of trials that were required for each student to find the right answer in the learnr tutorial exercises (Fig. \ref {fig:fig_learn_trials}). Caution is required here as a high number of trials could also be the result of students that are just guessing. However, answers being pieces of R code, pure guessing most probably leads to nothing useful. A certain level of understanding of both the R syntax and the question are required to obtain correct answers. Only data from students that correctly answered most of the exercises (\> 90%) were used here, as it also rules out the students that appeared to have insufficient knowledge to master the concepts in the tutorials and were probably just guessing. For Course A, 12 out of 59 students did not pass this filter, 5 out of 45 for Course B and 1 out of 26 for Course C. **The averages and standard deviations of logarithm of the average number of retriex are 1.375 +/- 0.260 for the Course A, 1.377 +/- 0.239 for the Course B and 1.205 +/- 10.252 for the Course C. At least one course differs significantly from the other two courses** (ANOVA, F(2, 109) = 4.49, p-value = 0.013). The homogeneity of variances (Bartlett Test, K2 = 0.30, df = 2, p-value = 0.86) and the Normal distribution of the residuals using a quantile-quantile plot were verified. The students on Course C need significantly fewer trials to find the right answer than students on Courses A at $\alpha$ level of 5% (Tukey HSD, t = -2.74, p-value = 0.019) and B (Tukey HSD, t = -2.68, p-value = 0.023).
+A fully objective quantitative measurement of the cognitive workload is near impossible to obtain in these asynchronous activities done at home. It was thus estimated by using a proxy: the logarithm of the average number of trials that were required for each student to find the right answer in the learnr tutorial exercises (Fig. \ref {fig:fig_learn_trials}). Caution is required here as a high number of trials could also be the result of students that are just guessing. However, answers being pieces of R code, pure guessing most probably leads to nothing useful. A certain level of understanding of both the R syntax and the question are required to obtain correct answers. Only data from students that correctly answered most of the exercises (\> 90%) were used here, as it also rules out the students that appeared to have insufficient knowledge to master the concepts in the tutorials and were probably just guessing. For Course A, 12 out of 59 students did not pass this filter, 5 out of 45 for Course B and 1 out of 26 for Course C. **Log(trials / learnr exercise) is (mean +/- standard deviation): 1.38 +/- 0.26 for Course A, 1.38 +/- 0.24 for Course B and 1.21 +/- 0.25 for Course C. At least one course differs significantly at 5% alpha level from the other two** (ANOVA, F(2, 109) = 4.49, p-value = 0.013). The homogeneity of variances (Bartlett Test, K2 = 0.30, df = 2, p-value = 0.86) and the Normal distribution of the residuals using a quantile-quantile plot were verified. The students on Course C need significantly fewer trials to find the right answer than students on Courses A at $\alpha$ level of 5% (Tukey HSD, t = -2.74, p-value = 0.019) and B (Tukey HSD, t = -2.68, p-value = 0.023).
 
 The perceived cognitive load required to perform these exercises was also determined on the same students and for the same exercises. The Raw Task Load indeX (RTLX) measured the emotional state of the students after having completed a tutorial. This has, as far as we know, not yet been done. We used a NASA LTX questionnaire to assess it across all three courses. Participation in the survey was high: 48/59 (81%), 35/45 (78%) and 18/26 (69%) for Courses A, B, and C respectively.
 
-```{r fig_rtlx, out.width='100%', message=FALSE, warning=FALSE, fig.cap="\\label{fig:fig_rtlx} Perceived workload for the learnr tutorials in the three courses (year 2020-2021). The big black diamond is the mean RTLX value. **The small black dots are the outliers of the boxplot. The number above each box is the number of anonymous respondents.**"}
+```{r fig_rtlx, out.width='100%', message=FALSE, warning=FALSE, fig.cap="\\label{fig:fig_rtlx} Perceived workload for the learnr tutorials in the three courses (year 2020-2021). The big black diamond is the mean RTLX value. The small black dots are the outliers of the boxplot. The gray dots are the actual observations with small random horizontal shift to separate them. The number n above each box is the number of anonymous respondents.**"}
 set.seed(253)
 read("../data/sdd_rtlx.csv") %>.%
   chart(., rtlx ~ course) +
@@ -228,7 +230,7 @@ read("../data/sdd_rtlx.csv") %>.%
   labs( y = "Raw Task Load indeX")
 ```
 
-**The averages and standard deviations of RTLX are 52.12 +/- 9.70 for the Course A, 49.76 +/-1 1.90 for the Course B and 43.70 +/- 14.19 for the Course C.** The difficulty of the course, and thus, of the exercises in the tutorials increased from one course to the other. However, we did not observe any increase, neither in the number of retries, nor in the RTLX (Fig. \ref {fig:fig_rtlx}). On the contrary, these appeared significantly lower for Course C than for Course A at the $\alpha$ level of 5% (ANOVA, F(2, 98) = 3.59, p-value = 0.031; Tukey HSD, t = -2.68, p-value = 0.023). The homogeneity of variances (Bartlett Test, K2 = 4.17, df = 2, p-value = 0.12) and the distribution of the residuals using a quantile-quantile plot were verified and indicated that they did not depart significantly from a Normal distribution. The cognitive load perceived by the students diminished at the same pace as their ability to find the right answer in fewer trials. This may be a consequence of a more fluent R coding ability and a better mastery of the software environment.
+**The RTLX are (mean +/- standard deviation) 52.1 +/- 9.7 for Course A, 49.8 +/- 11.9 for Course B and 43.7 +/- 14.2 for Course C.** The difficulty of the course, and thus, of the exercises in the tutorials increased from one course to the other. However, we did not observe any increase, neither in the number of retries, nor in the RTLX (Fig. \ref {fig:fig_rtlx}). On the contrary, these appeared significantly lower for Course C than for Course A at the $\alpha$ level of 5% (ANOVA, F(2, 98) = 3.59, p-value = 0.031; Tukey HSD, t = -2.68, p-value = 0.023). The homogeneity of variances (Bartlett Test, K2 = 4.17, df = 2, p-value = 0.12) and the distribution of the residuals using a quantile-quantile plot were verified and indicated that they did not depart significantly from a Normal distribution. The cognitive load perceived by the students diminished at the same pace as their ability to find the right answer in fewer trials. This may be a consequence of a more fluent R coding ability and a better mastery of the software environment.
 
 ```{r rtlx_stats, results='hide',include=FALSE}
 read("../data/sdd_rtlx.csv") %>.%
@@ -465,15 +467,20 @@ plot_som(sdd_som, shape = "straight", col = cols[as.factor(sdd_metrics$course)],
 text((1:3) + 0.5, 3, 1:3, cex = font_cex)
 text(1:3, 2.15, 4:6, cex = font_cex)
 text((1:3) + 0.5, 1.3, 7:9, cex = font_cex)
-legend(1.5, 3.65, legend = c("A", "B", "C"), col = cols, pch = 19,
-  horiz = TRUE, bty = "n", title = "Course", cex = font_cex)
+#legend(1.5, 3.65, legend = c("A", "B", "C"), col = cols, pch = 19,
+#  horiz = TRUE, bty = "n", title = "Course", cex = font_cex)
+legend(0.7, 3.65, legend = c("A", "B", "C"), col = cols, pch = 19, pt.cex = 1,
+  horiz = TRUE, bty = "n", title = "Course (color)", cex = font_cex)
+legend(1.9, 3.65, legend = c("1", "5", "10", "15", "20"), col = "black",
+  pch = 19, pt.cex = c(1, 5, 10, 15, 20) * 5 / 60,
+  horiz = TRUE, bty = "n", title = "Grade /20 (size)", cex = font_cex)
 
 rm(sdd_metrics, metrics_nograde, grays, plot_som)
 ```
 
-In Fig. \ref {fig:fig_som}, the small peripheral plots in gray scale show how selected metrics distribute in the nine cells, from lowest value in white to highest value in black. They help to decipher the way students behave according to their profile. Metrics that are not represented in the figure exhibit similar patterns to others (for instance H5P metrics have a similar pattern to learnr metrics). **The codebook vectors of the self-organizing map is presented in the Appendix. These codebook represent the importance of each variable on each cell is presented in the Appendix.** Dots in the central plot are the various students, with the color representing the course and the diameter of the dots indicating the grade the students obtained at the end of the course. The following paragraphs detail the information in this figure. The numbers between parentheses are the cell numbers in the central plot, and the uppercase letters in parentheses refer to the peripheral subplots.
+In Fig. \ref {fig:fig_som}, the small peripheral plots in gray scale show how selected metrics distribute in the nine cells, from lowest value in white to highest value in black. They help to decipher the way students behave according to their profile. Metrics that are not represented in the figure exhibit similar patterns to others (for instance H5P metrics have a similar pattern to learnr metrics). **The codebook vectors of the self-organizing map is presented in the Appendix. These codebook vectors represent the importance of each variable in each cell.** Dots in the central plot are the various students, with the color representing the course and the diameter of the dots indicating the grade the students obtained at the end of the course. The following paragraphs detail the information in this figure. The numbers between parentheses are the cell numbers in the central plot, and the uppercase letters in parentheses refer to the peripheral subplots.
 
-Each cell (1-9) represents a learning strategy used by the students. **The metric used to determine the effectiveness of the learning strategy is the score. A very high grade is associated with an optimal learning strategy and a low grade with a poor learning strategy.** Strategies that are considered as suboptimal are not only related to the grade but they can be related to the time students need to learn (e.g., large number of trials per exercise) or to a lack of interaction in the group (e.g., very few questions asked).
+Each cell (1-9) represents a learning strategy used by the students. **The metric used to determine the effectiveness of the learning strategy is the grade each student obtained for the course. Learning strategies associated with high grade are qualified as "optimal", and those corresponding to low grades are qualified as "suboptimal". No causal relationship between the two is inferred: good or bad grades could results from other variables not studied here.** We observe that suboptimal strategies are also associated with the time students need to learn (e.g., large number of trials per exercise) or to a lack of interaction in the group (e.g., very few questions asked).
 
 Although most students completed all, or almost all of the exercises (D), Cell (3) collects the few students that did only a tiny part of these exercises. These students obtained very low grades. They belong to Courses A and B. On the other hand, heavy workers are at the bottom (I & J), and good performers in learnr tutorials (C) are in Cells (5-9).
 
@@ -489,7 +496,7 @@ To summarize, at the top of the SOM map, Cells (1-4, plus 6) contain students wi
 
 ## Transition from Face-to-face to Distance Learning Imposed by the COVID-19 Lockdown
 
-<!-- Section renamed to emphasise the shift to the distance learning due to COVID 19-->
+<!-- Section renamed to emphasize the shift to the distance learning due to COVID 19-->
 
 Due to the COVID-19 lockdown periods, distance learning had to be adopted abruptly. We analyzed the activity collected during the 2019-2020 and 2020-2021 academic years to **describe** the impact of these transitions on the progression of the students. In Fig. \ref{fig:fig_support_by_time}, the academic term is divided into seven work periods of approximately two weeks each (note that this was the suggested rate of the courses: one module every other week). The classes of the second term started in period Y1P09, since period Y1P08 was reserved for the first term exams session. The courses of the first term of 2020-2021 began in Y2P01. First lockdown started in period Y1P11 for one month and a half. Second lockdown started in Y2P03 and lasted to the end of the second term (Y2P15). During the first lockdown, we quickly opened the dedicated Discord channels that were available without any latency.
 
@@ -581,7 +588,7 @@ Group projects are one of the keys to our method. Sometimes, groups do not work 
 
 ## Transition from Face-to-face to Distance Learning Imposed by the COVID-19 Lockdown
 
-Forced distance learning, due to the COVID-19 lockdown did not appear to be a barrier in the production of our students in their projects. A pattern was observed during the first lockdown with a marked decrease in their contributions, followed by a large, compensatory activity. All this happened in a time frame of a couple of weeks. That was the time needed to adapt to the new situation.**Several causes can be put forward to explain this adaptation time. Our study does not attempt to determine the main cause or causes. However, the first problem identified** was the access to a powerful-enough computer for roughly 15 to 20% of our students. In a normal situation, these students had access to computers on the university premises, both in-class and outside of class time. **When the lockdown was imposed, these students suffered a lack of hardware.** However, to reduce the social numeric divide, the university quickly reacted and computers were lent to them. During the second lockdown, a larger part of our students had acquired their own computer, and solutions were immediately available for the others.
+Forced distance learning, due to the COVID-19 lockdown did not appear to be a barrier in the production of our students in their projects. A pattern was observed during the first lockdown with a marked decrease in their contributions, followed by a large, compensatory activity. All this happened in a time frame of a couple of weeks. That was the time needed to adapt to the new situation. **Several reasons can be hypothesized to explain the adaptation period. Among them,** the access to a powerful-enough computer for roughly 15 to 20% of our students during lockdown. In a normal situation, these students had access to computers on the university premises, both in-class and outside of class time. **When the lockdown was imposed, these students suffered a lack of hardware.** However, to reduce the social numeric divide, the university quickly reacted and computers were lent to them. During the second lockdown, a larger part of our students had acquired their own computer, and solutions were immediately available for the others.
 
 While the contributions/questions remained globally at a similar level in face-to-face an distance learning, their impact on the teacher' timetables was very different. In distance learning, students worked at very different times. Their questions were thus less concentrated during the course periods. Also, an alternation between asynchronous work at home and synchronous work in the computer lab was more beneficial to interactions between students. The social and human components of teaching and learning are key factors that tend to vanish in exclusive distance learning. Contacts through videoconferences only partly compensate for a lack of interactions because in-class presence remains different to video chats. Blended learning combines the best of the two practices if pedagogical setups are accurate and well balanced \cite{Bernard2014}.
 
