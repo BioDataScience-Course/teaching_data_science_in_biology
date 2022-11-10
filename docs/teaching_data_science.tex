@@ -1,124 +1,139 @@
-% !!!IMPORTANT NOTE: Please read carefully all information including those preceded by % sign
-%Before you compile the tex file please download the class file AIMS.cls from the following URL link to the
-%local folder where your tex file resides. http://aimsciences.org/journals/tex-sample/AIMS.cls.
-\documentclass{aims}
+
+% Remember to rename this template to something unique to your article.
+% We recommend using the article ID assigned to your article in EditFlow if applicable.
+
+% Use this AIMS template to prepare your tex file after your article is accepted by an AIMS journal.
+% Read all information including that which is proceeded by a \% sign. These are important instructions and explanations.
+% Please refer to the Template FAQ for more information.
+% Thank you for your cooperation.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                    1. PREAMBLE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass{aims} % Use the aims.cls file to compile your paper
 \usepackage{amsmath}
-  \usepackage{paralist}
-  \usepackage{graphics} %% add this and next lines if pictures should be in esp format
-  \usepackage{epsfig} %For pictures: screened artwork should be set up with an 85 or 100 line screen
-\usepackage{graphicx}  \usepackage{epstopdf}%This is to transfer .eps figure to .pdf figure; please compile your paper using PDFLeTex or PDFTeXify.
- \usepackage[colorlinks=true]{hyperref}
+\usepackage{paralist}
+\usepackage[misc]{ifsym}
+\usepackage{epsfig} %For pictures: screened artwork should be set up with an 85 or 100 line screen
+\usepackage{epstopdf} %This is to transfer .eps figure to .pdf figure; please compile your article using PDFLaTex or PDFTeXify.
+\usepackage[colorlinks=true]{hyperref}
    % Warning: when you first run your tex file, some errors might occur,
    % please just press enter key to end the compilation process, then it will be fine if you run your tex file again.
    % Note that it is highly recommended by AIMS to use this package.
-   \hypersetup{urlcolor=blue, citecolor=red}
+\hypersetup{urlcolor=blue, citecolor=red}
 %\usepackage{hyperref}
+\allowdisplaybreaks
 
-\usepackage{lineno}
-\linenumbers
+% Do not change or remove the page specifications below.
+\textheight=8.2 true in
+ \textwidth=5.0 true in
+  \topmargin 30pt
+   \setcounter{page}{1}
 
-  \textheight=8.2 true in
-   \textwidth=5.0 true in
-    \topmargin 30pt
-     \setcounter{page}{1}
-
-% The next 5 line will be entered by an editorial staff.
+% The next 6 lines will be entered by AIMS production staff.
 \def\currentvolume{X}
  \def\currentissue{X}
   \def\currentyear{200X}
    \def\currentmonth{XX}
-    \def\ppages{X--XX}
+    \def\ppages{X-XX}
      \def\DOI{10.3934/xx.xxxxxxx}
 
- % Please minimize the usage of "newtheorem", "newcommand", and use
- % equation numbers only situation when they provide essential convenience
- % Try to avoid defining your own macros
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%          2. CUSTOM COMMANDS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% PLEASE NOTE: The AIMS cls file is updated regularly with the standard AMS usepackages - you do NOT need to insert custom commands for AMS symbols,
 
+% Insert your custom commands in this section.
+% Please minimize the use of "newtheorem", "newcommand", and use equation numbers only in situations where they provide essential convenience.
+% Use \usepackage{amssymb}, \usepackage{amsthm}, etc, but please do not define individual mathematical symbols unless it is completely necessary.
+% Try to avoid defining your own macros.
+
+% Do not change or remove the commands below.
 \newtheorem{theorem}{Theorem}[section]
-\newtheorem{corollary}{Corollary}
+\newtheorem{corollary}[theorem]{Corollary}
 \newtheorem*{main}{Main Theorem}
 \newtheorem{lemma}[theorem]{Lemma}
-\newtheorem{proposition}{Proposition}
-\newtheorem{conjecture}{Conjecture}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{conjecture}[theorem]{Conjecture}
 \newtheorem*{problem}{Problem}
 \theoremstyle{definition}
 \newtheorem{definition}[theorem]{Definition}
-\newtheorem{remark}{Remark}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{assumption}[theorem]{Assumption}
 \newtheorem*{notation}{Notation}
 \newcommand{\ep}{\varepsilon}
 \newcommand{\eps}[1]{{#1}_{\varepsilon}}
 
-% This is for Pandoc Markdown -> LaTeX, but AIMS author guidelines do not allow
-% custom LATeX macros except for equations!
-%\providecommand{\tightlist}{%
-%  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
-%
-%  
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%         3. HEADER AND FOOTER SECTION
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-%% Place the running title of the paper with 40 letters or less in []
- %% and the full title of the paper in { }.
-\title[Teaching Data Science in
-Biology] %Use the shortened version of the full title
-      {Teaching Data Science to Students in Biology using R, RStudio and
-Learnr: Analysis of Three Years Data}
+% Place the running head in [], and the full title of the article in {}.
+\title[Teaching Data Science in Biology]
+% Running head is the full title or shortened version of the full title. This will appear at the top of odd pages. It should be no more than 40 characters to fit within the width limit.
+{Teaching Data Science to Students in Biology using R, RStudio and
+Learnr: Analysis of Three Years
+Data} % Only the first word and proper nouns should be capitalized.
 
-% Place all authors' names in [ ] shown as running head, Leave { } empty
-% Please use `and' to connect the last two names if applicable
-% Use FirstNameInitial.  MiddleNameInitial. LastName, or only last names of authors if there are too many authors
+% Place all authors' names in []. This will be shown as the running head on even pages. Leave {} empty.
+% Please use `and' to connect the last two authors' names if applicable.
+% List full names if possible. If all authors' full names will not fit, use FirstNameInitial. MiddleNameInitial. LastName, only last names, or full names of first few authors, et al.
 \author[Guyliann Engels, Philippe Grosjean and Frédérique Artus]{}
 
-% It is required to enter 2020 MSC.
-\subjclass{Primary: XXXXX; Secondary: YYYYY.}
-% Please provide minimum  5 keywords.
- \keywords{Data Science Teaching, Flipped Classroom, R, RStudio, git.}
+% 2020 MSC numbers are required.
+\subjclass{Primary: 58F15, 58F17; Secondary: 53C35.}
+% Please provide a minimum of 5 keywords or phrases.
+\keywords{Data Science Teaching, Flipped Classroom, R, RStudio, git.}
 
-% Email address of each of all authors is required.
-% You may list email addresses of all other authors, separately.
- \email{Guyliann.Engels@umons.ac.be}
- \email{Philippe.Grosjean@umons.ac.be}
- \email{Frederique.Artus@umons.ac.be}
+% Put your short thanks below. For thanks/acknowledgments over 30 words, please place them in \section*{Acknowledgments} located above the reference section.
+% Remove \thanks{The first author is supported by NSF grant xx-xxxx} if nothing is added here.
+%\thanks{The first author is supported by [insert grant information here]}
 
-% Put your short thanks below. For long thanks/acknowledgements,
-%please go to the last acknowledgments section.
-%\thanks{We would like to acknowledge...}
 
-% Add corresponding author at the footnote of the first page if it is necessary.
-% Please add <dollar>^*<dollar> adjacent to the corresponding author's name on the first page.
-% The example shown in this template is if the first author is the corresponding author.
+% Add corresponding author in the footnote of the first page if necessary.
+% Add <dollar>^*<dollar> adjacent to the corresponding author's name on the first page if necessary.
+% The corresponding author in your article should match the corresponding author listed for your article in EditFlow (if applicable).
+% In the example shown below, the first author is the corresponding author. Please move or remove <dollar>^*<dollar>  as needed for your article.
 \thanks{\textsuperscript{*} Corresponding author: Guyliann Engels}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%      4. AUTHOR NAMES/ADDRESSES/AFFILIATIONS SECTION
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{document}
 \maketitle
 
-% Enter the first author's name and address:
-\centerline{\scshape Guyliann Engels\textsuperscript{*}, Philippe Grosjean}
+% Enter the first author's name and email address; email addresses are required for each author.
+% Use footnote notations to indicate address and affiliations with commas between numbers if more than one address applies; see below for examples.
+\centerline{\scshape
+Guyliann Engels \textsuperscript{{{\href{mailto:Guyliann.Engels@umons.ac.be}{\textrm{\Letter}}} *1}}, Philippe Grosjean\textsuperscript{{\href{mailto:Philippe.Grosjean@umons.ac.be}{\textrm{\Letter}}} 1} and Frederique Artus\textsuperscript{{\href{mailto:Frederique.Artus@umons.ac.be}{\textrm{\Letter}}}2}}
+
 \medskip
+
 {\footnotesize
-% please put the address of the first author
- \centerline{Numerical Ecology Department, Complexys and InforTech Institutes, University of Mons}
-   %\centerline{Other lines}
-   \centerline{Avenue du Champ de Mars, 8, 7000 Mons, Belgium}
-} % Do not forget to end the {\footnotesize by the sign }
+% Enter the full affiliation and country name:
+% Do not insert commas or periods at the end of lines.
+ \centerline{\textsuperscript{1} Numerical Ecology Department, Complexys and InforTech Institutes, University of Mons, Avenue du Champ de Mars, 8, 7000 Mons, Belgium}
+} % Do not forget to end {\footnotesize with the sign }
 
 \medskip
 
-\centerline{\scshape Frederique Artus}
-
-\medskip
 {\footnotesize
- % please put the address of the second  and third author
- \centerline{ Pedagogical Support and Quality Assurance Department, University of Mons}
-  % \centerline{Other lines}
-   \centerline{Place du Parc, 20, 700 Mons, Belgium}
+ % Enter the full affiliation and country name:
+ \centerline{\textsuperscript{2} Pedagogical Support and Quality Assurance Department, University of Mons, Place du Parc, 20, 700 Mons, Belgium}
 }
 
 \bigskip
 
-% The name of the associate editor will be entered by an editorial staff
-% "Communicated by the associate editor name" is not needed for special issue.
-% \centerline{(Communicated by the associate editor name)}
+% The name of the handling editor will be entered by AIMS production staff.
+% "Communicated by Handling Editor" is not needed for special issue.
+% \centerline{(Communicated by Handling Editor)}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%             5. ABSTRACT
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %The abstract of your paper
 \begin{abstract}
@@ -144,6 +159,10 @@ Learnr: Analysis of Three Years Data}
   the first lockdown, but the students' work was not markedly affected
   during the second lockdown period which lasted much longer.
 \end{abstract}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                   6. BODY
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \hypertarget{introduction}{%
 \section{Introduction}\label{introduction}}
@@ -342,26 +361,25 @@ students enrolled on the Bachelor, or Master in Biology at UMONS.
   not including A and B, in their curriculum.
 \end{itemize}
 
-The course material \textbf{was} available online
-(\url{https://wp.sciviews.org}) and was centralized on a Wordpress site.
-Students had to login with their GitHub account and their academic data
-were collected from the UMONS Moodle server
-(\url{https://moodle.umons.ac.be}). The courses were broken down into
-modules that amounted of roughly 15h of work each. There were two
-in-class sessions of 2h and 4h per module (outside the lockdown periods,
-of course). There was roughly 3h of preparation at home before each
-session, and 3h of work to complete one module. The main activities in
-the class were analysis of actual data (projects). Students also asked
-questions and followed brief lectures (15 minutes) on selected topics in
-the class. They had to propose and vote for the topics to be covered
-during these short lectures. Finally, we encouraged students to help
-each other and to explain what they understood to their colleagues.
-Indeed, students' questions were sometimes redirected by the teacher to
-other students that had already mastered the topic. Teachers rarely
-answered questions directly. When it was possible, they rather proposed
-new tracks or ideas to investigate and helped learners to find the
-solution themselves. Students who went through the activities before the
-others were also encouraged to help their slower colleagues.
+The course material was available online (\url{https://wp.sciviews.org})
+and was centralized on a Wordpress site. Students had to login with
+their GitHub account and their academic data were collected from the
+UMONS Moodle server (\url{https://moodle.umons.ac.be}). The courses were
+broken down into modules that amounted of roughly 15h of work each.
+There were two in-class sessions of 2h and 4h per module (outside the
+lockdown periods, of course). There was roughly 3h of preparation at
+home before each session, and 3h of work to complete one module. The
+main activities in the class were analysis of actual data (projects).
+Students also asked questions and followed brief lectures (15 minutes)
+on selected topics in the class. They had to propose and vote for the
+topics to be covered during these short lectures. Finally, we encouraged
+students to help each other and to explain what they understood to their
+colleagues. Indeed, students' questions were sometimes redirected by the
+teacher to other students that had already mastered the topic. Teachers
+rarely answered questions directly. When it was possible, they rather
+proposed new tracks or ideas to investigate and helped learners to find
+the solution themselves. Students who went through the activities before
+the others were also encouraged to help their slower colleagues.
 
 Regarding the timing, one module was taught every other week so that
 students had enough time to prepare the material at home before the
@@ -474,7 +492,7 @@ L4 & Free data analysis and reporting (by 2 or 4 students) & group project\\
 
 R and tidyverse \cite{Wickham2019} packages
 (\url{https://www.tidyverse.org}) were used to prepare the data and the
-analyses. \textbf{The pseudonymized data are available from Zenodo}
+analyses. The pseudonymized data are available from Zenodo
 \cite{Grosjeandataset2020, Grosjeandataset2019}. A GitHub repository
 with the code used to create the figures and table in this paper is
 available at
@@ -516,8 +534,8 @@ Lockdown}\label{transition-from-face-to-face-to-distance-learning-imposed-by-the
 The transition between face-to-face and distance learning was studied
 through the contribution of each student to projects with the commits
 (git logs) and by these contributions were then divided by the questions
-they asked by email and on Discord. \textbf{Though} only descriptive
-analysis of these data was done, interesting patterns were observed.
+they asked by email and on Discord. Though only descriptive analysis of
+these data was done, interesting patterns were observed.
 
 \hypertarget{results}{%
 \section{Results}\label{results}}
@@ -550,11 +568,11 @@ C & 26 & 6 & 19 & 7 (37) & 7 & 1\\
 \end{tabular}
 \end{table}
 
-\textbf{Retrospective data 2019-2020} \cite{Grosjeandataset2019} were
-also used when pertinent. It should be kept in mind that the pedagogical
-material was written and improved progressively over the three academic
-years. The H5P exercises and the auto-checking of learnr answers were
-not available before 2020-2021.
+Retrospective data 2019-2020 \cite{Grosjeandataset2019} were also used
+when pertinent. It should be kept in mind that the pedagogical material
+was written and improved progressively over the three academic years.
+The H5P exercises and the auto-checking of learnr answers were not
+available before 2020-2021.
 
 \hypertarget{measured-and-perceived-cognitive-workload-in-learnr-tutorials-1}{%
 \subsection{Measured and Perceived Cognitive Workload in learnr
@@ -609,16 +627,16 @@ data from students that correctly answered most of the exercises
 that appeared to have insufficient knowledge to master the concepts in
 the tutorials and were probably just guessing. For Course A, 12 out of
 59 students did not pass this filter, 5 out of 45 for Course B and 1 out
-of 26 for Course C. \textbf{Log(trials / learnr exercise) is (mean +/-
-standard deviation): 1.38 +/- 0.26 for Course A, 1.38 +/- 0.24 for
-Course B and 1.21 +/- 0.25 for Course C. At least one course differs
-significantly at 5\% alpha level from the other two} (ANOVA, F(2, 109) =
-4.49, p-value = 0.013). The homogeneity of variances (Bartlett Test, K2
-= 0.30, df = 2, p-value = 0.86) and the Normal distribution of the
-residuals using a quantile-quantile plot were verified. The students on
-Course C need significantly fewer trials to find the right answer than
-students on Courses A at \(\alpha\) level of 5\% (Tukey HSD, t = -2.74,
-p-value = 0.019) and B (Tukey HSD, t = -2.68, p-value = 0.023).
+of 26 for Course C. Log(trials / learnr exercise) is (mean +/- standard
+deviation): 1.38 +/- 0.26 for Course A, 1.38 +/- 0.24 for Course B and
+1.21 +/- 0.25 for Course C. At least one course differs significantly at
+5\% alpha level from the other two (ANOVA, F(2, 109) = 4.49, p-value =
+0.013). The homogeneity of variances (Bartlett Test, K2 = 0.30, df = 2,
+p-value = 0.86) and the Normal distribution of the residuals using a
+quantile-quantile plot were verified. The students on Course C need
+significantly fewer trials to find the right answer than students on
+Courses A at \(\alpha\) level of 5\% (Tukey HSD, t = -2.74, p-value =
+0.019) and B (Tukey HSD, t = -2.68, p-value = 0.023).
 
 The perceived cognitive load required to perform these exercises was
 also determined on the same students and for the same exercises. The Raw
@@ -629,21 +647,21 @@ three courses. Participation in the survey was high: 48/59 (81\%), 35/45
 (78\%) and 18/26 (69\%) for Courses A, B, and C respectively.
 
 \begin{figure}
-\includegraphics[width=1\linewidth]{teaching_data_science_files/figure-latex/fig_rtlx-1} \caption{\label{fig:fig_rtlx} Perceived workload for the learnr tutorials in the three courses (year 2020-2021). The big black diamond is the mean RTLX value. The small black dots are the outliers of the boxplot. The gray dots are the actual observations with small random horizontal shift to separate them. The number n above each box is the number of anonymous respondents.**}\label{fig:fig_rtlx}
+\includegraphics[width=1\linewidth]{teaching_data_science_files/figure-latex/fig_rtlx-1} \caption{\label{fig:fig_rtlx} Perceived workload for the learnr tutorials in the three courses (year 2020-2021). The big black diamond is the mean RTLX value. The small black dots are the outliers of the boxplot. The gray dots are the actual observations with small random horizontal shift to separate them. The number n above each box is the number of anonymous respondents.}\label{fig:fig_rtlx}
 \end{figure}
 
-\textbf{The RTLX are (mean +/- standard deviation) 52.1 +/- 9.7 for
-Course A, 49.8 +/- 11.9 for Course B and 43.7 +/- 14.2 for Course C.}
-The difficulty of the course, and thus, of the exercises in the
-tutorials increased from one course to the other. However, we did not
-observe any increase, neither in the number of retries, nor in the RTLX
-(Fig. \ref {fig:fig_rtlx}). On the contrary, these appeared
-significantly lower for Course C than for Course A at the \(\alpha\)
-level of 5\% (ANOVA, F(2, 98) = 3.59, p-value = 0.031; Tukey HSD, t =
--2.68, p-value = 0.023). The homogeneity of variances (Bartlett Test, K2
-= 4.17, df = 2, p-value = 0.12) and the distribution of the residuals
-using a quantile-quantile plot were verified and indicated that they did
-not depart significantly from a Normal distribution. The cognitive load
+The RTLX are (mean +/- standard deviation) 52.1 +/- 9.7 for Course A,
+49.8 +/- 11.9 for Course B and 43.7 +/- 14.2 for Course C. The
+difficulty of the course, and thus, of the exercises in the tutorials
+increased from one course to the other. However, we did not observe any
+increase, neither in the number of retries, nor in the RTLX (Fig.
+\ref {fig:fig_rtlx}). On the contrary, these appeared significantly
+lower for Course C than for Course A at the \(\alpha\) level of 5\%
+(ANOVA, F(2, 98) = 3.59, p-value = 0.031; Tukey HSD, t = -2.68, p-value
+= 0.023). The homogeneity of variances (Bartlett Test, K2 = 4.17, df =
+2, p-value = 0.12) and the distribution of the residuals using a
+quantile-quantile plot were verified and indicated that they did not
+depart significantly from a Normal distribution. The cognitive load
 perceived by the students diminished at the same pace as their ability
 to find the right answer in fewer trials. This may be a consequence of a
 more fluent R coding ability and a better mastery of the software
@@ -798,10 +816,10 @@ show how selected metrics distribute in the nine cells, from lowest
 value in white to highest value in black. They help to decipher the way
 students behave according to their profile. Metrics that are not
 represented in the figure exhibit similar patterns to others (for
-instance H5P metrics have a similar pattern to learnr metrics).
-\textbf{The codebook vectors of the self-organizing map is presented in
-the Appendix. These codebook vectors represent the importance of each
-variable in each cell.} Dots in the central plot are the various
+instance H5P metrics have a similar pattern to learnr metrics). The
+codebook vectors of the self-organizing map is presented in the
+Appendix. These codebook vectors represent the importance of each
+variable in each cell. Dots in the central plot are the various
 students, with the color representing the course and the diameter of the
 dots indicating the grade the students obtained at the end of the
 course. The following paragraphs detail the information in this figure.
@@ -809,13 +827,13 @@ The numbers between parentheses are the cell numbers in the central
 plot, and the uppercase letters in parentheses refer to the peripheral
 subplots.
 
-Each cell (1-9) represents a learning strategy used by the students.
-\textbf{The metric used to determine the effectiveness of the learning
-strategy is the grade each student obtained for the course. Learning
-strategies associated with high grade are qualified as ``optimal'', and
-those corresponding to low grades are qualified as ``suboptimal''. No
-causal relationship between the two is inferred: good or bad grades
-could results from other variables not studied here.} We observe that
+Each cell (1-9) represents a learning strategy used by the students. The
+metric used to determine the effectiveness of the learning strategy is
+the grade each student obtained for the course. Learning strategies
+associated with high grade are qualified as ``optimal'', and those
+corresponding to low grades are qualified as ``suboptimal''. No causal
+relationship between the two is inferred: good or bad grades could
+results from other variables not studied here. We observe that
 suboptimal strategies are also associated with the time students need to
 learn (e.g., large number of trials per exercise) or to a lack of
 interaction in the group (e.g., very few questions asked).
@@ -896,8 +914,8 @@ Lockdown}\label{transition-from-face-to-face-to-distance-learning-imposed-by-the
 
 Due to the COVID-19 lockdown periods, distance learning had to be
 adopted abruptly. We analyzed the activity collected during the
-2019-2020 and 2020-2021 academic years to \textbf{describe} the impact
-of these transitions on the progression of the students. In Fig.
+2019-2020 and 2020-2021 academic years to describe the impact of these
+transitions on the progression of the students. In Fig.
 \ref{fig:fig_support_by_time}, the academic term is divided into seven
 work periods of approximately two weeks each (note that this was the
 suggested rate of the courses: one module every other week). The classes
@@ -1079,16 +1097,16 @@ be a barrier in the production of our students in their projects. A
 pattern was observed during the first lockdown with a marked decrease in
 their contributions, followed by a large, compensatory activity. All
 this happened in a time frame of a couple of weeks. That was the time
-needed to adapt to the new situation. \textbf{Several reasons can be
-hypothesized to explain the adaptation period. Among them,} the access
-to a powerful-enough computer for roughly 15 to 20\% of our students
-during lockdown. In a normal situation, these students had access to
-computers on the university premises, both in-class and outside of class
-time. \textbf{When the lockdown was imposed, these students suffered a
-lack of hardware.} However, to reduce the social numeric divide, the
-university quickly reacted and computers were lent to them. During the
-second lockdown, a larger part of our students had acquired their own
-computer, and solutions were immediately available for the others.
+needed to adapt to the new situation. Several reasons can be
+hypothesized to explain the adaptation period. Among them, the access to
+a powerful-enough computer for roughly 15 to 20\% of our students during
+lockdown. In a normal situation, these students had access to computers
+on the university premises, both in-class and outside of class time.
+When the lockdown was imposed, these students suffered a lack of
+hardware. However, to reduce the social numeric divide, the university
+quickly reacted and computers were lent to them. During the second
+lockdown, a larger part of our students had acquired their own computer,
+and solutions were immediately available for the others.
 
 While the contributions/questions remained globally at a similar level
 in face-to-face an distance learning, their impact on the teacher'
@@ -1141,48 +1159,63 @@ with other teachers in data science. Altogether, we are on the way to
 reshaping the post-COVID teaching landscape, and it will probably be
 quite different than what we were used to!
 
-% You may incorporate your references as follows in your main tex file.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%          7. REFERENCES SECTION
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%       READ THIS SECTION CAREFULLY
+
+% Each of the references below MUST be cited in your article above. Do not include references that are not cited in your article.
+
+% Follow the examples below carefully. We strongly suggest that you copy and paste your reference information directly into our examples.
+
+% List all references in alphabetical order according to the first author's last name.
+
+% Verify each URL works correctly and can be accessed properly. Your URL links should be to reputable websites. The command line for a website link begins with: \url{ }
+
+% Do not add MR or DOI numbers to your references. AIMS production staff will add this information.
+
 % Using BibTex is not recommended but can be handled.
 
 \begin{thebibliography}{99}
-%bibliography.bib
+%
 
-\bibitem{Alonso2019} [10.1016/j.compedu.2019.103612]
+\bibitem{Alonso2019}
      \newblock  C. Alonso-Fernandez,  A. Calvo-Morata, M. Freire, I. Martínez-Ortiz and B. Fernandez-Manjon,
      \newblock Applications of data science to game learning analytics data: A systematic literature review,
      \newblock \emph{Computers \& Education}, \textbf{141} (2019), 103612.
 
-\bibitem{Alvarenga2020} [10.1080/10691898.2020.1773354]
+\bibitem{Alvarenga2020}
      \newblock  H. Alvarenga da Silva and A. Sampaio,
      \newblock Teaching introductory statistical classes in medical schools using RStudio and R statistical language: Evaluating technology acceptance and change in attitude toward statistics,
      \newblock \emph{Journal of Statistics Education}, \textbf{28} (2020), 212--219.
 
-\bibitem{Auker2020} [10.1002/ecs2.3060]
+\bibitem{Auker2020}
      \newblock  L. A. Auker and E. L. Barthelmess,
      \newblock Teaching R in the undergraduate ecology classroom: approaches, lessons learned, and recommendations,
      \newblock \emph{Ecosphere}, \textbf{11} (2020), e03060.
 
-\bibitem{Baker2016} [10.1038/533452a]
+\bibitem{Baker2016}
      \newblock  M. Baker,
      \newblock 1,500 scientists lift the lid on reproducibility,
      \newblock \emph{Nature}, \textbf{533} (2016), 452--454.
 
-\bibitem{Banks2019} [10.1007/s10869-018-9547-8]
+\bibitem{Banks2019}
      \newblock  G. C. Banks, J. G. Field, F. L. Oswald, E. H. O'Boyle, R. S. Landis, D. E. Rupp, S. G. Rogelberg.
      \newblock Answers to 18 Questions About Open Science Practices,
      \newblock \emph{Journal of Business and Psychology}, \textbf{34} (2019), 257--270.
 
-\bibitem{Baumer2014} [10.5070/t581020118]
+\bibitem{Baumer2014}
      \newblock B. Baumer, M. Cetinkaya-Rundel, A. Bray, L. Loi and N. J. Horton,
      \newblock R Markdown: Integrating A Reproducible Analysis Tool into Introductory Statistics,
      \newblock \emph{Technology Innovations in Statistics Education}, \textbf{8} (2014).
 
-\bibitem{Bernard2014} [10.1007/s12528-013-9077-3]
+\bibitem{Bernard2014}
      \newblock  R. M. Bernard, E. Borokhovski, R. F. Schmid, R. M. Tamin and P. C. Abrami,
      \newblock A meta-analysis of blended learning and technology use in higher education: from the general to the applied,
      \newblock \emph{J Comput High Educ}, \textbf{26} (2014), 87–-122.
 
-\bibitem{Boettiger2015} [10.1145/2723872.2723882]
+\bibitem{Boettiger2015}
      \newblock  C. Boettiger,
      \newblock An Introduction to Docker for Reproducible Research,
      \newblock \emph{SIGOPS Oper. Syst. Rev.}, \textbf{49} (2015), 71--79.
@@ -1197,62 +1230,57 @@ quite different than what we were used to!
      \newblock Traditional and raw task load index (TLX) correlations: Are paired comparisons necessary?,
      \newblock \emph{Advances in Industrial Ergonomics and Safety}, 1989, 481--485.
 
-\bibitem{Cetinkaya-Rundel2018} [10.1080/00031305.2017.1397549]
+\bibitem{Cetinkaya-Rundel2018}
      \newblock  M. Cetinkaya-Rundel and C. Rundel,
      \newblock Infrastructure and Tools for Teaching Computing Throughout the Statistical Curriculum,
      \newblock \emph{American Statistician}, \textbf{72} (2018), 58--65.
 
-\bibitem{Cetinkaya-Rundel2021} [10.1080/10691898.2020.1804497]
+\bibitem{Cetinkaya-Rundel2021}
      \newblock  M. Cetinkaya-Rundel and V. Ellison,
      \newblock A Fresh Look at Introductory Data Science,
      \newblock \emph{Journal of Statistics Education}, \textbf{0} (2021), 1--27.
 
-\bibitem{Cleveland2001} [10.2307/1403527]
+\bibitem{Cleveland2001}
      \newblock W.S. Cleveland,
      \newblock Data science: An action plan for expanding the technical areas of the field of statistics,
      \newblock \emph{International Statistical Review}, \textbf{1} (2001), 21--26.
 
-\bibitem{Compeau2019} [10.1080/10691898.2020.1804497]
+\bibitem{Compeau2019}
      \newblock P. Compeau,
      \newblock Establishing a computational biology flipped classroom,
      \newblock \emph{PLoS Computational Biology}, \textbf{15} (2019), 1--8.
 
-\bibitem{Donoho2017} [10.1080/10618600.2017.1384734]
+\bibitem{Donoho2017}
      \newblock  D. Donoho,
      \newblock 50 Years of Data Science,
      \newblock \emph{Journal of Computational and Graphical Statistics}, \textbf{26} (2017), 745--766.
 
-\bibitem{Estrellado2020} [10.1007/978-1-4612-0873-0]
+\bibitem{Estrellado2020}
      \newblock R.A. Estrellado, E. A. Emily, J. Mostipak, J. M. Rosenberg and I. C. Velasquez,
      \newblock \emph{Data science in education using R},
      \newblock 1st edition, Routledge, London, England, 2020.
 
-\bibitem{Fiksel2019} [10.1080/10691898.2019.1617089]
+\bibitem{Fiksel2019}
      \newblock J. Fiksel, L. R. Jager, J. S. Hardin and M. A. Taub
      \newblock Using GitHub Classroom to teach statistics,
      \newblock \emph{Journal of Statistics Education}, \textbf{27} (2019), 110--119.
 
-\bibitem{Freeman2014} [10.1073/PNAS.1319030111]
+\bibitem{Freeman2014}
      \newblock  D. R. Krathwohl,
      \newblock Active learning increases student performance in science, engineering, and mathematics,
      \newblock \emph{Proceedings of the National Academy of Sciences}, \textbf{111} (2014), 8410--8415.
 
-\bibitem{Grosjeandataset2020} [10.5281/zenodo.6420917]
+\bibitem{Grosjeandataset2020}
      \newblock P. Grosjean and G. Engels,
      \newblock Biological data science courses at UMONS, Belgium: student's activity for 2020-2021 (1.0.0) [Data set].,
      \newblock \emph{Zenodo}, (2022).
 
-\bibitem{Grosjeandataset2019} [10.5281/zenodo.6420879]
+\bibitem{Grosjeandataset2019}
      \newblock P. Grosjean and G. Engels,
      \newblock Biological data science courses at UMONS, Belgium: student's activity for 2019-2020 (1.0.0) [Data set].,
      \newblock \emph{Zenodo}, (2022).
 
-\bibitem{Grosjeandataset2018} [10.5281/zenodo.6420348]
-     \newblock P. Grosjean and G. Engels,
-     \newblock Biological data science courses at UMONS, Belgium: student's activity for 2018-2019 (1.0.0) [Data set].,
-     \newblock \emph{Zenodo}, (2022).
-
-\bibitem{Guzman2019} [10.1187/cbe.19-02-0041]
+\bibitem{Guzman2019}
      \newblock L.M. Guzman, M.W. Pennell, E. Nikelski and D.S. Srivastava,
      \newblock Successful integration of data science in undergraduate biostatistics courses using cognitive load theory,
      \newblock \emph{CBE-Life Sciences Education}, \textbf{18} (2019), ar49 1--10.
@@ -1262,27 +1290,27 @@ quite different than what we were used to!
      \newblock Development of NASA-TLX (Task Load Index): Results of Empirical and Theoretical Research,
      \newblock \emph{Advances in Psychology}, \textbf{52} (1998), 139--183.
 
-\bibitem{Hsing2019} [10.1145/3287324.3287460]
+\bibitem{Hsing2019}
      \newblock C. Hsing and V. Gennarelli,
      \newblock Using GitHub in the Classroom Predicts Student Learning Outcomes and Classroom Experiences: Findings from a Survey of Students and Teachers,
      \newblock In Proceedings of \emph{the 50th ACM Technical Symposium on Computer Science Education (SIGCSE '19)}, 2019, 672–678.
 
-\bibitem{Kirschner2020} [10.4324/9780429061523]
+\bibitem{Kirschner2020}
      \newblock P.A. Kirschner and C. Hendrick,
      \newblock \emph{How learning happens: seminal works in educational psychology and what they mean in practice},
      \newblock 1st edition, Routledge, London, New York, 2020.
 
-\bibitem{Kohonen1995} [10.1007/978-3-642-97610-0]
+\bibitem{Kohonen1995}
      \newblock T.  Kohonen,
      \newblock \emph{Self-Organizing Maps},
      \newblock 1st edition, Springer-Verlag, Berlin Heidelberg, 1995.
 
-\bibitem{Krathwohl2002} [10.1207/s15430421tip4104]
+\bibitem{Krathwohl2002}
      \newblock  D. R. Krathwohl,
      \newblock A Revision of Bloom' s Taxonomy: An overview,
      \newblock \emph{Theory Into Practice}, \textbf{41} (2002), 212--218.
 
-\bibitem{Larwin2011} [10.1080/15391523.2011.10782572]
+\bibitem{Larwin2011}
      \newblock  K. Larwin and D. Larwin,
      \newblock A meta-analysis examining the impact of computer-assisted instruction on postsecondary statistics education: 40 years of research,
      \newblock \emph{Journal of Research on Technology in Education}, \textbf{43} (2011), 253--278.
@@ -1297,7 +1325,7 @@ quite different than what we were used to!
      \newblock Using Learning Analytics to Assess Student Learning in Online Courses,
      \newblock \emph{Journal of University Teaching \& Learning Practice}, \textbf{13} (2016), 69--96.
 
-\bibitem{Marx2013} [10.1038/498255a]
+\bibitem{Marx2013}
      \newblock  V. Marx,
      \newblock The big challenges of big data,
      \newblock \emph{Nature}, \textbf{498} (2013), 255--260.
@@ -1307,12 +1335,12 @@ quite different than what we were used to!
      \newblock \emph{Le travail en equipe},
      \newblock 1st edition, ESF Editions, Paris, France, 1996.
 
-\bibitem{Onwuegbuzie2003} [10.1080/1356251032000052447]
+\bibitem{Onwuegbuzie2003}
      \newblock J. A. Onwuegbuzie  and V. A. Wilson,
      \newblock Statistics Anxiety: Nature, etiology, antecedents, effects, and treatments--A comprehensive review of the literature,
      \newblock \emph{Teaching in Higher Education}, \textbf{8} (2003), 195--209.
 
-\bibitem{Romero2020} [10.1002/widm.1355]
+\bibitem{Romero2020}
      \newblock C. Romero and S. Vetura,
      \newblock Educational data mining and learning analytics: An updated survey,
      \newblock \emph{WIREs Data Mining Knowl Discov}, \textbf{10} (2020), e1355.
@@ -1329,22 +1357,22 @@ quite different than what we were used to!
      \newblock RStudio Cloud,
      \newblock Boston, MA: RStudio, Inc.
 
-\bibitem{Siemens2013} [10.1177/0002764213498851]
+\bibitem{Siemens2013}
      \newblock G. Siemens,
      \newblock Learning Analytics: The Emergence of a Discipline,
      \newblock \emph{American Behavioral Scientist}, \textbf{57} (2013), 1380--1400.
 
-\bibitem{Sousa2018} [10.1145/3287324.3287460]
+\bibitem{Sousa2018}
      \newblock B. Sousa and D. Gomes,
-     \newblock Teaching With R—-A Curse or a Blessing?,
+     \newblock Teaching With R — A Curse or a Blessing?,
      \newblock In Proceedings of \emph{the Tenth International Conference on Teaching Statistics (ICOTS10 '18)}, 2018, 672–678.
 
-\bibitem{Spadafora2018} [10.5206/cjsotl-rcacea.2018.1.6]
+\bibitem{Spadafora2018}
      \newblock N. Spadafora and Z. Marini
      \newblock Self-Regulation and “Time Off”: Evaluations and Reflections on the Development of a Blended Course,
      \newblock \emph{The Canadian Journal for the Scholarship of Teaching and Learning}, \textbf{9} (2018).
 
-\bibitem{Theobold2021} [10.1080/10691898.2020.1854636]
+\bibitem{Theobold2021}
      \newblock A. S. Theobold, A. Hancock and S. Mannheimer,
      \newblock  Designing Data Science Workshops for Data-Intensive Environmental Science Research,
      \newblock \emph{Journal of Statistics and Data Science Education}, \textbf{29} (2021), S83--S94.
@@ -1367,12 +1395,12 @@ quite different than what we were used to!
     \newblock Accessed March 21, 2022,
     \newblock \url{https://applications.umons.ac.be/web/en/pde/2020-2021/ue/US-M1-BIOECO-004-M.htm}
 
-\bibitem{Wehrens2018} [10.18637/jss.v087.i07]
+\bibitem{Wehrens2018}
      \newblock R. Wehrens and J. Kruisselbrink,
      \newblock  Flexible Self-Organizing Maps in kohonen 3.0,
      \newblock \emph{Journal of Statistical Software, Articles}, \textbf{87} (2018), 1--18.
 
-\bibitem{Wickham2019} [10.21105/joss.01686]
+\bibitem{Wickham2019}
      \newblock H. Wickham et al,
      \newblock  Welcome to the Tidyverse,
      \newblock \emph{Journal of Open Source Software}, \textbf{43} (2019), 1686.

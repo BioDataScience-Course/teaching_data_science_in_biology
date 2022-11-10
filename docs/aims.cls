@@ -1,5 +1,4 @@
-%aims.cls:
- %% Slightly edited by Ph. Grosjean, 2021 to be useable with R Markdown & Pandoc
+%dcds.cls:
  %%%% modified on August 24, 2010
  % for new numbering use \arXiv{0709.3222v1}
   % for old numbering use \arXiv{math/0610801}
@@ -11,12 +10,14 @@
 [1994/12/01]% LaTeX date must December 1994 or later
 \ProvidesClass{aims}[1999/05/06 v1.0]
  %\RequirePackage[colorlinks=true]{hyperref}
+\RequirePackage{graphicx}
 \def\@tempa#1#2\@nil{\edef\@classname{#1}}
 \expandafter\@tempa\@currnamestack{}{}{}\@nil
 \ifx\@classname\@empty \edef\@classname{\@currname}\fi
-\def\publname{{\fontsize{7}{6.5\p@}\selectfont Manuscript submitted to
-\hfill %DOI:
- {doi:10.3934/fods.xxxxxxx}}\\ Foundations of Data Science}
+%\def\publname{{\fontsize{7}{6.5\p@}\selectfont Manuscript submitted to
+%\hfill %DOI:
+% {doi:10.3934/xx.xxxxxxx}}\\ AIMS Journal}
+\def\publname{Manuscript submitted to AIMS Journal}
 \DeclareOption{a4paper}{\paperheight 297mm\paperwidth 210mm
   \textheight 54.5pc }
 \DeclareOption{letterpaper}{\paperheight 11in\paperwidth 8.5in }
@@ -497,10 +498,15 @@
 } % end \@maketitle
 \def\@serieslogo{%
   \vbox to\headheight{%
-    \parindent\z@ \fontsize{6}{7\p@}\selectfont
-    \noindent\publname\newline
-    \makebox[\textwidth][s]{\volinfo\hfil\pageinfo}\@@par
-    \vss
+%    \parindent\z@ \fontsize{6}{7\p@}\selectfont
+%    \noindent\publname %\newline
+%%    \makebox[\textwidth][s]{\volinfo\hfil\pageinfo}\@@par
+%    \vss
+    \parindent\z@ \fontsize{8}{10\p@}\selectfont
+    \scalebox{1.0}[1.0]{\parbox[b]{0.8\textwidth}{\publname\\[1.18em]
+    \href{http://dx.doi.org/\DOI}{doi:\DOI}}}
+    \hfill \includegraphics[width=0.08\textwidth]{AIMS_Logo.pdf} \\[-2px]
+    \rule{\textwidth}{2px}
   }%
 }%
 \def\volinfo{{\fontsize{7}{6.5\p@}\selectfont
@@ -1444,4 +1450,4 @@ Le-gendre Mar-kov-ian Noe-ther-ian No-vem-ber Rie-mann-ian Sep-tem-ber}
 \endinput
 
 %%
-%% End of file `aims.cls'
+%% End of file `dcds.cls'
